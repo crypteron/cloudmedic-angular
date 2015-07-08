@@ -1,0 +1,1 @@
+﻿angular.module('crypteron.keys', ['crypteron.keys.detail', 'crypteron.keys.add']);

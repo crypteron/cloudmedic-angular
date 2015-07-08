@@ -1,0 +1,1 @@
+﻿angular.module('notifications', ['notifications.service', 'notifications.directive','ngSanitize']);

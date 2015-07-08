@@ -1,0 +1,73 @@
+﻿
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="well">
+            <form class="form-horizontal" name="profileForm" ng-submit="updateProfile()">
+                <h2 class="form-header">Edit Profile</h2>
+                <div class="form-group">
+                    <label for="profile-fullname" class="col-sm-4 control-label">Full Name:<span class="text-danger">*</span> </label>
+                    <div class="col-sm-8">
+                        <input id="profile-fullname" type="text" class="form-control" placeholder="Enter your fullname"
+                               ng-model="profile.FullName"
+                               ng-disabled="data.isSubmitting"
+                               required autofocus />
+                    </div>
+                </div>
+                <div class="form-group" ng-if="authStatus.ssoProvider == null">
+                    <label for="profile-email" class="col-sm-4 control-label">Email:<span class="text-danger">*</span> </label>
+                    <div class="col-sm-8">
+                        <input id="profile-email" type="email" class="form-control" placeholder="Enter your email"
+                               ng-model="profile.Email"
+                               ng-disabled="data.isSubmitting" required />
+                    </div>
+                </div>
+                <div class="form-group" ng-if="authStatus.ssoProvider == null">
+                    <label for="profile-password" class="col-sm-4 control-label">Password: </label>
+                    <div class="col-sm-8">
+                        <a ui-sref="profile.changePassword" class="btn btn-default" ng-disabled="data.isSubmitting">Change Password...</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="profile-company" class="col-sm-4 control-label">Company: </label>
+                    <div class="col-sm-8">
+                        <input id="profile-company" type="text" class="form-control" placeholder="Enter your company name"
+                               ng-model="profile.CompanyName"
+                               ng-disabled="data.isSubmitting" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="profile-company-size" class="col-sm-4 control-label">Company Size:<span class="text-danger">*</span> </label>
+                    <div class="col-sm-8">
+                        <select id="profile-company-size" class="form-control"
+                                ng-model="profile.CompanySize"
+                                ng-options="size.value as size.text for size in companySizes"
+                                ng-disabled="data.isSubmitting"
+                                required></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="profile-company-vertical" class="col-sm-4 control-label">Industry:<span class="text-danger">*</span> </label>
+                    <div class="col-sm-8">
+                        <select id="profile-company-vertical" class="form-control"
+                                ng-model="profile.IndustryVertical"
+                                ng-options="vertical.value as vertical.text for vertical in industryVerticals"
+                                ng-disabled="data.isSubmitting"
+                                required></select>
+                    </div>
+                </div>
+                <div class="profile-buttons">
+                    <button class="btn btn-primary btn-lg" type="submit" ng-disabled="data.isSubmitting">Update Profile</button>
+                    <a class="text-danger reset-link" type="button"
+                       ng-click="resetProfile()"
+                       ng-disabled="data.isSubmitting">
+                        <i class="fa fa-undo"></i> Reset
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+    

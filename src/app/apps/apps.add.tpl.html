@@ -1,0 +1,33 @@
+﻿<form name="form" role="form" ng-submit="save()">
+    <div class="modal-header">
+        <h3 class="modal-title">Add App</h3>
+    </div>
+    <div class="modal-body">
+        <cry-notification-bar></cry-notification-bar>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="app-name-input">App Name</label>
+                    <input id="app-name-input" class="form-control" placeholder="E.g. Health Tracker" type="text"
+                           ng-model="app.AppName"
+                           ng-disabled="data.isSubmitting"
+                           required autofocus />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="app-plan-input">Plan <a href="https://crypteron.com/cipherdb#pricing" target="_blank" title="Click to View Plan Details"><i class="fa fa-question-circle"></i></a></label>
+                    <select id="app-plan-input" class="form-control"
+                            ng-model="app.PlanId"
+                            ng-options="plan.value as plan.text for plan in plans"
+                            ng-disabled="data.isSubmitting"></select>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-warning" type="button" ng-click="$dismiss()" ng-disabled="data.isSubmitting">Cancel</button>
+    </div>
+</form>

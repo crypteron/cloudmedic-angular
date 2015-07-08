@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="crypteron" ng-controller="AppCtrl">
+<head>
+    <title ng-bind="pageTitle"></title>
+
+    <!-- social media tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@crypteron">
+    <meta name="twitter:title" content="Crypteron Dashboard">
+    <meta name="twitter:description" content="The makers of CipherDb, CipherStor and DualAuth bring you military grade encryption for the flexibility you want with the security you need.">
+    <meta name="twitter:creator" content="@crypteron">
+    <meta name="twitter:image:src" content="https://pbs.twimg.com/profile_images/378800000055586881/298a869989cb50da1575b235b5f77534.png">
+    <meta property="og:title" content="Crypteron Dashboard" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://my.crypteron.com" />
+    <meta property="og:image" content="https://pbs.twimg.com/profile_images/378800000055586881/298a869989cb50da1575b235b5f77534.png" />
+    <meta property="og:description" content="The makers of CipherDb, CipherStor and DualAuth bring you military grade encryption for the flexibility you want with the security you need.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- font awesome from BootstrapCDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+
+    <!-- Stripe.js from Stripe.com -->
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+    <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+
+</head>
+<body ng-class="bodyClass">        
+    <div ng-include="'navbar.tpl.html'" ng-hide="hideNav" ng-controller="NavbarCtrl"></div>
+    
+
+    <div id="main-container" class="container" ui-view="main"></div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <p>
+                    (c) 2014 Crypteron
+
+                </p>
+            </div>
+        </div>
+    </footer>    
+</body>
+</html>

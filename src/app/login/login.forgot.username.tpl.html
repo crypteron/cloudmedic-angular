@@ -1,0 +1,21 @@
+﻿<form ng-submit="forgotUsername()" name="form">
+    <div class="modal-header">
+        <h3 class="modal-title">Forgot Username</h3>
+    </div>
+
+    <div class="modal-body">
+        <cry-notification-bar></cry-notification-bar>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" class="form-control" placeholder="Enter your email" type="email" ng-model="data.email" required autofocus>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit"  ng-disabled="data.isSubmitting">Send My Username</button>
+        <button class="btn btn-warning" type=button ng-click="$dismiss()" ng-disabled="data.isSubmitting">Cancel</button>
+    </div>
+</form>

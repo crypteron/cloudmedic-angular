@@ -1,0 +1,44 @@
+﻿<ol class="breadcrumb">
+    <li><a ui-sref="apps.list">Apps</a></li>
+    <li><a ui-sref="apps.detail" ui-sref-opts="{appId: app.AppId}">App Details</a></li>
+    <li class="active">Security Partition Details</li>
+</ol>
+<h3><strong>Security Partition ID:</strong> {{key.SecPartId}}</h3>
+<div class="row">
+    <div class="col-lg-10 col-lg-offset-1">
+        <div class="well" id="key-details">
+            <button type="button" class="close btn-tr" name="Delete" ng-click="deleteKey()" title="Delete Security Partition"><i class="fa fa-trash"></i></button>
+            <div class="row">
+                <dl class="dl-horizontal col-md-6">
+                    <dt>Key Version:</dt>
+                    <dd>{{key.SecPartVer}} 
+                        <button class="btn btn-default btn-xs" ng-click="refreshKey()" popover="Rollover security partition's data encryption key" popover-trigger="mouseenter" popover-placement="top" popover-popup-delay="250" popover-append-to-body="true">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </button>
+                    </dd>
+                    <dt>Description:</dt>
+                    <dd id="edit-key-description">
+                        <span editable-text="key.Description" e-form="editDescription" onbeforesave="copyKey()" onaftersave="updateKey()" e-required="true" e-style="width:80%;">
+                            {{key.Description}}
+                        </span>
+                        <button class="btn btn-xs btn-default" ng-click="editDescription.$show()" ng-hide="editDescription.$visible"><i class="glyphicon glyphicon-pencil"></i></button>
+                    </dd>                
+                    
+                </dl>
+                <dl class="dl-horizontal col-md-6">
+                    <dt>Last Modified (UTC):</dt>
+                    <dd>{{key.ModifiedAt | date:'medium'}}</dd>                    
+                    <dt>Created At (UTC):</dt>
+                    <dd>{{key.CreatedAt | date:'medium'}}</dd>                    
+                </dl>
+            </div>
+            <div class="row">
+                <dl class="dl-horizontal col-md-12">
+                    <dt>Created By:</dt>
+                    <dd>{{key.AddedBy}}</dd>
+                </dl>
+            </div> 
+        </div>       
+    </div>
+</div>
+<div ui-view="acl"></div>
