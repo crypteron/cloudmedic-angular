@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crypteron-dashboard", "crypteron-dashboard.csproj", "{AA0F0D17-94D5-49DE-85F6-5C9445B7E274}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudmedic-angular", "cloudmedic-angular.csproj", "{AA0F0D17-94D5-49DE-85F6-5C9445B7E274}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

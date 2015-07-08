@@ -67,8 +67,6 @@
     <Content Include="src\app\app.spec.js" />
     <Content Include="src\app\apps\apps.add.js" />
     <Content Include="src\app\apps\apps.add.tpl.html" />
-    <Content Include="src\app\demo\demo.cipherdb.add.js" />
-    <Content Include="src\app\demo\demo.cipherdb.add.tpl.html" />
     <Content Include="src\app\apps\apps.detail.js" />
     <Content Include="src\app\apps\apps.detail.spec.js" />
     <Content Include="src\app\apps\apps.js" />
@@ -76,18 +74,6 @@
     <Content Include="src\app\apps\apps.list.spec.js" />
     <Content Include="src\app\apps\apps.list.tpl.html" />
     <Content Include="src\app\apps\apps.detail.tpl.html" />
-    <Content Include="src\app\billing\billing.addCard.js" />
-    <Content Include="src\app\billing\billing.addCard.tpl.html" />
-    <Content Include="src\app\billing\billing.list.js" />
-    <Content Include="src\app\billing\billing.list.tpl.html" />
-    <Content Include="src\app\billing\billing.spec.js" />
-    <Content Include="src\app\billing\card.add.tpl.html" />
-    <Content Include="src\app\demo\demo.cipherdb.js" />
-    <Content Include="src\app\demo\demo.cipherdb.spec.js" />
-    <Content Include="src\app\demo\demo.cipherdb.tpl.html" />
-    <Content Include="src\app\demo\demo.js" />
-    <Content Include="src\app\google.analytics.tpl.html" />
-    <Content Include="src\app\salesiq.tpl.html" />
     <Content Include="src\app\keys\keys.add.js" />
     <Content Include="src\app\keys\keys.add.spec.js" />
     <Content Include="src\app\keys\keys.detail.spec.js" />
@@ -106,16 +92,10 @@
     <Content Include="src\app\profile\profile.update.js" />
     <Content Include="src\app\sso\sso.js" />
     <Content Include="src\app\sso\sso.login.tpl.html" />
-    <Content Include="src\app\billing\billing.js" />
-    <Content Include="src\app\billing\billing.tpl.html" />
-    <Content Include="src\app\downloads\downloads.js" />
-    <Content Include="src\app\downloads\downloads.tpl.html" />
     <Content Include="src\app\keys\keys.add.tpl.html" />
     <Content Include="src\app\keys\keys.detail.tpl.html" />
     <Content Include="src\app\keys\keys.detail.js" />
     <Content Include="src\app\navbar.tpl.html" />
-    <Content Include="src\app\tour\tour.js" />
-    <Content Include="src\app\tour\tour.tpl.html" />
     <Content Include="src\assets\crypteron-banner.png" />
     <Content Include="src\assets\font-awesome.css" />
     <Content Include="src\assets\fonts\example.html" />
@@ -138,14 +118,6 @@
     <Content Include="src\assets\fonts\seguisb.svg" />
     <Content Include="src\assets\fonts\webfonts.ffonts.net.htm" />
     <Content Include="src\assets\fonts\webfonts.ffonts.net.txt" />
-    <Content Include="src\common\angular-payments\angularPayments.cards.js" />
-    <Content Include="src\common\angular-payments\angularPayments.common.js" />
-    <Content Include="src\common\angular-payments\angularPayments.fields.js" />
-    <Content Include="src\common\angular-payments\angularPayments.fields.tpl.html" />
-    <Content Include="src\common\angular-payments\angularPayments.form.js" />
-    <Content Include="src\common\angular-payments\angularPayments.format.js" />
-    <Content Include="src\common\angular-payments\angularPayments.js" />
-    <Content Include="src\common\angular-payments\angularPayments.validate.js" />
     <Content Include="src\common\auth\auth.interceptor.js" />
     <Content Include="src\common\auth\auth.js" />
     <Content Include="src\app\login\login.js" />
@@ -164,10 +136,8 @@
     <Content Include="src\common\misc\filters.js" />
     <Content Include="src\common\mocks\acl.mocks.js" />
     <Content Include="src\common\mocks\apps.mocks.js" />
-    <Content Include="src\common\mocks\billing.mocks.js" />
     <Content Include="src\common\mocks\keys.mocks.js" />
     <Content Include="src\common\mocks\mocks.js" />
-    <Content Include="src\common\ng-flexslider\ng-flexslider.directive.js" />
     <Content Include="src\common\notifications\notifications.bar.tpl.html" />
     <Content Include="src\common\notifications\notifications.directive.js" />
     <Content Include="src\common\notifications\notifications.js" />
@@ -177,8 +147,6 @@
     <Content Include="src\common\resources\apps.resource.js" />
     <Content Include="src\common\localizedMessages\localizedMessages.js" />
     <Content Include="src\common\notifications\notifications.service.js" />
-    <Content Include="src\common\resources\cards.resource.js" />
-    <Content Include="src\common\resources\downloads.resource.js" />
     <Content Include="src\common\resources\keys.resource.js" />
     <Content Include="src\common\resources\resources.spec.js" />
     <Content Include="src\common\resources\users.resource.js" />
@@ -204,16 +172,6 @@
     <Content Include="vendor\angular-local-storage\dist\angular-local-storage.js" />
     <Content Include="vendor\angular-local-storage\dist\angular-local-storage.min.js" />
     <Content Include="vendor\angular-mocks\angular-mocks.js" />
-    <Content Include="vendor\angular-payments\example\index.html" />
-    <Content Include="vendor\angular-payments\Gruntfile.js" />
-    <Content Include="vendor\angular-payments\lib\angular-payments.js" />
-    <Content Include="vendor\angular-payments\lib\angular-payments.min.js" />
-    <Content Include="vendor\angular-payments\src\cards.js" />
-    <Content Include="vendor\angular-payments\src\common.js" />
-    <Content Include="vendor\angular-payments\src\form.js" />
-    <Content Include="vendor\angular-payments\src\format.js" />
-    <Content Include="vendor\angular-payments\src\module.js" />
-    <Content Include="vendor\angular-payments\src\validate.js" />
     <Content Include="vendor\angular-resource\angular-resource.js" />
     <Content Include="vendor\angular-resource\angular-resource.min.js" />
     <Content Include="vendor\angular-ui-router\release\angular-ui-router.js" />
@@ -233,81 +191,6 @@
     <Content Include="vendor\angular-xeditable\dist\css\xeditable.css" />
     <Content Include="vendor\angular-xeditable\dist\js\xeditable.js" />
     <Content Include="vendor\angular-xeditable\dist\js\xeditable.min.js" />
-    <Content Include="vendor\angulartics\.gitignore" />
-    <Content Include="vendor\angulartics\dist\angulartics-adobe.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-baidu.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-chartbeat.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-cnzz.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-debug.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-flurry.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-ga-cordova-google-analytics-plugin.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-ga-cordova.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-ga.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-gtm-cordova.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-gtm.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-hubspot.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-intercom.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-kissmetrics.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-localytics.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-loggly.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-marketo.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-mixpanel.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-piwik.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-scroll.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-segmentio.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-splunk.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics-woopra.min.js" />
-    <Content Include="vendor\angulartics\dist\angulartics.min.js" />
-    <Content Include="vendor\angulartics\Gruntfile.js" />
-    <Content Include="vendor\angulartics\karma.conf.js" />
-    <Content Include="vendor\angulartics\samples\adobe-analytics.html" />
-    <Content Include="vendor\angulartics\samples\baidu.html" />
-    <Content Include="vendor\angulartics\samples\chartbeat.html" />
-    <Content Include="vendor\angulartics\samples\cnzz.html" />
-    <Content Include="vendor\angulartics\samples\flurry.html" />
-    <Content Include="vendor\angulartics\samples\google-analytics.html" />
-    <Content Include="vendor\angulartics\samples\google-tag-manager.html" />
-    <Content Include="vendor\angulartics\samples\intercom.html" />
-    <Content Include="vendor\angulartics\samples\kissmetrics.html" />
-    <Content Include="vendor\angulartics\samples\localytics.html" />
-    <Content Include="vendor\angulartics\samples\loggly.html" />
-    <Content Include="vendor\angulartics\samples\loggly.tracker.js" />
-    <Content Include="vendor\angulartics\samples\marketo.html" />
-    <Content Include="vendor\angulartics\samples\mixpanel.html" />
-    <Content Include="vendor\angulartics\samples\partials\a.tpl.html" />
-    <Content Include="vendor\angulartics\samples\partials\b.tpl.html" />
-    <Content Include="vendor\angulartics\samples\partials\c.tpl.html" />
-    <Content Include="vendor\angulartics\samples\partials\root.tpl.html" />
-    <Content Include="vendor\angulartics\samples\piwik.html" />
-    <Content Include="vendor\angulartics\samples\scroll.html" />
-    <Content Include="vendor\angulartics\samples\segmentio.html" />
-    <Content Include="vendor\angulartics\samples\splunk.html" />
-    <Content Include="vendor\angulartics\samples\woopra.html" />
-    <Content Include="vendor\angulartics\src\angulartics-adobe.js" />
-    <Content Include="vendor\angulartics\src\angulartics-baidu.js" />
-    <Content Include="vendor\angulartics\src\angulartics-chartbeat.js" />
-    <Content Include="vendor\angulartics\src\angulartics-cnzz.js" />
-    <Content Include="vendor\angulartics\src\angulartics-debug.js" />
-    <Content Include="vendor\angulartics\src\angulartics-flurry.js" />
-    <Content Include="vendor\angulartics\src\angulartics-ga-cordova-google-analytics-plugin.js" />
-    <Content Include="vendor\angulartics\src\angulartics-ga-cordova.js" />
-    <Content Include="vendor\angulartics\src\angulartics-ga.js" />
-    <Content Include="vendor\angulartics\src\angulartics-gtm-cordova.js" />
-    <Content Include="vendor\angulartics\src\angulartics-gtm.js" />
-    <Content Include="vendor\angulartics\src\angulartics-hubspot.js" />
-    <Content Include="vendor\angulartics\src\angulartics-intercom.js" />
-    <Content Include="vendor\angulartics\src\angulartics-kissmetrics.js" />
-    <Content Include="vendor\angulartics\src\angulartics-localytics.js" />
-    <Content Include="vendor\angulartics\src\angulartics-loggly.js" />
-    <Content Include="vendor\angulartics\src\angulartics-marketo.js" />
-    <Content Include="vendor\angulartics\src\angulartics-mixpanel.js" />
-    <Content Include="vendor\angulartics\src\angulartics-piwik.js" />
-    <Content Include="vendor\angulartics\src\angulartics-scroll.js" />
-    <Content Include="vendor\angulartics\src\angulartics-segmentio.js" />
-    <Content Include="vendor\angulartics\src\angulartics-splunk.js" />
-    <Content Include="vendor\angulartics\src\angulartics-woopra.js" />
-    <Content Include="vendor\angulartics\src\angulartics.js" />
-    <Content Include="vendor\angulartics\test\angularticsSpec.js" />
     <Content Include="vendor\angular\angular-csp.css" />
     <Content Include="vendor\angular\angular.js" />
     <Content Include="vendor\angular\angular.min.js" />
@@ -338,42 +221,6 @@
     <Content Include="vendor\bootstrap\js\transition.js" />
     <Content Include="vendor\bootstrap\test-infra\requirements.txt" />
     <Content Include="vendor\bootswatch-cosmo\bootstrap.min.css" />
-    <Content Include="vendor\flexslider\changelog.txt" />
-    <Content Include="vendor\flexslider\demo\basic-carousel.html" />
-    <Content Include="vendor\flexslider\demo\carousel-min-max.html" />
-    <Content Include="vendor\flexslider\demo\css\demo.css" />
-    <Content Include="vendor\flexslider\demo\dynamic-carousel-min-max.html" />
-    <Content Include="vendor\flexslider\demo\fonts\webfonts\geo-medium\svg\1110FC_0.svg" />
-    <Content Include="vendor\flexslider\demo\fonts\webfonts\geo-medium\svg\svg_test.html" />
-    <Content Include="vendor\flexslider\demo\fonts\webfonts\geo-regular\svg\11014B_0.svg" />
-    <Content Include="vendor\flexslider\demo\fonts\webfonts\geo-regular\svg\svg_test.html" />
-    <Content Include="vendor\flexslider\demo\fonts\webfonts\geo-semibold\svg\index.html" />
-    <Content Include="vendor\flexslider\demo\fonts\webfonts\geo-semibold\svg\style_169898.svg" />
-    <Content Include="vendor\flexslider\demo\images\kitchen_adventurer_caramel.jpg" />
-    <Content Include="vendor\flexslider\demo\images\kitchen_adventurer_cheesecake_brownie.jpg" />
-    <Content Include="vendor\flexslider\demo\images\kitchen_adventurer_donut.jpg" />
-    <Content Include="vendor\flexslider\demo\images\kitchen_adventurer_lemon.jpg" />
-    <Content Include="vendor\flexslider\demo\images\logo.png" />
-    <Content Include="vendor\flexslider\demo\index.html" />
-    <Content Include="vendor\flexslider\demo\js\demo.js" />
-    <Content Include="vendor\flexslider\demo\js\froogaloop.js" />
-    <Content Include="vendor\flexslider\demo\js\jquery.easing.js" />
-    <Content Include="vendor\flexslider\demo\js\jquery.fitvid.js" />
-    <Content Include="vendor\flexslider\demo\js\jquery.mousewheel.js" />
-    <Content Include="vendor\flexslider\demo\js\modernizr.js" />
-    <Content Include="vendor\flexslider\demo\js\shBrushCss.js" />
-    <Content Include="vendor\flexslider\demo\js\shBrushJScript.js" />
-    <Content Include="vendor\flexslider\demo\js\shBrushXml.js" />
-    <Content Include="vendor\flexslider\demo\js\shCore.js" />
-    <Content Include="vendor\flexslider\demo\thumbnail-controlnav.html" />
-    <Content Include="vendor\flexslider\demo\thumbnail-slider.html" />
-    <Content Include="vendor\flexslider\demo\video-wistia.html" />
-    <Content Include="vendor\flexslider\demo\video.html" />
-    <Content Include="vendor\flexslider\flexslider.css" />
-    <Content Include="vendor\flexslider\fonts\flexslider-icon.svg" />
-    <Content Include="vendor\flexslider\images\bg_play_pause.png" />
-    <Content Include="vendor\flexslider\jquery.flexslider-min.js" />
-    <Content Include="vendor\flexslider\jquery.flexslider.js" />
     <Content Include="vendor\jquery\dist\jquery.js" />
     <Content Include="vendor\jquery\dist\jquery.min.js" />
     <Content Include="vendor\jquery\MIT-LICENSE.txt" />
@@ -602,16 +449,7 @@
     <Content Include="vendor\angular-xeditable\readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="src\common\resources\charges.resource.js" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="src\common\notifications\notifications.less" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="vendor\angular-payments\.bower.json" />
-    <Content Include="vendor\angular-payments\bower.json" />
-    <Content Include="vendor\angular-payments\package.json" />
-    <Content Include="vendor\angular-payments\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\less\theme.less" />
@@ -638,34 +476,6 @@
     <Content Include="src\assets\fonts\seguisb.woff" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="src\common\resources\demo.cipherdb.orders.resource.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="vendor\flexslider\.bower.json" />
-    <Content Include="vendor\flexslider\CONTRIBUTING.md" />
-    <Content Include="vendor\flexslider\css\base.less" />
-    <Content Include="vendor\flexslider\css\font.less" />
-    <Content Include="vendor\flexslider\css\mixins.less" />
-    <Content Include="vendor\flexslider\css\resets.less" />
-    <Content Include="vendor\flexslider\css\responsive.less" />
-    <Content Include="vendor\flexslider\css\theme.less" />
-    <Content Include="vendor\flexslider\css\variables.less" />
-    <Content Include="vendor\flexslider\demo\fonts\webfonts\geo-medium\eot\1110FC_0.eot" />
-    <Content Include="vendor\flexslider\demo\fonts\webfonts\geo-medium\ttf\1110FC_0.ttf" />
-    <Content Include="vendor\flexslider\demo\fonts\webfonts\geo-medium\woff\1110FC_0.woff" />
-    <Content Include="vendor\flexslider\demo\fonts\webfonts\geo-regular\eot\11014B_0.eot" />
-    <Content Include="vendor\flexslider\demo\fonts\webfonts\geo-regular\ttf\11014B_0.ttf" />
-    <Content Include="vendor\flexslider\demo\fonts\webfonts\geo-regular\woff\11014B_0.woff" />
-    <Content Include="vendor\flexslider\demo\fonts\webfonts\geo-semibold\eot\style_169898.eot" />
-    <Content Include="vendor\flexslider\demo\fonts\webfonts\geo-semibold\ttf\style_169898.ttf" />
-    <Content Include="vendor\flexslider\demo\fonts\webfonts\geo-semibold\woff\style_169898.woff" />
-    <Content Include="vendor\flexslider\flexslider.less" />
-    <Content Include="vendor\flexslider\fonts\flexslider-icon.eot" />
-    <Content Include="vendor\flexslider\fonts\flexslider-icon.ttf" />
-    <Content Include="vendor\flexslider\fonts\flexslider-icon.woff" />
-    <Content Include="vendor\flexslider\README.mdown" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="src\assets\fonts\flexslider-icon.eot" />
   </ItemGroup>
   <ItemGroup>
@@ -673,38 +483,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\assets\fonts\flexslider-icon.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="vendor\angulartics\.bower.json" />
-    <Content Include="vendor\angulartics\.bowerrc" />
-    <Content Include="vendor\angulartics\bower.json" />
-    <Content Include="vendor\angulartics\CHANGELOG.md" />
-    <Content Include="vendor\angulartics\LICENSE" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.adobe.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.baidu.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.chartbeat.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.cnzz.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.core.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.debug.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.flurry.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.ga.cordova-google-analytics-plugin.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.ga.cordova.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.ga.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.gtm.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.hubspot.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.intercom.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.kissmetrics.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.localytics.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.loggly.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.marketo.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.mixpanel.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.piwik.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.scroll.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.segmentio.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.splunk.nuspec" />
-    <Content Include="vendor\angulartics\nuget\angular.analytics.woopra.nuspec" />
-    <Content Include="vendor\angulartics\package.json" />
-    <Content Include="vendor\angulartics\README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
