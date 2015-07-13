@@ -90,6 +90,7 @@
     <Content Include="src\app\profile\profile.password.tpl.html" />
     <Content Include="src\app\profile\profile.update.tpl.html" />
     <Content Include="src\app\profile\profile.update.js" />
+    <Content Include="src\app\register\register.tpl.html" />
     <Content Include="src\app\register\register.js" />
     <Content Include="src\app\sso\sso.js" />
     <Content Include="src\app\sso\sso.login.tpl.html" />

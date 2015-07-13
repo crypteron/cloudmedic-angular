@@ -1,6 +1,6 @@
 ﻿angular.module('crypteron.register', [
     'ui.router',
-    'auth',
+    'reg',
     'localizedNotifications'
 ]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider.state('register', {
@@ -18,69 +18,57 @@
             public: true
         }
     })
-    .state('register.verify', {
-        url: '/verify'
-    })
-    .state('register.verify.success', {
-        url: '/success',
-        data: {
-            notification: {
-                message: 'register.verify.success',
-                type: 'success'
-            }
-        }
-    })
-    .state('register.verify.error', {
-        url: '/error',
-        data: {
-            notification: {
-                message: 'register.verify.error',
-                type: 'danger'
-            }
-        }
-    });
+    //.state('register.verify', {
+    //    url: '/verify'
+    //})
+    //.state('register.verify.success', {
+    //    url: '/success',
+    //    data: {
+    //        notification: {
+    //            message: 'register.verify.success',
+    //            type: 'success'
+    //        }
+    //    }
+    //})
+    //.state('register.verify.error', {
+    //    url: '/error',
+    //    data: {
+    //        notification: {
+    //            message: 'register.verify.error',
+    //            type: 'danger'
+    //        }
+    //    }
+    //})
+    ;
 }])
-.controller('RegisterCtrl', function ($scope, auth, $state, localizedNotifications, userProfile) {
-
-    // If user is already logged in, navigate to apps state
-    if (auth.status.isLoggedIn) {
-        $state.go('apps.list');
-    }
+.controller('RegisterCtrl', function ($scope, reg, $state, localizedNotifications, userProfile) {
 
     // Initialize scope variables
     $scope.authError = null;
-    $scope.loginData = {
+
+    $scope.registerData = {
         username: "",
         password: "",
+        confirmpassword: "",
+        first: "",
+        last: "",
+        gender: "",
+        DOB: "",
+        specialty: "",
         isSubmitting: false
     };
-    $scope.ssoProviders = auth.ssoProviders;
 
-    $scope.notification = $state.current.data.notification;
-    if ($scope.notification) {
-        localizedNotifications.addForCurrent($scope.notification.message, $scope.notification.type);
-    }
-
-    // Login method
-    $scope.login = function () {
-        $scope.loginData.isSubmitting = true;
+    // Register method
+    $scope.register = function () {
+        $scope.registerData.isSubmitting = true;
         localizedNotifications.removeForCurrent();
-        auth.login($scope.loginData)
+        reg.register($scope.registerData)
         .then(function (response) {
-
-            // After login, if user hasn't completed profile, send them to profile page
-            var profile = userProfile.get();
-            profile.$promise.then(function () {
-                if (profile.UserMetaData.CompletedProfile === false) {
-                    $state.go('profile');
-                } else {
-                    // Otherwise redirect them to the Apps state or to whichever state they were attempting to load
-                    auth.redirectAfterLogin('apps.list', {});
-                }
-            });
+            // After registration, send them to login page
+            $state.go('login');
         },
         function (err) {
-            $scope.loginData.isSubmitting = false; // re-enable submit button
+            $scope.registerData.isSubmitting = false; // re-enable submit button
         });
     };
 }
