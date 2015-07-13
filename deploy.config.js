@@ -17,7 +17,7 @@ module.exports = {
           constants: {
               APP_CONFIG: {
                   environment: 'development',
-                  api_url: 'https://api.cloudmedic.dev/v1/',                  
+                  api_url: 'https://localhost:44300/',                  
                   base_uri: ''
               }
           }

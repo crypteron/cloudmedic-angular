@@ -6,6 +6,7 @@ angular.module('crypteron', [
   'crypteron.acl',
   'crypteron.profile',  
   'crypteron.login',
+  'crypteron.register',
   'crypteron.sso',
   'crypteron.config',
   'crypteron.messages',
@@ -19,7 +20,7 @@ angular.module('crypteron', [
   'errorHandler',  
   'userProfile'
 ])
-.config(function ($urlRouterProvider, authProvider, APP_CONFIG, localizedMessagesProvider, CRY_MESSAGES) {
+.config(function ($urlRouterProvider, authProvider, regProvider, APP_CONFIG, localizedMessagesProvider, CRY_MESSAGES) {
         // Configure the localized messages provider with the messages 
         localizedMessagesProvider.setMessages(CRY_MESSAGES);
 
@@ -28,16 +29,25 @@ angular.module('crypteron', [
             apiUrl: APP_CONFIG.api_url,
             loginState: 'login',
             assumePublic: false,
-            tokenPath: 'account/token',
+            tokenPath: 'token',
             // These are regular expressions to match
             excludeEndpoints: [
                 'account/forgotUsername$',
                 'account/forgotPassword$',
                 'account/resetPassword$',
                 'account/resendVerify$',
+                // The registration request
+                'Register$',
                 // The entire demo route
                 'demo/.*$'
             ]
+        });
+
+        // Configure the registration provider
+        regProvider.setOptions({
+            apiUrl: APP_CONFIG.api_url,
+            registerPath: 'Account/Register',
+            assumePublic: false
         });
 
         // Set default URL
