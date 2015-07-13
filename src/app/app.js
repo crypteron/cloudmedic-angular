@@ -28,7 +28,7 @@ angular.module('crypteron', [
             apiUrl: APP_CONFIG.api_url,
             loginState: 'login',
             assumePublic: false,
-            tokenPath: 'account/token',
+            tokenPath: 'token',
             // These are regular expressions to match
             excludeEndpoints: [
                 'account/forgotUsername$',
