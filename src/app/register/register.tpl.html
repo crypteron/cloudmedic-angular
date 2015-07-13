@@ -5,47 +5,44 @@
     <div class="col-md-6 col-md-offset-3">
         <div class="well">
             <h2 class="text-center">Registration</h2>
-            <cry-notification-bar></cry-notification-bar>
             <form name="form" novalidate role="form">
                 <div class="form-group">
-                    <label for="register-username">Username</label>
-                    <input id="register-username" class="form-control" placeholder="Enter username" type="text" ng-model="registerData.username" required autofocus tabindex="0">
+                    <label for="register-email">Email Address</label>
+                    <input id="register-email" class="form-control" placeholder="Enter email" type="text" ng-model="registerData.Email" required autofocus tabindex="0">
               </div>
                 <div class="form-group">
                     <label for="user-password">Password</label>
-                    <input id="user-password" class="form-control" placeholder="Enter password" type="password" ng-model="registerData.password" required tabindex="0">
+                    <input id="user-password" class="form-control" placeholder="Enter password" type="password" ng-model="registerData.Password" required tabindex="0">
                 </div>
                 <div class="form-group">
                     <label for="user-confirmpassword">Confirm Password</label>
-                    <input id="user-confirmpassword" class="form-control" placeholder="Confirm Password" type="password" ng-model="registerData.confirmpassword" required tabindex="0">
+                    <input id="user-confirmpassword" class="form-control" placeholder="Confirm Password" type="password" ng-model="registerData.ConfirmPassword" required tabindex="0">
                 </div>
                 <div class="form-group">
                     <label for="user-first">First Name</label>
-                    <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="registerData.first" required tabindex="0">
+                    <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="registerData.FirstName" required tabindex="0">
                 </div>
                 <div class="form-group">
                     <label for="user-last">Last Name</label>
-                    <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="registerData.last" required tabindex="0">
+                    <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="registerData.LastName" required tabindex="0">
                 </div>
-                <div class="radio" ng-init="registerData.gender=male">
+                <div class="radio">
                     <label for="radio-male">Gender</label>
-                    <label><input id="radio-male" type="radio" name="optradio" ng-model="registerData.gender" value="male">Male</label>
-                    <label><input id="radio-male" type="radio" name="optradio" ng-model="registerData.gender" value="female">Female</label>
+                    <label><input id="radio-male" type="radio" name="optradio" ng-model="registerData.Gender" value="male" checked>Male</label>
+                    <label><input id="radio-female" type="radio" name="optradio" ng-model="registerData.Gender" value="female">Female</label>
                 </div>
                 <div class="form-group">
                     <label for="user-dob">Date of Birth</label>
-                    <input id="dob" class="form-control" placeholder="MM/DD/YYYY" type="date" ng-model="registerData.dob" required tabindex="0" maxlength="10">
-                </div>
-                <div class="form-group" ng-init="registerData.specialty=""">
-                    <label for="user-specialty">Specialty</label>
-                    <input id="user-specialty" class="form-control" placeholder="Specialty" type="text" ng-model="registerData.specialty" required tabindex="0">
+                    <input id="dob" class="form-control" placeholder="YYYY-MM-DD" type="date" ng-model="registerData.DOB" required tabindex="0" maxlength="10">
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit" ng-click="register()" ng-disabled='form.$invalid || registerData.isSubmitting' tabindex="0">Register</button>                    
+                    <label for="user-specialty">Specialty</label>
+                    <input id="user-specialty" class="form-control" placeholder="Specialty" type="text" ng-model="registerData.Specialty" required tabindex="0">
                 </div>
-
+                <div class="form-group">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit" ng-click="register()" tabindex="0">Register</button>                    
+                </div>
             </form>
-        <!--    <hr />-->
         </div>
     </div>
 </div>
