@@ -4,6 +4,7 @@
     provider.apiUrl = '';
     provider.registerPath = '';
     provider.assumePublic = true;
+    provider.excludeEndpoints = [];
 
     // Provider configuration
     // Set the URL of the Register API
@@ -18,8 +19,6 @@
 
     // Set the path to receive the registration at the API url
     provider.setRegisterPath = function (registerPath) {
-        // remove the old token path from exclude endpoints
-        provider.RemoveExcludeEndpoint(registerPath);
 
         // set the new register path and add it to the exclude endpoints
         provider.excludeEndpoints.push(registerPath);
