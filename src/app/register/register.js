@@ -39,7 +39,7 @@
         reg.register($scope.registerData)
         .then(function (response) {
             // After registration, send them to login page
-            $state.go('register');
+            $state.go('login');
         },
         function (err) {
             $scope.registerData.isSubmitting = false; // re-enable submit button
