@@ -6,43 +6,47 @@
     <div class="col-md-6 col-md-offset-3">
         <div class="well">
             <h2 class="text-center">Registration</h2>
+            <cry-notification-bar></cry-notification-bar>
             <form name="form" novalidate role="form">
-                <div class="form-group">
-                    <label for="register-email">Email Address</label>
-                    <input id="register-email" class="form-control" placeholder="Enter email" type="text" ng-model="registerData.Email" required autofocus tabindex="0">
-              </div>
-                <div class="form-group">
-                    <label for="user-password">Password</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="register-username" class="form-control" placeholder="Username" type="text" ng-model="registerData.username" required autofocus aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">@</span>
+                    <input id="register-email" class="form-control" placeholder="Email" type="text" ng-model="registerData.Email" required autofocus aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                     <input id="user-password" class="form-control" placeholder="Enter password" type="password" ng-model="registerData.Password" required tabindex="0">
                 </div>
-                <div class="form-group">
-                    <label for="user-confirmpassword">Confirm Password</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                     <input id="user-confirmpassword" class="form-control" placeholder="Confirm Password" type="password" ng-model="registerData.ConfirmPassword" required tabindex="0">
                 </div>
-                <div class="form-group">
-                    <label for="user-first">First Name</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-heart"></i></span>
                     <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="registerData.FirstName" required tabindex="0">
-                </div>
-                <div class="form-group">
-                    <label for="user-last">Last Name</label>
                     <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="registerData.LastName" required tabindex="0">
                 </div>
-                <div class="form-group">
-                    <label for="radio">Gender:</label>
-                    <label><input id="radio-male" type="radio" name="optradio" ng-model="registerData.Gender" value="male" checked>Male</label>
-                    <label><input id="radio-female" type="radio" name="optradio" ng-model="registerData.Gender" value="female">Female</label>
+                <div class="">
+                    <span class=""><i class="glyphicon glyphicon-king"></i></span>
+                    <select class="form-control" ng-model="registerData.Gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
                 </div>
-                <div class="form-group" ng-init="SelectedYear=1900; SelectedMonth=1; SelectedDay=1">
+                <div class="dropdown">
                     <label for="user-dob">Date of Birth</label>
                         Year : <select ng-model="SelectedYear" ng-options="label for label in Years" ng-change="UpdateNumberOfDays()"></select>
                         Month: <select ng-model="SelectedMonth" ng-options="label for label in Months" ng-change="UpdateNumberOfDays()"></select>
                         Day: <select ng-model="SelectedDay" ng-options="label for label in Days | limitTo:NumberOfDays"></select>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit" ng-click="register()" tabindex="0">Register</button>                    
+                    <button class="btn btn-danger btn-lg btn-block" type="submit" ng-click="register()" ng-disabled="form.$invalid || data.isSubmitting" tabindex="0">Register</button>                    
                 </div>
             </form>
             <div class="text-center">
-                <strong>Already have an account? <a ui-sref="login" title="Sign In Immediately">Sign in immediately</a></strong>
+                <strong>Already have an account? <a ui-sref="login" title="Sign In Immediately">Log in here</a></strong>
             </div>
 </div>
