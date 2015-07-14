@@ -1,5 +1,4 @@
-﻿
-angular.module('crypteron.apps.list', ['ui.router', 'crypteron.resources'])
+﻿angular.module('crypteron.apps.list', ['ui.router', 'crypteron.resources'])
 .config(['$stateProvider', function config($stateProvider) {
     $stateProvider    
     .state('apps.list', {
