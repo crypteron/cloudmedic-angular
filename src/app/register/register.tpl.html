@@ -1,6 +1,5 @@
 ﻿<div class="row">
     <div class="text-center">
-        <div style="margin-top: 20px;"></div>
         <p><h1 class="text-center">CloudMedic <span class="glyphicon glyphicon-plus text-danger" aria-hidden="true"></span></h1>
     </div>
     <div class="col-md-6 col-md-offset-3">
@@ -29,23 +28,25 @@
                     <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="registerData.FirstName" required tabindex="0">
                     <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="registerData.LastName" required tabindex="0">
                 </div>
-                <div class="">
-                    <span class=""><i class="glyphicon glyphicon-king"></i></span>
-                    <select class="form-control" ng-model="registerData.Gender">
+                <div class="input-group">
+                    
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-heart"></i></span>
+                    <select class="col-md-3 form-control" ng-model="registerData.Gender" aria-expanded="false" tabindex="0" aria-haspopup="true" aria-activedescendant=":d" title="Gender">
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
-                </div>
-                <div class="dropdown">
-                    <label for="user-dob">Date of Birth</label>
-                        Year : <select ng-model="SelectedYear" ng-options="label for label in Years" ng-change="UpdateNumberOfDays()"></select>
-                        Month: <select ng-model="SelectedMonth" ng-options="label for label in Months" ng-change="UpdateNumberOfDays()"></select>
-                        Day: <select ng-model="SelectedDay" ng-options="label for label in Days | limitTo:NumberOfDays"></select>
+                <!--    <div style="height:auto;width:15px; display:inline-block">-->
+
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+    
+                    <select class="col-md-4 form-control-static" ng-model="SelectedYear" ng-options="label for label in Years" ng-change="UpdateNumberOfDays()"></select>
+                    <select class="col-md-3 form-control-static" ng-model="SelectedMonth" ng-options="label for label in Months" ng-change="UpdateNumberOfDays()"></select>
+                    <select class="col-md-3 form-control-static" ng-model="SelectedDay" ng-options="label for label in Days | limitTo:NumberOfDays"></select>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-danger btn-lg btn-block" type="submit" ng-click="register()" ng-disabled="form.$invalid || data.isSubmitting" tabindex="0">Register</button>                    
+                    <button class="btn btn-danger btn-lg btn-block" type="submit" ng-click="register()" ng-disabled="form.$invalid || data.isSubmitting" tabindex="0">Register</button>
                 </div>
-            </form>
+</form>
             <div class="text-center">
                 <strong>Already have an account? <a ui-sref="login" title="Sign In Immediately">Log in here</a></strong>
             </div>
