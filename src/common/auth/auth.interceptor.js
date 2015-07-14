@@ -78,6 +78,10 @@
                 //localizedNotifications.add('login.required', 'warning', { pageTitle: $state.current.data.pageTitle }, null);
                 $state.go(auth.loginState, null, { reload: true });
             }
+        } else if (rejection.status === 400) {
+            // Bad request
+            localizedNotifications.addForNext('login.failed', 'warning', null, null);
+            $state.go(auth.loginState, null, { reload: true });
         }
         return $q.reject(rejection);
     };
