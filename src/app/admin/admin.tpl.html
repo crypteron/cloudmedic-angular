@@ -25,19 +25,19 @@
         <tr>
             <th>Full Name</th>
             <th>User Name</th>
-            <th>Email</th>
-            <th style="width:69px;">Edit</th>
+            <!--<th>Email</th>-->
+            <!--<th style="width:69px;">Edit</th>-->
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="user in users">
-            <td>{{user.FullName}}</td>
+            <td>{{user.FirstName}} {{user.LastName}}</td>
             <td>{{user.UserName}}</td>
             <td>{{user.Email}}</td>
             <td>
-                <button class="btn btn-danger btn-xs" ng-click="removeUser(user)">
+                <!--<button class="btn btn-danger btn-xs" ng-click="removeUser(user)">
                     <i class="glyphicon glyphicon-trash"></i>
-                </button>
+                </button>-->
             </td>
         </tr>
     </tbody>
