@@ -96,7 +96,7 @@ angular.module('crypteron', [
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             // Update page title when state changes
             if (angular.isDefined(toState.data.pageTitle)) {
-                $scope.pageTitle = toState.data.pageTitle + ' | Crypteron Dashboard';
+                $scope.pageTitle = toState.data.pageTitle + ' | CloudMedic Dashboard';
             }
 
             $scope.bodyClass = toState.data.bodyClass;

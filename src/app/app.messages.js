@@ -13,7 +13,7 @@
         'key.refresh.confirm': 'Yes, rollover key',
         'login.verify.success': 'Your account is now verified, please login',
         'login.verify.error': 'Your account could not be verified or link is no longer valid.<br/><a href="/#/login/resendVerify" title="Resend Verification Email">Resend verification email</a>',
-        'login.success': 'Welcome to the Crypteron Dashboard!',                
+        'login.success': 'Welcome to the CloudMedic Dashboard!',                
         'field.required': 'Please provide a value for the {{field}} field.',
         'profile.required': 'Before we begin we ask that you complete your user profile below.',
         'profile.required.force': 'You have to complete your profile before you can navigate to {{pageTitle}}'        
