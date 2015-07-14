@@ -12,6 +12,7 @@ angular.module('crypteron', [
   'crypteron.messages',
   'crypteron.resources',    
   'crypteron.admin',
+  'crypteron.users',
   'ui.router',
   'auth',
   'localizedMessages',

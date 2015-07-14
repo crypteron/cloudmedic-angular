@@ -74,7 +74,7 @@
     <Content Include="src\app\apps\apps.list.spec.js" />
     <Content Include="src\app\apps\apps.list.tpl.html" />
     <Content Include="src\app\apps\apps.detail.tpl.html" />
-    <Content Include="src\app\Users\users.js" />
+    <Content Include="src\app\users\users.js" />
     <Content Include="src\app\keys\keys.add.js" />
     <Content Include="src\app\keys\keys.add.spec.js" />
     <Content Include="src\app\keys\keys.detail.spec.js" />
@@ -99,6 +99,7 @@
     <Content Include="src\app\keys\keys.detail.tpl.html" />
     <Content Include="src\app\keys\keys.detail.js" />
     <Content Include="src\app\navbar.tpl.html" />
+    <Content Include="src\app\users\users.tpl.html" />
     <Content Include="src\assets\crypteron-banner.png" />
     <Content Include="src\assets\font-awesome.css" />
     <Content Include="src\assets\fonts\example.html" />
