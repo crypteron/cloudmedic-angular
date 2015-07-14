@@ -1,12 +1,13 @@
-﻿angular.module('reg.service', ['localizedNotifications', 'ui.router', 'LocalStorageModule'])
+﻿angular.module('reg.service', ['ui.router', 'LocalStorageModule'])
 .provider('reg', function () {
     var provider = this;
     provider.apiUrl = '';
+    provider.registerPath = '';
     provider.assumePublic = true;
     provider.excludeEndpoints = [];
 
     // Provider configuration
-    // Set the URL of the Login API
+    // Set the URL of the Register API
     provider.setApiUrl = function (apiUrl) {
         provider.apiUrl = apiUrl;
     };
@@ -16,57 +17,54 @@
         provider.assumePublic = assumePublic;
     };
 
-    // Add an endpoint to those to exclude
-    provider.AddExcludeEndpoint = function (excludeEndpoint) {
-        provider.excludeEndpoints.push(excludeEndpoint);
-    };
+    // Set the path to receive the registration at the API url
+    provider.setRegisterPath = function (registerPath) {
 
-    // Remove an endpoint from those to exclude
-    provider.RemoveExcludeEndpoint = function (endpoint) {
-        var i = provider.excludeEndpoints.indexOf(endpoint);
-        if (i > -1) {
-            provider.excludeEndpoints.splice(i, 1);
-        }
+        // set the new register path and add it to the exclude endpoints
+        provider.excludeEndpoints.push(registerPath);
+        provider.registerPath = registerPath;
     };
 
     // Set all the provider options at once using JSON
     provider.setOptions = function (options) {
         options = angular.extend({
             apiUrl: '',
-            assumePublic: true,
-            excludeEndpoints: []
+            registerPath: '',
+            assumePublic: true
         }, options);
 
         provider.setApiUrl(options.apiUrl);
+        provider.setRegisterPath(options.registerPath);
         provider.setAssumePublic(options.assumePublic);
-        angular.forEach(options.excludeEndpoints, function (endpoint) {
-            provider.AddExcludeEndpoint(endpoint);
-        });
     };
 
     // Factory 
-    provider.$get = function ($http, $q, $rootScope, localizedNotifications, $state, localStorageService) {
+    provider.$get = function ($http, $q, $rootScope, $state, localStorageService) {
         // Properties
         var _status = {
             isRegistered: false
         };
 
         // Methods
-        // Initialization
-        var _init = function () {
-
-        };
 
         // Register user
         var _register = function (registerData) {
-            var data = registerData;
+            var data = {
+                Email: registerData.Email,
+                Password: registerData.Password,
+                ConfirmPassword: registerData.ConfirmPassword,
+                FirstName: registerData.FirstName,
+                LastName: registerData.LastName,
+                Gender: registerData.Gender,
+                DOB: registerData.DOB,
+                Specialty: registerData.Specialty
+            };
 
             var deferred = $q.defer();
 
-            $http.post(provider.apiUrl, data, { headers: { 'Content-Type': 'application/json' } })
+            $http.post(provider.apiUrl + provider.registerPath, JSON.stringify(data), { headers: { 'Content-Type': 'application/json; charset=utf-8' } })
                 .success(function (response) {
                     _status.isRegistered = true;
-                    _updateStorage();
                     deferred.resolve(response);
                 })
             .error(function (err, status) {
@@ -80,9 +78,7 @@
         var service =
         {
             register: _register,
-            apiUrl: provider.apiUrl,
-            init: _init,
-            excludeEndpoints: provider.excludeEndpoints
+            apiUrl: provider.apiUrl
         };
         return service;
     };
