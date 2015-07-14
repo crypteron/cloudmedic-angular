@@ -21,25 +21,25 @@
                     <input id="user-confirmpassword" class="form-control" placeholder="Confirm Password" type="password" ng-model="registerData.ConfirmPassword" required tabindex="0">
                 </div>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-heart"></i></span>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-fire"></i></span>
                     <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="registerData.FirstName" required tabindex="0">
                     <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="registerData.LastName" required tabindex="0">
                 </div>
                 <div class="input-group">                   
                     <span class="input-group-addon"><i class="glyphicon glyphicon-heart"></i></span>
-                    <select class="col-md-12 form-control-static" ng-model="registerData.Gender" aria-expanded="false" tabindex="0" aria-haspopup="true" aria-activedescendant=":d">
+                    <select required class="col-md-12 form-control-static" ng-model="registerData.Gender" aria-expanded="false" tabindex="0" aria-haspopup="true" aria-activedescendant=":d">
                         <option class="placeholder" selected disabled value="">Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>    
-                    <select class="col-md-4 form-control-static" ng-model="SelectedYear" ng-options="label for label in Years" ng-change="UpdateNumberOfDays()">
+                    <select required class="col-md-4 form-control-static" ng-model="SelectedYear" ng-options="label for label in Years" ng-change="UpdateNumberOfDays()">
                         <option class="placeholder" selected disabled value="">Date</option>
                     </select>
-                    <select class="col-md-4 form-control-static" ng-model="SelectedMonth" ng-options="label for label in Months" ng-change="UpdateNumberOfDays()">
+                    <select required class="col-md-4 form-control-static" ng-model="SelectedMonth" ng-options="label for label in Months" ng-change="UpdateNumberOfDays()">
                         <option class="placeholder" selected disabled value="">Of</option>
                     </select>
-                    <select class="col-md-4 form-control-static" ng-model="SelectedDay" ng-options="label for label in Days | limitTo:NumberOfDays">'
+                    <select required class="col-md-4 form-control-static" ng-model="SelectedDay" ng-options="label for label in Days | limitTo:NumberOfDays">'
                         <option class="placeholder" selected disabled value="">Birth</option>
                     </select>
                 </div>
