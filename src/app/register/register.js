@@ -22,6 +22,7 @@
 
     // Initialize scope variables
     $scope.registerData = {
+        UserName: "",
         Email: "",
         Password: "",
         ConfirmPassword: "",

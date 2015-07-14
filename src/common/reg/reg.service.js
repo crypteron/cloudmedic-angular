@@ -50,6 +50,7 @@
         // Register user
         var _register = function (registerData) {
             var data = {
+                UserName: registerData.UserName,
                 Email: registerData.Email,
                 Password: registerData.Password,
                 ConfirmPassword: registerData.ConfirmPassword,
