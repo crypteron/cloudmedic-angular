@@ -48,6 +48,7 @@
         });
     };
 
+    //Date of Birth dropdown menu value generator
     var numberOfYears = (new Date()).getYear();
     var years = $.map($(Array(numberOfYears)), function (val, i) { return i + 1900; });
     var months = $.map($(Array(12)), function (val, i) { return i + 1; });
