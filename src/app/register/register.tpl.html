@@ -26,18 +26,16 @@
                     <label for="user-last">Last Name</label>
                     <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="registerData.LastName" required tabindex="0">
                 </div>
-                <div class="radio">
-                    <label for="radio-male">Gender</label>
+                <div class="form-group">
+                    <label for="radio">Gender:</label>
                     <label><input id="radio-male" type="radio" name="optradio" ng-model="registerData.Gender" value="male" checked>Male</label>
                     <label><input id="radio-female" type="radio" name="optradio" ng-model="registerData.Gender" value="female">Female</label>
                 </div>
-                <div class="form-group">
+                <div class="form-group" ng-init="SelectedYear=1900; SelectedMonth=1; SelectedDay=1">
                     <label for="user-dob">Date of Birth</label>
-                    <input id="dob" class="form-control" placeholder="YYYY-MM-DD" type="date" ng-model="registerData.DOB" required tabindex="0" maxlength="10">
-                </div>
-                <div class="form-group">
-                    <label for="user-specialty">Specialty</label>
-                    <input id="user-specialty" class="form-control" placeholder="Specialty" type="text" ng-model="registerData.Specialty" required tabindex="0">
+                        Year : <select ng-model="SelectedYear" ng-options="label for label in Years" ng-change="UpdateNumberOfDays()"></select>
+                        Month: <select ng-model="SelectedMonth" ng-options="label for label in Months" ng-change="UpdateNumberOfDays()"></select>
+                        Day: <select ng-model="SelectedDay" ng-options="label for label in Days | limitTo:NumberOfDays"></select>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary btn-lg btn-block" type="submit" ng-click="register()" tabindex="0">Register</button>                    
