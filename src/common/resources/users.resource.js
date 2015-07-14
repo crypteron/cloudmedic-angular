@@ -7,9 +7,9 @@
     };
 
     provider.$get = ['$resource', function ($resource) {
-        var Users = $resource(provider.apiUrl + 'admin/users/:email', {}, {
+        var Users = $resource(provider.apiUrl + 'users/:email', {}, {
             'query': { method: 'GET', isArray: true },
-            remove: { method: 'DELETE', isArray: false, params: { email: "@Email" } }
+            'remove': { method: 'DELETE', isArray: false, params: { email: "@Email" } }
         });
         return Users;
     }];

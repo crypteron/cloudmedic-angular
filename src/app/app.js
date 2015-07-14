@@ -68,30 +68,30 @@ angular.module('crypteron', [
         $rootScope.previous = 'login';
         $rootScope.previousParams = {};
 
-        // Prevent migrating to any state other than Profile if not yet completed profile        
-        var removeProfileListener = $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-            if (auth.status.isLoggedIn && toState.name != 'profile' && toState.data.public !== true) {
-                // Fetch the profile singleton from the userProfile service
-                var profile = userProfile.get();
+        //// Prevent migrating to any state other than Profile if not yet completed profile        
+        //var removeProfileListener = $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+        //    if (auth.status.isLoggedIn && toState.name != 'profile' && toState.data.public !== true) {
+        //        // Fetch the profile singleton from the userProfile service
+        //        var profile = userProfile.get();
 
-                // Ensure the profile has already been fetched by using it's promise
-                profile.$promise.then(function () {
-                    // see if the user has complete his/her profile
-                    if (profile.UserMetaData.CompletedProfile === false) {            
-                        event.preventDefault();
-                        // show a custom error for those trying to navigate away from the Update profile page so they don't think that nothing is happening
-                        if (fromState.name == 'profile') {
-                            localizedNotifications.removeAll();
-                            localizedNotifications.addForCurrent('profile.required.force', 'warning', { pageTitle: toState.data.pageTitle });
-                        }
-                        $state.go('profile');
-                    } else {
-                        // Remove profile listener whenever CompletedProfile has been found to be true
-                        removeProfileListener();
-                    }
-                });
-            }
-        });
+        //        // Ensure the profile has already been fetched by using it's promise
+        //        profile.$promise.then(function () {
+        //            // see if the user has complete his/her profile
+        //            if (profile.UserMetaData.CompletedProfile === false) {            
+        //                event.preventDefault();
+        //                // show a custom error for those trying to navigate away from the Update profile page so they don't think that nothing is happening
+        //                if (fromState.name == 'profile') {
+        //                    localizedNotifications.removeAll();
+        //                    localizedNotifications.addForCurrent('profile.required.force', 'warning', { pageTitle: toState.data.pageTitle });
+        //                }
+        //                $state.go('profile');
+        //            } else {
+        //                // Remove profile listener whenever CompletedProfile has been found to be true
+        //                removeProfileListener();
+        //            }
+        //        });
+        //    }
+        //});
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             // Update page title when state changes
@@ -118,15 +118,15 @@ angular.module('crypteron', [
             return auth.status.token && auth.status.token.userRole === 'SiteAdmin';
         };
 
-        // When the user logs in, fetch the profile whenever the user logs in
-        $scope.$on('authService:login', function () {
-            $scope.profile = userProfile.get();
-        });
+        //// When the user logs in, fetch the profile whenever the user logs in
+        //$scope.$on('authService:login', function () {
+        //    $scope.profile = userProfile.get();
+        //});
 
-        // In case the page is refreshed after the user logs in, manually load the profile
-        if (auth.status.isLoggedIn) {
-            $scope.profile = userProfile.get();
-        }
+        //// In case the page is refreshed after the user logs in, manually load the profile
+        //if (auth.status.isLoggedIn) {
+        //    $scope.profile = userProfile.get();
+        //}
 
         $scope.logout = function () {
             localizedNotifications.removeAll();

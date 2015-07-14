@@ -74,6 +74,7 @@
     <Content Include="src\app\apps\apps.list.spec.js" />
     <Content Include="src\app\apps\apps.list.tpl.html" />
     <Content Include="src\app\apps\apps.detail.tpl.html" />
+    <Content Include="src\app\Users\users.js" />
     <Content Include="src\app\keys\keys.add.js" />
     <Content Include="src\app\keys\keys.add.spec.js" />
     <Content Include="src\app\keys\keys.detail.spec.js" />
@@ -145,6 +146,7 @@
     <Content Include="src\common\notifications\notifications.js" />
     <Content Include="src\common\reg\reg.js" />
     <Content Include="src\common\reg\reg.service.js" />
+    <Content Include="src\common\resources\home.resource.js" />
     <Content Include="src\common\resources\password.resource.js" />
     <Content Include="src\common\resources\profile.resource.js" />
     <Content Include="src\common\resources\acl.resource.js" />

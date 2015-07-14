@@ -14,23 +14,18 @@
         },
         resolve: {
             security: ['$q', 'auth', function($q, auth) {
-                if(!auth.status.token || auth.status.token.userRole !== 'SiteAdmin') {
+                if(!auth.status.token) {
                     return $q.reject("Not Authorized");
                 }
             }],
             users: ['Users', function (Users) {
                 return Users.query().$promise;
-            }],
-            reports: ['$http', 'APP_CONFIG', function ($http, APP_CONFIG) {
-                return $http.get(APP_CONFIG.api_url + 'admin/users/reports').then(function (response) {
-                    return response.data;
-                });
             }]
         },
         data: { pageTitle: 'Admin' }
     });
 }])
-.controller('AdminCtrl', ['$scope', '$state', 'users', 'reports', 'localizedNotifications', '$modal', 'DROPDOWN_PLANS',
+.controller('AdminCtrl', ['$scope', '$state', 'users', 'localizedNotifications', '$modal', 'DROPDOWN_PLANS',
     function ($scope, $state, users, reports, localizedNotifications, $modal, DROPDOWN_PLANS) {
     $scope.users = users;
 
@@ -52,19 +47,19 @@
         });
     };
 
-    $scope.signupsPastWeek = reports.SignupsPastWeek;
+    //$scope.signupsPastWeek = reports.SignupsPastWeek;
 
-    $scope.productTierLabels = [];
-    $scope.productTierData = [];
-    angular.forEach(reports.ProductsByTier, function (productTier) {
-        $scope.productTierLabels.push(productTier.Label);
-        $scope.productTierData.push(productTier.Value);
-    });
+    //$scope.productTierLabels = [];
+    //$scope.productTierData = [];
+    //angular.forEach(reports.ProductsByTier, function (productTier) {
+    //    $scope.productTierLabels.push(productTier.Label);
+    //    $scope.productTierData.push(productTier.Value);
+    //});
 
-    $scope.channelsLabels = [];
-    $scope.channelsData = [];
-    angular.forEach(reports.UsersByChannel, function (userChannel) {
-        $scope.channelsLabels.push(userChannel.Label);
-        $scope.channelsData.push(userChannel.Value);
-    });
+    //$scope.channelsLabels = [];
+    //$scope.channelsData = [];
+    //angular.forEach(reports.UsersByChannel, function (userChannel) {
+    //    $scope.channelsLabels.push(userChannel.Label);
+    //    $scope.channelsData.push(userChannel.Value);
+    //});
 }]);
