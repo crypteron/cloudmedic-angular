@@ -6,14 +6,19 @@
         <div class="well">
             <h2 class="text-center">Registration</h2>
             <cry-notification-bar></cry-notification-bar>
-            <form name="form" novalidate role="form">
+            <form name="form" role="form" ng-controller="RegisterCtrl">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input id="register-username" class="form-control" placeholder="Username" type="text" ng-model="registerData.UserName" required autofocus aria-describedby="basic-addon1">
+                    <input id="register-username" class="form-control" pattern="[A-Za-z0-9.]{3,12}" placeholder="Username" type="text" ng-model="registerData.UserName" ng-change="check_username()" required autofocus>
+                    <span class="input-group-addon" ng-hide="Username_Valid"><i class="glyphicon glyphicon-remove-circle"></i></span>
+                </div>
+                <div ng-hide="Username_Valid" style="padding-left:50px">
+                    <font color="red">Hello</font>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">@</span>
-                    <input id="register-email" class="form-control" placeholder="Email" type="text" ng-model="registerData.Email" required autofocus aria-describedby="basic-addon1">
+                    <input id="register-email" class="form-control" placeholder="Email" type="email" ng-model="registerData.Email" required autofocus>
+
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -48,6 +53,6 @@
                 </div>
 </form>
             <div class="text-center">
-                <strong>Already have an account? <a ui-sref="login" title="Sign In Immediately">Log in here</a></strong>
+                <strong>Already have an account? <a ui-sref="login" title="Log in here">Log in here</a></strong>
             </div>
 </div>
