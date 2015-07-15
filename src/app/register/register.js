@@ -101,7 +101,7 @@
     $scope.Password_Upper = true;
     $scope.Password_Special = true;
 
-    $scope.pw_pattern = "/^(?=*\d)(?=*[A-Z])(?=*[^A-Za-z0-9]){6,}$/";
+    $scope.pw_pattern = "/^(?=*[0-9])(?=*[A-Z])(?=*[^A-Za-z0-9]){6,}$/";
     $scope.check_password = function () {
         if (document.getElementById("user-password").value.length < 6) {
             $scope.Password_Short = true;
