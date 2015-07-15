@@ -10,15 +10,15 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="navbar-brand">
-                    Crypteron Dashboard
+                    CloudMedic Dashboard
                 </div>
             </div>
             <div class="collapse navbar-collapse navbar-inner" collapse="menuCollapsed" id="top-nav">
                 <ul class="nav navbar-nav navbar-right top-menu" ng-click="menuCollapsed = true">
-                    <li ng-show="authStatus.isLoggedIn" ng-class="{active: $state.includes('apps'), disabled: profile.UserMetaData.CompletedProfile === false}">
-                        <a href ui-sref="apps.list">
-                            <i class="fa fa-key"></i>
-                            Apps
+                    <li ng-show="authStatus.isLoggedIn" ng-class="{active: $state.includes('users')}">
+                        <a href ui-sref="users">
+                            <i class="fa fa-users"></i>
+                            Users
                         </a>
                     </li>                    
                     <li ng-hide="authStatus.isLoggedIn" ui-sref-active="active" >

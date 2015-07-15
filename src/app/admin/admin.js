@@ -14,7 +14,7 @@
         },
         resolve: {
             security: ['$q', 'auth', function($q, auth) {
-                if(!auth.status.token || auth.status.token.userRole !== 'SiteAdmin') {
+                if(!auth.status.token || auth.status.token.userRole !== 'SysAdmin') {
                     return $q.reject("Not Authorized");
                 }
             }],
