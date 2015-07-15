@@ -101,23 +101,24 @@
     $scope.Password_Upper = true;
     $scope.Password_Special = true;
 
+    $scope.pw_pattern = "/^(?=*\d)(?=*[A-Z])(?=*[^A-Za-z0-9]){6,}$/";
     $scope.check_password = function () {
         if (document.getElementById("user-password").value.length < 6) {
             $scope.Password_Short = true;
         } else {
             $scope.Password_Short = false;
         }
-        if (document.getElementById("user-password").value.match('[0-9]') === null) {
+        if (document.getElementById("user-password").value.match(/[0-9]/) == null) {
             $scope.Password_Digit = false;
         } else {
             $scope.Password_Digit = true;
         }
-        if (document.getElementById("user-password").value.match('[A-Z]') === null) {
+        if (document.getElementById("user-password").value.match(/[A-Z]/) == null) {
             $scope.Password_Upper = false;
         } else {
             $scope.Password_Upper = true;
         }
-        if (document.getElementById("user-password").value.match('[^A-Za-z0-9]') === null) {
+        if (document.getElementById("user-password").value.match(/[^A-Za-z0-9]/) == null) {
             $scope.Password_Special = false;
         } else {
             $scope.Password_Special = true;
