@@ -77,12 +77,21 @@
     $scope.Username_Valid = true;
 
     $scope.check_username = function () {
-
         if (document.getElementById("register-username").value.length < 3) {
             $scope.Username_Valid = false;
         }
         else{
             $scope.Username_Valid = true;
+        }
+    };
+
+    $scope.Passwords_Match = true;
+
+    $scope.compare_passwords = function () {
+        if (document.getElementById("user-password").value != (document.getElementById("user-confirmpassword").value)) {
+            $scope.Passwords_Match = false;
+        } else {
+            $scope.Passwords_Match = true;
         }
     };
 });
