@@ -76,19 +76,23 @@
     $scope.Username_Valid_length = true;
     $scope.Username_Valid_symbol = true;
 
-    $scope.check_username = function () {
-        if (document.getElementById("register-username").value.length < 3 || document.getElementById("register-username").value.length > 20) {
-            $scope.Username_Valid_length = false;
-        }
-        else {
-            $scope.Username_Valid_length = true;
-        }
+    $scope.check_username_symbol = function () {
 
         if (document.getElementById("register-username").value.match(/[^0-9a-zA-Z]/) != null) {
             $scope.Username_Valid_symbol = false;
         }
         else {
             $scope.Username_Valid_symbol = true;
+        }
+
+    };
+
+    $scope.check_username_length = function () {
+        if (document.getElementById("register-username").value.length < 3 || document.getElementById("register-username").value.length > 20) {
+            $scope.Username_Valid_length = false;
+        }
+        else {
+            $scope.Username_Valid_length = true;
         }
 
     };
