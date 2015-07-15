@@ -68,14 +68,6 @@
     $scope.UpdateNumberOfDays = function () {
         $scope.NumberOfDays = getNumberOfDaysInMonth();
     };
-    $scope.Check_FirstName = function () {
-        var matches = $scope.FirstName.match(/\d+/g);
-        return !(matches==null);
-    }
-    $scope.Check_LastName = function () {
-        var matches = $scope.LastName.match(/\d+/g);
-        return !(matches == null);
-    } 
     $scope.NumberOfDays = 31;
     $scope.Years = years;
     $scope.Days = days;
@@ -99,6 +91,26 @@
             $scope.Passwords_Match = false;
         } else {
             $scope.Passwords_Match = true;
+        }
+    };
+    $scope.Firstname_Valid = true;
+
+    $scope.check_firstName = function () {
+        if (document.getElementById("user-first").value.match(/\d/g)==null) {
+            $scope.Firstname_Valid = true;
+        }
+        else {
+            $scope.Firstname_Valid = false;
+        }
+    };
+
+    $scope.Lastname_Valid = true;
+    $scope.check_lastName = function () {
+        if(document.getElementById("user-last").value.match(/\d/g)==null) {
+            $scope.Lastname_Valid = true;
+        }
+        else {
+            $scope.Lastname_Valid = false;
         }
     };
 });
