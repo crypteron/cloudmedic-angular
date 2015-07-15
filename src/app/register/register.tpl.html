@@ -10,10 +10,9 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input id="register-username" class="form-control" pattern="[A-Za-z0-9.]{3,12}" placeholder="Username" type="text" ng-model="registerData.UserName" ng-change="check_username()" required autofocus>
-                    <span class="input-group-addon" ng-hide="Username_Valid"><i class="glyphicon glyphicon-remove-circle"></i></span>
                 </div>
-                <div ng-hide="Username_Valid" style="padding-left:50px">
-                    <font color="red">Hello</font>
+                <div ng-hide="Username_Valid" style="padding-left:50px;padding-bottom:5px">
+                    <font color="red">Username must be at least three characters long and only contain letters and numbers.</font>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">@</span>
@@ -25,7 +24,7 @@
                     <input id="user-password" class="form-control" placeholder="Enter password" type="password" ng-model="registerData.Password" required tabindex="0">
                     <input id="user-confirmpassword" class="form-control" placeholder="Confirm Password" type="password" ng-model="registerData.ConfirmPassword" ng-change="compare_passwords()" required tabindex="0">
                 </div>
-                <div ng-hide="Passwords_Match" style="padding-left:50px">
+                <div ng-hide="Passwords_Match" style="padding-left:50px;padding-bottom:5px">
                     <font color="red">Passwords must match!</font>
                 </div>
                 <div class="input-group">

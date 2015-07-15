@@ -75,7 +75,6 @@
     $scope.Months = months;
 
     $scope.Username_Valid = true;
-
     $scope.check_username = function () {
         if (document.getElementById("register-username").value.length < 3) {
             $scope.Username_Valid = false;
