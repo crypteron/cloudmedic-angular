@@ -68,7 +68,14 @@
     $scope.UpdateNumberOfDays = function () {
         $scope.NumberOfDays = getNumberOfDaysInMonth();
     };
-
+    $scope.Check_FirstName = function () {
+        var matches = $scope.FirstName.match(/\d+/g);
+        return !(matches==null);
+    }
+    $scope.Check_LastName = function () {
+        var matches = $scope.LastName.match(/\d+/g);
+        return !(matches == null);
+    } 
     $scope.NumberOfDays = 31;
     $scope.Years = years;
     $scope.Days = days;
