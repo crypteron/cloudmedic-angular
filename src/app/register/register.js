@@ -73,14 +73,24 @@
     $scope.Days = days;
     $scope.Months = months;
 
-    $scope.Username_Valid = true;
+    $scope.Username_Valid_length = true;
+    $scope.Username_Valid_symbol = true;
+
     $scope.check_username = function () {
-        if (document.getElementById("register-username").value.length < 3) {
-            $scope.Username_Valid = false;
+        if (document.getElementById("register-username").value.length < 3 || document.getElementById("register-username").value.length > 20) {
+            $scope.Username_Valid_length = false;
         }
-        else{
-            $scope.Username_Valid = true;
+        else {
+            $scope.Username_Valid_length = true;
         }
+
+        if (document.getElementById("register-username").value.match(/[^0-9a-zA-Z]/) != null) {
+            $scope.Username_Valid_symbol = false;
+        }
+        else {
+            $scope.Username_Valid_symbol = true;
+        }
+
     };
 
     $scope.Passwords_Match = true;
@@ -92,24 +102,25 @@
             $scope.Passwords_Match = true;
         }
     };
+
     $scope.Firstname_Valid = true;
+    $scope.Lastname_Valid = true;
 
     $scope.check_firstName = function () {
-        if (document.getElementById("user-first").value.match(/\d/g)==null) {
-            $scope.Firstname_Valid = true;
+        if (document.getElementById("user-first").value.match(/[^a-zA-Z]/) != null) {
+            $scope.Firstname_Valid = false;
         }
         else {
-            $scope.Firstname_Valid = false;
+            $scope.Firstname_Valid = true;
         }
     };
 
-    $scope.Lastname_Valid = true;
     $scope.check_lastName = function () {
-        if(document.getElementById("user-last").value.match(/\d/g)==null) {
-            $scope.Lastname_Valid = true;
+        if (document.getElementById("user-last").value.match(/[^a-zA-Z]/) != null) {
+            $scope.Lastname_Valid = false;
         }
         else {
-            $scope.Lastname_Valid = false;
+            $scope.Lastname_Valid = true;
         }
     };
 });
