@@ -9,7 +9,7 @@
             <form name="form" role="form" ng-controller="RegisterCtrl">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input id="register-username" class="form-control" pattern="[A-Za-z0-9.]{3,12}" placeholder="Username" type="text" ng-model="registerData.UserName" ng-change="check_username()" required autofocus>
+                    <input id="register-username" class="form-control" pattern="[A-Za-z0-9.]{3,20}" placeholder="Username" type="text" ng-model="registerData.UserName" ng-blur="check_username()" required autofocus>
                 </div>
                 <div ng-hide="Username_Valid" style="padding-left:50px;padding-bottom:5px">
                     <font color="red">Username must be at least three characters long and only contain letters and numbers.</font>
