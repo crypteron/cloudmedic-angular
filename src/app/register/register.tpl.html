@@ -27,23 +27,17 @@
                         <input id="register-email" class="form-control" placeholder="Email" type="email" ng-model="registerData.Email" required autofocus>
                     </div>
                 </div>
-                <div class="form-group">
                     <div class="form-inline">
-                        <div class="form-group ">
+                        <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <div class="form-inline">
-                                    <div class="form-group">
-                                        <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="registerData.FirstName" ng-change="check_firstName()" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="registerData.LastName" ng-change="check_lastName()" required>
-                                    </div>
-                                </div>
+                                <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="registerData.FirstName" ng-change="check_firstName()" required>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="registerData.LastName" ng-change="check_lastName()" required>
+                        </div>
                     </div>
-                </div>
                 <div class="form-group">
                     <div ng-hide="Firstname_Valid">
                         <font color="red">First name must only contain letters.</font>
@@ -81,6 +75,7 @@
                         <font color="red">Passwords must match!</font>
                     </div>
                 </div>   
+                <div class="form-inline">
                     <div class="form-group">
                         <div class="input-group">
                             <!--          <span class="input-group-addon">Birthday&nbsp;&nbsp;<i class="glyphicon glyphicon-calendar"></i></span>-->
@@ -94,6 +89,10 @@
                             <select required class="col-md-4 form-control-static" ng-model="SelectedYear" ng-options="label for label in Years | reverse" ng-change="UpdateNumberOfDays()">
                                 <option class="placeholder" selected disabled value="">Year</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-male"></i> /  <i class="fa fa-female"></i></span>
                             <select required class="col-md-12 form-control-static" ng-model="registerData.Gender" aria-expanded="false" tabindex="0" aria-haspopup="true" aria-activedescendant=":d">
                                 <option class="placeholder" selected disabled value="">Gender</option>
@@ -102,10 +101,11 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary btn-block btn-lg" type="submit" ng-click="register()" ng-disabled="form.$invalid || data.isSubmitting">Register</button>
-                    </div>
-</form>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block btn-lg" type="submit" ng-click="register()" ng-disabled="form.$invalid || data.isSubmitting">Register</button>
+                </div>
+            </form>
             <div class="text-center">
                 <strong>Already have an account? <a ui-sref="login" title="Log in here">Log in here</a></strong>
             </div>
