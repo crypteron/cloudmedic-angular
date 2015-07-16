@@ -28,67 +28,87 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="registerData.FirstName" ng-change="check_firstName()" required tabindex="0">
-                        <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="registerData.LastName" ng-change="check_lastName()" required tabindex="0">
+                    <div class="form-inline">
+                        <div class="form-group ">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="registerData.FirstName" ng-change="check_firstName()" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="registerData.LastName" ng-change="check_lastName()" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div ng-hide="Firstname_Valid" style="padding-left:50px;padding-bottom:5px">
-                    <font color="red">First name must only contain letters.</font>
-                </div>
-                <div ng-hide="Lastname_Valid" style="padding-left:50px;padding-bottom:5px">
-                    <font color="red">Last name must only contain letters.</font>
-                </div>
-                <div class="input-group" style="padding-bottom:10px">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input id="user-password" class="form-control" pattern="(?=(.*\d))(?=(.*[A-Z]))(?=(.*[^A-Za-z0-9])).{6,}" placeholder="Enter password" type="password" ng-model="registerData.Password" watch-change="check_password()" required tabindex="0">
-                    <input id="user-confirmpassword" class="form-control" placeholder="Confirm Password" type="password" ng-model="registerData.ConfirmPassword" ng-change="compare_passwords()" required tabindex="0">
-                </div>
-                <div ng-hide="Password_Valid" style="padding-left:50px;padding-bottom:5px" ng-cloak>
-                    <font color="red">Password invalid:</font>
-                    <ul style="margin-bottom:5px">
-                        <li ng-show="Password_Short" ng-cloak>
-                            <font color="red">must be at least six characters</font>
-                        </li>
-                        <li ng-hide="Password_Digit" ng-cloak>
-                            <font color="red">must contain a digit</font>
-                        </li>
-                        <li ng-hide="Password_Upper" ng-cloak>
-                            <font color="red">must contain an upper case character</font>
-                        </li>
-                        <li ng-hide="Password_Special" ng-cloak>
-                            <font color="red">must contain a special character</font>
-                        </li>                        
-                    </ul>
-                </div>
-                <div ng-hide="Passwords_Match" style="padding-left:50px;padding-bottom:5px" ng-cloak>
-                    <font color="red">Passwords must match!</font>
-                </div>
-                <div class="input-group" style="padding-bottom:10px">
-                    <span class="input-group-addon">Birthday&nbsp;&nbsp;<i class="glyphicon glyphicon-calendar"></i></span>
-                    <select required class="col-md-4 form-control-static" ng-model="SelectedDay" ng-options="label for label in Days | limitTo:NumberOfDays">
-                        <option class="placeholder" selected disabled value="">Day</option>
-                    </select>
-                    <select required class="col-md-4 form-control-static" ng-model="SelectedMonth" ng-options="label for label in Months" ng-change="UpdateNumberOfDays()">
-                        <option class="placeholder" selected disabled value="">Month</option>
-                    </select>
-                    <select required class="col-md-4 form-control-static" ng-model="SelectedYear" ng-options="label for label in Years" ng-change="UpdateNumberOfDays()">
-                        <option class="placeholder" selected disabled value="">Year</option>
-                    </select>
-                    <span class="input-group-addon"><i class="fa fa-male"></i> /  <i class="fa fa-female"></i></span>
-                    <select required class="col-md-12 form-control-static" ng-model="registerData.Gender" aria-expanded="false" tabindex="0" aria-haspopup="true" aria-activedescendant=":d">
-                        <option class="placeholder" selected disabled value="">Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </div>
-
                 <div class="form-group">
-                    <button style="padding-top:5px" class="btn btn-primary btn-block btn-lg" type="submit" ng-click="register()" ng-disabled="form.$invalid || data.isSubmitting" tabindex="0">Register</button>
+                    <div ng-hide="Firstname_Valid">
+                        <font color="red">First name must only contain letters.</font>
+                    </div>
+                    <div ng-hide="Lastname_Valid">
+                        <font color="red">Last name must only contain letters.</font>
+                    </div>
                 </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input id="user-password" class="form-control" pattern="(?=(.*\d))(?=(.*[A-Z]))(?=(.*[^A-Za-z0-9])).{6,}" placeholder="Enter password" type="password" ng-model="registerData.Password" watch-change="check_password()" required>
+                            <input id="user-confirmpassword" class="form-control" placeholder="Confirm Password" type="password" ng-model="registerData.ConfirmPassword" ng-change="compare_passwords()" required>
+                        </div>
+                    </div>
+                <div class="form-group">
+                    <div ng-hide="Password_Valid">
+                        <font color="red">Password invalid:</font>
+                        <ul style="margin-bottom:5px">
+                            <li ng-show="Password_Short" ng-cloak>
+                                <font color="red">must be at least six characters</font>
+                            </li>
+                            <li ng-hide="Password_Digit" ng-cloak>
+                                <font color="red">must contain a digit</font>
+                            </li>
+                            <li ng-hide="Password_Upper" ng-cloak>
+                                <font color="red">must contain an upper case character</font>
+                            </li>
+                            <li ng-hide="Password_Special" ng-cloak>
+                                <font color="red">must contain a special character</font>
+                            </li>
+                        </ul>
+                    </div>
+                    <div ng-hide="Passwords_Match">
+                        <font color="red">Passwords must match!</font>
+                    </div>
+                </div>   
+                    <div class="form-group">
+                        <div class="input-group">
+                            <!--          <span class="input-group-addon">Birthday&nbsp;&nbsp;<i class="glyphicon glyphicon-calendar"></i></span>-->
+                            <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
+                            <select required class="col-md-4 form-control-static" ng-model="SelectedDay" ng-options="label for label in Days | limitTo:NumberOfDays">
+                                <option class="placeholder" selected disabled value="">Day</option>
+                            </select>
+                            <select required class="col-md-4 form-control-static" ng-model="SelectedMonth" ng-options="label for label in Months" ng-change="UpdateNumberOfDays()">
+                                <option class="placeholder" selected disabled value="">Month</option>
+                            </select>
+                            <select required class="col-md-4 form-control-static" ng-model="SelectedYear" ng-options="label for label in Years | reverse" ng-change="UpdateNumberOfDays()">
+                                <option class="placeholder" selected disabled value="">Year</option>
+                            </select>
+                            <span class="input-group-addon"><i class="fa fa-male"></i> /  <i class="fa fa-female"></i></span>
+                            <select required class="col-md-12 form-control-static" ng-model="registerData.Gender" aria-expanded="false" tabindex="0" aria-haspopup="true" aria-activedescendant=":d">
+                                <option class="placeholder" selected disabled value="">Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block btn-lg" type="submit" ng-click="register()" ng-disabled="form.$invalid || data.isSubmitting">Register</button>
+                    </div>
 </form>
             <div class="text-center">
                 <strong>Already have an account? <a ui-sref="login" title="Log in here">Log in here</a></strong>
             </div>
+        </div>
+    </div>
 </div>

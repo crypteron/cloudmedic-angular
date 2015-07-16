@@ -18,6 +18,11 @@
         }
     });
 })
+.filter('reverse', function() {
+    return function(items) {
+        return items.slice().reverse();
+};
+})
 .controller('RegisterCtrl', function ($scope, reg, $state, userProfile) {
 
     // Initialize scope variables
