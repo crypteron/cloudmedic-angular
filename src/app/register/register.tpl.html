@@ -27,17 +27,13 @@
                         <input id="register-email" class="form-control" placeholder="Email" type="email" ng-model="registerData.Email" required autofocus>
                     </div>
                 </div>
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="registerData.FirstName" ng-change="check_firstName()" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="registerData.LastName" ng-change="check_lastName()" required>
-                        </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="registerData.FirstName" ng-change="check_firstName()" required>
+                        <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="registerData.LastName" ng-change="check_lastName()" required>
                     </div>
+                </div>
                 <div class="form-group">
                     <div ng-hide="Firstname_Valid">
                         <font color="red">First name must only contain letters.</font>
@@ -46,13 +42,13 @@
                         <font color="red">Last name must only contain letters.</font>
                     </div>
                 </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input id="user-password" class="form-control" pattern="(?=(.*\d))(?=(.*[A-Z]))(?=(.*[^A-Za-z0-9])).{6,}" placeholder="Enter password" type="password" ng-model="registerData.Password" watch-change="check_password()" required>
-                            <input id="user-confirmpassword" class="form-control" placeholder="Confirm Password" type="password" ng-model="registerData.ConfirmPassword" ng-change="compare_passwords()" required>
-                        </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input id="user-password" class="form-control" pattern="(?=(.*\d))(?=(.*[A-Z]))(?=(.*[^A-Za-z0-9])).{6,}" placeholder="Enter password" type="password" ng-model="registerData.Password" watch-change="check_password()" required>
+                        <input id="user-confirmpassword" class="form-control" placeholder="Confirm Password" type="password" ng-model="registerData.ConfirmPassword" ng-change="compare_passwords()" required>
                     </div>
+                </div>
                 <div class="form-group">
                     <div ng-hide="Password_Valid">
                         <font color="red">Password invalid:</font>
@@ -75,30 +71,34 @@
                         <font color="red">Passwords must match!</font>
                     </div>
                 </div>   
-                <div class="form-inline">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <!--          <span class="input-group-addon">Birthday&nbsp;&nbsp;<i class="glyphicon glyphicon-calendar"></i></span>-->
-                            <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
-                            <select required class="col-md-4 form-control-static" ng-model="SelectedDay" ng-options="label for label in Days | limitTo:NumberOfDays">
-                                <option class="placeholder" selected disabled value="">Day</option>
-                            </select>
-                            <select required class="col-md-4 form-control-static" ng-model="SelectedMonth" ng-options="label for label in Months" ng-change="UpdateNumberOfDays()">
-                                <option class="placeholder" selected disabled value="">Month</option>
-                            </select>
-                            <select required class="col-md-4 form-control-static" ng-model="SelectedYear" ng-options="label for label in Years | reverse" ng-change="UpdateNumberOfDays()">
-                                <option class="placeholder" selected disabled value="">Year</option>
-                            </select>
+                <div class="form-group">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
+                                <div class="form-inline">
+                                    <select required class="form-control" ng-model="SelectedMonth" ng-options="label for label in Months" ng-change="UpdateNumberOfDays()">
+                                        <option class="placeholder" selected disabled value="">Month</option>
+                                    </select>
+                                    <select required class="form-control" ng-model="SelectedDay" ng-options="label for label in Days | limitTo:NumberOfDays">
+                                        <option class="placeholder" selected disabled value="">Day</option>
+                                    </select>
+                                    <select required class="form-control" ng-model="SelectedYear" ng-options="label for label in Years | reverse" ng-change="UpdateNumberOfDays()">
+                                        <option class="placeholder" selected disabled value="">Year</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-male"></i> /  <i class="fa fa-female"></i></span>
-                            <select required class="col-md-12 form-control-static" ng-model="registerData.Gender" aria-expanded="false" tabindex="0" aria-haspopup="true" aria-activedescendant=":d">
-                                <option class="placeholder" selected disabled value="">Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                            </select>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-male"></i> /  <i class="fa fa-female"></i></span>
+                            </div>
+
+                                <select required class="form-control" ng-model="registerData.Gender" aria-expanded="false">
+                                    <option class="placeholder" selected disabled value="">Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
                         </div>
                     </div>
                 </div>
