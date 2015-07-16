@@ -26,6 +26,7 @@
             <th>Full Name</th>
             <th>User Name</th>
             <th>Email</th>
+            <th>Role</th>
             <th style="width:69px;">Edit</th>
         </tr>
     </thead>
@@ -34,6 +35,9 @@
             <td>{{user.FirstName}} {{user.LastName}}</td>
             <td>{{user.UserName}}</td>
             <td>{{user.Email}}</td>
+            <td>
+                <div ng-repeat="role in user.Roles">{{role}}</div>
+            </td>
             <td>
                 <button class="btn btn-danger btn-xs" ng-click="removeUser(user)">
                     <i class="glyphicon glyphicon-trash"></i>

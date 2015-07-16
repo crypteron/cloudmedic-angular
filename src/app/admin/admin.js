@@ -36,18 +36,18 @@
 
     $scope.removeUser = function (user) {
         localizedNotifications.removeForCurrent();
-        //$modal.open({
-        //    templateUrl: "app.confirm.tpl.html",
-        //    controller: ['$scope', function ($scope) {
-        //        $scope.confirmText = "You will not be able to recover this User!";
-        //        $scope.confirmButton = "Yes, delete User!";
-        //    }]
-        //}).result.then(function () {
+        $modal.open({
+            templateUrl: "app.confirm.tpl.html",
+            controller: ['$scope', function ($scope) {
+                $scope.confirmText = "You will not be able to recover this User!";
+                $scope.confirmButton = "Yes, delete User!";
+            }]
+        }).result.then(function () {
             $scope.userRemover.$remove({ email: user.Email }).then(function () {
                 localizedNotifications.addForNext('delete.success', 'success', { entityType: 'User' });
                 $state.go("admin", null, { reload: true });
             });
-    //    });
+        });
     };
 
     //$scope.signupsPastWeek = reports.SignupsPastWeek;
