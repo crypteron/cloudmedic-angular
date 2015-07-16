@@ -9,12 +9,12 @@
             <form name="form" novalidate role="form">
                 <div class="input-group" style="padding-bottom:10px">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input id="register-username" class="form-control" pattern="[A-Za-z0-9.]{3,20}" placeholder="Username" type="text" ng-model="registerData.UserName" ng-change="check_username_symbol();check_username_length()" ng-cloak required autofocus>
+                    <input id="register-username" class="form-control" pattern="[A-Za-z0-9.]{3,20}" placeholder="Username" type="text" ng-model="registerData.UserName" ng-change="check_username_symbol();check_username_length()" required autofocus>
                 </div>
-                <div ng-hide="Username_Valid_length" style="padding-left:50px;padding-bottom:5px" ng-cloak>
+                <div ng-hide="Username_Valid_length" style="padding-left:50px;padding-bottom:5px">
                     <font color="red">Username must be 3-20 characters long.</font>
                 </div>
-                <div ng-hide="Username_Valid_symbol" style="padding-left:50px;padding-bottom:5px" ng-cloak>
+                <div ng-hide="Username_Valid_symbol" style="padding-left:50px;padding-bottom:5px">
                     <font color="red">Username must only contain letters and numbers.</font>
                 </div>
                 <div class="input-group" style="padding-bottom:10px">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="input-group" style="padding-bottom:10px">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input id="user-password" class="form-control" ng-pattern="pw_pattern" placeholder="Enter password" type="password" ng-model="registerData.Password" ng-change="check_password()" required tabindex="0">
+                    <input id="user-password" class="form-control" pattern="(?=(.*\d))(?=(.*[A-Z]))(?=(.*[^A-Za-z0-9])).{6,}" placeholder="Enter password" type="password" ng-model="registerData.Password" watch-change="check_password()" required tabindex="0">
                     <input id="user-confirmpassword" class="form-control" placeholder="Confirm Password" type="password" ng-model="registerData.ConfirmPassword" ng-change="compare_passwords()" required tabindex="0">
                 </div>
                 <div ng-hide="Password_Valid" style="padding-left:50px;padding-bottom:5px" ng-cloak>
