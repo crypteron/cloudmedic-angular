@@ -6,11 +6,11 @@
         provider.apiUrl = apiUrl;
     };
 
-    provider.$get = ['$resource', function ($resource) {
-        var Users = $resource(provider.apiUrl + 'users/:email', {}, {
+    provider.$get = function ($resource) {
+        var service = $resource(provider.apiUrl + 'users/:Email', {}, {
             'query': { method: 'GET', isArray: true },
-            'remove': { method: 'DELETE', isArray: false, params: { email: "@Email" } }
+            'remove': { method: 'DELETE', isArray: false, params: { Email: "@Email" } }
         });
-        return Users;
-    }];
+        return service;
+    };
 });
