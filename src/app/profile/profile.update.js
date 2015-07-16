@@ -23,33 +23,22 @@
     });
 }])
 .controller('ProfileCtrl', 
-    function ($scope, localizedNotifications, profile, DROPDOWN_COMPANY_SIZES, DROPDOWN_INDUSTRY_VERTICALS, $state, auth) {            
-        $scope.companySizes = DROPDOWN_COMPANY_SIZES;
-        $scope.industryVerticals = DROPDOWN_INDUSTRY_VERTICALS;
+    function ($scope, localizedNotifications, profile, $state, auth) {            
+        
         $scope.profile = angular.copy(profile);
         $scope.data = {
             isSubmitting: false
         };
         $scope.authStatus = auth.status;
-
-        var newProfile = false;        
-        if ($scope.profile.UserMetaData.CompletedProfile === false) {
-            localizedNotifications.addForCurrent('profile.required', 'info', {}, { disableClose: true });            
-            newProfile = true;
-        }
-
+        //$scope.GetProfileUrl = APP_CONFIG.api_url + 'account/Profile';
+        //$scope.UpdateProfileUrl = APP_CONFIG.api_url + 'account/UpdateProfile';
+        //$http.get($scope.GetProfileUrl).success(function () {
+        //    $scope.CurrentProfile = response;
+        //});
+        $scope.defaultname = "aaa";
         $scope.updateProfile = function () {            
             localizedNotifications.removeForCurrent();
-            if ($scope.profile.IndustryVertical === 0) {
-                localizedNotifications.addForCurrent('field.required', 'danger', { field: 'Industry' });
-                return;
-            }
-            if ($scope.profile.CompanySize === 0) {
-                localizedNotifications.addForCurrent('field.required', 'danger', { field: 'Company Size' });
-                return;
-            }
-            $scope.data.isSubmitting = true;
-            
+            $scope.data.isSubmitting = true;          
             $scope.profile.$update().then(function () {
                 localizedNotifications.addForNext('update.success', 'success', { entityType: 'Profile' });
                 $scope.data.isSubmitting = false;
@@ -63,7 +52,7 @@
             });
             
         };
-
+        
         $scope.resetProfile = function () {
             $scope.profile = angular.copy(profile);
             $scope.profileForm.$setPristine();
