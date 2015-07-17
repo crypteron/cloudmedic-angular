@@ -9,7 +9,7 @@
         return items.slice().reverse();
     };
 })
-.controller('FormCtrl', function ($scope, reg, Users, $state, MONTHS) {
+.controller('FormCtrl', function ($scope, reg, Users, $state, MONTHS, localizedNotifications) {
 
     // Initialize scope variables
     $scope.data = {
@@ -27,7 +27,7 @@
     };
     $scope.creator = new Users();
 
-    // Register method
+    // User registration method
     $scope.register = function () {
         $scope.data.isSubmitting = true;
 
@@ -42,12 +42,11 @@
         });
     };
 
-    // Create method
+    // User creation method
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
-
         // bind scope values to creator object
-        $scope.creator.UserName = $scope.UserName;
+        $scope.creator.UserName = $scope.data.UserName;
         $scope.creator.Email = $scope.data.Email;
         $scope.creator.FirstName = $scope.data.FirstName;
         $scope.creator.LastName = $scope.data.LastName;
@@ -58,7 +57,7 @@
 
         $scope.creator.$create().then(function () {
             localizedNotifications.addForNext('create.success', 'success', { entityType: 'User' });
-            $modalInstance.close();
+            $scope.$close();
         }, function () {
             $scope.data.isSubmitting = false;
         });

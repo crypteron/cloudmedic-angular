@@ -58,8 +58,7 @@
     <Content Include="src\app\acl\acl.list.tpl.html" />
     <Content Include="src\app\acl\acl.permissions.js" />
     <Content Include="src\app\acl\acl.list.spec.js" />
-    <Content Include="src\app\admin\admin.add.js" />
-    <Content Include="src\app\admin\admin.add.tpl.html" />
+    <Content Include="src\app\app.add.tpl.html" />
     <Content Include="src\app\admin\admin.js" />
     <Content Include="src\app\admin\admin.tpl.html" />
     <Content Include="src\app\app.confirm.tpl.html" />
@@ -150,6 +149,7 @@
     <Content Include="src\common\notifications\notifications.js" />
     <Content Include="src\common\reg\reg.js" />
     <Content Include="src\common\reg\reg.service.js" />
+    <Content Include="src\common\resources\add.resource.js" />
     <Content Include="src\common\resources\home.resource.js" />
     <Content Include="src\common\resources\password.resource.js" />
     <Content Include="src\common\resources\profile.resource.js" />
