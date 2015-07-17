@@ -5,9 +5,12 @@
             <form class="form-horizontal" name="profileForm" ng-submit="updateProfile()">
                 <h2 class="form-header">Edit Profile</h2>
                 <div class="input-group" style="padding-bottom:10px">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-fire"></i></span>
-                    <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="profile.FirstName" ng-change="check_firstName()" required tabindex="0">
-                    <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="profile.LastName" ng-change="check_lastName()" required tabindex="0">
+                    <label for="profile-fn" class="col-sm-4 control-label">FirstName:</label>
+                    <input id="user-first" class="col-sm-8" placeholder="First Name" type="text" ng-model="profile.FirstName" ng-change="check_firstName()" required tabindex="0">
+                </div>
+                <div class="input-group" style="padding-bottom:10px">      
+                    <label for="profile-ln" class="col-sm-4 control-label">LastName:</label>
+                    <input id="user-last" class="col-sm-8" placeholder="Last Name" type="text" ng-model="profile.LastName" ng-change="check_lastName()" required tabindex="0">
                 </div>
                 <div ng-hide="Firstname_Valid" style="padding-left:50px;padding-bottom:5px">
                     <font color="red">First name must only contain letters.</font>
@@ -15,26 +18,27 @@
                 <div ng-hide="Lastname_Valid" style="padding-left:50px;padding-bottom:5px">
                     <font color="red">Last name must only contain letters.</font>
                 </div>
-                <div class="input-group" style="padding-bottom:10px">
-                    <span class="input-group-addon" id="basic-addon1">@</span>
-                    <input id="register-email" class="form-control" type="text" ng-model="profile.Email" placeholder="Email" ng-disabled="data.isSubmitting"
+                <div class="input-group" style="padding-bottom:10px;padding-left:10px">
+                    <label for="profile-ln" class="col-sm-4 control-label">Email:</label>
+                    <input id="register-email" class="col-sm-8" type="text" ng-model="profile.Email" placeholder="Email" ng-disabled="data.isSubmitting"
                            required autofocus />
-                </div>     
-                <div class="form-group" ng-if="authStatus.ssoProvider == null">
+                </div>
+                <div class="form-group" style="padding-right:200px" ng-if="authStatus.ssoProvider == null">
+                    <label for="profile-password" class="col-sm-4 control-label">Password: </label>
                     <div class="col-sm-8">
                         <a ui-sref="profile.changePassword" class="btn btn-default" ng-disabled="data.isSubmitting">Change Password...</a>
                     </div>
-                </div>           
-        <div class="profile-buttons">
-            <button class="btn btn-primary btn-lg" type="submit" ng-disabled="data.isSubmitting">Update Profile</button>
-            <a class="text-danger reset-link" type="button"
-               ng-click="resetProfile()"
-               ng-disabled="data.isSubmitting">
-                <i class="fa fa-undo"></i> Reset
-            </a>
+                </div>
+                <div class="profile-buttons">            
+                    <button class="btn btn-primary btn-lg" type="submit" ng-disabled="data.isSubmitting">Update Profile</button>
+                    <a class="text-danger reset-link" type="button"
+                       ng-click="resetProfile()"
+                       ng-disabled="data.isSubmitting">
+                        <i class="fa fa-undo"></i> Reset
+                    </a>
+                </div>
+            </form>
         </div>
-        </form>
-    </div>
     </div>
 </div>
 
