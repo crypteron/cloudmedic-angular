@@ -19,16 +19,12 @@
                     <span class="input-group-addon" id="basic-addon1">@</span>
                     <input id="register-email" class="form-control" type="text" ng-model="profile.Email" placeholder="Email" ng-disabled="data.isSubmitting"
                            required autofocus />
-                </div>
+                </div>     
                 <div class="form-group" ng-if="authStatus.ssoProvider == null">
                     <div class="col-sm-8">
                         <a ui-sref="profile.changePassword" class="btn btn-default" ng-disabled="data.isSubmitting">Change Password...</a>
                     </div>
-                </div>
-                
-        </div>
-
-
+                </div>           
         <div class="profile-buttons">
             <button class="btn btn-primary btn-lg" type="submit" ng-disabled="data.isSubmitting">Update Profile</button>
             <a class="text-danger reset-link" type="button"

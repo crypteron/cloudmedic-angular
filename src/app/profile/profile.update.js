@@ -31,12 +31,10 @@
         $scope.authStatus = auth.status;
         $scope.updateProfile = function () {            
             localizedNotifications.removeForCurrent();
-            $scope.data.isSubmitting = true;
-    
+            $scope.data.isSubmitting = true;   
             $scope.profile.$post().then(function () {
                 localizedNotifications.addForNext('update.success', 'success', { entityType: 'Profile' });
                 $scope.data.isSubmitting = false;
-
                 angular.copy($scope.profile, profile);
                 $scope.profileForm.$setPristine();
                 $state.go('users');                
