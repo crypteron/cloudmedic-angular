@@ -15,6 +15,7 @@ angular.module('crypteron', [
   'crypteron.users',
   'ui.router',
   'auth',
+  'form',
   'localizedMessages',
   'localizedNotifications',
   'angular-loading-bar',

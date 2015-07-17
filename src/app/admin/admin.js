@@ -1,6 +1,7 @@
 ﻿angular.module('crypteron.admin', [
     'ui.router',
     'chart.js',
+    'form',
     'crypteron.resources'
 ])
 .config(['$stateProvider', function config($stateProvider) {
@@ -13,8 +14,8 @@
             }
         },
         resolve: {
-            security: ['$q', 'auth', function($q, auth) {
-                if(!auth.status.token || !auth.status.token.userRole.contains('SysAdmin')) {
+            security: ['$q', 'auth', function ($q, auth) {
+                if (!auth.status.token || !auth.status.token.userRole.contains('SysAdmin')) {
                     return $q.reject("Not Authorized");
                 }
             }],
@@ -43,10 +44,20 @@
                 $scope.confirmButton = "Yes, delete User!";
             }]
         }).result.then(function () {
-            $scope.userRemover.$remove({ email: user.Email }).then(function () {
+            $scope.userRemover.$remove({ userName: user.UserName }).then(function () {
                 localizedNotifications.addForNext('delete.success', 'success', { entityType: 'User' });
                 $state.go("admin", null, { reload: true });
             });
+        });
+    };
+
+    $scope.createUser = function () {
+        localizedNotifications.removeForCurrent();
+        $modal.open({
+            templateUrl: "app.add.tpl.html",
+            controller: 'FormCtrl'
+        }).result.then(function () {
+            $state.go("admin", null, { reload: true });
         });
     };
 

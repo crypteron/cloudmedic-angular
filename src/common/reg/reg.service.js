@@ -40,10 +40,6 @@
 
     // Factory 
     provider.$get = function ($http, $q, $rootScope, $state, localStorageService) {
-        // Properties
-        var _status = {
-            isRegistered: false
-        };
 
         // Methods
 
@@ -65,7 +61,6 @@
 
             $http.post(provider.apiUrl + provider.registerPath, JSON.stringify(data), { headers: { 'Content-Type': 'application/json; charset=utf-8' } })
                 .success(function (response) {
-                    _status.isRegistered = true;
                     deferred.resolve(response);
                 })
             .error(function (err, status) {

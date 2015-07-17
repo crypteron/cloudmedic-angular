@@ -2,7 +2,7 @@
 angular.module('crypteron.apps.detail', [
     'ui.router',
     'crypteron.resources',
-    'crypteron.dropdown.values',
+    'cloudmedic.dropdown.values',
     'xeditable'    
 ])
 .config(['$stateProvider', function config($stateProvider) {

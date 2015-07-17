@@ -7,9 +7,10 @@
     };
 
     provider.$get = function ($resource) {
-        var service = $resource(provider.apiUrl + 'users/:Email', {}, {
+        var service = $resource(provider.apiUrl + 'users/:path', {}, {
             'query': { method: 'GET', isArray: true },
-            'remove': { method: 'DELETE', isArray: false, params: { Email: "@Email" } }
+            'remove': { method: 'DELETE', isArray: false },
+            'create': { method: 'POST', isArray: false, params: { path: 'Add' } }
         });
         return service;
     };

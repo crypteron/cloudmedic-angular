@@ -1,4 +1,4 @@
-# Crypteron's AngularJS dashboard
+# Cloudmedic's AngularJS dashboard
 
 ***
 

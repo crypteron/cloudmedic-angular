@@ -1,4 +1,4 @@
-﻿angular.module('crypteron.dropdown.values', [])
+﻿angular.module('cloudmedic.dropdown.values', [])
 .constant('DROPDOWN_PLANS', [
     { value: 0, text: 'Developer ($0)', amount: 0 },
     { value: 4, text: 'Startup ($49 / month)', amount:49 },
@@ -44,4 +44,19 @@
     { value: 21, text: 'Telecommunications' },
     { value: 22, text: 'Transportation' },
     { value: 23, text: 'Other'}
-]);
+])
+.constant('MONTHS', [
+    { value: 1, text: 'January' },
+    { value: 2, text: 'February' },
+    { value: 3, text: 'March' },
+    { value: 4, text: 'April' },
+    { value: 5, text: 'May' },
+    { value: 6, text: 'June' },
+    { value: 7, text: 'July'},
+    { value: 8, text: 'August' },
+    { value: 9, text: 'September' },
+    { value: 10, text: 'October' },
+    { value: 11, text: 'November' },
+    { value: 12, text: 'December' }
+])
+;
