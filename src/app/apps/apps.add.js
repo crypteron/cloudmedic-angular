@@ -2,7 +2,7 @@
         'ui.router',
         'crypteron.resources',
         'ui.bootstrap',
-        'crypteron.dropdown.values'
+        'cloudmedic.dropdown.values'
     ])
     .config([
         '$stateProvider', function config($stateProvider) {

@@ -1,6 +1,5 @@
 ﻿<div class="row">
     <div class="text-center">      
-        <div style="margin-top: 20px;"></div> 
         <p><h1 class="text-center">CloudMedic <span class="glyphicon glyphicon-plus text-danger" aria-hidden="true"></span></h1>
     </div>
     <div class="col-md-6 col-md-offset-3">
@@ -8,23 +7,26 @@
             <h2 class="text-center">Login</h2>
             <cry-notification-bar></cry-notification-bar>
             <form name="form" novalidate role="form">
-                <div class="input-group" style="padding-bottom:10px">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input id="login-username" class="form-control" placeholder="Username" type="text" ng-model="loginData.username" required autofocus>
-                    <!--<a ui-sref="login.forgot.username" tabindex="1">Forgot username?</a>-->
-                </div>
-                <div class="input-group" style="padding-bottom:10px">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input id="user-password" class="form-control" placeholder="Password" type="password" ng-model="loginData.password" required tabindex="0">
-                    <!--<a ui-sref="login.forgot.password">Forgot password?</a>-->
-                </div>
-
                 <div class="form-group">
-                    <button class="btn btn-danger btn-lg btn-block" type="submit" ng-click="login()" ng-disabled='form.$invalid || loginData.isSubmitting' tabindex="0">Login to your account</button>                    
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="login-username" class="form-control" placeholder="Username" type="text" ng-model="loginData.username" required autofocus>
+                        <!--<a ui-sref="login.forgot.username" tabindex="1">Forgot username?</a>-->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input id="user-password" class="form-control" placeholder="Password" type="password" ng-model="loginData.password" required >
+                        <!--<a ui-sref="login.forgot.password">Forgot password?</a>-->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit" ng-click="login()" ng-disabled='form.$invalid || loginData.isSubmitting' >Login to your account</button>                    
                 </div>
             </form>
             <div class="text-center">
-                <strong>Don't have an account? <a ui-sref="register" title="Sign Up for a Free CloudMedic Account" ng-class="{'disabled': loginData.isSubmitting}" tabindex="0">Sign up for free</a></strong>
+                <strong>Don't have an account? <a ui-sref="register" title="Sign Up for a Free CloudMedic Account" ng-class="{'disabled': loginData.isSubmitting}" >Sign up for free</a></strong>
             </div>
         </div>
     </div>

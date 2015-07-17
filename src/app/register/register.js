@@ -1,6 +1,8 @@
 ﻿angular.module('crypteron.register', [
     'ui.router',
-    'reg'
+    'reg',
+    'cloudmedic.dropdown.values'
+
 ]).config(function ($stateProvider) {
     $stateProvider.state('register', {
         url: '/register',
@@ -23,7 +25,15 @@
         return items.slice().reverse();
 };
 })
-.controller('RegisterCtrl', function ($scope, reg, $state, userProfile) {
+
+.filter('monthName', [function () {
+    return function (monthNumber) { //1 = January
+        var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'];
+        return monthNames[monthNumber - 1];
+    };
+}])
+.controller('RegisterCtrl', function ($scope, reg, $state, userProfile, MONTHS) {
 
     // Initialize scope variables
     $scope.registerData = {
@@ -57,7 +67,6 @@
     //Date of Birth dropdown menu value generator
     var numberOfYears = (new Date()).getYear();
     var years = $.map($(Array(numberOfYears)), function (val, i) { return i + 1900; });
-    var months = $.map($(Array(12)), function (val, i) { return i + 1; });
     var days = $.map($(Array(31)), function (val, i) { return i + 1; });
 
     var isLeapYear = function () {
@@ -73,10 +82,11 @@
     $scope.UpdateNumberOfDays = function () {
         $scope.NumberOfDays = getNumberOfDaysInMonth();
     };
+
     $scope.NumberOfDays = 31;
     $scope.Years = years;
     $scope.Days = days;
-    $scope.Months = months;
+    $scope.Months = MONTHS;
 
     $scope.Username_Valid_length = true;
     $scope.Username_Valid_symbol = true;

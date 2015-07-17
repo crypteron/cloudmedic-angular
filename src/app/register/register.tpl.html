@@ -77,13 +77,13 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
                                 <div class="form-inline">
-                                    <select required class="form-control" ng-model="SelectedMonth" ng-options="label for label in Months" ng-change="UpdateNumberOfDays()">
+                                    <select required class="form-control" ng-model="SelectedMonth" ng-options="month.value as month.text for month in Months" ng-change="UpdateNumberOfDays()">
                                         <option class="placeholder" selected disabled value="">Month</option>
                                     </select>
-                                    <select required class="form-control" ng-model="SelectedDay" ng-options="label for label in Days | limitTo:NumberOfDays">
+                                    <select required class="form-control" ng-model="SelectedDay" ng-options="day as day for day in Days | limitTo:NumberOfDays">
                                         <option class="placeholder" selected disabled value="">Day</option>
                                     </select>
-                                    <select required class="form-control" ng-model="SelectedYear" ng-options="label for label in Years | reverse" ng-change="UpdateNumberOfDays()">
+                                    <select required class="form-control" ng-model="SelectedYear" ng-options="years as years for years in Years | reverse" ng-change="UpdateNumberOfDays()">
                                         <option class="placeholder" selected disabled value="">Year</option>
                                     </select>
                                 </div>
@@ -92,13 +92,12 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-male"></i> /  <i class="fa fa-female"></i></span>
-                            </div>
-
                                 <select required class="form-control" ng-model="registerData.Gender" aria-expanded="false">
                                     <option class="placeholder" selected disabled value="">Gender</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 ﻿angular.module('crypteron.profile.update', [
     'ui.router',
     'crypteron.resources',
-    'crypteron.dropdown.values'
+    'cloudmedic.dropdown.values'
 ])
 .config(['$stateProvider', function config($stateProvider) {
     $stateProvider.state('profile', {
