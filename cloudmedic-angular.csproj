@@ -149,7 +149,6 @@
     <Content Include="src\common\notifications\notifications.js" />
     <Content Include="src\common\reg\reg.js" />
     <Content Include="src\common\reg\reg.service.js" />
-    <Content Include="src\common\resources\add.resource.js" />
     <Content Include="src\common\resources\home.resource.js" />
     <Content Include="src\common\resources\password.resource.js" />
     <Content Include="src\common\resources\profile.resource.js" />

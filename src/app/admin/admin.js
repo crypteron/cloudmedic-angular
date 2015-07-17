@@ -44,7 +44,7 @@
                 $scope.confirmButton = "Yes, delete User!";
             }]
         }).result.then(function () {
-            $scope.userRemover.$remove({ email: user.Email }).then(function () {
+            $scope.userRemover.$remove({ userName: user.UserName }).then(function () {
                 localizedNotifications.addForNext('delete.success', 'success', { entityType: 'User' });
                 $state.go("admin", null, { reload: true });
             });
@@ -55,7 +55,7 @@
         localizedNotifications.removeForCurrent();
         $modal.open({
             templateUrl: "app.add.tpl.html",
-            controller: 'FormCtrl',
+            controller: 'FormCtrl'
         }).result.then(function () {
             $state.go("admin", null, { reload: true });
         });

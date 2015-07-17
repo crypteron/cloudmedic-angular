@@ -111,6 +111,7 @@
     $scope.Password_Short = false;
     $scope.Password_Digit = true;
     $scope.Password_Upper = true;
+    $scope.Password_Lower = true;
     $scope.Password_Special = true;
     $scope.check_password = function () {
         if (document.getElementById("user-password").value.length < 6) {
@@ -128,12 +129,17 @@
         } else {
             $scope.Password_Upper = true;
         }
+        if (document.getElementById("user-password").value.match('[a-z]') === null) {
+            $scope.Password_Lower = false;
+        } else {
+            $scope.Password_Lower = true;
+        }
         if (document.getElementById("user-password").value.match('[^A-Za-z0-9]') === null) {
             $scope.Password_Special = false;
         } else {
             $scope.Password_Special = true;
         }
-        if ($scope.Password_Short || !$scope.Password_Digit || !$scope.Password_Upper || !$scope.Password_Special) {
+        if ($scope.Password_Short || !$scope.Password_Digit || !$scope.Password_Upper || !$scope.Password_Lower || !$scope.Password_Special) {
             $scope.Password_Valid = false;
         } else {
             $scope.Password_Valid = true;
