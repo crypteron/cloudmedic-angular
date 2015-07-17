@@ -1,0 +1,87 @@
+﻿<form name="form">
+    <div class="modal-header">
+        <h3 class="modal-title">Register New Physician/Nurse</h3>
+    </div>
+
+    <div class="modal-body">
+        <cry-notification-bar></cry-notification-bar>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+                <input id="register-username" class="form-control" pattern="[A-Za-z0-9.]{3,20}" placeholder="Username" type="text" ng-model="data.UserName" watch-change="check_username_symbol();check_username_length()" required autofocus>
+            </div>
+        </div>
+        <div class="form-group">
+            <div ng-hide="Username_Valid_length">
+                <font color="red">Username must be 3-20 characters long.</font>
+            </div>
+            <div ng-hide="Username_Valid_symbol">
+                <font color="red">Username must only contain letters and numbers.</font>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">@</span>
+                <input id="register-email" class="form-control" placeholder="Email" type="email" ng-model="data.Email" required autofocus>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="data.FirstName" ng-change="check_firstName()" required>
+                <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="data.LastName" ng-change="check_lastName()" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div ng-hide="Firstname_Valid">
+                <font color="red">First name must only contain letters.</font>
+            </div>
+            <div ng-hide="Lastname_Valid">
+                <font color="red">Last name must only contain letters.</font>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-inline">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
+                        <div class="form-inline">
+                            <select required class="form-control" ng-model="SelectedMonth" ng-options="month.value as month.text for month in Months" ng-change="UpdateNumberOfDays()">
+                                <option class="placeholder" selected disabled value="">Month</option>
+                            </select>
+                            <select required class="form-control" ng-model="SelectedDay" ng-options="day as day for day in Days | limitTo:NumberOfDays">
+                                <option class="placeholder" selected disabled value="">Day</option>
+                            </select>
+                            <select required class="form-control" ng-model="SelectedYear" ng-options="years as years for years in Years | reverse" ng-change="UpdateNumberOfDays()">
+                                <option class="placeholder" selected disabled value="">Year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-male"></i> /  <i class="fa fa-female"></i></span>
+                        <select required class="form-control" ng-model="data.Gender" aria-expanded="false">
+                            <option class="placeholder" selected disabled value="">Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-heart"></i></span>
+                <select required class="col-md-12 form-control-static" ng-model="data.Role">
+                    <option class="placeholder" selected disabled value="">Role</option>
+                    <option value="Physician">Physician</option>
+                    <option value="Nurse">Nurse</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button style="padding-top:5px" class="btn btn-primary btn-lg btn-block" type="submit" ng-click="create()" ng-disabled="form.$invalid || data.isSubmitting" tabindex="0">Register</button>
+        </div>
+    </div>
+</form>
