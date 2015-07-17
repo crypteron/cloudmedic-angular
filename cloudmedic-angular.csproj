@@ -76,6 +76,7 @@
     <Content Include="src\app\apps\apps.list.spec.js" />
     <Content Include="src\app\apps\apps.list.tpl.html" />
     <Content Include="src\app\apps\apps.detail.tpl.html" />
+    <Content Include="src\common\form\form.js" />
     <Content Include="src\app\users\users.js" />
     <Content Include="src\app\keys\keys.add.js" />
     <Content Include="src\app\keys\keys.add.spec.js" />

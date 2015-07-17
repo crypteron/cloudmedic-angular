@@ -10,7 +10,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
-                        <input id="register-username" class="form-control" pattern="[A-Za-z0-9.]{3,20}" placeholder="Username" type="text" ng-model="registerData.UserName" ng-change="check_username_symbol();check_username_length()" required autofocus>
+                        <input id="register-username" class="form-control" pattern="[A-Za-z0-9.]{3,20}" placeholder="Username" type="text" ng-model="data.UserName" watch-change="check_username_symbol();check_username_length()" required autofocus>
                     </div>
                 </div>
                 <div class="form-group">
@@ -24,14 +24,14 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">@</span>
-                        <input id="register-email" class="form-control" placeholder="Email" type="email" ng-model="registerData.Email" required autofocus>
+                        <input id="register-email" class="form-control" placeholder="Email" type="email" ng-model="data.Email" required autofocus>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="registerData.FirstName" ng-change="check_firstName()" required>
-                        <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="registerData.LastName" ng-change="check_lastName()" required>
+                        <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="data.FirstName" ng-change="check_firstName()" required>
+                        <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="data.LastName" ng-change="check_lastName()" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -45,8 +45,8 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="user-password" class="form-control" pattern="(?=(.*\d))(?=(.*[A-Z]))(?=(.*[^A-Za-z0-9])).{6,}" placeholder="Enter password" type="password" ng-model="registerData.Password" watch-change="check_password()" required>
-                        <input id="user-confirmpassword" class="form-control" placeholder="Confirm Password" type="password" ng-model="registerData.ConfirmPassword" ng-change="compare_passwords()" required>
+                        <input id="user-password" class="form-control" pattern="(?=(.*\d))(?=(.*[A-Z]))(?=(.*[^A-Za-z0-9])).{6,}" placeholder="Enter password" type="password" ng-model="data.Password" watch-change="check_password()" required>
+                        <input id="user-confirmpassword" class="form-control" placeholder="Confirm Password" type="password" ng-model="data.ConfirmPassword" ng-change="compare_passwords()" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -92,7 +92,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-male"></i> /  <i class="fa fa-female"></i></span>
-                                <select required class="form-control" ng-model="registerData.Gender" aria-expanded="false">
+                                <select required class="form-control" ng-model="data.Gender" aria-expanded="false">
                                     <option class="placeholder" selected disabled value="">Gender</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
