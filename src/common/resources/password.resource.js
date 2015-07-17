@@ -7,8 +7,8 @@
     };
 
     provider.$get = ['$resource', function ($resource) {
-        var Password = $resource(provider.apiUrl + 'account/password', {}, {
-            update: { method: 'PUT', isArray: false }
+        var Password = $resource(provider.apiUrl + 'account/ChangePassword', {}, {
+            update: { method: 'POST', isArray: false }
         });
         return Password;
     }];
