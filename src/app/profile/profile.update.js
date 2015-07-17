@@ -24,35 +24,44 @@
 }])
 .controller('ProfileCtrl', 
     function ($scope, localizedNotifications, profile, $state, auth) {            
-        
         $scope.profile = angular.copy(profile);
         $scope.data = {
             isSubmitting: false
         };
         $scope.authStatus = auth.status;
-        //$scope.GetProfileUrl = APP_CONFIG.api_url + 'account/Profile';
-        //$scope.UpdateProfileUrl = APP_CONFIG.api_url + 'account/UpdateProfile';
-        //$http.get($scope.GetProfileUrl).success(function () {
-        //    $scope.CurrentProfile = response;
-        //});
-        $scope.defaultname = "aaa";
         $scope.updateProfile = function () {            
             localizedNotifications.removeForCurrent();
-            $scope.data.isSubmitting = true;          
-            $scope.profile.$update().then(function () {
+            $scope.data.isSubmitting = true;   
+            $scope.profile.$post().then(function () {
                 localizedNotifications.addForNext('update.success', 'success', { entityType: 'Profile' });
                 $scope.data.isSubmitting = false;
                 angular.copy($scope.profile, profile);
                 $scope.profileForm.$setPristine();
-                $state.go('apps.list');
-                
-                
+                $state.go('users');                
             }, function () {
                 $scope.data.isSubmitting = false;
             });
             
         };
-        
+        $scope.Firstname_Valid = true;
+        $scope.Lastname_Valid = true;
+        $scope.check_firstName = function () {
+            if (document.getElementById("user-first").value.match(/[^a-zA-Z]/) != null) {
+                $scope.Firstname_Valid = false;
+            }
+            else {
+                $scope.Firstname_Valid = true;
+            }
+        };
+
+        $scope.check_lastName = function () {
+            if (document.getElementById("user-last").value.match(/[^a-zA-Z]/) != null) {
+                $scope.Lastname_Valid = false;
+            }
+            else {
+                $scope.Lastname_Valid = true;
+            }
+        };
         $scope.resetProfile = function () {
             $scope.profile = angular.copy(profile);
             $scope.profileForm.$setPristine();
