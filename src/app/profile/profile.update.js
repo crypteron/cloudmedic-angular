@@ -24,7 +24,6 @@
 }])
 .controller('ProfileCtrl', 
     function ($scope, localizedNotifications, profile, $state, auth) {            
-        
         $scope.profile = angular.copy(profile);
         $scope.data = {
             isSubmitting: false
@@ -38,9 +37,7 @@
                 $scope.data.isSubmitting = false;
                 angular.copy($scope.profile, profile);
                 $scope.profileForm.$setPristine();
-                $state.go('users');
-                
-                
+                $state.go('users');                
             }, function () {
                 $scope.data.isSubmitting = false;
             });
