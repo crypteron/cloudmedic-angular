@@ -30,21 +30,15 @@
             isSubmitting: false
         };
         $scope.authStatus = auth.status;
-        //$scope.GetProfileUrl = APP_CONFIG.api_url + 'account/Profile';
-        //$scope.UpdateProfileUrl = APP_CONFIG.api_url + 'account/UpdateProfile';
-        //$http.get($scope.GetProfileUrl).success(function () {
-        //    $scope.CurrentProfile = response;
-        //});
-        $scope.defaultname = "aaa";
         $scope.updateProfile = function () {            
             localizedNotifications.removeForCurrent();
             $scope.data.isSubmitting = true;          
-            $scope.profile.$update().then(function () {
+            $scope.profile.$post().then(function () {
                 localizedNotifications.addForNext('update.success', 'success', { entityType: 'Profile' });
                 $scope.data.isSubmitting = false;
                 angular.copy($scope.profile, profile);
                 $scope.profileForm.$setPristine();
-                $state.go('apps.list');
+                $state.go('users');
                 
                 
             }, function () {

@@ -12,18 +12,18 @@
             response: function (response) {                
                 _profileCache.remove(response.config.url);
                 _profileCache.put(response.config.url, response.resource);
-                $rootScope.$broadcast('profile:updated', response.resource);
+                $rootScope.$broadcast('profile:post', response.resource);
                 return response;
             }
         };
         
-        $rootScope.$on('authService:logout', function () {
+        $rootScope.$on('authServic:logout', function () {
             _profileCache.removeAll();
         });
         
         var Profile = $resource(provider.apiUrl + 'account/profile', {}, {
             get: { method: 'GET', isArray: false, cache: _profileCache },
-            update: { method: 'PUT', isArray: false, interceptor: _putInterceptor }
+            post: { method: 'POST', isArray: false, interceptor: _putInterceptor }
         });
         
         return Profile;
