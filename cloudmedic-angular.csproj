@@ -159,6 +159,8 @@
     <Content Include="src\common\resources\keys.resource.js" />
     <Content Include="src\common\resources\resources.spec.js" />
     <Content Include="src\common\resources\users.resource.js" />
+    <Content Include="src\common\userProfile\userProfile.js" />
+    <Content Include="src\common\userProfile\userProfile.service.js" />
     <Content Include="src\index.html" />
     <Content Include="vendor\angular-animate\angular-animate.js" />
     <Content Include="vendor\angular-animate\angular-animate.min.js" />

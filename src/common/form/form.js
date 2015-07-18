@@ -9,7 +9,7 @@
         return items.slice().reverse();
     };
 })
-.controller('FormCtrl', function ($scope, reg, Users, $state, MONTHS, localizedNotifications) {
+.controller('FormCtrl', function ($scope, reg, Users, Password, Profile, $state, userProfile, MONTHS, localizedNotifications) {
 
     // Initialize scope variables
     $scope.data = {
@@ -26,6 +26,11 @@
         isSubmitting: false
     };
     $scope.creator = new Users();
+    $scope.profile = userProfile.get();
+    $scope.profile.$promise.then(function () {
+        $scope.original = angular.copy($scope.profile);
+    });
+    $scope.password = new Password();
 
     // User registration method
     $scope.register = function () {
@@ -45,6 +50,7 @@
     // User creation method
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
+        $scope.data.isSubmitting = true;
         // bind scope values to creator object
         $scope.creator.UserName = $scope.data.UserName;
         $scope.creator.Email = $scope.data.Email;
@@ -57,6 +63,35 @@
 
         $scope.creator.$create().then(function () {
             localizedNotifications.addForNext('create.success', 'success', { entityType: 'User' });
+            $scope.$close();
+        }, function () {
+            $scope.data.isSubmitting = false;
+        });
+    };
+
+    // Profile update
+    $scope.updateProfile = function () {
+        localizedNotifications.removeForCurrent();
+        $scope.data.isSubmitting = true;
+        $scope.profile.$post().then(function () {
+            localizedNotifications.addForNext('update.success', 'success', { entityType: 'Profile' });
+            $scope.data.isSubmitting = false;
+            $scope.form.$setPristine();
+            $state.go('users');
+        }, function () {
+            $scope.data.isSubmitting = false;
+        });
+    };
+    $scope.resetProfile = function () {
+        $scope.form.$setPristine();
+        $scope.profile = angular.copy($scope.original);
+    };
+
+    // Password update
+    $scope.changePassword = function () {
+        localizedNotifications.removeForCurrent();
+        $scope.password.$update().then(function () {
+            localizedNotifications.addForNext('update.success', 'success', { entityType: 'Password' });
             $scope.$close();
         }, function () {
             $scope.data.isSubmitting = false;

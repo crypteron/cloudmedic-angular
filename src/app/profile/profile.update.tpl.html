@@ -2,38 +2,50 @@
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <div class="well">
-            <form class="form-horizontal" name="profileForm" ng-submit="updateProfile()">
+            <form class="form-horizontal" name="form" ng-submit="updateProfile()">
                 <h2 class="form-header">Edit Profile</h2>
-                <div class="input-group" style="padding-bottom:10px">
-                    <label for="profile-fn" class="col-sm-4 control-label">FirstName:</label>
-                    <input id="user-first" class="col-sm-8" placeholder="First Name" type="text" ng-model="profile.FirstName" ng-change="check_firstName()" required tabindex="0">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label for="profile-fn" class="control-label pull-right">FirstName:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="profile.FirstName" watch-change="check_firstName()" required tabindex="0">
+                    </div>
                 </div>
-                <div class="input-group" style="padding-bottom:10px">      
-                    <label for="profile-ln" class="col-sm-4 control-label">LastName:</label>
-                    <input id="user-last" class="col-sm-8" placeholder="Last Name" type="text" ng-model="profile.LastName" ng-change="check_lastName()" required tabindex="0">
+                <div class="form-group">
+                    <div class="col-md-3">
+                            <label for="profile-ln" class="control-label pull-right">LastName:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="profile.LastName" watch-change="check_lastName()" required tabindex="0">
+                    </div>
                 </div>
-                <div ng-hide="Firstname_Valid" style="padding-left:50px;padding-bottom:5px">
-                    <font color="red">First name must only contain letters.</font>
+                <div ng-hide="Firstname_Valid">
+                        <font color="red">First name must only contain letters.</font>
                 </div>
-                <div ng-hide="Lastname_Valid" style="padding-left:50px;padding-bottom:5px">
+                <div ng-hide="Lastname_Valid">
                     <font color="red">Last name must only contain letters.</font>
                 </div>
-                <div class="input-group" style="padding-bottom:10px;padding-left:10px">
-                    <label for="profile-ln" class="col-sm-4 control-label">Email:</label>
-                    <input id="register-email" class="col-sm-8" type="text" ng-model="profile.Email" placeholder="Email" ng-disabled="data.isSubmitting"
-                           required autofocus />
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label for="profile-ln" class="control-label pull-right">Email:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input id="register-email" class="form-control" type="text" ng-model="profile.Email" placeholder="Email" ng-disabled="data.isSubmitting"
+                               required autofocus />
+                    </div>
                 </div>
-                <div class="form-group" style="padding-right:200px" ng-if="authStatus.ssoProvider == null">
-                    <label for="profile-password" class="col-sm-4 control-label">Password: </label>
-                    <div class="col-sm-8">
+                <div class="form-group" ng-if="authStatus.ssoProvider == null">
+                    <div class="col-md-3">
+                        <label for="profile-password" class="control-label pull-right">Password: </label>
+                    </div>
+                    <div class="col-md-3">
                         <a ui-sref="profile.changePassword" class="btn btn-default" ng-disabled="data.isSubmitting">Change Password...</a>
                     </div>
                 </div>
                 <div class="profile-buttons">            
                     <button class="btn btn-primary btn-lg" type="submit" ng-disabled="data.isSubmitting">Update Profile</button>
-                    <a class="text-danger reset-link" type="button"
-                       ng-click="resetProfile()"
-                       ng-disabled="data.isSubmitting">
+                    <a class="text-danger reset-link" type="button" ng-click="resetProfile()" ng-disabled="data.isSubmitting">
                         <i class="fa fa-undo"></i> Reset
                     </a>
                 </div>
