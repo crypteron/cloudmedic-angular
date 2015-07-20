@@ -31,4 +31,8 @@
 
         $scope.orderByField = 'LastName';
         $scope.reverseSort = false;
+
+        $scope.PhysicianOrNurse = function (user) {
+            return user.Roles == 'Nurse' || user.Roles == 'Physician';
+        };
     }]);
