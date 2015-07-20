@@ -36,6 +36,12 @@
                             Admin
                         </a>
                     </li>
+                    <li ng-show="authStatus.isLoggedIn && isStaff()" ui-sref-active="active">
+                        <a ui-sref="Prescriptions">
+                            <i class="fa fa-plus-square"></i>
+                            Prescriptions
+                        </a>
+                    </li>
                     <li class="dropdown">
                         <a href dropdown-toggle><i class=" fa fa-support">
                         </i> Help <span class="caret"></span></a>

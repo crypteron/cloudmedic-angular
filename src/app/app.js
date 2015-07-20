@@ -119,6 +119,9 @@ angular.module('crypteron', [
         $scope.isAdmin = function () {
             return auth.status.token && auth.status.token.userRole.contains("SysAdmin");
         };
+        $scope.isStaff = function () {
+            return auth.status.token && (auth.status.token.userRole.contains("Physician") || auth.status.token.userRole.contain("Nurse"));
+        };
 
         //// When the user logs in, fetch the profile whenever the user logs in
         //$scope.$on('authService:login', function () {
