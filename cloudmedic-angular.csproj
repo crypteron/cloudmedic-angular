@@ -53,6 +53,8 @@
     <Content Include="build.config.js" />
     <Content Include="Gruntfile.js" />
     <Content Include="karma\karma-unit.tpl.js" />
+    <Content Include="src\app\app.add.tpl.html" />
+    <Content Include="src\app\medications\medications.add.js" />
     <Content Include="src\app\medications\medications.add.tpl.html" />
     <Content Include="src\app\medications\medications.js" />
     <Content Include="src\app\medications\medications.tpl.html" />
@@ -61,7 +63,6 @@
     <Content Include="src\app\acl\acl.list.tpl.html" />
     <Content Include="src\app\acl\acl.permissions.js" />
     <Content Include="src\app\acl\acl.list.spec.js" />
-    <Content Include="src\app\app.add.tpl.html" />
     <Content Include="src\app\admin\admin.js" />
     <Content Include="src\app\admin\admin.tpl.html" />
     <Content Include="src\app\app.confirm.tpl.html" />

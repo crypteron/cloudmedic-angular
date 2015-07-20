@@ -9,12 +9,12 @@
         views: {
             "main": {
                 controller: 'MedicationsCtrl',
-                templateUrl: 'medications/medication.tpl.html'
+                templateUrl: 'medications/medications.tpl.html'
             }
         },
         resolve: {
             security: ['$q', 'auth', function($q, auth) {
-                if (!auth.status.token || !auth.status.token.userRole.contains('SysAdmin') || !auth.status.token.userRole.contains('Physician') || !auth.status.token.userRole.contains('Nurse')) {
+                if (!auth.status.token || (!auth.status.token.userRole.contains('SysAdmin') && !auth.status.token.userRole.contains('Physician') && !auth.status.token.userRole.contains('Nurse'))) {
                     return $q.reject("Not Authorized");
                 }
             }],
@@ -27,16 +27,8 @@
 }])
 .controller('MedicationsCtrl', function ($scope, $state, medications, Medications, localizedNotifications, $modal) {
 
-    $scope.medicationsData = {
-        MedicationId: "",
-        GenericName: "",
-        Code: "",
-        isSubmitting: false
-    };
-
     $scope.medications = medications;
     $scope.medicationsRemover = new Medications();
-    $scope.medicationsCreator = new Medications();
 
     $scope.removeMedication = function (medication) {
         localizedNotifications.removeForCurrent();
@@ -47,7 +39,7 @@
                 $scope.confirmButton = "Yes, delete medication!";
             }]
         }).result.then(function () {
-            $scope.medicationRemover.$remove({ medication: medication.Code }).then(function () {
+            $scope.medicationsRemover.$remove({ id: medication.MedicationId }).then(function () {
                 localizedNotifications.addForNext('delete.success', 'success', { entityType: 'Medication' });
                 $state.go("medications", null, { reload: true });
             });
@@ -57,26 +49,35 @@
     $scope.createMedication = function () {
         localizedNotifications.removeForCurrent();
         $modal.open({
-            templateUrl: "medications/medications.add.html",
-            controller: 'MedicationsCtrl'
+            templateUrl: "medications/medications.add.tpl.html",
+            controller: 'MedAddCtrl'
         }).result.then(function () {
             $state.go("medications", null, { reload: true });
         });
     };
+})
+.controller('MedAddCtrl', function ($scope, $state, $modalInstance, Medications, localizedNotifications) {
+    $scope.medicationsData = {
+        MedicationId: "",
+        GenericName: "",
+        Code: "",
+        isSubmitting: false
+    };
+    $scope.medicationsCreator = new Medications();
 
     // Medication creation method
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
-        $scope.data.isSubmitting = true;
+        $scope.medicationsData.isSubmitting = true;
         // bind scope values to creator object
         $scope.medicationsCreator.GenericName = $scope.medicationsData.GenericName;
         $scope.medicationsCreator.Code = $scope.medicationsData.Code;
 
         $scope.medicationsCreator.$create().then(function () {
             localizedNotifications.addForNext('create.success', 'success', { entityType: 'Medication' });
-            $scope.$close();
+            $modalInstance.close();
         }, function () {
-            $scope.data.isSubmitting = false;
+            $scope.medicationsData.isSubmitting = false;
         });
     };
 });
