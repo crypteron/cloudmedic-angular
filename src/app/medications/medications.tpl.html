@@ -1,27 +1,27 @@
-﻿<h2>Medications</h2>
+﻿<div class="well-lg">
+    <h2>Medications</h2>
+    <button class="btn btn-lg btn-default pull-right" ng-click="createMedication()">Add Medication</button>
 
-<div>
-    <strong>Add Medication <button class="btn btn-lg btn-default pull-right visible-lg-inline-block" ng-click="createMedication()">Add Physician/Nurse...</button></strong>
+    <table id="medications-list" class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Generic Name</th>
+                <th>Medication ID</th>
+                <th>Code</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="medication in medications">
+                <td class="col-md-2">{{medication.GenericName}}</td>
+                <td class="col-md-2" >{{medication.MedicationId | uppercase}}</td>
+                <td class="col-md-1">{{medication.Code}}</td>
+                <td class="col-md-1">
+                    <button class="btn btn-danger btn-xs" ng-click="removeMedication(medication)">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-<table id="medications-list" class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>Medication ID</th>
-            <th>Generic Name</th>
-            <th>Code</th>
-            <th style="width:69px;">Edit</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="medication in medications">
-            <td>{{medication.MedicationId}}</td>
-            <td>{{medication.GenericName}}</td>
-            <td>{{medication.Code}}</td>
-            <td>
-                <button class="btn btn-danger btn-xs" ng-click="removeMedication(medication)">
-                    <i class="glyphicon glyphicon-trash"></i>
-                </button>
-            </td>
-        </tr>
-    </tbody>
-</table>
