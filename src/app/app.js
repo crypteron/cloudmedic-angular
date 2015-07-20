@@ -13,6 +13,7 @@ angular.module('crypteron', [
   'crypteron.resources',    
   'crypteron.admin',
   'crypteron.users',
+  'cloudmedic.medications',
   'ui.router',
   'auth',
   'form',
@@ -121,6 +122,10 @@ angular.module('crypteron', [
         };
         $scope.isStaff = function () {
             return auth.status.token && (auth.status.token.userRole.contains("Physician") || auth.status.token.userRole.contain("Nurse"));
+        };
+
+        $scope.isMedicationViewer = function () {
+            return auth.status.token.userRole.contains("Physician");
         };
 
         //// When the user logs in, fetch the profile whenever the user logs in

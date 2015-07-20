@@ -1,0 +1,26 @@
+﻿<form>
+    <div class="modal-header">
+        <h3 class="modal-title">Add New Medication</h3>
+    </div>
+
+    <div class="modal-body">
+        <cry-notification-bar></cry-notification-bar>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">@</span>
+                <input id="medication-genericname" class="form-control" placeholder="Generic Name" type="text" ng-model="medicationsData.GenericName" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-fire"></i></span>
+                <input id="medication-code" class="form-control" placeholder="Code" type="number" ng-model="medicationsData.Code" maxlength="5" required>
+               </div>
+        </div>
+        <div class="form-group">
+            <div class="modal-footer">
+                <button class="btn btn-danger btn-lg btn-block" type="submit" ng-click="create()" ng-disabled="form.$invalid || medicationsData.isSubmitting">Create</button>
+            </div>
+        </div>
+    </div>
+</form>

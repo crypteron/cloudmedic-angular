@@ -30,6 +30,12 @@
                             Profile
                         </a>
                     </li>
+                    <li ng-show="authStatus.isLoggedIn && isMedicationViewer() || isAdmin()" ui-sref-active="active">
+                        <a ui-sref="medications">
+                            <i class="fa fa-medkit"></i>
+                            Medications
+                        </a>
+                    </li>
                     <li ng-show="authStatus.isLoggedIn && isAdmin()" ui-sref-active="active">
                         <a ui-sref="admin">
                             <i class="fa fa-lock"></i>
