@@ -83,7 +83,9 @@
         });
     };
     $scope.resetProfile = function () {
-        $scope.profile = angular.copy($scope.original);
+        $scope.profile.Email = $scope.original.Email;
+        $scope.profile.LastName = $scope.original.LastName;
+        $scope.profile.FirstName = $scope.original.FirstName;
         $scope.form.$setPristine();
         $scope.check_firstName();
         $scope.check_lastName();
