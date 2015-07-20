@@ -5,22 +5,22 @@
         <tr>
             <th>
                 <a href="#" ng-click="orderByField='LastName'; reverseSort = !reverseSort">
-                    Full Name <span ng-show="orderByField == 'LastName'"><span ng-show="!reverseSort" class="fa fa-caret-up"></span><span ng-show="reverseSort" class="fa fa-caret-down"></span></span>
+                    Full Name <span ng-show="orderByField == 'LastName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
                 </a>
             </th>
             <th>
                 <a href="#" ng-click="orderByField='UserName'; reverseSort = !reverseSort">
-                    UserName <span ng-show="orderByField == 'UserName'"><span ng-show="!reverseSort" class="fa fa-caret-up"></span><span ng-show="reverseSort" class="fa fa-caret-down"></span></span>
+                    UserName <span ng-show="orderByField == 'UserName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
                 </a>
             </th>
             <th>
                 <a href="#" ng-click="orderByField='Email'; reverseSort = !reverseSort">
-                    Email <span ng-show="orderByField == 'Email'"><span ng-show="!reverseSort" class="fa fa-caret-up"></span><span ng-show="reverseSort" class="fa fa-caret-down"></span></span>
+                    Email <span ng-show="orderByField == 'Email'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
                 </a>
             </th>
             <th style="width:69px;">
                 <a href="#" ng-click="orderByField='Roles'; reverseSort = !reverseSort">
-                    Roles <span ng-show="orderByField == 'Roles'"><span ng-show="!reverseSort" class="fa fa-caret-up"></span><span ng-show="reverseSort" class="fa fa-caret-down"></span></span>
+                    Roles <span ng-show="orderByField == 'Roles'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
                 </a>
             </th>
         </tr>

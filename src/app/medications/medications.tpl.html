@@ -7,17 +7,17 @@
             <tr>
                 <th>
                     <a href="#" ng-click="orderByField='GenericName'; reverseSort = !reverseSort">
-                        Generic Name <span ng-show="orderByField == 'GenericName'"><span ng-show="!reverseSort" class="fa fa-caret-up"></span><span ng-show="reverseSort" class="fa fa-caret-down"></span></span>
+                        Generic Name <span ng-show="orderByField == 'GenericName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
                     </a>
                 </th>
                 <th>
                     <a href="#" ng-click="orderByField='MedicationId'; reverseSort = !reverseSort">
-                        Medication ID <span ng-show="orderByField == 'MedicationId'"><span ng-show="!reverseSort" class="fa fa-caret-up"></span><span ng-show="reverseSort" class="fa fa-caret-down"></span></span>
+                        Medication ID <span ng-show="orderByField == 'MedicationId'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
                     </a>                
                 </th>
                 <th>
                     <a href="#" ng-click="orderByField='Code'; reverseSort = !reverseSort">
-                        Code <span ng-show="orderByField == 'Code'"><span ng-show="!reverseSort" class="fa fa-caret-up"></span><span ng-show="reverseSort" class="fa fa-caret-down"></span></span>
+                        Code <span ng-show="orderByField == 'Code'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
                     </a>
                 </th>
                 <th style="width:69px;">Edit</th>
