@@ -83,8 +83,10 @@
         });
     };
     $scope.resetProfile = function () {
-        $scope.form.$setPristine();
         $scope.profile = angular.copy($scope.original);
+        $scope.form.$setPristine();
+        $scope.check_firstName();
+        $scope.check_lastName();
     };
 
     // Password update

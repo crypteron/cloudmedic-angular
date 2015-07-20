@@ -12,6 +12,9 @@
                         <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="profile.FirstName" watch-change="check_firstName()" required tabindex="0">
                     </div>
                 </div>
+                <div class="form-group text-center" ng-hide="Firstname_Valid">
+                    <font color="red">First name must only contain letters.</font>
+                </div>
                 <div class="form-group">
                     <div class="col-md-3">
                             <label for="profile-ln" class="control-label pull-right">LastName:</label>
@@ -20,10 +23,7 @@
                         <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="profile.LastName" watch-change="check_lastName()" required tabindex="0">
                     </div>
                 </div>
-                <div ng-hide="Firstname_Valid">
-                        <font color="red">First name must only contain letters.</font>
-                </div>
-                <div ng-hide="Lastname_Valid">
+                <div class="form-group text-center" ng-hide="Lastname_Valid">
                     <font color="red">Last name must only contain letters.</font>
                 </div>
                 <div class="form-group">
