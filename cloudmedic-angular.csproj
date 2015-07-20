@@ -53,6 +53,10 @@
     <Content Include="build.config.js" />
     <Content Include="Gruntfile.js" />
     <Content Include="karma\karma-unit.tpl.js" />
+    <Content Include="src\app\medications\medications.add.js" />
+    <Content Include="src\app\medications\medications.add.tpl.html" />
+    <Content Include="src\app\medications\medications.js" />
+    <Content Include="src\app\medications\medications.tpl.html" />
     <Content Include="src\app\acl\acl.js" />
     <Content Include="src\app\acl\acl.list.js" />
     <Content Include="src\app\acl\acl.list.tpl.html" />
