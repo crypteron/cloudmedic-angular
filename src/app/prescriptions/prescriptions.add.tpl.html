@@ -1,0 +1,39 @@
+﻿<form>
+    <div class="modal-header">
+        <h3 class="modal-title">Add New Prescription</h3>
+    </div>
+
+    <div class="modal-body">
+        <cry-notification-bar></cry-notification-bar>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicons-qrcode"></i></span>
+                <input id="prescription-
+                       id" class="form-control" placeholder="MedicationId" type="text" ng-model="prescriptionsData.MedicationId" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicons-cardio"></i></span>
+                <input id="prescription-frequency" class="form-control" placeholder="Frequency" type="text" ng-model="prescriptionsData.Frequency" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicons-coffee-cup"></i></span>
+                <input id="prescription-dosage" class="form-control" placeholder="Dosage" type="text" ng-model="prescriptionsData.Dosage" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicons-pen"></i></span>
+                <input id="prescription-notes" class="form-control" placeholder="Notes" type="text" ng-model="prescriptionsData.Notes" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="modal-footer">
+                <button class="btn btn-danger btn-lg btn-block" type="submit" ng-click="create()" ng-disabled="form.$invalid || medicationsData.isSubmitting">Create</button>
+            </div>
+        </div>
+    </div>
+</form>

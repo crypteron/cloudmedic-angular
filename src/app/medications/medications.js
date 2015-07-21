@@ -56,6 +56,19 @@
             $state.go("medications", null, { reload: true });
         });
     };
+    $scope.createPrescription = function (MedId) {
+        $scope.MedId = MedId;
+        localizedNotifications.removeForCurrent();
+        $modal.open({
+            templateUrl: "prescriptions/prescriptions.add.tpl.html",
+            controller: 'PreAddCtrl',
+            resolve: {
+                MedId: function () { return $scope.MedId;}
+            }
+        }).result.then(function () {
+            $state.go("prescriptions", null, { reload: true });
+        });
+    };
 })
 .controller('MedAddCtrl', function ($scope, $state, $modalInstance, Medications, localizedNotifications) {
     $scope.medicationsData = {
