@@ -53,6 +53,13 @@ angular.module('crypteron', [
             assumePublic: false
         });
 
+        // Enable to 'contains' method for all browsers
+        if (!('contains' in String.prototype)) {
+            String.prototype.contains = function (str, startIndex) {
+                return -1 !== String.prototype.indexOf.call(this, str, startIndex);
+            };
+        }
+
         // Set default URL
         $urlRouterProvider.otherwise('/login');
     }
