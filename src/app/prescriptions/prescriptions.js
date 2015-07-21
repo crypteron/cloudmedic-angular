@@ -58,20 +58,21 @@
         Frequency: "",
         Dosage: "",
         Notes:"",
-        isSubmitting: false
-    };    
+        isSubmitting: false,
+        // for testing only 
+        // Candidates: [{ firstname: 'one', lastname:'1',userid: '30' }, { firstname: 'two', lastname:'2',userid: '27' }, { firstname: 'three', lastname:'3',userid: '50' }],
+        SelectedId:""
+    };
     $scope.prescriptionsCreator = new Prescriptions();
     // Prescription creation method
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
         $scope.prescriptionsData.isSubmitting = true;
-        // bind scope values to creator object
         $scope.prescriptionsCreator.PrescriptionId = $scope.prescriptionsData.PrescriptionId;
         $scope.prescriptionsCreator.MedicationId = $scope.prescriptionsData.MedicationId;
         $scope.prescriptionsCreator.Frequency = $scope.prescriptionsData.Frequency;
         $scope.prescriptionsCreator.Dosage = $scope.prescriptionsData.Dosage;
         $scope.prescriptionsCreator.Notes = $scope.prescriptionsData.Notes;
-
         $scope.prescriptionsCreator.$create().then(function () {
             localizedNotifications.addForNext('create.success', 'success', { entityType: 'Prescription' });
             $modalInstance.close();

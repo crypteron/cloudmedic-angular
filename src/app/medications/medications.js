@@ -66,7 +66,7 @@
                 MedId: function () { return $scope.MedId;}
             }
         }).result.then(function () {
-            $state.go("prescriptions", null, { reload: true });
+            $state.go("medications", null, { reload: true });
         });
     };
 })

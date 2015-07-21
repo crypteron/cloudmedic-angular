@@ -7,9 +7,9 @@
         <cry-notification-bar></cry-notification-bar>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicons-qrcode"></i></span>
+                <span class="input-group-addon"><i class="glyphicon glyphicons-coffee-cup"></i></span>
                 <input id="prescription-
-                       id" class="form-control" placeholder="MedicationId" type="text" ng-model="prescriptionsData.MedicationId" required>
+                       id" class="form-control" placeholder="Medication ID" type="text" ng-model="prescriptionsData.MedicationId" required>
             </div>
         </div>
         <div class="form-group">
@@ -30,6 +30,14 @@
                 <input id="prescription-notes" class="form-control" placeholder="Notes" type="text" ng-model="prescriptionsData.Notes" required>
             </div>
         </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicons-pen"></i></span>
+                <select required class="form-control" ng-model="patientid" ng-options="candidate.userid as candidate.firstname+' '+candidate.lastname for candidate in prescriptionsData.Candidates">
+                    <option class="placeholder" selected disabled value="">Patient Name</option>
+                </select>
+            </div>
+        </div>         
         <div class="form-group">
             <div class="modal-footer">
                 <button class="btn btn-danger btn-lg btn-block" type="submit" ng-click="create()" ng-disabled="form.$invalid || medicationsData.isSubmitting">Create</button>
