@@ -5,39 +5,45 @@
     <thead>
         <tr>
             <th>
-                <a href="#" ng-click="orderByField='LastName'; reverseSort = !reverseSort">
-                    Full Name <span ng-show="orderByField == 'LastName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                <a href="#" ng-click="orderByField='PrescriptionId'; reverseSort = !reverseSort">
+                    Prescription Id <span ng-show="orderByField == 'PrescriptionId'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
                 </a>
             </th>
             <th>
-                <a href="#" ng-click="orderByField='UserName'; reverseSort = !reverseSort">
-                    UserName <span ng-show="orderByField == 'UserName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                <a href="#" ng-click="orderByField='MedicationId'; reverseSort = !reverseSort">
+                    Medication Id <span ng-show="orderByField == 'MedicationId'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
                 </a>
             </th>
             <th>
-                <a href="#" ng-click="orderByField='Email'; reverseSort = !reverseSort">
-                    Email <span ng-show="orderByField == 'Email'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                <a href="#" ng-click="orderByField='Frequency'; reverseSort = !reverseSort">
+                    Frequency <span ng-show="orderByField == 'Frequency'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
                 </a>
             </th>
-            <th style="width:69px;">
-                <a href="#" ng-click="orderByField='Roles'; reverseSort = !reverseSort">
-                    Roles <span ng-show="orderByField == 'Roles'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+            <th>
+                <a href="#" ng-click="orderByField='Dosage'; reverseSort = !reverseSort">
+                    Dosage <span ng-show="orderByField == 'Dosage'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
                 </a>
             </th>
+            <th>
+                <a href="#" ng-click="orderByField='Notes'; reverseSort = !reverseSort">
+                    Notes <span ng-show="orderByField == 'Notes'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                </a>
+            </th>
+            <th style="width:69px;">Edit</th>
+
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="user in users | orderBy:orderByField:reverseSort | filter:{Roles:'Patient'}">
-            <td>{{user.LastName}}, {{user.FirstName}}</td>
-            <td>{{user.UserName}}</td>
-            <td>{{user.Email}}</td>
+        <tr ng-repeat="prescription in prescriptions">
+            <td>{{prescription.PrescriptionId}}</td>
+            <td>{{prescription.MedicationId}}</td>
+            <td>{{prescription.Frequency}}</td>
+            <td>{{prescription.Dosage}}</td>
+            <td>{{prescription.Notes}}</td>
             <td>
-                <div ng-repeat="role in user.Roles">
-                    {{role}}
-                </div>
-                <!--<button class="btn btn-danger btn-xs" ng-click="removeUser(user)">
-                <i class="glyphicon glyphicon-trash"></i>
-            </button>-->
+                <button class="btn btn-danger btn-xs" ng-click="removePrescription(prescription)">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </button>
             </td>
         </tr>
     </tbody>
@@ -70,7 +76,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="user in users | orderBy:orderByField:reverseSort | filter:{Roles:'Patient'}">
+            <!--<tr ng-repeat="user in users | orderBy:orderByField:reverseSort | filter:{Roles:'Patient'}">
                 <td>{{user.LastName}}, {{user.FirstName}}</td>
                 <td>{{user.PhoneNumber}}</td>
                 <td>{{user.Email}}</td>
@@ -78,11 +84,11 @@
                     <div ng-repeat="role in user.Roles">
                         {{role}}
                     </div>
-                    <!--<button class="btn btn-danger btn-xs" ng-click="removeUser(user)">
+                    <button class="btn btn-danger btn-xs" ng-click="removeUser(user)">
                         <i class="glyphicon glyphicon-trash"></i>
-                    </button>-->
-                </td>
-            </tr>
+                    </button>
+                </td>-->
+            <!--</tr>-->
         </tbody>
     </table>
 </div>

@@ -36,7 +36,6 @@
     // User registration method
     $scope.register = function () {
         $scope.data.isSubmitting = true;
-
         $scope.data.DOB = $scope.SelectedYear + '-' + pad($scope.SelectedMonth, 2) + '-' + pad($scope.SelectedDay, 2);
         reg.register($scope.data)
         .then(function (response) {
@@ -215,6 +214,19 @@
             $scope.Lastname_Valid = true;
         }
     };
+
+    //Phone Number Validation
+
+    $scope.PhoneNumber_Valid = true;
+
+    $scope.check_PhoneNumber = function () {
+        if (document.getElementById("register-phonenumber").value.match(/^[1-9]\d{2}-\d{3}-\d{4}$/) != null) {
+            $scope.PhoneNumber_Valid = true;
+        }
+        else {
+            $scope.PhoneNumber_Valid = false;
+        }
+    }
 })
  // call function on change even if input invalid
 .directive('watchChange', function () {
