@@ -29,7 +29,8 @@
 
     $scope.medications = medications;
     $scope.medicationsRemover = new Medications();
-
+    $scope.orderByField = 'GenericName';
+    $scope.reverseSort = false;
     $scope.removeMedication = function (medication) {
         localizedNotifications.removeForCurrent();
         $modal.open({

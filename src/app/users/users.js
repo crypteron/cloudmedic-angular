@@ -29,4 +29,10 @@
     function ($scope, $state, users, reports, localizedNotifications, $modal, DROPDOWN_PLANS) {
         $scope.users = users;
 
+        $scope.orderByField = 'LastName';
+        $scope.reverseSort = false;
+
+        $scope.PhysicianOrNurse = function (user) {
+            return user.Roles == 'Nurse' || user.Roles == 'Physician';
+        };
     }]);
