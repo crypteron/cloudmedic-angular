@@ -54,7 +54,8 @@
                 LastName: registerData.LastName,
                 Gender: registerData.Gender,
                 DOB: registerData.DOB,
-                Specialty: registerData.Specialty
+                Specialty: registerData.Specialty,
+                PhoneNumber: registerData.PhoneNumber
             };
 
             var deferred = $q.defer();

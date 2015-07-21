@@ -1,14 +1,15 @@
 ﻿angular.module('crypteron.users', [
     'ui.router',
     'chart.js',
-    'crypteron.resources'
+    'crypteron.resources',
+    'form'
 ])
 .config(['$stateProvider', function config($stateProvider) {
     $stateProvider.state('users', {
         url: '/users',
         views: {
             "main": {
-                controller: 'UsersCtrl',
+                controller: 'FormCtrl',
                 templateUrl: 'users/users.tpl.html'
             }
         },
@@ -24,15 +25,14 @@
         },
         data: { pageTitle: 'Users' }
     });
-}])
-.controller('UsersCtrl', ['$scope', '$state', 'users', 'localizedNotifications', '$modal', 'DROPDOWN_PLANS',
-    function ($scope, $state, users, reports, localizedNotifications, $modal, DROPDOWN_PLANS) {
-        $scope.users = users;
+}]);
+//.controller('UsersCtrl', function ($scope, $state, users, reports, localizedNotifications, $modal) {
+//        $scope.users = users;
 
-        $scope.orderByField = 'LastName';
-        $scope.reverseSort = false;
+//        $scope.orderByField = 'LastName';
+//        $scope.reverseSort = false;
 
-        $scope.PhysicianOrNurse = function (user) {
-            return user.Roles == 'Nurse' || user.Roles == 'Physician';
-        };
-    }]);
+//        $scope.PhysicianOrNurse = function (user) {
+//            return user.Roles == 'Nurse' || user.Roles == 'Physician';
+//        };
+//    });

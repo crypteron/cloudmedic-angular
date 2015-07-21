@@ -23,6 +23,7 @@
         DOB: "",
         Role: "",
         Specialty: "",
+        PhoneNumber: "",
         isSubmitting: false
     };
     $scope.creator = new Users();
@@ -58,6 +59,7 @@
         $scope.creator.LastName = $scope.data.LastName;
         $scope.creator.Gender = $scope.data.Gender;
         $scope.creator.Specialty = $scope.data.Specialty;
+        $scope.creator.PhoneNumber = $scope.data.PhoneNumber;
         $scope.creator.Roles = [$scope.data.Role];
         $scope.creator.DOB = $scope.SelectedYear + '-' + pad($scope.SelectedMonth, 2) + '-' + pad($scope.SelectedDay, 2);
 
