@@ -14,6 +14,7 @@ angular.module('crypteron', [
   'crypteron.admin',
   'crypteron.users',
   'cloudmedic.medications',
+  'cloudmedic.prescriptions',
   'ui.router',
   'auth',
   'form',
@@ -121,7 +122,7 @@ angular.module('crypteron', [
             return auth.status.token && auth.status.token.userRole.contains("SysAdmin");
         };
         $scope.isStaff = function () {
-            return auth.status.token && (auth.status.token.userRole.contains("Physician") || auth.status.token.userRole.contain("Nurse"));
+            return auth.status.token && (auth.status.token.userRole.contains("Physician") || auth.status.token.userRole.contains("Nurse"));
         };
 
         $scope.isMedicationViewer = function () {

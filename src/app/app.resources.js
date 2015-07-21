@@ -2,6 +2,7 @@
         'apps.resource',
         'keys.resource',
         'acl.resource',
+        'prescriptions.resource',
         'medications.resource',
         'profile.resource',
         'password.resource',
@@ -13,6 +14,7 @@
             KeysProvider,
             AclProvider,
             MedicationsProvider,
+            PrescriptionsProvider,
             ProfileProvider,
             PasswordProvider,
             APP_CONFIG,            
@@ -24,5 +26,6 @@
                 ProfileProvider.setApiUrl(APP_CONFIG.api_url);
                 PasswordProvider.setApiUrl(APP_CONFIG.api_url);                
                 UsersProvider.setApiUrl(APP_CONFIG.api_url);
+                PrescriptionsProvider.setApiUrl(APP_CONFIG.api_url);
         }
     );

@@ -87,8 +87,8 @@
         $scope.profile.LastName = $scope.original.LastName;
         $scope.profile.FirstName = $scope.original.FirstName;
         $scope.form.$setPristine();
-        $scope.check_firstName();
-        $scope.check_lastName();
+        $scope.Firstname_Valid = true;
+        $scope.Lastname_Valid = true;
     };
 
     // Password update

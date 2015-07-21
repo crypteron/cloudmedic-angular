@@ -79,6 +79,9 @@
     <Content Include="src\app\apps\apps.list.spec.js" />
     <Content Include="src\app\apps\apps.list.tpl.html" />
     <Content Include="src\app\apps\apps.detail.tpl.html" />
+    <Content Include="src\app\prescriptions\prescriptions.add.tpl.html" />
+    <Content Include="src\app\prescriptions\prescriptions.js" />
+    <Content Include="src\app\prescriptions\prescriptions.tpl.html" />
     <Content Include="src\common\form\form.js" />
     <Content Include="src\app\users\users.js" />
     <Content Include="src\app\keys\keys.add.js" />
@@ -156,6 +159,7 @@
     <Content Include="src\common\resources\home.resource.js" />
     <Content Include="src\common\resources\medications.resource.js" />
     <Content Include="src\common\resources\password.resource.js" />
+    <Content Include="src\common\resources\prescriptions.resources.js" />
     <Content Include="src\common\resources\profile.resource.js" />
     <Content Include="src\common\resources\acl.resource.js" />
     <Content Include="src\common\resources\apps.resource.js" />
