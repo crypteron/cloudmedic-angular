@@ -15,13 +15,20 @@
         resolve: {
             prescriptions: ['Prescriptions', function (Prescriptions) {
                 return Prescriptions.query().$promise;
+            }],
+            users: ['Users', function (Users) {
+                return Users.query().$promise;
+            }],
+            medications: ['Medications', function (Medications) {
+                return Medications.query().$promise;
             }]
         },
         data: { pageTitle: 'Prescriptions' }
     });
 }])
-.controller('PrescriptionsCtrl', function ($scope, $state, prescriptions, Prescriptions, localizedNotifications, $modal) {
+.controller('PrescriptionsCtrl', function ($scope, $window, $state, prescriptions, Prescriptions, localizedNotifications, $modal, users, medications) {
 
+    
     $scope.prescriptions = prescriptions;
     $scope.prescriptionsRemover = new Prescriptions();
 
@@ -51,7 +58,28 @@
             $state.go("medications", null, { reload: true });
         });
     };
+
+    $scope.users = users;
+    $scope.medications = medications;
+
+    $scope.getPrescriptionInfo = function (prescription) {
+
+        for (var j = 0; j < medications.length; j++) {
+            if (prescription.MedicationId.toString() === medications[j].MedicationId.toString()) {
+                $scope.MedicationName = medications[j].GenericName + ' (' + medications[j].Code + ')';
+                break;
+            }
+
+        }
+        for (var i = 0; i < users.length; i++) {
+            if (prescription.PatientId.toString() === users[i].UserId.toString()) {
+                $scope.FullName = users[i].FirstName + ' ' + users[i].LastName;
+                return prescription;
+            }
+        }
+    };
 })
+
 .controller('PreAddCtrl', function ($scope, $state, $modalInstance, Prescriptions, localizedNotifications, MedId) {
     $scope.prescriptionsData = {
         MedicationId:MedId,
@@ -80,4 +108,5 @@
             $scope.prescriptionsData.isSubmitting = false;
         });
     };
+
 });
