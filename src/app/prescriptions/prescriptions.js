@@ -3,7 +3,7 @@
     'chart.js',
     'crypteron.resources'
 ])
-.config(['$stateProvider', function config($stateProvider) {
+.config(function config($stateProvider) {
     $stateProvider.state('prescriptions', {
         url: '/prescriptions',
         views: {
@@ -13,22 +13,20 @@
             }
         },
         resolve: {
-            prescriptions: ['Prescriptions', function (Prescriptions) {
+            prescriptions: function (Prescriptions) {
                 return Prescriptions.query().$promise;
-            }],
-            users: ['Users', function (Users) {
+            },
+            users: function (Users) {
                 return Users.query().$promise;
-            }],
-            medications: ['Medications', function (Medications) {
+            },
+            medications: function (Medications) {
                 return Medications.query().$promise;
-            }]
+            }
         },
         data: { pageTitle: 'Prescriptions' }
     });
-}])
-.controller('PrescriptionsCtrl', function ($scope, $window, $state, prescriptions, Prescriptions, localizedNotifications, $modal, users, medications) {
-
-    
+})
+.controller('PrescriptionsCtrl', function ($scope, $window, $state, prescriptions, Prescriptions, localizedNotifications, $modal, users, medications) {   
     $scope.prescriptions = prescriptions;
     $scope.prescriptionsRemover = new Prescriptions();
 
@@ -47,7 +45,6 @@
             });
         });
     };
-
     $scope.createPrescription = function () {     
         localizedNotifications.removeForCurrent();
         $modal.open({
@@ -79,17 +76,18 @@
         }
     };
 })
-
-.controller('PreAddCtrl', function ($scope, $state, $modalInstance, Prescriptions, localizedNotifications, MedId) {
+.controller('PreAddCtrl', function ($scope, $state, $modalInstance, Prescriptions, localizedNotifications, MedId, MedName) {
     $scope.prescriptionsData = {
-        MedicationId:MedId,
+        MedicationId: MedId,
+        MedicationName: MedName,
         Frequency: "",
         Dosage: "",
         Notes:"",
         isSubmitting: false,
+        PatientId: ""
         // for testing only 
-        Candidates: [{ firstname: 'one', lastname:'1',userid: '30' }, { firstname: 'two', lastname:'2',userid: '27' }, { firstname: 'three', lastname:'3',userid: '50' }],
-        SelectedId:""
+        //Candidates: [{ firstname: 'one', lastname:'1',userid: '30' }, { firstname: 'two', lastname:'2',userid: '27' }, { firstname: 'three', lastname:'3',userid: '50' }],
+        //SelectedId:""
     };
     $scope.prescriptionsCreator = new Prescriptions();
     // Prescription creation method
@@ -98,6 +96,7 @@
         $scope.prescriptionsData.isSubmitting = true;
         $scope.prescriptionsCreator.PrescriptionId = $scope.prescriptionsData.PrescriptionId;
         $scope.prescriptionsCreator.MedicationId = $scope.prescriptionsData.MedicationId;
+        $scope.prescriptionsCreator.PatientId = $scope.prescriptionsData.PatientId;
         $scope.prescriptionsCreator.Frequency = $scope.prescriptionsData.Frequency;
         $scope.prescriptionsCreator.Dosage = $scope.prescriptionsData.Dosage;
         $scope.prescriptionsCreator.Notes = $scope.prescriptionsData.Notes;

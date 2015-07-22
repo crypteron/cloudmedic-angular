@@ -57,14 +57,15 @@
             $state.go("medications", null, { reload: true });
         });
     };
-    $scope.createPrescription = function (MedId) {
-        $scope.MedId = MedId;
+    $scope.createPrescription = function (medication) {
+        $scope.medication = medication;
         localizedNotifications.removeForCurrent();
         $modal.open({
             templateUrl: "prescriptions/prescriptions.add.tpl.html",
             controller: 'PreAddCtrl',
             resolve: {
-                MedId: function () { return $scope.MedId;}
+                MedId: function () { return $scope.medication.MedicationId; },
+                MedName: function () { return $scope.medication.GenericName; }
             }
         }).result.then(function () {
             $state.go("medications", null, { reload: true });

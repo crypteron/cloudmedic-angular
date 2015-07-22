@@ -7,37 +7,42 @@
         <cry-notification-bar></cry-notification-bar>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicons-coffee-cup"></i></span>
-                <input id="prescription-
-                       id" class="form-control" placeholder="Medication ID" type="text" ng-model="prescriptionsData.MedicationId" required>
+                <span class="input-group-addon"><i class="fa fa-medkit"></i></span>
+                <input id="medication-name" class="form-control" placeholder="Medication Name" type="text" ng-model="prescriptionsData.MedicationName" required>
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicons-cardio"></i></span>
+                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
                 <input id="prescription-frequency" class="form-control" placeholder="Frequency" type="text" ng-model="prescriptionsData.Frequency" required>
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicons-coffee-cup"></i></span>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
                 <input id="prescription-dosage" class="form-control" placeholder="Dosage" type="text" ng-model="prescriptionsData.Dosage" required>
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicons-pen"></i></span>
-                <input id="prescription-notes" class="form-control" placeholder="Notes" type="text" ng-model="prescriptionsData.Notes" required>
+                <span class="input-group-addon"><i class="fa fa-file-text"></i></span>
+                <textarea id="prescription-notes" class="form-control" placeholder="Notes" type="text" ng-model="prescriptionsData.Notes" required></textarea>
             </div>
         </div>
-        <div class="form-group">
+        <!--<div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicons-pen"></i></span>
                 <select required class="form-control" ng-model="patientid" ng-options="candidate.userid as candidate.firstname+' '+candidate.lastname for candidate in prescriptionsData.Candidates">
                     <option class="placeholder" selected disabled value="">Patient Name</option>
                 </select>
             </div>
-        </div>         
+        </div>-->    
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input id="patient-id" class="form-control" placeholder="Patient Id" type="text" ng-model="prescriptionsData.PatientId" required>
+            </div>
+        </div>     
         <div class="form-group">
             <div class="modal-footer">
                 <button class="btn btn-danger btn-lg btn-block" type="submit" ng-click="create()" ng-disabled="form.$invalid || medicationsData.isSubmitting">Create</button>
