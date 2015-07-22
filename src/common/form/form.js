@@ -9,7 +9,7 @@
         return items.slice().reverse();
     };
 })
-.controller('FormCtrl', function ($scope, reg, Users, Password, Profile, $state, userProfile, MONTHS, localizedNotifications) {
+.controller('FormCtrl', function ($scope, reg, Users, Password, $state, MONTHS, localizedNotifications) {
 
     // Initialize scope variables
     $scope.data = {
@@ -27,10 +27,6 @@
         isSubmitting: false
     };
     $scope.creator = new Users();
-    $scope.profile = userProfile.get();
-    $scope.profile.$promise.then(function () {
-        $scope.original = angular.copy($scope.profile);
-    });
     $scope.password = new Password();
 
     // User registration method
@@ -68,28 +64,6 @@
         }, function () {
             $scope.data.isSubmitting = false;
         });
-    };
-
-    // Profile update
-    $scope.updateProfile = function () {
-        localizedNotifications.removeForCurrent();
-        $scope.data.isSubmitting = true;
-        $scope.profile.$post().then(function () {
-            localizedNotifications.addForNext('update.success', 'success', { entityType: 'Profile' });
-            $scope.data.isSubmitting = false;
-            $scope.form.$setPristine();
-            $state.go('users');
-        }, function () {
-            $scope.data.isSubmitting = false;
-        });
-    };
-    $scope.resetProfile = function () {
-        $scope.profile.Email = $scope.original.Email;
-        $scope.profile.LastName = $scope.original.LastName;
-        $scope.profile.FirstName = $scope.original.FirstName;
-        $scope.form.$setPristine();
-        $scope.Firstname_Valid = true;
-        $scope.Lastname_Valid = true;
     };
 
     // Password update
@@ -195,10 +169,6 @@
             $scope.Passwords_Match = true;
         }
     };
-
-    // Name validation
-    $scope.Firstname_Valid = true;
-    $scope.Lastname_Valid = true;
 
     $scope.check_firstName = function () {
         if (document.getElementById("user-first").value.match(/[^a-zA-Z]/) != null) {

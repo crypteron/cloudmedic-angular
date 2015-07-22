@@ -131,7 +131,6 @@ angular.module('crypteron', [
         $scope.isStaff = function () {
             return auth.status.token && (auth.status.token.userRole.contains("Physician") || auth.status.token.userRole.contains("Nurse"));
         };
-
         $scope.isMedicationViewer = function () {
             return auth.status.token.userRole.contains("Physician");
         };
