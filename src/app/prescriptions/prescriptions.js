@@ -60,7 +60,7 @@
         Notes:"",
         isSubmitting: false,
         // for testing only 
-        // Candidates: [{ firstname: 'one', lastname:'1',userid: '30' }, { firstname: 'two', lastname:'2',userid: '27' }, { firstname: 'three', lastname:'3',userid: '50' }],
+        Candidates: [{ firstname: 'one', lastname:'1',userid: '30' }, { firstname: 'two', lastname:'2',userid: '27' }, { firstname: 'three', lastname:'3',userid: '50' }],
         SelectedId:""
     };
     $scope.prescriptionsCreator = new Prescriptions();

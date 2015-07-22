@@ -191,9 +191,7 @@
     };
 
     //Phone Number Validation
-
     $scope.PhoneNumber_Valid = true;
-
     $scope.check_PhoneNumber = function () {
         if (document.getElementById("register-phonenumber").value.match(/^[1-9]\d{2}-\d{3}-\d{4}$/) != null) {
             $scope.PhoneNumber_Valid = true;
