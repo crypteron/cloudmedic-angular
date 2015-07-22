@@ -1,7 +1,8 @@
 ﻿angular.module('cloudmedic.medications', [
     'ui.router',
     'chart.js',
-    'crypteron.resources'
+    'crypteron.resources',
+    'form'
 ])
 .config(['$stateProvider', function config($stateProvider) {
     $stateProvider.state('medications', {
@@ -93,5 +94,32 @@
         }, function () {
             $scope.medicationsData.isSubmitting = false;
         });
+    };
+
+    $scope.Code_Valid = true;
+
+    $scope.check_Code = function () {
+
+        if (document.getElementById("medication-code").value.match(/\D{1,5}/) != null) {
+            $scope.Code_Valid = false;
+            $scope.medicationsData.isSubmitting = true;
+        }
+        else {
+            $scope.Code_Valid = true;
+            $scope.medicationsData.isSubmitting = false;
+        }
+    };
+
+    $scope.GenericName_Valid = true;
+
+    $scope.check_GenericName = function () {
+        if (document.getElementById("medication-genericname").value.match(/[^a-zA-Z]{1,}/) != null) {
+            $scope.GenericName_Valid = false;
+            $scope.medicationsData.isSubmitting = true;
+        }
+        else {
+            $scope.GenericName_Valid = true;
+            $scope.medicationsData.isSubmitting = false;
+        }
     };
 });

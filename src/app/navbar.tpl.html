@@ -42,7 +42,8 @@
                             Admin
                         </a>
                     </li>
-                    <li ng-show="authStatus.isLoggedIn && isStaff()" ui-sref-active="active">
+                    <!--<li ng-show="authStatus.isLoggedIn && isStaff()" ui-sref-active="active">-->
+                    <li ng-show="authStatus.isLoggedIn" ui-sref-active="active">
                         <a ui-sref="prescriptions">
                             <i class="fa fa-plus-square"></i>
                             Prescriptions

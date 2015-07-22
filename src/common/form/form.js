@@ -228,7 +228,7 @@
         else {
             $scope.PhoneNumber_Valid = false;
         }
-    }
+    };
 })
  // call function on change even if input invalid
 .directive('watchChange', function () {

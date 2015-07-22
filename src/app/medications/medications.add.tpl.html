@@ -8,15 +8,21 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">@</span>
-                <input id="medication-genericname" class="form-control" placeholder="Generic Name" type="text" ng-model="medicationsData.GenericName" required>
+                <input id="medication-genericname" class="form-control" placeholder="Generic Name" type="text" watch-change="check_GenericName()" ng-model="medicationsData.GenericName" required>
             </div>
         </div>
+        <div class="form-group" ng-hide="GenericName_Valid">
+            <font color="red">Generic Name must only contain letters.</font>
+        </div>  
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-fire"></i></span>
-                <input id="medication-code" class="form-control" placeholder="Code" type="number" ng-model="medicationsData.Code" maxlength="5" required>
-               </div>
+                <input id="medication-code" class="form-control" placeholder="Code" type="text" ng-pattern="/^\d{5}$/" ng-model="medicationsData.Code" ng-maxlength="5" maxlength="5" watch-change="check_Code()" required>
+            </div>
         </div>
+        <div class="form-group" ng-hide="Code_Valid">
+            <font color="red">Code must only contain numbers.</font>
+        </div>        
         <div class="form-group">
             <div class="modal-footer">
                 <button class="btn btn-danger btn-lg btn-block" type="submit" ng-click="create()" ng-disabled="form.$invalid || medicationsData.isSubmitting">Create</button>
