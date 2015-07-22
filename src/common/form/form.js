@@ -170,6 +170,9 @@
         }
     };
 
+    // Name Validation
+    $scope.Firstname_Valid = true;
+    $scope.Lastname_Valid = true;
     $scope.check_firstName = function () {
         if (document.getElementById("user-first").value.match(/[^a-zA-Z]/) != null) {
             $scope.Firstname_Valid = false;
