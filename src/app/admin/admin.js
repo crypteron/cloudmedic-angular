@@ -4,7 +4,7 @@
     'form',
     'crypteron.resources'
 ])
-.config(['$stateProvider', function config($stateProvider) {
+.config(function config($stateProvider) {
     $stateProvider.state('admin', {
         url: '/admin',
         views: {
@@ -14,14 +14,14 @@
             }
         },
         resolve: {
-            security: ['$q', 'auth', function ($q, auth) {
+            security: function ($q, auth) {
                 if (!auth.status.token || !auth.status.token.userRole.contains('SysAdmin')) {
                     return $q.reject("Not Authorized");
                 }
-            }],
-            users: ['Users', function (Users) {
+            },
+            users: function (Users) {
                 return Users.query().$promise;
-            }]//,
+            }//,
             //reports: ['$http', 'APP_CONFIG', function ($http, APP_CONFIG) {
             //    return $http.get(APP_CONFIG.api_url + 'admin/users/reports').then(function (response) {
             //        return response.data;
@@ -30,7 +30,7 @@
         },
         data: { pageTitle: 'Admin' }
     });
-}])
+})
 .controller('AdminCtrl', function ($scope, $state, users, Users, /*reports,*/ localizedNotifications, $modal, DROPDOWN_PLANS) {
     $scope.users = users;
     $scope.userRemover = new Users();
