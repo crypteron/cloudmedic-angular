@@ -16,6 +16,7 @@ angular.module('crypteron', [
   'cloudmedic.medications',
   'cloudmedic.prescriptions',
   'ui.router',
+  'ui.mask',
   'auth',
   'form',
   'localizedMessages',
