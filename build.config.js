@@ -81,7 +81,7 @@ module.exports = {
          'vendor/angulartics/dist/angulartics-ga.min.js',
          'vendor/Chart.js/Chart.min.js',
          'vendor/angular-chart.js/dist/angular-chart.min.js',
-         'vendor/angular-ui-mask/mask.js'
+         'vendor/angular-ui-mask/dist/mask.js'
     ],
     css: [
         'vendor/angular-loading-bar/build/loading-bar.css',
