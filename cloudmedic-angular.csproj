@@ -194,11 +194,6 @@
     <Content Include="vendor\angular-mocks\angular-mocks.js" />
     <Content Include="vendor\angular-resource\angular-resource.js" />
     <Content Include="vendor\angular-resource\angular-resource.min.js" />
-    <Content Include="vendor\angular-ui-mask\.gitignore" />
-    <Content Include="vendor\angular-ui-mask\gulpfile.js" />
-    <Content Include="vendor\angular-ui-mask\karma.conf.js" />
-    <Content Include="vendor\angular-ui-mask\mask.js" />
-    <Content Include="vendor\angular-ui-mask\mask.min.js" />
     <Content Include="vendor\angular-ui-router\release\angular-ui-router.js" />
     <Content Include="vendor\angular-ui-router\release\angular-ui-router.min.js" />
     <Content Include="vendor\angular-ui-router\src\common.js" />
@@ -511,10 +506,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />
-    <Content Include="vendor\angular-ui-mask\.jshintrc" />
-    <Content Include="vendor\angular-ui-mask\.travis.yml" />
-    <Content Include="vendor\angular-ui-mask\LICENSE" />
-    <Content Include="vendor\angular-ui-mask\package.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
