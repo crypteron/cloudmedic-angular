@@ -76,7 +76,7 @@
         }
     };
 })
-.controller('PreAddCtrl', function ($scope, $state, $modalInstance, Prescriptions, localizedNotifications, MedId, MedName) {
+.controller('PreAddCtrl', function ($scope, $state, $http,$modalInstance, Prescriptions, localizedNotifications, MedId, MedName) {
     $scope.prescriptionsData = {
         MedicationId: MedId,
         MedicationName: MedName,
@@ -84,10 +84,15 @@
         Dosage: "",
         Notes:"",
         isSubmitting: false,
-        PatientId: ""
+        PatientId: "",
         // for testing only 
-        //Candidates: [{ firstname: 'one', lastname:'1',userid: '30' }, { firstname: 'two', lastname:'2',userid: '27' }, { firstname: 'three', lastname:'3',userid: '50' }],
-        //SelectedId:""
+        Candidates: "",
+        PatientLastName:""
+    };
+    $scope.search = function () {
+        $http.get("https://localhost:44300/Users/Find?LastName=" + $scope.prescriptionsData.PatientLastName).then(function (response) {        
+            $scope.prescriptionsData.Candidates = response.data;
+        });
     };
     $scope.prescriptionsCreator = new Prescriptions();
     // Prescription creation method
