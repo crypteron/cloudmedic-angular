@@ -6,8 +6,16 @@
 <table id="prescription-list" class="table table-striped table-hover">
     <thead>
         <tr>
-            <th>Medication</th>
-            <th>Patient</th>
+            <th>
+                <a href="#" ng-click="orderByField='MedicationCode'; reverseSort = !reverseSort">
+                    Medication <span ng-show="orderByField == 'MedicationCode'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                </a>
+            </th>
+            <th>
+                <a href="#" ng-click="orderByField='PatientName'; reverseSort = !reverseSort">
+                    Patient <span ng-show="orderByField == 'PatientName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                </a>
+            </th>
             <th>Frequency</th>
             <th>Dosage</th>
             <th>Notes</th>
@@ -15,13 +23,12 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="prescription in prescriptions | filter:getPrescriptionInfo">
-            <td>{{MedicationName}}</td>
-            <!--<td>{{}}</td>-->
-            <td>{{FullName}}</td>
+        <tr ng-repeat="prescription in prescriptions | orderBy:orderByField:reverseSort">
+            <td>{{prescription.MedicationCode}} ({{prescription.MedicationName}})</td>
+            <td>{{prescription.PatientName}}</td>
             <td>{{prescription.Frequency}}</td>
             <td>{{prescription.Dosage}}</td>
-            <td>{{prescription.Notes}}</td>
+            <td class="col-md-5">{{prescription.Notes}}</td>
             <td>
                 <button class="btn btn-danger btn-xs" ng-click="removePrescription(prescription)">
                     <i class="glyphicon glyphicon-trash"></i>

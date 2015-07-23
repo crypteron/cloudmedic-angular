@@ -13,12 +13,12 @@
                     <p>CloudMedic <span class="glyphicon glyphicon-plus text-danger" aria-hidden="true"></span>
                 </div>
             </div>
-            <div class="collapse navbar-collapse navbar-inner" collapse="menuCollapsed" id="top-nav">
-                <ul class="nav navbar-nav navbar-right top-menu" ng-click="menuCollapsed = true">
+            <div class="collapse navbar-collapse navbar-inner navbar-right" collapse="menuCollapsed" id="top-nav">
+                <ul class="nav navbar-nav top-menu" ng-click="menuCollapsed = true">
                     <li ng-show="authStatus.isLoggedIn" ng-class="{active: $state.includes('users')}">
-                        <a href ui-sref="users">
-                            <i class="fa fa-users"></i>
-                            Users
+                        <a href ui-sref="user">
+                            <i class="fa fa-user"></i>
+                            User
                         </a>
                     </li>                    
                     <li ng-hide="authStatus.isLoggedIn" ui-sref-active="active" >
@@ -26,7 +26,7 @@
                     </li>                    
                     <li ng-show="authStatus.isLoggedIn" ui-sref-active="active">
                         <a ui-sref="profile">
-                            <i class="fa fa-user"></i>
+                            <i class="glyphicon glyphicon-wrench"></i>
                             Profile
                         </a>
                     </li>
@@ -42,30 +42,20 @@
                             Admin
                         </a>
                     </li>
-                    <!--<li ng-show="authStatus.isLoggedIn && isStaff()" ui-sref-active="active">-->
-                    <li ng-show="authStatus.isLoggedIn" ui-sref-active="active">
+                    <li ng-show="authStatus.isLoggedIn && isStaff() || isAdmin()" ui-sref-active="active">
                         <a ui-sref="prescriptions">
                             <i class="fa fa-plus-square"></i>
                             Prescriptions
                         </a>
                     </li>
-                    <li class="dropdown">
+                    <!--<li class="dropdown">
                         <a href dropdown-toggle><i class=" fa fa-support">
                         </i> Help <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">                            
                             <li>
-                                <a href="https://www.crypteron.com/cipherdb-developers-guide/" title="Crypteron Developers Guide" target="_blank">
-                                    Developer's Guide
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://support.crypteron.com" target="_blank" title="Crypteron Support">
-                                    Support Request
-                                </a>
                             </li>
                         </ul>
-
-                    </li>
+                    </li>-->
                     <li ng-show="authStatus.isLoggedIn">
                         <a ng-click="logout()">
                             <i class="fa fa-sign-out"></i>

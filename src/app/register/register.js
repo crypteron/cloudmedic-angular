@@ -1,5 +1,6 @@
 ﻿angular.module('crypteron.register', [
     'ui.router',
+    'ui.mask',
     'reg',
     'form',
     'cloudmedic.dropdown.values'
