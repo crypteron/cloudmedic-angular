@@ -25,22 +25,33 @@
         </div>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-file-text"></i></span>
+                <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
                 <textarea id="prescription-notes" class="form-control" placeholder="Notes" type="text" ng-model="prescriptionsData.Notes" required></textarea>
             </div>
         </div>
-        <!--<div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicons-pen"></i></span>
-                <select required class="form-control" ng-model="patientid" ng-options="candidate.userid as candidate.firstname+' '+candidate.lastname for candidate in prescriptionsData.Candidates">
-                    <option class="placeholder" selected disabled value="">Patient Name</option>
-                </select>
+        <div class="form-inline">
+            <div class="form-group">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-cloud"></i></span>
+                            <div class="form-inline">
+                                <input id="prescription-frequency" class="form-control" placeholder="Patient Last Name" type="text" ng-model="prescriptionsData.PatientLastName" required>   
+                                <a class="text-muted" ng-click="search()">
+                                    <div class="fa fa-search" style="margin-left:250px;margin-top:10px"></div> Search
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>-->    
+        </div>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input id="patient-id" class="form-control" placeholder="Patient Id" type="text" ng-model="prescriptionsData.PatientId" required>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <select required class="form-control" ng-model="prescriptionsData.PatientId" ng-options="candidate.UserId as candidate.LastName+','+candidate.FirstName for candidate in prescriptionsData.Candidates">
+                    <option class="placeholder" selected disabled value="">Patient Name</option>
+                </select>
             </div>
         </div>     
         <div class="form-group">
