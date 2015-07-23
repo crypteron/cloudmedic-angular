@@ -12,7 +12,7 @@ angular.module('crypteron', [
   'crypteron.messages',
   'crypteron.resources',    
   'crypteron.admin',
-  'crypteron.users',
+  'cloudmedic.user',
   'cloudmedic.medications',
   'cloudmedic.prescriptions',
   'ui.router',

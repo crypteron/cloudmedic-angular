@@ -16,9 +16,9 @@
             <div class="collapse navbar-collapse navbar-inner" collapse="menuCollapsed" id="top-nav">
                 <ul class="nav navbar-nav navbar-right top-menu" ng-click="menuCollapsed = true">
                     <li ng-show="authStatus.isLoggedIn" ng-class="{active: $state.includes('users')}">
-                        <a href ui-sref="users">
-                            <i class="fa fa-users"></i>
-                            Users
+                        <a href ui-sref="user">
+                            <i class="fa fa-user"></i>
+                            User
                         </a>
                     </li>                    
                     <li ng-hide="authStatus.isLoggedIn" ui-sref-active="active" >
@@ -26,7 +26,7 @@
                     </li>                    
                     <li ng-show="authStatus.isLoggedIn" ui-sref-active="active">
                         <a ui-sref="profile">
-                            <i class="fa fa-user"></i>
+                            <i class="glyphicon glyphicon-wrench"></i>
                             Profile
                         </a>
                     </li>

@@ -39,10 +39,10 @@
         localizedNotifications.removeForCurrent();
         $modal.open({
             templateUrl: "app.confirm.tpl.html",
-            controller: ['$scope', function ($scope) {
+            controller: function ($scope) {
                 $scope.confirmText = "You will not be able to recover this User!";
                 $scope.confirmButton = "Yes, delete User!";
-            }]
+            }
         }).result.then(function () {
             $scope.userRemover.$remove({ id: user.UserId }).then(function () {
                 localizedNotifications.addForNext('delete.success', 'success', { entityType: 'User' });
