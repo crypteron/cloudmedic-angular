@@ -13,6 +13,11 @@
             }
         },
         resolve: {
+            security: function ($q, auth) {
+                if (!auth.status.token || !auth.status.token.userRole.contains('SysAdmin') && !auth.status.token.userRole.contains('Physician') && !auth.status.token.userRole.contains('Nurse')) {
+                    return $q.reject("Not Authorized");
+                }
+            },
             prescriptions: function (Prescriptions) {
                 return Prescriptions.query().$promise;
             }

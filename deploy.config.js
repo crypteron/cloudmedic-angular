@@ -29,8 +29,8 @@ module.exports = {
           constants: {
               APP_CONFIG: {
                   environment: 'production',
-                  api_url: 'https://localhost:44300/',
-                  base_uri: 'https://az664324.vo.msecnd.net/dashboard/'
+                  api_url: 'https://cloudmedic.io/',
+                  base_uri: 'https://cloudmedic.io/'
               }
           }
       }

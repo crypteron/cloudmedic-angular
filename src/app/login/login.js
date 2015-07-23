@@ -47,7 +47,7 @@
     
     // If user is already logged in, navigate to apps state
     if (auth.status.isLoggedIn) {        
-        $state.go('users');
+        $state.go('user');
     }
 
     // Initialize scope variables
@@ -70,7 +70,7 @@
         localizedNotifications.removeForCurrent();
         auth.login($scope.loginData)
         .then(function (response) {
-            auth.redirectAfterLogin('users');
+            auth.redirectAfterLogin('user');
             //// After login, if user hasn't completed profile, send them to profile page
             //var profile = userProfile.get();
             //profile.$promise.then(function () {

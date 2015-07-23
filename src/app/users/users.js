@@ -1,38 +1,33 @@
-﻿angular.module('crypteron.users', [
+﻿angular.module('cloudmedic.user', [
     'ui.router',
     'chart.js',
     'crypteron.resources',
     'form'
 ])
-.config(['$stateProvider', function config($stateProvider) {
-    $stateProvider.state('users', {
-        url: '/users',
+.config(function config($stateProvider) {
+    $stateProvider.state('user', {
+        url: '/user',
         views: {
             "main": {
-                controller: 'FormCtrl',
+                controller: 'UserCtrl',
                 templateUrl: 'users/users.tpl.html'
             }
         },
         resolve: {
-            security: ['$q', 'auth', function ($q, auth) {
+            security: function ($q, auth) {
                 if (!auth.status.token) {
                     return $q.reject("Not Authorized");
                 }
-            }],
-            users: ['Users', function (Users) {
-                return Users.query().$promise;
-            }]
+            },
+            prescriptions: function (Users, auth) {
+                return Users.meds({ id: auth.status.token.userId }).$promise;
+            }
         },
-        data: { pageTitle: 'Users' }
+        data: { pageTitle: 'User' }
     });
-}]);
-//.controller('UsersCtrl', function ($scope, $state, users, reports, localizedNotifications, $modal) {
-//        $scope.users = users;
-
-//        $scope.orderByField = 'LastName';
-//        $scope.reverseSort = false;
-
-//        $scope.PhysicianOrNurse = function (user) {
-//            return user.Roles == 'Nurse' || user.Roles == 'Physician';
-//        };
-//    });
+})
+.controller('UserCtrl', function ($scope, $state, prescriptions, localizedNotifications) {
+    $scope.prescriptions = prescriptions;
+    $scope.orderByField = 'MedicationName';
+    $scope.reverseSort = false;
+});

@@ -1,54 +1,31 @@
 ﻿<!--<h1>Welcome, {{profile.FirstName}}</h1>-->
+<div class="col-md-10 col-md-offset-1">
+    <h2>Prescriptions</h2>
+    <table id="prescription-list" class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <a href="#" ng-click="orderByField='MedicationName'; reverseSort = !reverseSort">
+                        Medication<span ng-show="orderByField == 'MedicationName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                    </a>
+                </th>
+                <th>Frequency</th>
+                <th>Dosage</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="prescription in prescriptions">
+                <td>{{prescription.MedicationName}}</td>
+                <td>{{prescription.Frequency}}</td>
+                <td>{{prescription.Dosage}}</td>
+                <td>{{prescription.Notes}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-<h2>Prescriptions</h2>
-<table id="prescription-list" class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>
-                <a href="#" ng-click="orderByField='PrescriptionId'; reverseSort = !reverseSort">
-                    Prescription Id <span ng-show="orderByField == 'PrescriptionId'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
-                </a>
-            </th>
-            <th>
-                <a href="#" ng-click="orderByField='MedicationId'; reverseSort = !reverseSort">
-                    Medication Id <span ng-show="orderByField == 'MedicationId'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
-                </a>
-            </th>
-            <th>
-                <a href="#" ng-click="orderByField='Frequency'; reverseSort = !reverseSort">
-                    Frequency <span ng-show="orderByField == 'Frequency'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
-                </a>
-            </th>
-            <th>
-                <a href="#" ng-click="orderByField='Dosage'; reverseSort = !reverseSort">
-                    Dosage <span ng-show="orderByField == 'Dosage'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
-                </a>
-            </th>
-            <th>
-                <a href="#" ng-click="orderByField='Notes'; reverseSort = !reverseSort">
-                    Notes <span ng-show="orderByField == 'Notes'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
-                </a>
-            </th>
-            <th style="width:69px;">Edit</th>
-
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="prescription in prescriptions">
-            <td>{{prescription.PrescriptionId}}</td>
-            <td>{{prescription.MedicationId}}</td>
-            <td>{{prescription.Frequency}}</td>
-            <td>{{prescription.Dosage}}</td>
-            <td>{{prescription.Notes}}</td>
-            <td>
-                <button class="btn btn-danger btn-xs" ng-click="removePrescription(prescription)">
-                    <i class="glyphicon glyphicon-trash"></i>
-                </button>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<div>
+<!--<div>
     <h2>Care Team</h2>
     <table id="prescription-list" class="table table-striped table-hover">
         <thead>
@@ -76,7 +53,7 @@
             </tr>
         </thead>
         <tbody>
-            <!--<tr ng-repeat="user in users | orderBy:orderByField:reverseSort | filter:{Roles:'Patient'}">
+            <tr ng-repeat="user in users | orderBy:orderByField:reverseSort | filter:{Roles:'Patient'}">
                 <td>{{user.LastName}}, {{user.FirstName}}</td>
                 <td>{{user.PhoneNumber}}</td>
                 <td>{{user.Email}}</td>
@@ -87,35 +64,8 @@
                     <button class="btn btn-danger btn-xs" ng-click="removeUser(user)">
                         <i class="glyphicon glyphicon-trash"></i>
                     </button>
-                </td>-->
-            <!--</tr>-->
+                </td>
+            </tr>
         </tbody>
     </table>
-</div>
-
-<!--<table id="prescription-list" class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>Prescription ID</th>
-            <th>Medication ID</th>
-            <th>Frequency</th>
-            <th>Dosage</th>
-            <th>Notes</th>
-            <th style="width:69px;">Edit</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="prescription in prescriptions">
-            <td>{{prescription.PrescriptionId}}</td>
-            <td>{{prescription.MedicationId}}</td>
-            <td>{{prescription.Frequency}}</td>
-            <td>{{prescription.Dosage}}</td>
-            <td>{{prescription.Notes}}</td>
-            <td>
-                <button class="btn btn-danger btn-xs" ng-click="removePrescription(prescription)">
-                    <i class="glyphicon glyphicon-trash"></i>
-                </button>
-            </td>
-        </tr>
-    </tbody>
-</table>-->
+</div>-->
