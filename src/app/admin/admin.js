@@ -1,5 +1,6 @@
 ﻿angular.module('crypteron.admin', [
     'ui.router',
+    'ui.mask',
     'chart.js',
     'form',
     'crypteron.resources'

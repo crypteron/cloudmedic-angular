@@ -48,6 +48,7 @@
     // User creation method
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
+
         $scope.data.isSubmitting = true;
         // bind scope values to creator object
         $scope.creator.UserName = $scope.data.UserName;
@@ -56,7 +57,7 @@
         $scope.creator.LastName = $scope.data.LastName;
         $scope.creator.Gender = $scope.data.Gender;
         $scope.creator.Specialty = $scope.data.Specialty;
-        $scope.creator.PhoneNumber = $scope.data.PhoneNumber;
+        $scope.creator.PhoneNumber = '(' + $scope.data.PhoneNumber.substr(0, 3) + ') ' + $scope.data.PhoneNumber.substr(3, 3) + '-' + $scope.data.PhoneNumber.substr(6, 4);
         $scope.creator.Roles = [$scope.data.Role];
         $scope.creator.DOB = $scope.SelectedYear + '-' + pad($scope.SelectedMonth, 2) + '-' + pad($scope.SelectedDay, 2);
 
