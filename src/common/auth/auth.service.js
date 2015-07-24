@@ -78,6 +78,7 @@
         // Properties
         var _status = {
             token: null,
+            userRoles: [],
             userName: '',
             ssoProvider:  null,
             isLoggedIn: false       
@@ -111,6 +112,7 @@
             if (status) {
                 _status.isLoggedIn = status.isLoggedIn;
                 _status.token = status.token;
+                _status.userRoles = angular.fromJson(status.userRoles);
                 _status.userName = status.username;
                 _status.ssoProvider = status.ssoProvider;
             }
@@ -138,6 +140,7 @@
         var _logout = function (withNotification) {
             withNotification = (typeof withNotification === 'undefined') ? true: withNotification;
             _status.token = null;
+            _status.userRoles = [];
             _status.userName = '';
             _status.ssoProvider = null;
             _status.isLoggedIn = false;
