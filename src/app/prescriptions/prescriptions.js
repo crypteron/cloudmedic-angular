@@ -64,18 +64,20 @@
     $scope.search = function () {
         $scope.Candidates = Users.search({ Name: $scope.prescriptionsData.PatientName });
     };
-    $scope.prescriptionsCreator = new Prescriptions();
+    $scope.Creator = new Prescriptions();
 
     // Prescription creation method
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
         $scope.prescriptionsData.isSubmitting = true;
-        $scope.prescriptionsCreator.MedicationId = $scope.prescriptionsData.MedicationId;
-        $scope.prescriptionsCreator.PatientId = $scope.prescriptionsData.PatientId[0];
-        $scope.prescriptionsCreator.Frequency = $scope.prescriptionsData.Frequency;
-        $scope.prescriptionsCreator.Dosage = $scope.prescriptionsData.Dosage;
-        $scope.prescriptionsCreator.Notes = $scope.prescriptionsData.Notes;
-        $scope.prescriptionsCreator.$create().then(function () {
+        $scope.Creator.MedicationId = $scope.prescriptionsData.MedicationId;
+        $scope.Creator.PatientId = $scope.prescriptionsData.PatientId[0];
+        $scope.Creator.Frequency = $scope.prescriptionsData.Frequency;
+        $scope.Creator.Dosage = $scope.prescriptionsData.Dosage;
+        $scope.Creator.Notes = $scope.prescriptionsData.Notes;
+        $scope.Creator.StartDate = new Date();
+        $scope.Creator.EndDate = $scope.SelectedYear + '-' + pad($scope.SelectedMonth, 2) + '-' + pad($scope.SelectedDay, 2);
+        $scope.Creator.$create().then(function () {
             localizedNotifications.addForNext('create.success', 'success', { entityType: 'Prescription' });
             $modalInstance.close();
         }, function () {
@@ -83,4 +85,29 @@
         });
     };
 
+    // Date of Birth dropdown menu value generator
+    var numberOfYears = (new Date()).getYear();
+    var years = $.map($(Array(numberOfYears)), function (val, i) { return i + 1900; });
+    var days = $.map($(Array(31)), function (val, i) { return i + 1; });
+    var isLeapYear = function () {
+        var year = $scope.SelectedYear || 0;
+        return ((year % 400 === 0 || year % 100 !== 0) && (year % 4 === 0)) ? 1 : 0;
+    };
+    var getNumberOfDaysInMonth = function () {
+        var selectedMonth = $scope.SelectedMonth || 0;
+        return 31 - ((selectedMonth === 2) ? (3 - isLeapYear()) : ((selectedMonth - 1) % 7 % 2));
+    };
+
+    $scope.UpdateNumberOfDays = function () {
+        $scope.NumberOfDays = getNumberOfDaysInMonth();
+    };
+    $scope.NumberOfDays = 31;
+    $scope.Years = years;
+    $scope.Days = days;
+    $scope.Months = MONTHS;
 });
+// adds leading zeroes
+function pad(num, size) {
+    var s = "00" + num;
+    return s.substr(s.length - size);
+}
