@@ -71,7 +71,7 @@
         localizedNotifications.removeForCurrent();
         $scope.prescriptionsData.isSubmitting = true;
         $scope.prescriptionsCreator.MedicationId = $scope.prescriptionsData.MedicationId;
-        $scope.prescriptionsCreator.PatientId = $scope.prescriptionsData.PatientId;
+        $scope.prescriptionsCreator.PatientId = $scope.prescriptionsData.PatientId[0];
         $scope.prescriptionsCreator.Frequency = $scope.prescriptionsData.Frequency;
         $scope.prescriptionsCreator.Dosage = $scope.prescriptionsData.Dosage;
         $scope.prescriptionsCreator.Notes = $scope.prescriptionsData.Notes;
