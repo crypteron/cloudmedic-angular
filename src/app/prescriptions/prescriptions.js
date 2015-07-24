@@ -1,7 +1,8 @@
 ﻿angular.module('cloudmedic.prescriptions', [
     'ui.router',
     'chart.js',
-    'cloudmedic.resources'
+    'cloudmedic.resources',
+    'cloudmedic.dropdown.values'
 ])
 .config(function config($stateProvider) {
     $stateProvider.state('prescriptions', {
@@ -49,7 +50,7 @@
         });
     };
 })
-.controller('PreAddCtrl', function ($scope, $state, $http,$modalInstance, Prescriptions, Users, localizedNotifications, MedId, MedName) {
+.controller('PreAddCtrl', function ($scope, $state, $http, $modalInstance, Prescriptions, Users, localizedNotifications, MedId, MedName, MONTHS) {
     $scope.prescriptionsData = {
         MedicationId: MedId,
         MedicationName: MedName,
@@ -86,8 +87,9 @@
     };
 
     // Date of Birth dropdown menu value generator
-    var numberOfYears = (new Date()).getYear();
-    var years = $.map($(Array(numberOfYears)), function (val, i) { return i + 1900; });
+    var CurrrentYear = new Date().getFullYear();
+    $scope.CurrrentYear = CurrrentYear;
+    var years = $.map($(Array(10)), function (val, i) { return i + CurrrentYear; });
     var days = $.map($(Array(31)), function (val, i) { return i + 1; });
     var isLeapYear = function () {
         var year = $scope.SelectedYear || 0;
