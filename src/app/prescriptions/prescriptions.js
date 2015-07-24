@@ -37,10 +37,10 @@
         localizedNotifications.removeForCurrent();
         $modal.open({
             templateUrl: "app.confirm.tpl.html",
-            controller: ['$scope', function ($scope) {
+            controller: function ($scope) {
                 $scope.confirmText = "You will not be able to recover this prescription!";
                 $scope.confirmButton = "Yes, delete prescription!";
-            }]
+            }
         }).result.then(function () {
             $scope.prescriptionsRemover.$remove({ id: prescription.PrescriptionId }).then(function () {
                 localizedNotifications.addForNext('delete.success', 'success', { entityType: 'Prescription' });
@@ -48,19 +48,8 @@
             });
         });
     };
-    $scope.createPrescription = function () {     
-        localizedNotifications.removeForCurrent();
-        $modal.open({
-            templateUrl: "prescriptions/prescriptions.add.tpl.html",
-            controller: 'PreAddCtrl',
-            resolve: {MedId:""}
-        }).result.then(function () {
-            $state.go("medications", null, { reload: true });
-        });
-    };
-
 })
-.controller('PreAddCtrl', function ($scope, $state, $http,$modalInstance, Prescriptions, localizedNotifications, MedId, MedName) {
+.controller('PreAddCtrl', function ($scope, $state, $http,$modalInstance, Prescriptions, Users, localizedNotifications, MedId, MedName) {
     $scope.prescriptionsData = {
         MedicationId: MedId,
         MedicationName: MedName,
@@ -69,21 +58,18 @@
         Notes:"",
         isSubmitting: false,
         PatientId: "",
-        // for testing only 
-        Candidates: "",
         PatientLastName:""
     };
+
     $scope.search = function () {
-        $http.get("https://localhost:44300/Users/Find?LastName=" + $scope.prescriptionsData.PatientLastName).then(function (response) {        
-            $scope.prescriptionsData.Candidates = response.data;
-        });
+        $scope.Candidates = Users.search({ LastName: $scope.prescriptionsData.PatientLastName });
     };
     $scope.prescriptionsCreator = new Prescriptions();
+
     // Prescription creation method
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
         $scope.prescriptionsData.isSubmitting = true;
-        $scope.prescriptionsCreator.PrescriptionId = $scope.prescriptionsData.PrescriptionId;
         $scope.prescriptionsCreator.MedicationId = $scope.prescriptionsData.MedicationId;
         $scope.prescriptionsCreator.PatientId = $scope.prescriptionsData.PatientId;
         $scope.prescriptionsCreator.Frequency = $scope.prescriptionsData.Frequency;

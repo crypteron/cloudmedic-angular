@@ -49,7 +49,7 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <select required class="form-control" ng-model="prescriptionsData.PatientId" ng-options="candidate.UserId as candidate.LastName+','+candidate.FirstName for candidate in prescriptionsData.Candidates">
+                <select required class="form-control" ng-model="prescriptionsData.PatientId" ng-options="candidate.UserId as candidate.LastName+','+candidate.FirstName for candidate in Candidates">
                     <option class="placeholder" selected disabled value="">Patient Name</option>
                 </select>
             </div>
