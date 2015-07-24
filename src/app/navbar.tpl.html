@@ -10,7 +10,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="navbar-brand">
-                    <p>CloudMedic <span class="glyphicon glyphicon-plus text-danger" aria-hidden="true"></span>
+                    <p>CloudMedic <span ng-repeat="userRole in authStatus.userRoles">{{userRole}}</span> <span class="glyphicon glyphicon-plus text-danger" aria-hidden="true"></span>
                 </div>
             </div>
             <div class="collapse navbar-collapse navbar-inner navbar-right" collapse="menuCollapsed" id="top-nav">

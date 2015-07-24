@@ -1,4 +1,4 @@
-﻿<form ng-submit="search()">
+﻿<form name="form" ng-submit="search()">
     <div class="modal-header">
         <h3 class="modal-title">Add New Prescription</h3>
     </div>
@@ -44,7 +44,7 @@
                 <select multiple required class="form-control" ng-model="prescriptionsData.PatientId">    
                     <option class="placeholder" selected disabled value="">--Select Patient--</option>
                     <option ng-repeat="candidate in Candidates" value="{{candidate.UserId}}">
-                        Name: {{candidate.LastName}}, {{candidate.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName: {{candidate.UserName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Born: {{candidate.DateOfBirth | date}}
+                        Name: {{candidate.LastName}}, {{candidate.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Born: {{candidate.DateOfBirth | date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName: {{candidate.UserName}}
                     </option>
                 </select>
             </div>
