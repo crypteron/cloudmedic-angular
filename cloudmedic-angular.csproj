@@ -109,7 +109,6 @@
     <Content Include="src\app\keys\keys.detail.js" />
     <Content Include="src\app\navbar.tpl.html" />
     <Content Include="src\app\users\users.tpl.html" />
-    <Content Include="src\assets\crypteron-banner.png" />
     <Content Include="src\assets\font-awesome.css" />
     <Content Include="src\assets\fonts\example.html" />
     <Content Include="src\assets\fonts\flexslider-icon.svg" />

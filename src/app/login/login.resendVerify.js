@@ -1,4 +1,4 @@
-﻿angular.module('crypteron.login.resendVerify', ['ui.router', 'crypteron.resources', 'ui.bootstrap'])
+﻿angular.module('cloudmedic.login.resendVerify', ['ui.router', 'cloudmedic.resources', 'ui.bootstrap'])
 .config(['$stateProvider', function config($stateProvider) {
     $stateProvider
     .state("login.resendVerify", {

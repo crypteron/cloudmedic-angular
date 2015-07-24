@@ -1,7 +1,7 @@
 ﻿
-angular.module('crypteron.apps.detail', [
+angular.module('cloudmedic.apps.detail', [
     'ui.router',
-    'crypteron.resources',
+    'cloudmedic.resources',
     'cloudmedic.dropdown.values',
     'xeditable'    
 ])

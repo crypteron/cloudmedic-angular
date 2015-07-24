@@ -2,7 +2,7 @@
     'ui.router',
     'ui.mask',
     'reg',
-    'crypteron.resources',
+    'cloudmedic.resources',
     'cloudmedic.dropdown.values'
 ])
 .filter('reverse', function () {
@@ -61,10 +61,10 @@
         $scope.creator.Roles = [$scope.data.Role];
         $scope.creator.DOB = $scope.SelectedYear + '-' + pad($scope.SelectedMonth, 2) + '-' + pad($scope.SelectedDay, 2);
 
-        $scope.creator.$create().then(function () {
+        $scope.creator.$create().then(function (response) {
             localizedNotifications.addForNext('create.success', 'success', { entityType: 'User' });
             $scope.$close();
-        }, function () {
+        }, function (err) {
             $scope.data.isSubmitting = false;
         });
     };

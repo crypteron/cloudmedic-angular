@@ -9,8 +9,8 @@
     
     beforeEach(function () {
         // load the modules
-        module('crypteron.apps.list');
-        module('crypteron.resources');
+        module('cloudmedic.apps.list');
+        module('cloudmedic.resources');
         module('apps.mocks');
 
         // Override dependency injection for testing

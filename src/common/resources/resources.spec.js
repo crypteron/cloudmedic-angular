@@ -15,7 +15,7 @@
         });
 
         // load the modules
-        module('crypteron.resources');
+        module('cloudmedic.resources');
         module('apps.mocks');
         
         // inject the dependancies

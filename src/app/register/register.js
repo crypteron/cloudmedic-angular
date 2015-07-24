@@ -1,4 +1,4 @@
-﻿angular.module('crypteron.register', [
+﻿angular.module('cloudmedic.register', [
     'ui.router',
     'ui.mask',
     'reg',

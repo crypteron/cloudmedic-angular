@@ -1,17 +1,17 @@
-angular.module('crypteron', [  
+angular.module('cloudmedic', [  
   'templates-app',
   'templates-common',
-  'crypteron.apps',  
-  'crypteron.keys',
-  'crypteron.acl',
-  'crypteron.profile',  
-  'crypteron.login',
-  'crypteron.register',
-  'crypteron.sso',
-  'crypteron.config',
-  'crypteron.messages',
-  'crypteron.resources',    
-  'crypteron.admin',
+  'cloudmedic.apps',  
+  'cloudmedic.keys',
+  'cloudmedic.acl',
+  'cloudmedic.profile',  
+  'cloudmedic.login',
+  'cloudmedic.register',
+  'cloudmedic.sso',
+  'cloudmedic.config',
+  'cloudmedic.messages',
+  'cloudmedic.resources',    
+  'cloudmedic.admin',
   'cloudmedic.user',
   'cloudmedic.medications',
   'cloudmedic.prescriptions',
@@ -72,9 +72,9 @@ angular.module('crypteron', [
 .controller('AppCtrl', function ($scope, localizedNotifications, $state, $rootScope, auth, APP_CONFIG, $window, userProfile) {
         $rootScope.base_uri = APP_CONFIG.base_uri;
         $scope.environment = APP_CONFIG.environment;
-        if ($window.hasOwnProperty('Stripe')) {
-            $window.Stripe.setPublishableKey(APP_CONFIG.stripe_key);
-        }
+        //if ($window.hasOwnProperty('Stripe')) {
+        //    $window.Stripe.setPublishableKey(APP_CONFIG.stripe_key);
+        //}
         auth.init();
         $scope.hideNav = false;
         $rootScope.previous = 'login';

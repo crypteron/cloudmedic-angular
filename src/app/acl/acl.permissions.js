@@ -1,4 +1,4 @@
-﻿angular.module('crypteron.aclPermissions', [])
+﻿angular.module('cloudmedic.aclPermissions', [])
 .constant('ACL_PERMISSIONS',
      [
         /*{
