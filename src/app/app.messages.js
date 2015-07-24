@@ -1,4 +1,4 @@
-﻿angular.module('crypteron.messages', [])
+﻿angular.module('cloudmedic.messages', [])
 .constant('CRY_MESSAGES',
     {
         'unknown_error': 'An unknown error has occured.  Please contact support.',

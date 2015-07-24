@@ -1,4 +1,4 @@
-﻿angular.module('crypteron.profile', [
-    'crypteron.profile.update',
-    'crypteron.profile.password'    
+﻿angular.module('cloudmedic.profile', [
+    'cloudmedic.profile.update',
+    'cloudmedic.profile.password'
 ]);

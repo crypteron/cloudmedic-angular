@@ -1,7 +1,7 @@
 ﻿angular.module('cloudmedic.medications', [
     'ui.router',
     'chart.js',
-    'crypteron.resources',
+    'cloudmedic.resources',
     'form'
 ])
 .config(['$stateProvider', function config($stateProvider) {

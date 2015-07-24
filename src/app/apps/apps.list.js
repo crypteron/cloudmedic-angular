@@ -1,4 +1,4 @@
-﻿angular.module('crypteron.apps.list', ['ui.router', 'crypteron.resources'])
+﻿angular.module('cloudmedic.apps.list', ['ui.router', 'cloudmedic.resources'])
 .config(['$stateProvider', function config($stateProvider) {
     $stateProvider    
     .state('apps.list', {

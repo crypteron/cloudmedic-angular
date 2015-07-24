@@ -1,4 +1,4 @@
-﻿angular.module('crypteron.sso', ['ui.router'])
+﻿angular.module('cloudmedic.sso', ['ui.router'])
 .config(['$stateProvider', function config($stateProvider) {
     $stateProvider
     .state('sso', {
