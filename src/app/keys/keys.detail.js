@@ -1,5 +1,5 @@
 ﻿
-angular.module('crypteron.keys.detail', ['ui.router', 'crypteron.resources', 'xeditable', 'ui.bootstrap'])
+angular.module('cloudmedic.keys.detail', ['ui.router', 'cloudmedic.resources', 'xeditable', 'ui.bootstrap'])
 .config(['$stateProvider', function config($stateProvider) {
     $stateProvider
     .state('apps.detail.key', {

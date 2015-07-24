@@ -1,4 +1,4 @@
-﻿angular.module('crypteron.resources', [
+﻿angular.module('cloudmedic.resources', [
         'apps.resource',
         'keys.resource',
         'acl.resource',
@@ -6,7 +6,7 @@
         'medications.resource',
         'profile.resource',
         'password.resource',
-        'crypteron.config',        
+        'cloudmedic.config',
         'users.resource'
     ])
     .config(

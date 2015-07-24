@@ -12,8 +12,8 @@ describe('Apps Detail Controller', function () {
 
     beforeEach(function () {
         // load the modules
-        module('crypteron.apps.detail');    // contains controller we'll be testing
-        module('crypteron.resources');      // contains resources for API calls
+        module('cloudmedic.apps.detail');    // contains controller we'll be testing
+        module('cloudmedic.resources');      // contains resources for API calls
         module('apps.mocks');               // contains mock app data
         module('keys.mocks');               // contains mock key data
         

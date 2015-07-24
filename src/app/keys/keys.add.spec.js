@@ -11,7 +11,7 @@ describe('Add Key Controller', function () {
     
     beforeEach(function () {
         // load the modules
-        module('crypteron.keys.add');       // contains controller we'll be testing
+        module('cloudmedic.keys.add');       // contains controller we'll be testing
         module('keys.mocks');           // mock key data
 
         // Override dependency injection for testing

@@ -12,8 +12,8 @@ describe('View Keys Controller', function () {
     
     beforeEach(function () {
         // load the modules
-        module('crypteron.keys.detail');       // contains controller we'll be testing
-        module('crypteron.resources');  // contains resources that make API requests
+        module('cloudmedic.keys.detail');       // contains controller we'll be testing
+        module('cloudmedic.resources');  // contains resources that make API requests
         module('keys.mocks');           // mock key data
         
         // Override dependency injection for testing

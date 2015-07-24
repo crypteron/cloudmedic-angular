@@ -1,1 +1,1 @@
-﻿angular.module('crypteron.acl', ['crypteron.acl.list']);
+﻿angular.module('cloudmedic.acl', ['cloudmedic.acl.list']);

@@ -1,4 +1,4 @@
-﻿angular.module('crypteron.profile.password', ['ui.router', 'crypteron.resources', 'ui.bootstrap', 'form'])
+﻿angular.module('cloudmedic.profile.password', ['ui.router', 'cloudmedic.resources', 'ui.bootstrap', 'form'])
 .config(['$stateProvider', function config($stateProvider) {
     $stateProvider
     .state("profile.changePassword", {

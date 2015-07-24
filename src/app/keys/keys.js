@@ -1,1 +1,1 @@
-﻿angular.module('crypteron.keys', ['crypteron.keys.detail', 'crypteron.keys.add']);
+﻿angular.module('cloudmedic.keys', ['cloudmedic.keys.detail', 'cloudmedic.keys.add']);

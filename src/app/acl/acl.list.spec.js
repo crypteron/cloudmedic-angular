@@ -15,9 +15,9 @@
 
     beforeEach(function () {
         // load the modules
-        module('crypteron.acl.list');       // contains controller we'll be testing
-        module('crypteron.resources');  // contains resources that make API requests
-        module('crypteron.aclPermissions');
+        module('cloudmedic.acl.list');       // contains controller we'll be testing
+        module('cloudmedic.resources');  // contains resources that make API requests
+        module('cloudmedic.aclPermissions');
         module('keys.mocks');
         module('acl.mocks');           // mock acl data
 
