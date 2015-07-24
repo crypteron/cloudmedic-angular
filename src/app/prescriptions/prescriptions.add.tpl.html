@@ -1,4 +1,4 @@
-﻿<form>
+﻿<form ng-submit="search()">
     <div class="modal-header">
         <h3 class="modal-title">Add New Prescription</h3>
     </div>
@@ -29,23 +29,15 @@
                 <textarea id="prescription-notes" class="form-control" placeholder="Notes" type="text" ng-model="prescriptionsData.Notes" required></textarea>
             </div>
         </div>
-        <div class="form-inline">
             <div class="form-group">
-                <div class="form-inline">
-                    <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-cloud"></i></span>
-                            <div class="form-inline">
-                                <input id="prescription-frequency" class="form-control" placeholder="Patient Last Name" type="text" ng-model="prescriptionsData.PatientLastName" required>   
-                                <a class="text-muted" ng-click="search()">
-                                    <div class="fa fa-search" style="margin-left:250px;margin-top:10px"></div> Search
-                                </a>
-                            </div>
+                            <input id="prescription-frequency" class="form-control" placeholder="Patient Last Name" type="text" ng-model="prescriptionsData.PatientLastName" required>
+                            <span ng-click="search()" class="input-group-addon"><i class="fa fa-search"></i></span>
+                            <button type="submit" ng-click="search()"ng-hide="true"></button>
+
                         </div>
-                    </div>
-                </div>
             </div>
-        </div>
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -56,7 +48,7 @@
         </div>     
         <div class="form-group">
             <div class="modal-footer">
-                <button class="btn btn-danger btn-lg btn-block" type="submit" ng-click="create()" ng-disabled="form.$invalid || medicationsData.isSubmitting">Create</button>
+                <button class="btn btn-danger btn-lg btn-block" type="button" ng-click="create()" ng-disabled="form.$invalid || medicationsData.isSubmitting">Create</button>
             </div>
         </div>
     </div>
