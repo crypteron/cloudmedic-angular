@@ -58,11 +58,11 @@
         Notes:"",
         isSubmitting: false,
         PatientId: "",
-        PatientLastName:""
+        PatientName:""
     };
 
     $scope.search = function () {
-        $scope.Candidates = Users.search({ LastName: $scope.prescriptionsData.PatientLastName });
+        $scope.Candidates = Users.search({ Name: $scope.prescriptionsData.PatientName });
     };
     $scope.prescriptionsCreator = new Prescriptions();
 
