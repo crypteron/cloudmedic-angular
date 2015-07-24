@@ -1,4 +1,4 @@
-﻿angular.module('crypteron.login.forgot', ['ui.router', 'crypteron.resources', 'ui.bootstrap'])
+﻿angular.module('cloudmedic.login.forgot', ['ui.router', 'cloudmedic.resources', 'ui.bootstrap'])
 .config(['$stateProvider', function config($stateProvider) {
     $stateProvider
     .state("login.forgot", {

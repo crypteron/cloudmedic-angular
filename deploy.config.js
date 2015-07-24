@@ -7,7 +7,7 @@ module.exports = {
       // Options for all targets
       options: {
           space: '  ',
-          name: 'crypteron.config'
+          name: 'cloudmedic.config'
       },
       // Environment targets
       development: {

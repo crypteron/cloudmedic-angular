@@ -1,9 +1,9 @@
-﻿angular.module('crypteron.admin', [
+﻿angular.module('cloudmedic.admin', [
     'ui.router',
     'ui.mask',
     'chart.js',
     'form',
-    'crypteron.resources'
+    'cloudmedic.resources'
 ])
 .config(function config($stateProvider) {
     $stateProvider.state('admin', {

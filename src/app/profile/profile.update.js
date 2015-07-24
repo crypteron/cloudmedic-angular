@@ -1,6 +1,6 @@
-﻿angular.module('crypteron.profile.update', [
+﻿angular.module('cloudmedic.profile.update', [
     'ui.router',
-    'crypteron.resources',
+    'cloudmedic.resources',
     'cloudmedic.dropdown.values',
     'form'
 ])

@@ -1,4 +1,4 @@
-﻿angular.module('crypteron.acl.list', ['ui.router', 'crypteron.resources', 'crypteron.aclPermissions', 'cryFilters', 'ui.bootstrap'])
+﻿angular.module('cloudmedic.acl.list', ['ui.router', 'cloudmedic.resources', 'cloudmedic.aclPermissions', 'cryFilters', 'ui.bootstrap'])
 .controller('ViewAclCtrl', ['$scope', 'key', 'acl', 'aclPermissions', 'Acl', 'localizedNotifications', '$modal', function ($scope, key, acl, aclPermissions, Acl, localizedNotifications, $modal) {
     $scope.acl = aclPermissions.expandPermissions(acl);    
     $scope.permissions = aclPermissions.permissions;

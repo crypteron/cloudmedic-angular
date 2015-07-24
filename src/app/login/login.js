@@ -1,7 +1,7 @@
-﻿angular.module('crypteron.login', [
-    'crypteron.login.forgot',
-    'crypteron.login.resetPassword',
-    'crypteron.login.resendVerify',
+﻿angular.module('cloudmedic.login', [
+    'cloudmedic.login.forgot',
+    'cloudmedic.login.resetPassword',
+    'cloudmedic.login.resendVerify',
     'ui.router',
     'auth',
     'localizedNotifications'
