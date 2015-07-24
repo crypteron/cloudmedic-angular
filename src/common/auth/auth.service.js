@@ -156,6 +156,7 @@
             $http.post(provider.apiUrl + provider.tokenPath, data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
                 .success(function (response) {
                     _status.token = response;
+                    _status.userRoles = angular.fromJson(response.userRole);
                     _status.userName = loginData.username;
                     _status.isLoggedIn = true;
                     _status.ssoProvider = null;
