@@ -56,15 +56,31 @@
         MedicationName: MedName,
         Frequency: "",
         Dosage: "",
-        Notes:"",
-        isSubmitting: false,
+        Notes: "",
+        Duration: 0,
+        Units: 1,
         PatientId: "",
-        PatientName:""
+        PatientName:"",
+        isSubmitting: false
+    };
+
+    // Default date placeholders
+    var today = new Date();
+    $scope.selectedMonth = today.getMonth();
+    $scope.selectedDay = today.getDay();
+    $scope.selectedYear = today.getYear();
+
+    // creates a function to add the duration
+    Date.prototype.addDays = function (days) {
+        var dat = new Date(this.valueOf());
+        dat.setDate(dat.getDate() + days);
+        return dat;
     };
 
     $scope.search = function () {
         $scope.Candidates = Users.search({ Name: $scope.prescriptionsData.PatientName });
     };
+
     $scope.Creator = new Prescriptions();
 
     // Prescription creation method
@@ -76,8 +92,8 @@
         $scope.Creator.Frequency = $scope.prescriptionsData.Frequency;
         $scope.Creator.Dosage = $scope.prescriptionsData.Dosage;
         $scope.Creator.Notes = $scope.prescriptionsData.Notes;
-        $scope.Creator.StartDate = new Date();
-        $scope.Creator.EndDate = $scope.SelectedYear + '-' + pad($scope.SelectedMonth, 2) + '-' + pad($scope.SelectedDay, 2);
+        $scope.Creator.StartDate = new Date($scope.SelectedYear + '-' + pad($scope.SelectedMonth, 2) + '-' + pad($scope.SelectedDay, 2));
+        $scope.Creator.EndDate = $scope.Creator.StartDate.addDays($scope.prescriptionsData.Duration * $scope.prescriptionsData.Units);
         $scope.Creator.$create().then(function () {
             localizedNotifications.addForNext('create.success', 'success', { entityType: 'Prescription' });
             $modalInstance.close();
@@ -86,10 +102,10 @@
         });
     };
 
-    // Date of Birth dropdown menu value generator
-    var CurrrentYear = new Date().getFullYear();
-    $scope.CurrrentYear = CurrrentYear;
-    var years = $.map($(Array(10)), function (val, i) { return i + CurrrentYear; });
+    // Date dropdown menu value generator
+    var CurrentYear = new Date().getFullYear();
+    $scope.CurrentYear = CurrentYear;
+    var years = $.map($(Array(10)), function (val, i) { return i + CurrentYear; });
     var days = $.map($(Array(31)), function (val, i) { return i + 1; });
     var isLeapYear = function () {
         var year = $scope.SelectedYear || 0;
@@ -107,6 +123,12 @@
     $scope.Years = years;
     $scope.Days = days;
     $scope.Months = MONTHS;
+    $scope.Periods = $.map($(Array(100)), function (val, i) { return i + 1; });
+    $scope.Units = [
+        Days = 1,
+        Weeks = 7,
+        Months = 31
+    ];
 });
 // adds leading zeroes
 function pad(num, size) {

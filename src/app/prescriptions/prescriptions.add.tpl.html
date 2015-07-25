@@ -30,22 +30,39 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                <!--<select id="duration-dropdown" required class="form-control" ng-model="SelectedDuration" >
-                    <option ng-repeat="i in getNumber(number) track by $index" value="{{$index+1}}">{{$index+1}}</option>
-                </select>-->
-
-                <div class="form-inline">
-                    <select required class="form-control" ng-model="SelectedMonth" ng-options="month.value as month.text for month in Months" ng-change="UpdateNumberOfDays()">
-                        <option class="placeholder" selected disabled value="">Month</option>
-                    </select>
-                    <select required class="form-control" ng-model="SelectedDay" ng-options="day as day for day in Days | limitTo:NumberOfDays">
-                        <option class="placeholder" selected disabled value="">Day</option>
-                    </select>
-                    <select required class="form-control" ng-model="SelectedYear" ng-init="SelectedYear=CurrrentYear" ng-options="years as years for years in Years" ng-change="UpdateNumberOfDays()">
-                        <option class="placeholder" selected disabled value="">Year</option>
-                    </select>
+            <div class="form-inline">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <div class="form-inline">
+                            <select required class="form-control" ng-model="SelectedMonth" ng-options="month.value as month.text for month in Months" ng-change="UpdateNumberOfDays()">
+                                <option class="placeholder" selected disabled value="">Month</option>
+                            </select>
+                            <select required class="form-control" ng-model="SelectedDay" ng-options="day as day for day in Days | limitTo:NumberOfDays">
+                                <option class="placeholder" selected disabled value="">Day</option>
+                            </select>
+                            <select required class="form-control" ng-model="SelectedYear" ng-options="years as years for years in Years | reverse" ng-change="UpdateNumberOfDays()">
+                                <option class="placeholder" selected disabled value="">Year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                        <select id="duration-dropdown" required class="form-control" ng-model="prescriptionsData.Duration" ng-options="period as period for period in Periods">
+                            <option class="placeholder" selected disabled value="">Duration</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <select id="duration-dropdown" required class="form-control" ng-model="prescriptionsData.Units">
+                            <option value="1">Days</option>
+                            <option value="7">Weeks</option>
+                            <option value="31">Months</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
