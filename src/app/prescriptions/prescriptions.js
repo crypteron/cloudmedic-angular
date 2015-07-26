@@ -66,9 +66,9 @@
 
     // Default date placeholders
     var today = new Date();
-    $scope.selectedMonth = today.getMonth();
-    $scope.selectedDay = today.getDay();
-    $scope.selectedYear = today.getYear();
+    $scope.SelectedMonth = today.getMonth() + 1;
+    $scope.SelectedDay = today.getDate();
+    $scope.SelectedYear = today.getFullYear();
 
     // creates a function to add the duration
     Date.prototype.addDays = function (days) {

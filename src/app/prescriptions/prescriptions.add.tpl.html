@@ -36,13 +36,10 @@
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         <div class="form-inline">
                             <select required class="form-control" ng-model="SelectedMonth" ng-options="month.value as month.text for month in Months" ng-change="UpdateNumberOfDays()">
-                                <option class="placeholder" selected disabled value="">Month</option>
                             </select>
                             <select required class="form-control" ng-model="SelectedDay" ng-options="day as day for day in Days | limitTo:NumberOfDays">
-                                <option class="placeholder" selected disabled value="">Day</option>
                             </select>
                             <select required class="form-control" ng-model="SelectedYear" ng-options="years as years for years in Years | reverse" ng-change="UpdateNumberOfDays()">
-                                <option class="placeholder" selected disabled value="">Year</option>
                             </select>
                         </div>
                     </div>
