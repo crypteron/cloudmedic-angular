@@ -1,0 +1,41 @@
+﻿<form name="form">
+    <div class="modal-header">
+        <h3 class="modal-title">Update Prescription</h3>
+    </div>
+
+    <div class="modal-body">
+        <cry-notification-bar></cry-notification-bar>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <label>End Date</label>
+                <div class="form-group">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <div class="form-inline">
+                                    <select required class="form-control" ng-model="SelectedMonth" ng-options="month.value as month.text for month in Months" ng-change="UpdateNumberOfDays()"></select>
+                                    <select required class="form-control" ng-model="SelectedDay" ng-options="day as day for day in Days | limitTo:NumberOfDays"></select>
+                                    <select required class="form-control" ng-model="SelectedYear" ng-options="years as years for years in Years | reverse" ng-change="UpdateNumberOfDays()"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <label>Notes</label>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                        <textarea id="prescription-notes" class="form-control" placeholder="Notes" type="text" ng-model="prescription.Notes" required></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="profile-buttons">
+            <button class="btn btn-primary btn-lg" ng-click="updatePrescription()" type="submit">Update Prescription</button>
+            <a class="text-danger reset-link" type="button" ng-click="resetPrescription()" ng-disabled="data.isSubmitting">
+                <i class="fa fa-undo"></i> Reset
+            </a>
+        </div>
+    </div>
+</form>
