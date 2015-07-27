@@ -16,6 +16,16 @@
                     Patient <span ng-show="orderByField == 'PatientName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
                 </a>
             </th>
+            <th>
+                <a href="#" ng-click="orderByField='StartDate'; reverseSort = !reverseSort">
+                    Start Date <span ng-show="orderByField == 'StartDate'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                </a>
+            </th>
+            <th>
+                <a href="#" ng-click="orderByField='EndDate'; reverseSort = !reverseSort">
+                    End Date <span ng-show="orderByField == 'EndDate'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                </a>
+            </th>
             <th>Frequency</th>
             <th>Dosage</th>
             <th>Notes</th>
@@ -26,9 +36,11 @@
         <tr ng-repeat="prescription in prescriptions | orderBy:orderByField:reverseSort">
             <td>{{prescription.MedicationCode}} ({{prescription.MedicationName}})</td>
             <td>{{prescription.PatientName}}</td>
+            <td>{{prescription.StartDate | date}}</td>
+            <td>{{prescription.EndDate | date}}</td>
             <td>{{prescription.Frequency}}</td>
             <td>{{prescription.Dosage}}</td>
-            <td class="col-md-5">{{prescription.Notes}}</td>
+            <td class="col-md-3">{{prescription.Notes}}</td>
             <td>
                 <button class="btn btn-danger btn-xs" ng-click="removePrescription(prescription)">
                     <i class="glyphicon glyphicon-trash"></i>
