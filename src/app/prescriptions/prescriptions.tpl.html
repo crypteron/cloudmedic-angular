@@ -3,12 +3,12 @@
 <!--<div>
     <strong><button class="btn btn-lg btn-default pull-right visible-lg-inline-block" ng-click="createPrescription()">Add Prescription</button></strong>
 </div>-->
-<table id="prescription-list" class="table table-striped table-hover">
+<table id="activeprescription-list" class="table table-striped table-hover">
     <thead>
         <tr>
             <th>
                 <a href="#" ng-click="orderByField='MedicationCode'; reverseSort = !reverseSort">
-                    Medication <span ng-show="orderByField == 'MedicationCode'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                    Medication(Active) <span ng-show="orderByField == 'MedicationCode'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
                 </a>
             </th>
             <th>
@@ -33,21 +33,14 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="prescription in prescriptions | orderBy:orderByField:reverseSort">
+        <tr ng-repeat="prescription in activeprescriptions | orderBy:orderByField:reverseSort">
             <td>{{prescription.MedicationCode}} ({{prescription.MedicationName}})</td>
             <td>{{prescription.PatientName}}</td>
             <td>{{prescription.StartDate | date}}</td>
             <td>{{prescription.EndDate | date}}</td>
             <td>{{prescription.Frequency}}</td>
             <td>{{prescription.Dosage}}</td>
-<<<<<<< HEAD
-            <td>{{prescription.StartDate}}</td>
-            <td>{{prescription.EndDate}}</td>
-            <td>{{prescription.Status}}</td>
-            <td class="col-md-5">{{prescription.Notes}}</td>
-=======
             <td class="col-md-3">{{prescription.Notes}}</td>
->>>>>>> 17a666708039603d622d2ff15a3adf0ed7ade43c
             <td>
                 <button class="btn btn-danger btn-xs" ng-click="removePrescription(prescription)">
                     <i class="glyphicon glyphicon-trash"></i>
@@ -56,3 +49,49 @@
         </tr>
     </tbody>
 </table>
+<table id="expiredprescription-list" class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <a href="#" ng-click="orderByField='MedicationCode'; reverseSort = !reverseSort">
+                        Medication(Expired) <span ng-show="orderByField == 'MedicationCode'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='PatientName'; reverseSort = !reverseSort">
+                        Patient <span ng-show="orderByField == 'PatientName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='StartDate'; reverseSort = !reverseSort">
+                        Start Date <span ng-show="orderByField == 'StartDate'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='EndDate'; reverseSort = !reverseSort">
+                        End Date <span ng-show="orderByField == 'EndDate'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                    </a>
+                </th>
+                <th>Frequency</th>
+                <th>Dosage</th>
+                <th>Notes</th>
+                <th style="width:69px;">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="prescription in expiredprescriptions | orderBy:orderByField:reverseSort">
+                <td>{{prescription.MedicationCode}} ({{prescription.MedicationName}})</td>
+                <td>{{prescription.PatientName}}</td>
+                <td>{{prescription.StartDate | date}}</td>
+                <td>{{prescription.EndDate | date}}</td>
+                <td>{{prescription.Frequency}}</td>
+                <td>{{prescription.Dosage}}</td>
+                <td class="col-md-3">{{prescription.Notes}}</td>
+                <td>
+                    <button class="btn btn-danger btn-xs" ng-click="removePrescription(prescription)">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
