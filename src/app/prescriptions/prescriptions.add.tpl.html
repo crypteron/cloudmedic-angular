@@ -29,15 +29,48 @@
                 <textarea id="prescription-notes" class="form-control" placeholder="Notes" type="text" ng-model="prescriptionsData.Notes" required></textarea>
             </div>
         </div>
-            <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-cloud"></i></span>
-                            <input id="prescription-frequency" class="form-control" placeholder="Patient Full Name" type="text" ng-model="prescriptionsData.PatientName" required>
-                            <span ng-click="search()" class="input-group-addon"><i class="fa fa-search"></i></span>
-                            <button type="submit" ng-click="search()"ng-hide="true"></button>
-
+        <div class="form-group">
+            <div class="form-inline">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <div class="form-inline">
+                            <select required class="form-control" ng-model="SelectedMonth" ng-options="month.value as month.text for month in Months" ng-change="UpdateNumberOfDays()">
+                            </select>
+                            <select required class="form-control" ng-model="SelectedDay" ng-options="day as day for day in Days | limitTo:NumberOfDays">
+                            </select>
+                            <select required class="form-control" ng-model="SelectedYear" ng-options="years as years for years in Years | reverse" ng-change="UpdateNumberOfDays()">
+                            </select>
                         </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                        <select id="duration-dropdown" required class="form-control" ng-model="prescriptionsData.Duration" ng-options="period as period for period in Periods">
+                            <option class="placeholder" selected disabled value="">Duration</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <select id="duration-dropdown" required class="form-control" ng-model="prescriptionsData.Units">
+                            <option value="1">Days</option>
+                            <option value="7">Weeks</option>
+                            <option value="31">Months</option>
+                        </select>
+                    </div>
+                </div>
             </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-cloud"></i></span>
+                <input id="prescription-frequency" class="form-control" placeholder="Patient Full Name" type="text" ng-model="prescriptionsData.PatientName" required>
+                <span ng-click="search()" class="input-group-addon"><i class="fa fa-search"></i></span>
+                <button type="submit" ng-click="search()"ng-hide="true"></button>
+            </div>
+        </div>
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>

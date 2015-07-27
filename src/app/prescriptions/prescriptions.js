@@ -1,7 +1,8 @@
 ﻿angular.module('cloudmedic.prescriptions', [
     'ui.router',
     'chart.js',
-    'cloudmedic.resources'
+    'cloudmedic.resources',
+    'cloudmedic.dropdown.values'
 ])
 .config(function config($stateProvider) {
     $stateProvider.state('prescriptions', {
@@ -49,33 +50,51 @@
         });
     };
 })
-.controller('PreAddCtrl', function ($scope, $state, $http,$modalInstance, Prescriptions, Users, localizedNotifications, MedId, MedName) {
+.controller('PreAddCtrl', function ($scope, $state, $http, $modalInstance, Prescriptions, Users, localizedNotifications, MedId, MedName, MONTHS) {
     $scope.prescriptionsData = {
         MedicationId: MedId,
         MedicationName: MedName,
         Frequency: "",
         Dosage: "",
-        Notes:"",
-        isSubmitting: false,
+        Notes: "",
+        Duration: 0,
+        Units: 1,
         PatientId: "",
-        PatientName:""
+        PatientName:"",
+        isSubmitting: false
+    };
+
+    // Default date placeholders
+    var today = new Date();
+    $scope.SelectedMonth = today.getMonth() + 1;
+    $scope.SelectedDay = today.getDate();
+    $scope.SelectedYear = today.getFullYear();
+
+    // creates a function to add the duration
+    Date.prototype.addDays = function (days) {
+        var dat = new Date(this.valueOf());
+        dat.setDate(dat.getDate() + days);
+        return dat;
     };
 
     $scope.search = function () {
         $scope.Candidates = Users.search({ Name: $scope.prescriptionsData.PatientName });
     };
-    $scope.prescriptionsCreator = new Prescriptions();
+
+    $scope.Creator = new Prescriptions();
 
     // Prescription creation method
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
         $scope.prescriptionsData.isSubmitting = true;
-        $scope.prescriptionsCreator.MedicationId = $scope.prescriptionsData.MedicationId;
-        $scope.prescriptionsCreator.PatientId = $scope.prescriptionsData.PatientId[0];
-        $scope.prescriptionsCreator.Frequency = $scope.prescriptionsData.Frequency;
-        $scope.prescriptionsCreator.Dosage = $scope.prescriptionsData.Dosage;
-        $scope.prescriptionsCreator.Notes = $scope.prescriptionsData.Notes;
-        $scope.prescriptionsCreator.$create().then(function () {
+        $scope.Creator.MedicationId = $scope.prescriptionsData.MedicationId;
+        $scope.Creator.PatientId = $scope.prescriptionsData.PatientId[0];
+        $scope.Creator.Frequency = $scope.prescriptionsData.Frequency;
+        $scope.Creator.Dosage = $scope.prescriptionsData.Dosage;
+        $scope.Creator.Notes = $scope.prescriptionsData.Notes;
+        $scope.Creator.StartDate = new Date($scope.SelectedYear + '-' + pad($scope.SelectedMonth, 2) + '-' + pad($scope.SelectedDay, 2));
+        $scope.Creator.EndDate = $scope.Creator.StartDate.addDays($scope.prescriptionsData.Duration * $scope.prescriptionsData.Units);
+        $scope.Creator.$create().then(function () {
             localizedNotifications.addForNext('create.success', 'success', { entityType: 'Prescription' });
             $modalInstance.close();
         }, function () {
@@ -83,4 +102,36 @@
         });
     };
 
+    // Date dropdown menu value generator
+    var CurrentYear = new Date().getFullYear();
+    $scope.CurrentYear = CurrentYear;
+    var years = $.map($(Array(10)), function (val, i) { return i + CurrentYear; });
+    var days = $.map($(Array(31)), function (val, i) { return i + 1; });
+    var isLeapYear = function () {
+        var year = $scope.SelectedYear || 0;
+        return ((year % 400 === 0 || year % 100 !== 0) && (year % 4 === 0)) ? 1 : 0;
+    };
+    var getNumberOfDaysInMonth = function () {
+        var selectedMonth = $scope.SelectedMonth || 0;
+        return 31 - ((selectedMonth === 2) ? (3 - isLeapYear()) : ((selectedMonth - 1) % 7 % 2));
+    };
+
+    $scope.UpdateNumberOfDays = function () {
+        $scope.NumberOfDays = getNumberOfDaysInMonth();
+    };
+    $scope.NumberOfDays = 31;
+    $scope.Years = years;
+    $scope.Days = days;
+    $scope.Months = MONTHS;
+    $scope.Periods = $.map($(Array(100)), function (val, i) { return i + 1; });
+    $scope.Units = [
+        Days = 1,
+        Weeks = 7,
+        Months = 31
+    ];
 });
+// adds leading zeroes
+function pad(num, size) {
+    var s = "00" + num;
+    return s.substr(s.length - size);
+}
