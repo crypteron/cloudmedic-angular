@@ -66,7 +66,7 @@
         $scope.user = user;
         $modal.open({
             templateUrl: "careteams/careteams.add.tpl.html",
-            controller: 'MedAddCtrl',
+            controller: 'CareTeamAddCtrl',
             resolve: {
                 User: function () { return $scope.user;}
             }

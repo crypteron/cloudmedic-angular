@@ -1,0 +1,41 @@
+﻿<div class="modal-header">
+    <h2 class="text-center">Medications for: {{patient.LastName}}, {{patient.FirstName}}</h2>
+</div>
+<div class="modal-body">
+    <table id="prescription-list" class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <a href="#" ng-click="orderByField='MedicationName'; reverseSort = !reverseSort">
+                        Medication <span ng-show="orderByField == 'MedicationName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='StartDate'; reverseSort = !reverseSort">
+                        Start Date <span ng-show="orderByField == 'StartDate'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='EndDate'; reverseSort = !reverseSort">
+                        End Date <span ng-show="orderByField == 'EndDate'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                    </a>
+                </th>
+                <th>Frequency</th>
+                <th>Dosage</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="prescription in prescriptions">
+                <td>{{prescription.MedicationName}}</td>
+                <td>{{prescription.StartDate | date}}</td>
+                <td>{{prescription.EndDate | date}}</td>
+                <td>{{prescription.Frequency}}</td>
+                <td>{{prescription.Dosage}}</td>
+                <td>
+                    <button popover="{{prescription.Notes}}" popover-placement="bottom" popover-trigger="mouseenter" class="btn btn-default">{{prescription.Notes | cutTo:true:10}}</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
