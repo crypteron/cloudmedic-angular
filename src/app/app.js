@@ -13,6 +13,7 @@ angular.module('cloudmedic', [
   'cloudmedic.resources',    
   'cloudmedic.admin',
   'cloudmedic.user',
+  'cloudmedic.careteams',
   'cloudmedic.medications',
   'cloudmedic.prescriptions',
   'ui.router',

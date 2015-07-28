@@ -1,5 +1,5 @@
-﻿angular.module('users.resource', ['ngResource'])
-.provider('Users', function () {
+﻿angular.module('careteams.resource', ['ngResource'])
+.provider('CareTeams', function () {
     var provider = this;
     provider.apiUrl = '';
     provider.setApiUrl = function (apiUrl) {
@@ -7,14 +7,10 @@
     };
 
     provider.$get = function ($resource) {
-        var service = $resource(provider.apiUrl + 'users/:path', {}, {
+        var service = $resource(provider.apiUrl + 'careteams/:path', {}, {
             'query': { method: 'GET', isArray: true },
-            'meds': { method: 'GET', isArray: true, params: { path: 'Prescriptions' } },
-            'team': { method:'GET',isArray:true,params:{path:'CareTeams'}},
-            'search': { method: 'GET', isArray: true, params: { path: 'Find' } },
             'remove': { method: 'DELETE', isArray: false },
             'create': { method: 'POST', isArray: false, params: { path: 'Add' } }
-
         });
         return service;
     };

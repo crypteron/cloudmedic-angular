@@ -55,6 +55,9 @@
     <Content Include="Gruntfile.js" />
     <Content Include="karma\karma-unit.tpl.js" />
     <Content Include="src\app\app.add.tpl.html" />
+    <Content Include="src\app\careteams\careteams.add.tpl.html" />
+    <Content Include="src\app\careteams\careteams.js" />
+    <Content Include="src\app\careteams\careteams.tpl.html" />
     <Content Include="src\app\medications\medications.add.tpl.html" />
     <Content Include="src\app\medications\medications.js" />
     <Content Include="src\app\medications\medications.tpl.html" />
@@ -156,6 +159,7 @@
     <Content Include="src\common\reg\reg.js" />
     <Content Include="src\common\reg\reg.service.js" />
     <Content Include="src\common\resources\home.resource.js" />
+    <Content Include="src\common\resources\careteams.resource.js" />
     <Content Include="src\common\resources\medications.resource.js" />
     <Content Include="src\common\resources\password.resource.js" />
     <Content Include="src\common\resources\prescriptions.resources.js" />
