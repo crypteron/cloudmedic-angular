@@ -3,45 +3,24 @@
     <table id="careteams-list" class="table table-striped table-hover">
         <thead>
             <tr>
-                <th>
-                    <a href="#" ng-click="orderByField='Care Team Name'; reverseSort = !reverseSort">
-                        Care Team Name <span ng-show="orderByField == 'GenericName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
-                    </a>
-                </th>
-
-                <th>
-                    <a href="#" ng-click="orderByField='Patient'; reverseSort = !reverseSort">
-                       Patient <span ng-show="orderByField == 'Patient'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
-                    </a>
-                </th>
-                <th>
-                    <a href="#" ng-click="orderByField='DOB'; reverseSort = !reverseSort">
-                        DOB<span ng-show="orderByField == 'DOB'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
-                    </a>
-                </th>
-                <th>
-                    <a href="#" ng-click="orderByField='Gender'; reverseSort = !reverseSort">
-                        Gender<span ng-show="orderByField == 'Gender'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
-                    </a>
-                </th>
-                <th style="width:50px;">View Providers</th>
-                <th style="width:50px;">Remove</th>
+                <th>Care Team Name</th>
+                <th>Patient</th>
+                <th>Providers</th>
+                <th style="width:69px;">Remove</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="careteam in careteams | orderBy:orderByField:reverseSort">
                 <td>{{careteam.CareTeamName}}</td>
-                <td>{{careteam.patient.name}}</td>
-                <td>{{careteam.patient.dob}}</td>
-                <td>{{caretea,.patient.gender}}</td>
+                <td class="col-md-3">
+                    <button popover="{{careteam.patientinfo}}" popover-placement="bottom" popover-trigger="mouseenter" class="btn btn-default">{{careteam.patient.name}}</button>
+                </td>  
+                <td class="col-md-3">
+                    <button popover="{{careteam.providersinfo}}" popover-placement="bottom" popover-trigger="mouseenter" class="btn btn-default">providers</button>
+                </td>  
                 <td>
                     <button class="btn btn-danger btn-xs center-block" ng-click="removecareteam(careteam)">
                         <i class="glyphicon glyphicon-trash"></i>
-                    </button>
-                </td>
-                <td align="center">
-                    <button class="btn btn-primary btn-xs" ng-click="viewproviders(careteam)">
-                        <i class="glyphicon glyphicon-search"></i>
                     </button>
                 </td>
             </tr>
