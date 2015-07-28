@@ -29,27 +29,50 @@
 .controller('CareTeamsCtrl', function ($scope, $state, careteams, CareTeams, localizedNotifications, $modal) {
 
     $scope.careteams = careteams;
-    for (var i = 0; i < $scope.careteams.length; i++)
-    {
-        $scope.careteams[i].patientinfo= "Name: " + $scope.careteams[i].Patient.LastName + "," + $scope.careteams[i].Patient.FirstName+"\n";
-        $scope.careteams[i].patientinfo+= "Gender: " + $scope.careteams[i].Patient.Gender+"\n";
-        $scope.careteams[i].patientinfo+= "Date of Birth: " + $scope.careteams[i].Patient.DateOfBirth.substring(0, 10)+"\n";
-        $scope.careteams[i].patientinfo+= "Email: " + $scope.careteams[i].Patient.Email;
+    for (var i = 0; i < $scope.careteams.length; i++) {
+        $scope.careteams[i].patientinfo = "Name: " + $scope.careteams[i].Patient.LastName + "," + $scope.careteams[i].Patient.FirstName + "\n";
+        $scope.careteams[i].patientinfo += "Gender: " + $scope.careteams[i].Patient.Gender + "\n";
+        $scope.careteams[i].patientinfo += "Date of Birth: " + $scope.careteams[i].Patient.DateOfBirth.substring(0, 10) + "\n";
+        $scope.careteams[i].patientinfo += "Email: " + $scope.careteams[i].Patient.Email;
     }
     $scope.careteamRemover = new CareTeams();
     $scope.removecareteam = function (careteam) {
-      localizedNotifications.removeForCurrent();
-      $modal.open({
-        templateUrl: "app.confirm.tpl.html",
-        controller: ['$scope', function ($scope) {
-          $scope.confirmText = "You will not be able to recover this medication!";
-          $scope.confirmButton = "Yes, delete medication!";
-        }]
-    }).result.then(function () {
-          $scope.careteamRemover.$remove({ id: careteam.Id}).then(function () {
-          localizedNotifications.addForNext('delete.success', 'success', { entityType: 'CareTeam' });
-          $state.go("careteams", null, { reload: true });
-    });
-    });
+        localizedNotifications.removeForCurrent();
+        $modal.open({
+            templateUrl: "app.confirm.tpl.html",
+            controller: ['$scope', function ($scope) {
+                $scope.confirmText = "You will not be able to recover this medication!";
+                $scope.confirmButton = "Yes, delete medication!";
+            }]
+        }).result.then(function () {
+            $scope.careteamRemover.$remove({ id: careteam.Id }).then(function () {
+                localizedNotifications.addForNext('delete.success', 'success', { entityType: 'CareTeam' });
+                $state.go("careteams", null, { reload: true });
+            });
+        });
     };
+})
+.controller('CareTeamAddCtrl', function ($scope, $state, $modalInstance, User,CareTeams, localizedNotifications) {
+    $scope.patient = User;
+    $scope.patient.Name = $scope.patient.FirstName + " " + $scope.patient.LastName;
+    $scope.Name="";
+    $scope.providerid = "";
+    $scope.ProviderIds = [];
+    $scope.AddProvider = function () {
+        $scope.ProviderIds.push($scope.providerid);
+        $scope.providerid = "";
+    };
+    $scope.create = function () {
+        $scope.creator = new CareTeams();
+        $scope.creator.Name = $scope.Name;
+        $scope.creator.PatientId = $scope.patient.UserId;
+        $scope.creator.ProviderIds = $scope.ProviderIds;
+        $scope.creator.$create().then(function () {
+            localizedNotifications.addForNext('create.success', 'success', { entityType: 'CareTeam' });
+            $modalInstance.close();
+        }, function () {
+        });
+
+    };
+
 });

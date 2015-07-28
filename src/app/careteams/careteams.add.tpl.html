@@ -1,31 +1,37 @@
-﻿<form name="form">
+﻿<form name="form" ng-submit="search()">
     <div class="modal-header">
-        <h3 class="modal-title">Add New Medication</h3>
+        <h3 class="modal-title">Assign New Care Team</h3>
     </div>
 
     <div class="modal-body">
         <cry-notification-bar></cry-notification-bar>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">@</span>
-                <input id="medication-genericname" class="form-control" placeholder="Generic Name" type="text" watch-change="check_GenericName()" ng-model="medicationsData.GenericName" required>
+                <span class="input-group-addon"><i class="fa fa-medkit"></i></span>
+                <input id="patient-name" class="form-control" placeholder="Patient Name" type="text" ng-model="patient.Name" required>
             </div>
         </div>
-        <div class="form-group" ng-hide="GenericName_Valid">
-            <font color="red">Generic Name must only contain letters.</font>
-        </div>  
+     
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-fire"></i></span>
-                <input id="medication-code" class="form-control" placeholder="Code" type="text" ng-pattern="/^\d{5}$/" ng-model="medicationsData.Code" ng-maxlength="5" maxlength="5" watch-change="check_Code()" required>
+                <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                <textarea id="prescription-notes" class="form-control" placeholder="Team Name" type="text" ng-model="Name" required></textarea>
             </div>
         </div>
-        <div class="form-group" ng-hide="Code_Valid">
-            <font color="red">Code must only contain numbers.</font>
-        </div>        
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-medkit"></i></span>
+                <input id="providerid" class="form-control" placeholder="Provider Id" type="text" ng-model="providerid" required>
+            </div>
+        </div>
         <div class="form-group">
             <div class="modal-footer">
-                <button class="btn btn-danger btn-lg btn-block" type="submit" ng-click="create()" ng-disabled="form.$invalid || medicationsData.isSubmitting">Create</button>
+                <button class="btn btn-danger btn-lg btn-block" type="button" ng-click="AddProvider()">Add Provider</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="modal-footer">
+                <button class="btn btn-danger btn-lg btn-block" type="button" ng-click="create()">Create</button>
             </div>
         </div>
     </div>
