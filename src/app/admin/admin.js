@@ -65,6 +65,18 @@
             $state.go("admin", null, { reload: true });
         });
     };
+    $scope.PhysicianOrNurse = function (user) {
+        return user.Roles == 'Nurse' || user.Roles == 'Physician';
+    };
+    $scope.providers = [];
+    for (var i = 0; i < $scope.users.length; i++)
+    {
+        if ($scope.PhysicianOrNurse($scope.users[i]))
+        {
+            $scope.providers.push($scope.users[i]);
+        }
+    }
+
     $scope.createCareTeam = function (user) {
         localizedNotifications.removeForCurrent();
         $scope.user = user;
@@ -72,7 +84,8 @@
             templateUrl: "careteams/careteams.add.tpl.html",
             controller: 'CareTeamAddCtrl',
             resolve: {
-                User: function () { return $scope.user;}
+                User: function () { return $scope.user; },
+                Providers: function () { return $scope.providers;}
             }
         }).result.then(function () {
             $state.go("admin", null, { reload: true });
@@ -85,9 +98,7 @@
     $scope.orderByField = 'LastName';
     $scope.reverseSort = false;
 
-    $scope.PhysicianOrNurse = function (user) {
-        return user.Roles == 'Nurse' || user.Roles == 'Physician';
-    };
+  
     //$scope.signupsPastWeek = reports.SignupsPastWeek;
 
     //$scope.productTierLabels = [];

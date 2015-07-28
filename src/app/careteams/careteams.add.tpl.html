@@ -20,11 +20,19 @@
         </div>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-medkit"></i></span>
-                <input id="providerid" class="form-control" placeholder="Provider Id" type="text" ng-model="providerid" required>
-                <button class="btn btn-primary btn-block" type="button" ng-click="AddProvider()">Add Provider</button>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <select id="providersSelect" multiple required class="form-control">
+                    <option class="placeholder" selected disabled value="">--Select Providers--</option>
+                    <option ng-repeat="provider in Providers" value="{{provider.UserId}}">
+                        Name: {{provider.LastName}}, {{provider.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Role: {{provider.Roles[0]}}
+                    </option>
+                </select>
+                <button class="btn btn-primary btn-block" type="button" ng-click="AddSelectedProviders()">Add Provider</button>
+                <div ng-repeat="selectname in SelectedNames">{{selectname}}</div>
+                <a class="text-danger reset-link" type="button" ng-click="reset()" ng-hide="hidereset">
+                    <i class="fa fa-undo"></i> Reset
+                </a>
             </div>
-            <div ng-repeat="ProviderId in ProviderIds">{{ProviderId}}</div>
         </div>
         <div class="form-group">
             <div class="modal-footer">
