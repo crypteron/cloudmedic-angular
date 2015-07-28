@@ -85,6 +85,7 @@
     <Content Include="src\app\prescriptions\prescriptions.add.tpl.html" />
     <Content Include="src\app\prescriptions\prescriptions.js" />
     <Content Include="src\app\prescriptions\prescriptions.tpl.html" />
+    <Content Include="src\app\prescriptions\prescriptions.update.tpl.html" />
     <Content Include="src\common\form\form.js" />
     <Content Include="src\app\users\users.js" />
     <Content Include="src\app\keys\keys.add.js" />

@@ -1,5 +1,5 @@
 ﻿angular.module('cloudmedic.profile.password', ['ui.router', 'cloudmedic.resources', 'ui.bootstrap', 'form'])
-.config(['$stateProvider', function config($stateProvider) {
+.config(function config($stateProvider) {
     $stateProvider
     .state("profile.changePassword", {
         url: "/changepassword",
@@ -14,4 +14,4 @@
             });
         }
     });
-}]);
+});
