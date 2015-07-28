@@ -30,6 +30,19 @@
 })
 .controller('PrescriptionsCtrl', function ($scope, $window, $state, prescriptions, Prescriptions, localizedNotifications, $modal) {   
     $scope.prescriptions = prescriptions;
+    var today = new Date();
+    $scope.expiredprescriptions = [];
+    $scope.activeprescriptions = [];
+    for (var i = 0; i < $scope.prescriptions.length; i++)
+    {
+        if (Date.parse($scope.prescriptions[i].EndDate)<today)
+        { $scope.expiredprescriptions.push($scope.prescriptions[i]); }
+        else
+        { $scope.activeprescriptions.push($scope.prescriptions[i]);  }
+    }
+    console.log($scope.activeprescriptions);
+    console.log($scope.expiredprescriptions);
+    console.log(today.getTime());
     $scope.prescriptionsRemover = new Prescriptions();
 
     $scope.orderByField = 'MedicationCode';

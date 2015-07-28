@@ -20,6 +20,7 @@
             </th>
             <th class="col-md-4"></th>
             <th style="width:69px;">Edit</th>
+            <th style="width:69px;">Add</th>
         </tr>
     </thead>
     <tbody>
@@ -29,6 +30,11 @@
             <td>{{user.Email}}</td>
             <td></td>
             <td><button class="btn btn-danger btn-xs" ng-click="removeUser(user)"><i class="glyphicon glyphicon-trash"></i></button></td>
+            <td align="center">
+                <button class="btn btn-primary btn-xs" ng-click="createCareTeam(user)">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                </button>
+            </td>            
         </tr>
     </tbody>
 </table>

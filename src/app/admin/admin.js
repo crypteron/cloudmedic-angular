@@ -61,6 +61,19 @@
             $state.go("admin", null, { reload: true });
         });
     };
+    $scope.createCareTeam = function (user) {
+        localizedNotifications.removeForCurrent();
+        $scope.user = user;
+        $modal.open({
+            templateUrl: "careteams/careteams.add.tpl.html",
+            controller: 'CareTeamAddCtrl',
+            resolve: {
+                User: function () { return $scope.user;}
+            }
+        }).result.then(function () {
+            $state.go("admin", null, { reload: true });
+        });
+    };
 
     $scope.PatientorderByField = 'LastName';
     $scope.PatientreverseSort = false;
