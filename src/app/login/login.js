@@ -49,9 +49,10 @@
     if (auth.status.isLoggedIn) {
         if (auth.status.token.userRole.contains('SysAdmin')) {
             $state.go('admin');
-        }
-        else {
+        } else if (auth.status.token.userRole.contains('Patient')) {
             $state.go('user');
+        } else {
+            $state.go('provider');
         }
     }
 
@@ -78,8 +79,10 @@
             if (auth.status.token.userRole.contains('SysAdmin')) {
                 auth.redirectAfterLogin('admin');
             }
-            else {
+            else if (auth.status.token.userRole.contains('Patient')) {
                 auth.redirectAfterLogin('user');
+            } else {
+                auth.redirectAfterLogin('provider');
             }
             //// After login, if user hasn't completed profile, send them to profile page
             //var profile = userProfile.get();

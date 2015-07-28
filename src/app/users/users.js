@@ -15,7 +15,7 @@
         },
         resolve: {
             security: function ($q, auth) {
-                if (!auth.status.token) {
+                if (!auth.status.token || !auth.status.token.userRole.contains('Patient')) {
                     return $q.reject("Not Authorized");
                 }
             },

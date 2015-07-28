@@ -26,8 +26,27 @@
         data: { pageTitle: 'Provider' }
     });
 })
-.controller('ProviderCtrl', function ($scope, $state, careTeams, localizedNotifications) {
+.controller('ProviderCtrl', function ($scope, $state, $modal, careTeams, localizedNotifications) {
     $scope.careTeams = careTeams;
     $scope.orderByField = 'Name';
     $scope.reverseSort = false;
+
+    $scope.medicationHistory = function (patient) {
+        $modal.open({
+            templateUrl: "provider/history.tpl.html",
+            controller: 'MedicationsHistoryCtrl',
+            resolve: {
+                patient: function () {
+                    return patient;
+                },
+                prescriptions: function (Users) {
+                    return Users.meds({ id: patient.UserId }).$promise;
+                }
+            }
+        });
+    };
+})
+.controller('MedicationsHistoryCtrl', function ($scope, $modalInstance, patient, prescriptions, Users) {
+    $scope.patient = patient;
+    $scope.prescriptions = prescriptions;
 });

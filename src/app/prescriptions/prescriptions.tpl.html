@@ -41,7 +41,7 @@
             <td>{{prescription.Frequency}}</td>
             <td>{{prescription.Dosage}}</td>
             <td class="col-md-3">
-                <button popover="{{prescription.Notes}}" popover-placement="bottom" popover-trigger="mouseenter" class="btn btn-default">{{prescription.Notes | limitTo: 40 : 0}}</button>
+                <button popover="{{prescription.Notes}}" popover-placement="bottom" popover-trigger="mouseenter" class="btn btn-default">{{prescription.Notes | cutTo:true:40}}</button>
             </td>
             <!--<td>
                 <button class="btn btn-danger btn-xs" ng-click="removePrescription(prescription)">

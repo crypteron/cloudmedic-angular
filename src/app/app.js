@@ -15,6 +15,7 @@ angular.module('cloudmedic', [
   'cloudmedic.user',
   'cloudmedic.medications',
   'cloudmedic.prescriptions',
+  'cloudmedic.provider',
   'ui.router',
   'ui.mask',
   'auth',
@@ -135,6 +136,9 @@ angular.module('cloudmedic', [
         $scope.isMedicationViewer = function () {
             return auth.status.token.userRole.contains("Physician");
         };
+        $scope.isPatient = function () {
+            return auth.status.token.userRole.contains("Patient");
+        };
 
         //// When the user logs in, fetch the profile whenever the user logs in
         //$scope.$on('authService:login', function () {
@@ -153,5 +157,32 @@ angular.module('cloudmedic', [
         };
         $scope.$state = $state;
     }
-);
+)
+// Enable custom truncation to use in place of limitTo filter
+.filter('cutTo', function () {
+    return function (value, wordwise, max, tail) {
+        if (!value) {
+            return '';
+        }
+
+        max = parseInt(max, 10);
+        if (!max) {
+            return value;
+        }
+        if (value.length <= max) {
+            return value;
+        }
+        
+        value = value.substr(0, max);
+        // Prevent truncation in the middle of a word
+        if (wordwise) {
+            var lastspace = value.lastIndexOf(' ');
+            if (lastspace != -1) {
+                value = value.substr(0, lastspace);
+            }
+        }
+
+        return value + (tail || '…');
+    };
+});
 
