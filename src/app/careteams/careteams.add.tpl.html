@@ -1,6 +1,6 @@
 ﻿<form name="form" ng-submit="search()">
     <div class="modal-header">
-        <h3 class="modal-title">Assign New Care Team</h3>
+        <h3 class="modal-title">Create New Care Team</h3>
     </div>
 
     <div class="modal-body">
@@ -15,23 +15,20 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                <textarea id="prescription-notes" class="form-control" placeholder="Team Name" type="text" ng-model="Name" required></textarea>
+                <input id="prescription-notes" class="form-control" placeholder="Team Name" type="text" ng-model="Name" required></input>
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-medkit"></i></span>
                 <input id="providerid" class="form-control" placeholder="Provider Id" type="text" ng-model="providerid" required>
+                <button class="btn btn-primary btn-block" type="button" ng-click="AddProvider()">Add Provider</button>
             </div>
+            <div ng-repeat="ProviderId in ProviderIds">{{ProviderId}}</div>
         </div>
         <div class="form-group">
             <div class="modal-footer">
-                <button class="btn btn-danger btn-lg btn-block" type="button" ng-click="AddProvider()">Add Provider</button>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="modal-footer">
-                <button class="btn btn-danger btn-lg btn-block" type="button" ng-click="create()">Create</button>
+                <button class="btn btn-primary btn-lg btn-block" type="button" ng-click="create()">Create</button>
             </div>
         </div>
     </div>

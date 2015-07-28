@@ -22,6 +22,9 @@
             },
             users: function (Users) {
                 return Users.query().$promise;
+            },
+            careTeams: function (CareTeams) {
+                return CareTeams.query().$promise;
             }//,
             //reports: ['$http', 'APP_CONFIG', function ($http, APP_CONFIG) {
             //    return $http.get(APP_CONFIG.api_url + 'admin/users/reports').then(function (response) {
@@ -32,8 +35,9 @@
         data: { pageTitle: 'Admin' }
     });
 })
-.controller('AdminCtrl', function ($scope, $state, users, Users, /*reports,*/ localizedNotifications, $modal, DROPDOWN_PLANS) {
+.controller('AdminCtrl', function ($scope, $state, users, Users, careTeams, /*reports,*/ localizedNotifications, $modal, DROPDOWN_PLANS) {
     $scope.users = users;
+    $scope.careTeams = careTeams;
     $scope.userRemover = new Users();
 
     $scope.removeUser = function (user) {
