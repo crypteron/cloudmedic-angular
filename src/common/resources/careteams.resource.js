@@ -7,7 +7,7 @@
     };
 
     provider.$get = function ($resource) {
-        var service = $resource(provider.apiUrl + 'careteams/:path', {}, {
+        var service = $resource(provider.apiUrl + 'CareTeams/:path', {}, {
             'query': { method: 'GET', isArray: true },
             'remove': { method: 'DELETE', isArray: false },
             'create': { method: 'POST', isArray: false, params: { path: 'Add' } }

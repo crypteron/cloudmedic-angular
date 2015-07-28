@@ -11,12 +11,12 @@
         </thead>
         <tbody>
             <tr ng-repeat="careteam in careteams | orderBy:orderByField:reverseSort">
-                <td>{{careteam.CareTeamName}}</td>
+                <td>{{careteam.Name}}</td>
                 <td class="col-md-3">
-                    <button popover="{{careteam.patientinfo}}" popover-placement="bottom" popover-trigger="mouseenter" class="btn btn-default">{{careteam.patient.name}}</button>
+                    <button popover="{{careteam.patientinfo}}" popover-placement="bottom" popover-trigger="mouseenter" class="btn btn-default">{{careteam.Patient.FirstName}}, {{careteam.Patient.LastName}}</button>
                 </td>  
                 <td class="col-md-3">
-                    <button popover="{{careteam.providersinfo}}" popover-placement="bottom" popover-trigger="mouseenter" class="btn btn-default">providers</button>
+                    <button popover="{{careteam.Providers}}" popover-placement="bottom" popover-trigger="mouseenter" class="btn btn-default">View</button>
                 </td>  
                 <td>
                     <button class="btn btn-danger btn-xs center-block" ng-click="removecareteam(careteam)">
