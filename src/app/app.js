@@ -183,7 +183,7 @@ angular.module('cloudmedic', [
             }
         }
 
-        return value + (tail || '…');
+        return value + (tail || '...');
     };
 });
 

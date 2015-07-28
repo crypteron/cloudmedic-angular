@@ -3,11 +3,27 @@
     <table id="careteams-list" class="table table-striped table-hover">
         <thead>
             <tr>
-                <th>Patient</th>
-                <th>Date of Birth</th>
-                <th>Gender</th>
+                <th>
+                    <a href="#" ng-click="orderByField='Patient.LastName'; reverseSort = !reverseSort">
+                        Patient <span ng-show="orderByField == 'Patient.LastName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='Patient.DateOfBirth'; reverseSort = !reverseSort">
+                        Date of Birth <span ng-show="orderByField == 'Patient.DateOfBirth'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='Patient.Gender'; reverseSort = !reverseSort">
+                        Gender <span ng-show="orderByField == 'Patient.Gender'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                    </a>
+                </th>
                 <th>Medication History</th>
-                <th>CareTeam Name</th>
+                <th>
+                    <a href="#" ng-click="orderByField='Name'; reverseSort = !reverseSort">
+                        CareTeam Name <span ng-show="orderByField == 'Name'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                    </a>
+                </th>
                 <th class="text-center">Providers</th>
             </tr>
         </thead>
