@@ -35,6 +35,13 @@
         $scope.careteams[i].patientinfo += "Date of Birth: " + $scope.careteams[i].Patient.DateOfBirth.substring(0, 10) + "\n";
         $scope.careteams[i].patientinfo += "Email: " + $scope.careteams[i].Patient.Email;
     }
+    for ( i = 0; i < $scope.careteams.length; i++) {
+        $scope.careteams[i].providersinfo = "";
+        for (var j = 0; j < $scope.careteams[i].Providers.length; j++) {
+            $scope.careteams[i].providersinfo+= "Name: " + $scope.careteams[i].Providers[j].LastName + "," + $scope.careteams[i].Providers[j].FirstName + "\n";
+            $scope.careteams[i].providersinfo += "Role: " + $scope.careteams[i].Providers[j].Roles[0] + "\n";
+        }
+    }
     $scope.careteamRemover = new CareTeams();
     $scope.removecareteam = function (careteam) {
         localizedNotifications.removeForCurrent();
