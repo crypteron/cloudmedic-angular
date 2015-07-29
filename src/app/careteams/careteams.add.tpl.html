@@ -7,7 +7,7 @@
         <cry-notification-bar></cry-notification-bar>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-medkit"></i></span>
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
                 <input id="patient-name" class="form-control" placeholder="Patient Name" type="text" ng-model="patient.Name" required>
             </div>
         </div>
@@ -20,15 +20,30 @@
         </div>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
                 <select id="providersSelect" multiple required class="form-control">
                     <option class="placeholder" selected disabled value="">--Select Providers--</option>
                     <option ng-repeat="provider in Providers" value="{{provider.UserId}}">
-                        Name: {{provider.LastName}}, {{provider.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Role: {{provider.Roles[0]}}
+                        Name: {{provider.LastName}}, {{provider.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Role: {{provider.Roles[0]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email: {{provider.Email}}
                     </option>
                 </select>
                 <button class="btn btn-primary btn-block" type="button" ng-click="AddSelectedProviders()">Add Provider</button>
-                <div ng-repeat="selectname in SelectedNames">{{selectname}}</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-9">
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>
+                            Providers
+                        </th>
+                    </tr>
+                    <tr ng-repeat="SelectedName in SelectedNames">
+                        <td>{{SelectedName}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-3">
                 <a class="text-danger reset-link" type="button" ng-click="reset()" ng-hide="hidereset">
                     <i class="fa fa-undo"></i> Reset
                 </a>
