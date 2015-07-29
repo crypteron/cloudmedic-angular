@@ -58,6 +58,7 @@
     <Content Include="src\app\careteams\careteams.add.tpl.html" />
     <Content Include="src\app\careteams\careteams.js" />
     <Content Include="src\app\careteams\careteams.tpl.html" />
+    <Content Include="src\app\careteams\careteams.update.tpl.html" />
     <Content Include="src\app\medications\medications.add.tpl.html" />
     <Content Include="src\app\medications\medications.js" />
     <Content Include="src\app\medications\medications.tpl.html" />

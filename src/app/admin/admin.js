@@ -36,9 +36,29 @@
     });
 })
 .controller('AdminCtrl', function ($scope, $state, users, Users, careTeams, /*reports,*/ localizedNotifications, $modal, DROPDOWN_PLANS) {
+    // Initialize scope variables
     $scope.users = users;
     $scope.careTeams = careTeams;
     $scope.userRemover = new Users();
+    $scope.isProvider = function (user) {
+        return user.Roles == 'Nurse' || user.Roles == 'Physician';
+    };
+
+    $scope.orderByFieldPatient = 'LastName';
+    $scope.reverseSortPatient = false;
+
+    $scope.orderByFieldProvider = 'LastName';
+    $scope.reverseSortProvider = false;
+
+    $scope.orderByFieldCareTeam = 'Name';
+    $scope.reverseSortCareTeam = false;
+
+    $scope.providers = [];
+    for (var i = 0; i < $scope.users.length; i++) {
+        if ($scope.isProvider($scope.users[i])) {
+            $scope.providers.push($scope.users[i]);
+        }
+    }
 
     $scope.removeUser = function (user) {
         localizedNotifications.removeForCurrent();
@@ -65,17 +85,6 @@
             $state.go("admin", null, { reload: true });
         });
     };
-    $scope.PhysicianOrNurse = function (user) {
-        return user.Roles == 'Nurse' || user.Roles == 'Physician';
-    };
-    $scope.providers = [];
-    for (var i = 0; i < $scope.users.length; i++)
-    {
-        if ($scope.PhysicianOrNurse($scope.users[i]))
-        {
-            $scope.providers.push($scope.users[i]);
-        }
-    }
 
     $scope.createCareTeam = function (user) {
         localizedNotifications.removeForCurrent();
@@ -84,22 +93,28 @@
             templateUrl: "careteams/careteams.add.tpl.html",
             controller: 'CareTeamAddCtrl',
             resolve: {
-                User: function () { return $scope.user; },
-                Providers: function () { return $scope.providers;}
+                user: function () { return $scope.user; },
+                providers: function () { return $scope.providers; }
             }
         }).result.then(function () {
             $state.go("admin", null, { reload: true });
         });
     };
 
-    $scope.PatientorderByField = 'LastName';
-    $scope.PatientreverseSort = false;
-
-    $scope.orderByField = 'LastName';
-    $scope.reverseSort = false;
-
-    $scope.CareOrderByField = 'Name';
-    $scope.CareReverseSort = false;
+    $scope.updateCareTeam = function (careTeam) {
+        localizedNotifications.removeForCurrent();
+        //$scope.careTeam = careTeam;
+        $modal.open({
+            templateUrl: "careteams/careteams.update.tpl.html",
+            controller: 'CareTeamUpdateCtrl',
+            resolve: {
+                careTeam: function () { return careTeam; },
+                providers: function () { return $scope.providers; }
+            }
+        }).result.then(function () {
+            $state.go("admin", null, { reload: true });
+        });
+    };
 
     $scope.PhysicianTabActive = false;
 });

@@ -4,7 +4,7 @@
     'cloudmedic.resources',
     'form'
 ])
-.config(['$stateProvider', function config($stateProvider) {
+.config(function config($stateProvider) {
     $stateProvider.state('careteams', {
         url: '/careteams',
         views: {
@@ -25,7 +25,7 @@
         },
         data: { pageTitle: 'CareTeams' }
     });
-}])
+})
 .controller('CareTeamsCtrl', function ($scope, $state, careteams, CareTeams, localizedNotifications, $modal) {
 
     $scope.careteams = careteams;
@@ -59,12 +59,11 @@
         });
     };
 })
-.controller('CareTeamAddCtrl', function ($scope, $state, $modalInstance, User,Providers,CareTeams, localizedNotifications) {
-    $scope.patient = User;
+.controller('CareTeamAddCtrl', function ($scope, $modalInstance, user, providers, CareTeams, localizedNotifications) {
+    $scope.patient = user;
     $scope.patient.Name = $scope.patient.FirstName + " " + $scope.patient.LastName;
     $scope.Name = "";
-    $scope.Providers = Providers;
-    $scope.providerid = "";
+    $scope.Providers = providers;
     $scope.ProviderIds = [];
     $scope.lefttoright = function () {
         var selectedItem = $("#rightValues option:selected");
@@ -99,4 +98,68 @@
         }, function () {
         });
     };
+})
+.controller('CareTeamUpdateCtrl', function ($scope, $modalInstance, providers, careTeam, CareTeams, localizedNotifications) {
+    // initialize scope variables
+    $scope.careTeam = careTeam;
+    $scope.origTeam = angular.copy($scope.careTeam);
+    $scope.ProviderIds = [];
+    $scope.providers = providers;
+    for (var x = 0; x < $scope.careTeam.Providers.length; x++) {
+        $scope.ProviderIds.push($scope.careTeam.Providers[x].UserId);
+        for (var y = 0; y < $scope.providers.length; y++) {
+            if ($scope.providers[y].UserId == $scope.careTeam.Providers[x].UserId) {
+                $scope.providers.splice(y, 1);
+            }
+        }
+    }
+    $scope.origProviders = angular.copy($scope.providers);
+    $scope.origIds = angular.copy($scope.ProviderIds);
+    $scope.Updater = new CareTeams();
+    $scope.data = {
+        isSubmitting: false
+    };
+
+    // For adding or removing providers
+    $scope.lefttoright = function () {
+        var selectedItem = $("#leftValues option:selected");
+        for (var i = 0; i < selectedItem.length; i++) {
+            var id = selectedItem[i].value;
+            if ($scope.ProviderIds.indexOf(id) == -1) {
+                $scope.ProviderIds.push(id);
+            }
+        }
+        $("#rightValues").append(selectedItem);
+    };
+    $scope.righttoleft = function () {
+        var selectedItem = $("#rightValues option:selected");
+        for (var i = 0; i < selectedItem.length; i++) {
+            var id = selectedItem[i].value;
+            var index = $scope.ProviderIds.indexOf(id);
+            if (index > -1) {
+                $scope.ProviderIds.splice(index, 1);
+            }
+        }
+        $("#leftValues").append(selectedItem);
+    };
+
+    $scope.update = function () {
+        localizedNotifications.removeForCurrent();
+        $scope.Updater.TeamId = $scope.careTeam.Id;
+        $scope.Updater.TeamName = $scope.careTeam.Name;
+        $scope.Updater.ProviderIds = $scope.ProviderIds;
+        $scope.Updater.$update().then(function () {
+            localizedNotifications.addForNext('update.success', 'success', { entityType: 'Prescription' });
+            $modalInstance.close();
+        }, function () {
+            $scope.data.isSubmitting = false;
+        });
+    };
+
+    //$scope.reset = function () {
+    //    $scope.ProviderIds = angular.copy($scope.origIds);
+    //    $scope.careTeam.Name = $scope.original.Name;
+    //    $scope.providers = angular.copy($scope.origProviders);
+    //    $scope.form.$setPristine();
+    //};
 });

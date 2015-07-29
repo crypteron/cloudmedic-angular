@@ -1,23 +1,22 @@
 ﻿<tabset>
     <button class="btn btn-sm btn-default pull-right" ng-show="PhysicianTabActive" ng-click="createUser()">Add Physician/Nurse</button>
-
     <tab heading="Patients" id="patient-tab" ng-click="PhysicianTabActive=false">
         <table id="patient-list" class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th class="col-md-3">
-                        <a href="#" ng-click="PatientorderByField='LastName'; PatientreverseSort = !PatientreverseSort">
-                            Full Name <span ng-show="PatientorderByField == 'LastName'" class="fa" ng-class="PatientreverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                        <a href="#" ng-click="orderByFieldPatient='LastName'; reverseSortPatient = !reverseSortPatient">
+                            Full Name <span ng-show="orderByFieldPatient == 'LastName'" class="fa" ng-class="reverseSortPatient ? 'fa-caret-up' : 'fa-caret-down'"></span>
                         </a>
                     </th>
                     <th class="col-md-3">
-                        <a href="#" ng-click="PatientorderByField='UserName'; PatientreverseSort = !PatientreverseSort">
-                            UserName <span ng-show="PatientorderByField == 'UserName'" class="fa" ng-class="PatientreverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                        <a href="#" ng-click="orderByFieldPatient='UserName'; reverseSortPatient = !reverseSortPatient">
+                            UserName <span ng-show="orderByFieldPatient == 'UserName'" class="fa" ng-class="reverseSortPatient ? 'fa-caret-up' : 'fa-caret-down'"></span>
                         </a>
                     </th>
                     <th class="col-md-4">
-                        <a href="#" ng-click="PatientorderByField='Email'; PatientreverseSort = !PatientreverseSort">
-                            Email <span ng-show="PatientorderByField == 'Email'" class="fa" ng-class="PatientreverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                        <a href="#" ng-click="orderByFieldPatient='Email'; reverseSortPatient = !reverseSortPatient">
+                            Email <span ng-show="orderByFieldPatient == 'Email'" class="fa" ng-class="reverseSortPatient ? 'fa-caret-up' : 'fa-caret-down'"></span>
                         </a>
                     </th>
                     <th class="col-md-4"></th>
@@ -26,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="user in users | orderBy:PatientorderByField:PatientreverseSort | filter:{Roles:'Patient'}">
+                <tr ng-repeat="user in users | orderBy:orderByFieldPatient:reverseSortPatient | filter:{Roles:'Patient'}">
                     <td>{{user.LastName}}, {{user.FirstName}}</td>
                     <td>{{user.UserName}}</td>
                     <td>{{user.Email}}</td>
@@ -46,23 +45,23 @@
             <thead>
                 <tr>
                     <th class="col-md-3">
-                        <a href="#" ng-click="orderByField='LastName'; reverseSort = !reverseSort">
-                            Full Name <span ng-show="orderByField == 'LastName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                        <a href="#" ng-click="orderByFieldProvider='LastName'; reverseSortProvider = !reverseSortProvider">
+                            Full Name <span ng-show="orderByFieldProvider == 'LastName'" class="fa" ng-class="reverseSortProvider ? 'fa-caret-up' : 'fa-caret-down'"></span>
                         </a>
                     </th>
                     <th class="col-md-3">
-                        <a href="#" ng-click="orderByField='UserName'; reverseSort = !reverseSort">
-                            UserName <span ng-show="orderByField == 'UserName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                        <a href="#" ng-click="orderByFieldProvider='UserName'; reverseSortProvider = !reverseSortProvider">
+                            UserName <span ng-show="orderByFieldProvider == 'UserName'" class="fa" ng-class="reverseSortProvider ? 'fa-caret-up' : 'fa-caret-down'"></span>
                         </a>
                     </th>
                     <th class="col-md-4">
-                        <a href="#" ng-click="orderByField='Email'; reverseSort = !reverseSort">
-                            Email <span ng-show="orderByField == 'Email'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                        <a href="#" ng-click="orderByFieldProvider='Email'; reverseSortProvider = !reverseSortProvider">
+                            Email <span ng-show="orderByFieldProvider == 'Email'" class="fa" ng-class="reverseSortProvider ? 'fa-caret-up' : 'fa-caret-down'"></span>
                         </a>
                     </th>
                     <th class="col-md-4">
-                        <a href="#" ng-click="orderByField='Roles'; reverseSort = !reverseSort">
-                            Roles <span ng-show="orderByField == 'Roles'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                        <a href="#" ng-click="orderByFieldProvider='Roles'; reverseSortProvider = !reverseSortProvider">
+                            Roles <span ng-show="orderByFieldProvider == 'Roles'" class="fa" ng-class="reverseSortProvider ? 'fa-caret-up' : 'fa-caret-down'"></span>
                         </a>
                     </th>
                     <th style="width:69px;">
@@ -71,7 +70,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="user in users | orderBy:orderByField:reverseSort | filter:PhysicianOrNurse">
+                <tr ng-repeat="user in users | orderBy:orderByFieldProvider:reverseSortProvider | filter:isProvider">
                     <td>{{user.LastName}}, {{user.FirstName}}</td>
                     <td>{{user.UserName}}</td>
                     <td>{{user.Email}}</td>
@@ -94,26 +93,34 @@
             <thead>
                 <tr>
                     <th>
-                        <a href="#" ng-click="CareOrderByField='Name'; CareReverseSort = !CareReverseSort">
-                            CareTeam Name <span ng-show="CareOrderByField == 'Name'" class="fa" ng-class="CareReverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                        <a href="#" ng-click="orderByFieldCareTeam='Name'; reverseSortCareTeam = !reverseSortCareTeam">
+                            Name <span ng-show="orderByFieldCareTeam == 'Name'" class="fa" ng-class="reverseSortCareTeam ? 'fa-caret-up' : 'fa-caret-down'"></span>
                         </a>
                     </th>
                     <th>
-                        <a href="#" ng-click="CareOrderByField='Patient.LastName'; CareReverseSort = !CareReverseSort">
-                            Patient <span ng-show="CareOrderByField == 'Patient.LastName'" class="fa" ng-class="CareReverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                        <a href="#" ng-click="orderByFieldCareTeam='Patient.LastName'; reverseSortCareTeam = !reverseSortCareTeam">
+                            Patient <span ng-show="orderByFieldCareTeam == 'Patient.LastName'" class="fa" ng-class="reverseSortCareTeam ? 'fa-caret-up' : 'fa-caret-down'"></span>
                         </a>
                     </th>
                     <th>Providers</th>
+                    <th style="width:69px;">
+                        Edit
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="careTeam in careTeams | orderBy:orderByField:reverseSort">
+                <tr ng-repeat="careTeam in careTeams | orderBy:orderByFieldCareTeam:reverseSortCareTeam">
                     <td>{{careTeam.Name}}</td>
                     <td>{{careTeam.Patient.LastName}}, {{careTeam.Patient.FirstName}}</td>
                     <td>
                         <ul>
                             <li ng-repeat="provider in careTeam.Providers">{{provider.LastName}}, {{provider.FirstName}} - {{provider.Roles[0]}}</li>
                         </ul>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" ng-click="updateCareTeam(careTeam)">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>
