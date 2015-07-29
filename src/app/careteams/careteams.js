@@ -66,26 +66,28 @@
     $scope.Providers = Providers;
     $scope.providerid = "";
     $scope.ProviderIds = [];
-    $scope.SelectedNames = [];
-    $scope.AddSelectedProviders = function () {
-        var mySelect = document.getElementById("providersSelect").options;
-        var id = mySelect[mySelect.selectedIndex].value;
-        if ($scope.ProviderIds.indexOf(id)==-1) {
-            $scope.ProviderIds.push(id);
-            for (var i = 0; i < $scope.Providers.length; i++)
-            {
-                if ($scope.Providers[i].UserId == id)
-                {
-                    $scope.SelectedNames.push($scope.Providers[i].LastName + " " + $scope.Providers[i].FirstName);
-                }
+    $scope.righttoleft = function () {
+        var selectedItem = $("#rightValues option:selected");
+        for (var i = 0; i < selectedItem.length; i++) {
+            var id = selectedItem[i].value;
+            if ($scope.ProviderIds.indexOf(id) == -1) {
+                $scope.ProviderIds.push(id);
             }
         }
+        $("#leftValues").append(selectedItem);
+        
     };
-    $scope.reset = function () {
-        $scope.ProviderIds = [];
-        $scope.SelectedNames = [];
+    $scope.lefttoright = function () {
+        var selectedItem = $("#leftValues option:selected");
+        for (var i = 0; i < selectedItem.length; i++) {
+            var id = selectedItem[i].value;
+            var index = $scope.ProviderIds.indexOf(id);
+            if (index > -1) {
+                $scope.ProviderIds.splice(index, 1);
+            }
+        }
+        $("#rightValues").append(selectedItem);
     };
-    
     $scope.create = function () {
         $scope.creator = new CareTeams();
         $scope.creator.Name = $scope.Name;
@@ -96,7 +98,5 @@
             $modalInstance.close();
         }, function () {
         });
-
     };
-
 });

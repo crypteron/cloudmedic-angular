@@ -25,11 +25,11 @@
             <th>Frequency</th>
             <th>Dosage</th>
             <th>Notes</th>
-            <th style="width:69px;">Edit</th>
+            <th style="width:69px;" class="text-center">Edit</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="prescription in activeprescriptions | orderBy:orderByField:reverseSort">
+        <tr ng-repeat="prescription in activePrescriptions | orderBy:orderByField:reverseSort">
             <td>{{prescription.MedicationCode}} ({{prescription.MedicationName}})</td>
             <td>{{prescription.PatientName}}</td>
             <td>{{prescription.StartDate | date}}</td>
@@ -39,13 +39,8 @@
             <td class="col-md-3">
                 <button popover="{{prescription.Notes}}" popover-placement="bottom" popover-trigger="mouseenter" class="btn btn-default">{{prescription.Notes | cutTo:true:40}}</button>
             </td>
-            <!--<td>
-                <button class="btn btn-danger btn-xs" ng-click="removePrescription(prescription)">
-                    <i class="glyphicon glyphicon-trash"></i>
-                </button>
-            </td>-->
             <td>
-                <button class="btn btn-danger btn-xs" ng-click="updatePrescription(prescription)">
+                <button class="btn btn-danger btn-xs center-block" ng-click="updatePrescription(prescription)">
                     <i class="glyphicon glyphicon-wrench"></i>
                 </button>
             </td>
@@ -79,11 +74,11 @@
                 <th>Frequency</th>
                 <th>Dosage</th>
                 <th>Notes</th>
-                <th style="width:69px;">Remove</th>
+                <th style="width:69px;" class="text-center">Remove</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="prescription in expiredprescriptions | orderBy:orderByField:reverseSort">
+            <tr ng-repeat="prescription in expiredPrescriptions | orderBy:orderByField:reverseSort">
                 <td>{{prescription.MedicationCode}} ({{prescription.MedicationName}})</td>
                 <td>{{prescription.PatientName}}</td>
                 <td>{{prescription.StartDate | date}}</td>
@@ -94,7 +89,7 @@
                     <button popover="{{prescription.Notes}}" popover-placement="bottom" popover-trigger="mouseenter" class="btn btn-default">{{prescription.Notes | cutTo:true:40}}</button>
                 </td>
                 <td>
-                    <button class="btn btn-danger btn-xs" ng-click="removePrescription(prescription)">
+                    <button class="btn btn-danger btn-xs center-block" ng-click="removePrescription(prescription)">
                         <i class="glyphicon glyphicon-trash"></i>
                     </button>
                 </td>

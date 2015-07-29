@@ -15,7 +15,7 @@
         },
         resolve: {
             security: ['$q', 'auth', function($q, auth) {
-                if (!auth.status.token || (!auth.status.token.userRole.contains('SysAdmin') && !auth.status.token.userRole.contains('Physician') && !auth.status.token.userRole.contains('Nurse'))) {
+                if (!auth.status.token || (!auth.status.token.userRole.contains('Physician') && !auth.status.token.userRole.contains('Nurse'))) {
                     return $q.reject("Not Authorized");
                 }
             }],
