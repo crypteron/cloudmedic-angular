@@ -35,6 +35,13 @@
         $scope.careteams[i].patientinfo += "Date of Birth: " + $scope.careteams[i].Patient.DateOfBirth.substring(0, 10) + "\n";
         $scope.careteams[i].patientinfo += "Email: " + $scope.careteams[i].Patient.Email;
     }
+    for ( i = 0; i < $scope.careteams.length; i++) {
+        $scope.careteams[i].providersinfo = "";
+        for (var j = 0; j < $scope.careteams[i].Providers.length; j++) {
+            $scope.careteams[i].providersinfo+= "Name: " + $scope.careteams[i].Providers[j].LastName + "," + $scope.careteams[i].Providers[j].FirstName + "\n";
+            $scope.careteams[i].providersinfo += "Role: " + $scope.careteams[i].Providers[j].Roles[0] + "\n";
+        }
+    }
     $scope.careteamRemover = new CareTeams();
     $scope.removecareteam = function (careteam) {
         localizedNotifications.removeForCurrent();
@@ -52,16 +59,33 @@
         });
     };
 })
-.controller('CareTeamAddCtrl', function ($scope, $state, $modalInstance, User,CareTeams, localizedNotifications) {
+.controller('CareTeamAddCtrl', function ($scope, $state, $modalInstance, User,Providers,CareTeams, localizedNotifications) {
     $scope.patient = User;
     $scope.patient.Name = $scope.patient.FirstName + " " + $scope.patient.LastName;
-    $scope.Name="";
+    $scope.Name = "";
+    $scope.Providers = Providers;
     $scope.providerid = "";
     $scope.ProviderIds = [];
-    $scope.AddProvider = function () {
-        $scope.ProviderIds.push($scope.providerid);
-        $scope.providerid = "";
+    $scope.SelectedNames = [];
+    $scope.AddSelectedProviders = function () {
+        var mySelect = document.getElementById("providersSelect").options;
+        var id = mySelect[mySelect.selectedIndex].value;
+        if ($scope.ProviderIds.indexOf(id)==-1) {
+            $scope.ProviderIds.push(id);
+            for (var i = 0; i < $scope.Providers.length; i++)
+            {
+                if ($scope.Providers[i].UserId == id)
+                {
+                    $scope.SelectedNames.push($scope.Providers[i].LastName + " " + $scope.Providers[i].FirstName);
+                }
+            }
+        }
     };
+    $scope.reset = function () {
+        $scope.ProviderIds = [];
+        $scope.SelectedNames = [];
+    };
+    
     $scope.create = function () {
         $scope.creator = new CareTeams();
         $scope.creator.Name = $scope.Name;
