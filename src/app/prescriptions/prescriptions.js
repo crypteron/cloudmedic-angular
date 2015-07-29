@@ -17,7 +17,7 @@
         },
         resolve: {
             security: function ($q, auth) {
-                if (!auth.status.token || !auth.status.token.userRole.contains('SysAdmin') && !auth.status.token.userRole.contains('Physician') && !auth.status.token.userRole.contains('Nurse')) {
+                if (!auth.status.token || !auth.status.token.userRole.contains('Physician') && !auth.status.token.userRole.contains('Nurse')) {
                     return $q.reject("Not Authorized");
                 }
             },
@@ -79,7 +79,7 @@
         });
     };
 })
-.controller('PreAddCtrl', function ($scope, $state, $modalInstance, Prescriptions, Users, localizedNotifications, MedId, MedName, MONTHS) {
+.controller('PreAddCtrl', function ($scope, $state, $modalInstance, auth, Prescriptions, Users, localizedNotifications, MedId, MedName, MONTHS) {
     $scope.prescriptionsData = {
         MedicationId: MedId,
         MedicationName: MedName,
@@ -107,7 +107,7 @@
     };
 
     $scope.search = function () {
-        $scope.Candidates = Users.search({ Name: $scope.prescriptionsData.PatientName });
+        $scope.Candidates = Users.search({ Name: $scope.prescriptionsData.PatientName, ProviderId: auth.status.token.userId });
     };
 
     $scope.Creator = new Prescriptions();

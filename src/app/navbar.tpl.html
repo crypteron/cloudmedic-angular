@@ -42,13 +42,13 @@
                             Profile
                         </a>
                     </li>
-                    <li ng-show="authStatus.isLoggedIn && isMedicationViewer() || isAdmin()" ui-sref-active="active">
+                    <li ng-show="authStatus.isLoggedIn && isMedicationViewer()" ui-sref-active="active">
                         <a ui-sref="medications">
                             <i class="fa fa-medkit"></i>
                             Medications
                         </a>
                     </li>
-                    <li ng-show="authStatus.isLoggedIn && isStaff() || isAdmin()" ui-sref-active="active">
+                    <li ng-show="authStatus.isLoggedIn && isStaff()" ui-sref-active="active">
                         <a ui-sref="prescriptions">
                             <i class="fa fa-plus-square"></i>
                             Prescriptions
