@@ -18,37 +18,43 @@
                 <input id="prescription-notes" class="form-control" placeholder="Team Name" type="text" ng-model="Name" required></input>
             </div>
         </div>
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
-                <select id="providersSelect" multiple required class="form-control">
-                    <option class="placeholder" selected disabled value="">--Select Providers--</option>
+        <style>
+          SELECT, INPUT[type="text"] {
+                 width: 250px;
+                 box-sizing: border-box;
+          }
+          SECTION {
+                 padding: 8px;
+                 overflow: auto;
+          }
+          SECTION > DIV {
+                 float: left;
+                 padding: 4px;
+          }
+          SECTION > DIV + DIV {
+                width: 40px;
+                text-align: center;
+          }
+        </style>
+        <section class="container">
+            <div>
+                <select id="leftValues" size="10" multiple>
+                    <option class="placeholder" selected disabled value="">--Selected Providers--</option>
+                </select>
+            </div>
+            <div>
+                <input type="button" id="btnLeft" value="&lt;&lt;" ng-click="righttoleft()" />
+                <input type="button" id="btnRight" value="&gt;&gt;" ng-click="lefttoright()" />
+            </div>
+            <div>
+                <select id="rightValues" size="10" multiple>
+                    <option class="placeholder" selected disabled value="">--Available Providers--</option>
                     <option ng-repeat="provider in Providers" value="{{provider.UserId}}">
-                        Name: {{provider.LastName}}, {{provider.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Role: {{provider.Roles[0]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email: {{provider.Email}}
+                        {{provider.LastName}}, {{provider.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,{{provider.Roles[0]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </option>
                 </select>
-                <button class="btn btn-primary btn-block" type="button" ng-click="AddSelectedProviders()">Add Provider</button>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-9">
-                <table class="table table-striped table-hover">
-                    <tr>
-                        <th>
-                            Providers
-                        </th>
-                    </tr>
-                    <tr ng-repeat="SelectedName in SelectedNames">
-                        <td>{{SelectedName}}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-3">
-                <a class="text-danger reset-link" type="button" ng-click="reset()" ng-hide="hidereset">
-                    <i class="fa fa-undo"></i> Reset
-                </a>
-            </div>
-        </div>
+        </section>
         <div class="form-group">
             <div class="modal-footer">
                 <button class="btn btn-primary btn-lg btn-block" type="button" ng-click="create()">Create</button>
