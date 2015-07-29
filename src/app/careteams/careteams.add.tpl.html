@@ -37,9 +37,13 @@
           }
         </style>
         <section class="container">
+            
             <div>
-                <select id="leftValues" size="10" multiple>
-                    <option class="placeholder" selected disabled value="">--Selected Providers--</option>
+                <select id="rightValues" size="10" multiple>
+                    <option class="placeholder" selected disabled value="">--Available Providers--</option>
+                    <option ng-repeat="provider in Providers" value="{{provider.UserId}}">
+                        {{provider.LastName}}, {{provider.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,{{provider.Roles[0]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </option>
                 </select>
             </div>
             <div>
@@ -47,11 +51,8 @@
                 <input type="button" id="btnRight" value="&gt;&gt;" ng-click="lefttoright()" />
             </div>
             <div>
-                <select id="rightValues" size="10" multiple>
-                    <option class="placeholder" selected disabled value="">--Available Providers--</option>
-                    <option ng-repeat="provider in Providers" value="{{provider.UserId}}">
-                        {{provider.LastName}}, {{provider.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,{{provider.Roles[0]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </option>
+                <select id="leftValues" size="10" multiple>
+                    <option class="placeholder" selected disabled value="">--Selected Providers--</option>
                 </select>
             </div>
         </section>

@@ -66,7 +66,7 @@
     $scope.Providers = Providers;
     $scope.providerid = "";
     $scope.ProviderIds = [];
-    $scope.righttoleft = function () {
+    $scope.lefttoright = function () {
         var selectedItem = $("#rightValues option:selected");
         for (var i = 0; i < selectedItem.length; i++) {
             var id = selectedItem[i].value;
@@ -77,7 +77,7 @@
         $("#leftValues").append(selectedItem);
         
     };
-    $scope.lefttoright = function () {
+    $scope.righttoleft= function () {
         var selectedItem = $("#leftValues option:selected");
         for (var i = 0; i < selectedItem.length; i++) {
             var id = selectedItem[i].value;
