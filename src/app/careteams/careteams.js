@@ -104,7 +104,7 @@
     $scope.careTeam = careTeam;
     $scope.origTeam = angular.copy($scope.careTeam);
     $scope.ProviderIds = [];
-    $scope.providers = providers;
+    $scope.providers = angular.copy(providers);
     for (var x = 0; x < $scope.careTeam.Providers.length; x++) {
         $scope.ProviderIds.push($scope.careTeam.Providers[x].UserId);
         for (var y = 0; y < $scope.providers.length; y++) {
@@ -149,7 +149,7 @@
         $scope.Updater.TeamName = $scope.careTeam.Name;
         $scope.Updater.ProviderIds = $scope.ProviderIds;
         $scope.Updater.$update().then(function () {
-            localizedNotifications.addForNext('update.success', 'success', { entityType: 'Prescription' });
+            localizedNotifications.addForNext('update.success', 'success', { entityType: 'CareTeam' });
             $modalInstance.close();
         }, function () {
             $scope.data.isSubmitting = false;
