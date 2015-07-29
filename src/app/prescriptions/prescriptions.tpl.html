@@ -29,7 +29,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="prescription in activeprescriptions | orderBy:orderByField:reverseSort">
+        <tr ng-repeat="prescription in activePrescriptions | orderBy:orderByField:reverseSort">
             <td>{{prescription.MedicationCode}} ({{prescription.MedicationName}})</td>
             <td>{{prescription.PatientName}}</td>
             <td>{{prescription.StartDate | date}}</td>
@@ -78,7 +78,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="prescription in expiredprescriptions | orderBy:orderByField:reverseSort">
+            <tr ng-repeat="prescription in expiredPrescriptions | orderBy:orderByField:reverseSort">
                 <td>{{prescription.MedicationCode}} ({{prescription.MedicationName}})</td>
                 <td>{{prescription.PatientName}}</td>
                 <td>{{prescription.StartDate | date}}</td>

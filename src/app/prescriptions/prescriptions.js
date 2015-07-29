@@ -28,26 +28,25 @@
         data: { pageTitle: 'Prescriptions' }
     });
 })
-.controller('PrescriptionsCtrl', function ($scope, $window, $state, prescriptions, Prescriptions, localizedNotifications, $modal) {   
+.controller('PrescriptionsCtrl', function ($scope, $state, prescriptions, Prescriptions, localizedNotifications, $modal) {
+    // initialize scope variables
     $scope.prescriptions = prescriptions;
-    var today = new Date();
-    $scope.expiredprescriptions = [];
-    $scope.activeprescriptions = [];
-    for (var i = 0; i < $scope.prescriptions.length; i++)
-    {
-        if (Date.parse($scope.prescriptions[i].EndDate)<today)
-        { $scope.expiredprescriptions.push($scope.prescriptions[i]); }
-        else
-        { $scope.activeprescriptions.push($scope.prescriptions[i]);  }
-    }
-    console.log($scope.activeprescriptions);
-    console.log($scope.expiredprescriptions);
-    console.log(today.getTime());
-    $scope.prescriptionsRemover = new Prescriptions();
-
     $scope.orderByField = 'MedicationCode';
     $scope.reverseSort = false;
 
+    var today = new Date();
+    $scope.expiredPrescriptions = [];
+    $scope.activePrescriptions = [];
+    for (var i = 0; i < $scope.prescriptions.length; i++) {
+        if (Date.parse($scope.prescriptions[i].EndDate) < today) {
+            $scope.expiredPrescriptions.push($scope.prescriptions[i]);
+        }
+        else {
+            $scope.activePrescriptions.push($scope.prescriptions[i]);
+        }
+    }
+
+    $scope.prescriptionsRemover = new Prescriptions();
 
     $scope.removePrescription = function (prescription) {
         localizedNotifications.removeForCurrent();
@@ -79,7 +78,7 @@
         });
     };
 })
-.controller('PreAddCtrl', function ($scope, $state, $modalInstance, auth, Prescriptions, Users, localizedNotifications, MedId, MedName, MONTHS) {
+.controller('PreAddCtrl', function ($scope, $modalInstance, auth, Prescriptions, Users, localizedNotifications, MedId, MedName, MONTHS) {
     $scope.prescriptionsData = {
         MedicationId: MedId,
         MedicationName: MedName,
@@ -99,7 +98,7 @@
     $scope.SelectedDay = today.getDate();
     $scope.SelectedYear = today.getFullYear();
 
-    // creates a function to add the duration
+    // Create function to calculate End Date based on duration
     Date.prototype.addDays = function (days) {
         var dat = new Date(this.valueOf());
         dat.setDate(dat.getDate() + days);
@@ -159,16 +158,14 @@
         Months = 31
     ];
 })
-.controller('UpdatePrescriptionsCtrl', function ($scope, $state, $modalInstance, Prescriptions, prescription, MONTHS, localizedNotifications) {
+.controller('UpdatePrescriptionsCtrl', function ($scope, $modalInstance, Prescriptions, prescription, MONTHS, localizedNotifications) {
+    // initialize scope variables
     $scope.prescription = angular.copy(prescription);
     $scope.original = angular.copy($scope.prescription);
+
     $scope.data = {
         isSubmitting: false
     };
-    var origDate = new Date($scope.prescription.EndDate);
-    $scope.SelectedMonth = origDate.getMonth() + 1;
-    $scope.SelectedDay = origDate.getDate();
-    $scope.SelectedYear = origDate.getFullYear();
 
     $scope.Updater = new Prescriptions();
 
@@ -184,6 +181,7 @@
             $scope.data.isSubmitting = false;
         });
     };
+
     $scope.resetPrescription = function () {
         $scope.prescription.Notes = $scope.original.Notes;
         $scope.SelectedMonth = origDate.getMonth() + 1;
@@ -193,6 +191,11 @@
     };
 
     // Date dropdown menu value generator
+    var origDate = new Date($scope.prescription.EndDate);
+    $scope.SelectedMonth = origDate.getMonth() + 1;
+    $scope.SelectedDay = origDate.getDate();
+    $scope.SelectedYear = origDate.getFullYear();
+
     var CurrentYear = new Date().getFullYear();
     $scope.CurrentYear = CurrentYear;
     var years = $.map($(Array(10)), function (val, i) { return i + CurrentYear; });
