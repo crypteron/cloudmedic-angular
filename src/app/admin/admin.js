@@ -98,20 +98,8 @@
     $scope.orderByField = 'LastName';
     $scope.reverseSort = false;
 
-  
-    //$scope.signupsPastWeek = reports.SignupsPastWeek;
+    $scope.CareOrderByField = 'Name';
+    $scope.CareReverseSort = false;
 
-    //$scope.productTierLabels = [];
-    //$scope.productTierData = [];
-    //angular.forEach(reports.ProductsByTier, function (productTier) {
-    //    $scope.productTierLabels.push(productTier.Label);
-    //    $scope.productTierData.push(productTier.Value);
-    //});
-
-    //$scope.channelsLabels = [];
-    //$scope.channelsData = [];
-    //angular.forEach(reports.UsersByChannel, function (userChannel) {
-    //    $scope.channelsLabels.push(userChannel.Label);
-    //    $scope.channelsData.push(userChannel.Value);
-    //});
+    $scope.PhysicianTabActive = false;
 });
