@@ -23,7 +23,7 @@
             },
             prescriptions: function (Prescriptions, $q, auth) {
                 if (auth.status.token.userRole.contains('Physician') || auth.status.token.userRole.contains('Nurse')) {
-                    return Prescriptions.query().$promise;
+                    return Prescriptions.query({ providerId: auth.status.token.userId }).$promise;
                 }
             }
         },
