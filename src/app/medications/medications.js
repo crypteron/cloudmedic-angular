@@ -14,14 +14,16 @@
             }
         },
         resolve: {
-            security: ['$q', 'auth', function($q, auth) {
+            security: function($q, auth) {
                 if (!auth.status.token || (!auth.status.token.userRole.contains('Physician') && !auth.status.token.userRole.contains('Nurse'))) {
                     return $q.reject("Not Authorized");
                 }
-            }],
-            medications: ['Medications', function (Medications) {
-                return Medications.query().$promise;
-            }]
+            },
+            medications: function (Medications, $q, auth) {
+                if (auth.status.token.userRole.contains('Physician') || auth.status.token.userRole.contains('Nurse')) {
+                    return Medications.query().$promise;
+                }
+            }
         },
         data: { pageTitle: 'Medications' }
     });

@@ -20,22 +20,21 @@
                     return $q.reject("Not Authorized");
                 }
             },
-            users: function (Users) {
-                return Users.query().$promise;
+            users: function (Users, $q, auth) {
+                if (auth.status.token.userRole.contains('SysAdmin')) {
+                    return Users.query().$promise;
+                }
             },
-            careTeams: function (CareTeams) {
-                return CareTeams.query().$promise;
-            }//,
-            //reports: ['$http', 'APP_CONFIG', function ($http, APP_CONFIG) {
-            //    return $http.get(APP_CONFIG.api_url + 'admin/users/reports').then(function (response) {
-            //        return response.data;
-            //    });
-            //}]
+            careTeams: function (CareTeams, $q, auth) {
+                if (auth.status.token.userRole.contains('SysAdmin')) {
+                    return CareTeams.query().$promise;
+                }
+            }
         },
         data: { pageTitle: 'Admin' }
     });
 })
-.controller('AdminCtrl', function ($scope, $state, users, Users, careTeams, /*reports,*/ localizedNotifications, $modal, DROPDOWN_PLANS) {
+.controller('AdminCtrl', function ($scope, $state, users, Users, careTeams, localizedNotifications, $modal, DROPDOWN_PLANS) {
     // Initialize scope variables
     $scope.users = users;
     $scope.careTeams = careTeams;
@@ -103,7 +102,6 @@
 
     $scope.updateCareTeam = function (careTeam) {
         localizedNotifications.removeForCurrent();
-        //$scope.careTeam = careTeam;
         $modal.open({
             templateUrl: "careteams/careteams.update.tpl.html",
             controller: 'CareTeamUpdateCtrl',

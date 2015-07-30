@@ -14,14 +14,16 @@
             }
         },
         resolve: {
-            security: ['$q', 'auth', function ($q, auth) {
+            security: function ($q, auth) {
                 if (!auth.status.token || (!auth.status.token.userRole.contains('SysAdmin') && !auth.status.token.userRole.contains('Physician') && !auth.status.token.userRole.contains('Nurse'))) {
                     return $q.reject("Not Authorized");
                 }
-            }],
-            careteams: ['CareTeams', function (CareTeams) {
-                return CareTeams.query().$promise;
-            }]
+            },
+            careteams: function (CareTeams) {
+                if (auth.status.token.userRole.contains('SysAdmin') || auth.status.token.userRole.contains('Physician') || auth.status.token.userRole.contains('Nurse')) {
+                    return CareTeams.query().$promise;
+                }
+            }
         },
         data: { pageTitle: 'CareTeams' }
     });
@@ -102,7 +104,6 @@
 .controller('CareTeamUpdateCtrl', function ($scope, $modalInstance, providers, careTeam, CareTeams, localizedNotifications) {
     // initialize scope variables
     $scope.careTeam = careTeam;
-    $scope.origTeam = angular.copy($scope.careTeam);
     $scope.ProviderIds = [];
     $scope.providers = angular.copy(providers);
     for (var x = 0; x < $scope.careTeam.Providers.length; x++) {
@@ -113,8 +114,6 @@
             }
         }
     }
-    $scope.origProviders = angular.copy($scope.providers);
-    $scope.origIds = angular.copy($scope.ProviderIds);
     $scope.Updater = new CareTeams();
     $scope.data = {
         isSubmitting: false
@@ -155,11 +154,4 @@
             $scope.data.isSubmitting = false;
         });
     };
-
-    //$scope.reset = function () {
-    //    $scope.ProviderIds = angular.copy($scope.origIds);
-    //    $scope.careTeam.Name = $scope.original.Name;
-    //    $scope.providers = angular.copy($scope.origProviders);
-    //    $scope.form.$setPristine();
-    //};
 });
