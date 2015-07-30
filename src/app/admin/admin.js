@@ -20,17 +20,16 @@
                     return $q.reject("Not Authorized");
                 }
             },
-            users: function (Users) {
-                return Users.query().$promise;
+            users: function (Users, $q, auth) {
+                if (auth.status.token.userRole.contains('SysAdmin')) {
+                    return Users.query().$promise;
+                }
             },
-            careTeams: function (CareTeams) {
-                return CareTeams.query().$promise;
-            }//,
-            //reports: ['$http', 'APP_CONFIG', function ($http, APP_CONFIG) {
-            //    return $http.get(APP_CONFIG.api_url + 'admin/users/reports').then(function (response) {
-            //        return response.data;
-            //    });
-            //}]
+            careTeams: function (CareTeams, $q, auth) {
+                if (auth.status.token.userRole.contains('SysAdmin')) {
+                    return CareTeams.query().$promise;
+                }
+            }
         },
         data: { pageTitle: 'Admin' }
     });

@@ -15,12 +15,14 @@
         },
         resolve: {
             security: function ($q, auth) {
-                if (!auth.status.token) {
+                if (!auth.status.token || !auth.status.token.userRole.contains('Physician') && !auth.status.token.userRole.contains('Nurse')) {
                     return $q.reject("Not Authorized");
                 }
             },
-            careTeams: function (Users, auth) {
-                return Users.prTeams({ id: auth.status.token.userId }).$promise;
+            careTeams: function (Users, $q, auth) {
+                if (auth.status.token.userRole.contains('Physician') || auth.status.token.userRole.contains('Nurse')) {
+                    return Users.prTeams({ id: auth.status.token.userId }).$promise;
+                }
             }
         },
         data: { pageTitle: 'Provider' }

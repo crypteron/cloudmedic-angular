@@ -21,8 +21,10 @@
                     return $q.reject("Not Authorized");
                 }
             },
-            prescriptions: function (Prescriptions) {
-                return Prescriptions.query().$promise;
+            prescriptions: function (Prescriptions, $q, auth) {
+                if (auth.status.token.userRole.contains('Physician') || auth.status.token.userRole.contains('Nurse')) {
+                    return Prescriptions.query().$promise;
+                }
             }
         },
         data: { pageTitle: 'Prescriptions' }

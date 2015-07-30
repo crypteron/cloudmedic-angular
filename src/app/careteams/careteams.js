@@ -14,14 +14,16 @@
             }
         },
         resolve: {
-            security: ['$q', 'auth', function ($q, auth) {
+            security: function ($q, auth) {
                 if (!auth.status.token || (!auth.status.token.userRole.contains('SysAdmin') && !auth.status.token.userRole.contains('Physician') && !auth.status.token.userRole.contains('Nurse'))) {
                     return $q.reject("Not Authorized");
                 }
-            }],
-            careteams: ['CareTeams', function (CareTeams) {
-                return CareTeams.query().$promise;
-            }]
+            },
+            careteams: function (CareTeams) {
+                if (auth.status.token.userRole.contains('SysAdmin') || auth.status.token.userRole.contains('Physician') || auth.status.token.userRole.contains('Nurse')) {
+                    return CareTeams.query().$promise;
+                }
+            }
         },
         data: { pageTitle: 'CareTeams' }
     });
