@@ -134,7 +134,17 @@
             }
         }
     };
-
+    $scope.filter = function () {
+        $scope.Candidates = Candidates;
+        var name = $scope.prescriptionsData.PatientName.toLowerCase();
+        for (var i = 0; i < $scope.Candidates.length; i++) {
+            var candidatename = ($scope.Candidates[i].FirstName + " " + $scope.Candidates[i].LastName).toLowerCase();
+            if (candidatename.indexOf(name) == -1) {
+                $scope.Candidates.splice(i, 1);
+            }
+        }
+        $scope.search();     
+    };
     $scope.Creator = new Prescriptions();
     $scope.search();
     // Prescription creation method
