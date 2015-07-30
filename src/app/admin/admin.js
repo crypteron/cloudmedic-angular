@@ -34,7 +34,7 @@
         data: { pageTitle: 'Admin' }
     });
 })
-.controller('AdminCtrl', function ($scope, $state, users, Users, careTeams, /*reports,*/ localizedNotifications, $modal, DROPDOWN_PLANS) {
+.controller('AdminCtrl', function ($scope, $state, users, Users, careTeams, localizedNotifications, $modal, DROPDOWN_PLANS) {
     // Initialize scope variables
     $scope.users = users;
     $scope.careTeams = careTeams;
@@ -102,7 +102,6 @@
 
     $scope.updateCareTeam = function (careTeam) {
         localizedNotifications.removeForCurrent();
-        //$scope.careTeam = careTeam;
         $modal.open({
             templateUrl: "careteams/careteams.update.tpl.html",
             controller: 'CareTeamUpdateCtrl',

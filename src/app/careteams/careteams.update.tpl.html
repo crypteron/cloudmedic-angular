@@ -5,14 +5,12 @@
 
     <div class="modal-body">
         <cry-notification-bar></cry-notification-bar>
-        <div class="form-group">
         <label>Team Name</label>
-            <div class="form-group">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                    <input id="team-name" class="form-control" placeholder="Name" type="text" ng-model="careTeam.Name" required>
-                </div>
-            </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                <input id="team-name" class="form-control" placeholder="Name" type="text" ng-model="careTeam.Name" required>
+            </div>                   
         </div>
         <label>Providers</label>
         <div class="form-group">
@@ -40,10 +38,7 @@
     </div>
     <div class="form-group" style="pointer-events:none">
         <div class="profile-buttons">
-            <button class="btn btn-primary btn-lg" ng-click="update()" type="submit" style="pointer-events:all">Update CareTeam</button>
-            <!--<a class="text-danger reset-link" type="button" ng-click="reset()" ng-disabled="data.isSubmitting">
-                <i class="fa fa-undo"></i> Reset
-            </a>-->
+            <button class="btn btn-primary btn-lg" ng-click="update()" type="submit" style="pointer-events:all">Update CareTeam</button>           
         </div>
     </div>
 </form>
