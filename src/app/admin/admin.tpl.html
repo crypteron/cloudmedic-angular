@@ -20,8 +20,8 @@
                         </a>
                     </th>
                     <th class="col-md-4"></th>
-                    <th style="width:69px;">Edit</th>
-                    <th style="width:69px;">Team</th>
+                    <th style="width:69px;">Remove</th>
+                    <th style="width:69px;">CareTeam</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,10 +30,10 @@
                     <td>{{user.UserName}}</td>
                     <td>{{user.Email}}</td>
                     <td></td>
-                    <td><button class="btn btn-danger btn-xs" ng-click="removeUser(user)"><i class="glyphicon glyphicon-trash"></i></button></td>
+                    <td><button class="btn btn-danger btn-xs center-block" ng-click="removeUser(user)"><i class="glyphicon glyphicon-trash"></i></button></td>
                     <td align="center">
                         <button class="btn btn-primary btn-xs" ng-click="createCareTeam(user)">
-                            <i class="glyphicon glyphicon-pencil"></i>Create
+                            <i class="glyphicon glyphicon-plus"></i>
                         </button>
                     </td>
                 </tr>
@@ -65,7 +65,7 @@
                         </a>
                     </th>
                     <th style="width:69px;">
-                        Edit
+                        Remove
                     </th>
                 </tr>
             </thead>
@@ -80,7 +80,7 @@
                         </div>
                     </td>
                     <td>
-                        <button class="btn btn-danger btn-xs" ng-click="removeUser(user)">
+                        <button class="btn btn-danger btn-xs center-block" ng-click="removeUser(user)">
                             <i class="glyphicon glyphicon-trash"></i>
                         </button>
                     </td>
@@ -118,8 +118,8 @@
                         </ul>
                     </td>
                     <td>
-                        <button class="btn btn-primary btn-sm" ng-click="updateCareTeam(careTeam)">
-                            <i class="glyphicon glyphicon-pencil"></i>
+                        <button class="btn btn-primary btn-xs" ng-click="updateCareTeam(careTeam)">
+                            <i class="glyphicon glyphicon-wrench"></i>
                         </button>
                     </td>
                 </tr>
