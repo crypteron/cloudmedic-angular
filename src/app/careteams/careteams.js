@@ -68,18 +68,18 @@
     $scope.Providers = providers;
     $scope.ProviderIds = [];
     $scope.lefttoright = function () {
-        var selectedItem = $("#rightValues option:selected");
+        var selectedItem = $("#leftValues option:selected");
         for (var i = 0; i < selectedItem.length; i++) {
             var id = selectedItem[i].value;
             if ($scope.ProviderIds.indexOf(id) == -1) {
                 $scope.ProviderIds.push(id);
             }
         }
-        $("#leftValues").append(selectedItem);
+        $("#rightValues").append(selectedItem);
         
     };
     $scope.righttoleft= function () {
-        var selectedItem = $("#leftValues option:selected");
+        var selectedItem = $("#rightValues option:selected");
         for (var i = 0; i < selectedItem.length; i++) {
             var id = selectedItem[i].value;
             var index = $scope.ProviderIds.indexOf(id);
@@ -87,7 +87,7 @@
                 $scope.ProviderIds.splice(index, 1);
             }
         }
-        $("#rightValues").append(selectedItem);
+        $("#leftValues").append(selectedItem);
     };
     $scope.create = function () {
         $scope.creator = new CareTeams();
