@@ -63,6 +63,7 @@
                 </div>
             </div>
         </div>
+            </div>
         <tabset>
             <tab heading="A-I" id="a-i-tab">
                 <div class="form-group">
@@ -89,19 +90,19 @@
                         </select>
                     </div>
                 </div>
-                <tab heading="R-Z" id="R-Z-tab">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <select multiple required class="form-control" ng-model="prescriptionsData.PatientId">
-                                <option class="placeholder" selected disabled value="">--Select Patient--</option>
-                                <option ng-repeat="candidate in CandidatesRZ" value="{{candidate.UserId}}">
-                                    Name: {{candidate.LastName}}, {{candidate.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Born: {{candidate.DateOfBirth | date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName: {{candidate.UserName}}
-                                </option>
-                            </select>
-                        </div>
+            </tab>
+            <tab heading="R-Z" id="R-Z-tab">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <select multiple required class="form-control" ng-model="prescriptionsData.PatientId">
+                            <option class="placeholder" selected disabled value="">--Select Patient--</option>
+                            <option ng-repeat="candidate in CandidatesRZ" value="{{candidate.UserId}}">
+                                Name: {{candidate.LastName}}, {{candidate.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Born: {{candidate.DateOfBirth | date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName: {{candidate.UserName}}
+                            </option>
+                        </select>
                     </div>
-                </tab>
+                </div>
             </tab>
             </tabset>
             <div class="form-group">
