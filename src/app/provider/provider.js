@@ -30,7 +30,6 @@
     $scope.careTeams = careTeams;
     $scope.orderByField = 'Name';
     $scope.reverseSort = false;
-
     $scope.medicationHistory = function (patient) {
         $modal.open({
             templateUrl: "provider/history.tpl.html",
