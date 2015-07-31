@@ -25,6 +25,7 @@
                     </a>
                 </th>
                 <th class="text-center">Providers</th>
+                <th class="text-center">Supporters</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +40,11 @@
                 <td>
                     <ul>
                         <li ng-repeat="provider in careTeam.Providers" class="text-center">{{provider.LastName}}, {{provider.FirstName}} - {{provider.Roles[0]}}</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li ng-repeat="supporter in careTeam.Patient.Supporters" class="text-center">{{supporter.LastName}}, {{supporter.FirstName}}</li>
                     </ul>
                 </td>
             </tr>
