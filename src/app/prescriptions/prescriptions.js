@@ -80,7 +80,7 @@
         });
     };
 })
-.controller('PreAddCtrl', function ($scope, $modalInstance, auth, Prescriptions, Users, localizedNotifications, MedId, MedName, MONTHS) {
+.controller('PreAddCtrl', function ($scope, $modalInstance, auth, Prescriptions, Users, localizedNotifications, Candidates,MedId, MedName, MONTHS) {
     $scope.prescriptionsData = {
         MedicationId: MedId,
         MedicationName: MedName,
@@ -93,7 +93,7 @@
         PatientName:"",
         isSubmitting: false
     };
-
+    $scope.Candidates = Candidates;
     // Default date placeholders
     var today = new Date();
     $scope.SelectedMonth = today.getMonth() + 1;
@@ -108,11 +108,45 @@
     };
 
     $scope.search = function () {
-        $scope.Candidates = Users.search({ Name: $scope.prescriptionsData.PatientName, ProviderId: auth.status.token.userId });
+        $scope.CandidatesAI = [];
+        $scope.CandidatesJQ = [];
+        $scope.CandidatesRZ = [];
+        for (var letter1 =65; letter1 <= 73; letter1++) {
+            for (var i = 0; i < $scope.Candidates.length;i++) {
+                if ($scope.Candidates[i].LastName.charCodeAt(0) == letter1) {
+                    $scope.CandidatesAI.push($scope.Candidates[i]);
+                }
+            }         
+        }
+        for (var letter2 = 74; letter2 <= 80; letter2++) {
+            for (var j= 0; j< $scope.Candidates.length; j++) {
+                if ($scope.Candidates[j].LastName.charCodeAt(0) == letter2) {
+                    $scope.CandidatesJQ.push($scope.Candidates[j]);
+                }
+            }
+        }
+
+        for (var letter3 = 81; letter3 <= 90; letter3++) {
+            for (var k = 0; k < $scope.Candidates.length; k++) {
+                if ($scope.Candidates[k].LastName.charCodeAt(0) == letter3) {
+                    $scope.CandidatesRZ.push($scope.Candidates[k]);
+                }
+            }
+        }
     };
-
+    $scope.filter = function () {
+        $scope.Candidates = Candidates;
+        var name = $scope.prescriptionsData.PatientName.toLowerCase();
+        for (var i = 0; i < $scope.Candidates.length; i++) {
+            var candidatename = ($scope.Candidates[i].FirstName + " " + $scope.Candidates[i].LastName).toLowerCase();
+            if (candidatename.indexOf(name) == -1) {
+                $scope.Candidates.splice(i, 1);
+            }
+        }
+        $scope.search();     
+    };
     $scope.Creator = new Prescriptions();
-
+    $scope.search();
     // Prescription creation method
     $scope.create = function () {
         localizedNotifications.removeForCurrent();

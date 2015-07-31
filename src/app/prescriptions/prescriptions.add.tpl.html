@@ -35,12 +35,9 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         <div class="form-inline">
-                            <select required class="form-control" ng-model="SelectedMonth" ng-options="month.value as month.text for month in Months" ng-change="UpdateNumberOfDays()">
-                            </select>
-                            <select required class="form-control" ng-model="SelectedDay" ng-options="day as day for day in Days | limitTo:NumberOfDays">
-                            </select>
-                            <select required class="form-control" ng-model="SelectedYear" ng-options="years as years for years in Years | reverse" ng-change="UpdateNumberOfDays()">
-                            </select>
+                            <select required class="form-control" ng-model="SelectedMonth" ng-options="month.value as month.text for month in Months" ng-change="UpdateNumberOfDays()"></select>
+                            <select required class="form-control" ng-model="SelectedDay" ng-options="day as day for day in Days | limitTo:NumberOfDays"></select>
+                            <select required class="form-control" ng-model="SelectedYear" ng-options="years as years for years in Years | reverse" ng-change="UpdateNumberOfDays()"></select>
                         </div>
                     </div>
                 </div>
@@ -67,25 +64,57 @@
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-cloud"></i></span>
                 <input id="prescription-frequency" class="form-control" placeholder="Patient Full Name" type="text" ng-model="prescriptionsData.PatientName" required>
-                <span ng-click="search()" class="input-group-addon"><i class="fa fa-search"></i></span>
-                <button type="submit" ng-click="search()"ng-hide="true"></button>
+                <span ng-click="filter()" class="input-group-addon"><i class="fa fa-search"></i></span>
+                <button type="submit" ng-click="filter()" ng-hide="true"></button>
             </div>
         </div>
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <select multiple required class="form-control" ng-model="prescriptionsData.PatientId">    
-                    <option class="placeholder" selected disabled value="">--Select Patient--</option>
-                    <option ng-repeat="candidate in Candidates" value="{{candidate.UserId}}">
-                        Name: {{candidate.LastName}}, {{candidate.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Born: {{candidate.DateOfBirth | date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName: {{candidate.UserName}}
-                    </option>
-                </select>
-            </div>
-        </div>     
-        <div class="form-group">
-            <div class="modal-footer">
-                <button class="btn btn-danger btn-lg btn-block" type="button" ng-click="create()" ng-disabled="form.$invalid || medicationsData.isSubmitting">Create</button>
-            </div>
-        </div>
+
+        <tabset>
+            <tab heading="A-I" id="a-i-tab">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <select multiple required class="form-control" ng-model="prescriptionsData.PatientId">
+                            <option class="placeholder" selected disabled value="">--Select Patient--</option>
+                            <option ng-repeat="candidate in CandidatesAI" value="{{candidate.UserId}}">
+                                Name: {{candidate.LastName}}, {{candidate.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Born: {{candidate.DateOfBirth | date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName: {{candidate.UserName}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </tab>
+            <tab heading="J-Q" id="J-Q-tab">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <select multiple required class="form-control" ng-model="prescriptionsData.PatientId">
+                            <option class="placeholder" selected disabled value="">--Select Patient--</option>
+                            <option ng-repeat="candidate in CandidatesJQ" value="{{candidate.UserId}}">
+                                Name: {{candidate.LastName}}, {{candidate.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Born: {{candidate.DateOfBirth | date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName: {{candidate.UserName}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </tab>
+            <tab heading="R-Z" id="R-Z-tab">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <select multiple required class="form-control" ng-model="prescriptionsData.PatientId">
+                            <option class="placeholder" selected disabled value="">--Select Patient--</option>
+                            <option ng-repeat="candidate in CandidatesRZ" value="{{candidate.UserId}}">
+                                Name: {{candidate.LastName}}, {{candidate.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Born: {{candidate.DateOfBirth | date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName: {{candidate.UserName}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
     </div>
+            <div class="form-group">
+                <div class="modal-footer">
+                    <button class="btn btn-danger btn-lg btn-block" type="button" ng-click="create()" ng-disabled="form.$invalid || medicationsData.isSubmitting">Create</button>
+                </div>
+            </div>
+</div>
 </form>

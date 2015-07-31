@@ -66,6 +66,8 @@
             templateUrl: "prescriptions/prescriptions.add.tpl.html",
             controller: 'PreAddCtrl',
             resolve: {
+                Candidates: function (Users, auth) {
+                    return Users.search({ ProviderId: auth.status.token.userId }).$promise;},
                 MedId: function () { return $scope.medication.MedicationId; },
                 MedName: function () { return $scope.medication.GenericName; }
             }
