@@ -103,6 +103,7 @@
                         </a>
                     </th>
                     <th>Providers</th>
+                    <th>Supporter</th>
                     <th style="width:69px;">
                         Edit
                     </th>
@@ -117,6 +118,7 @@
                             <li ng-repeat="provider in careTeam.Providers">{{provider.LastName}}, {{provider.FirstName}} - {{provider.Roles[0]}}</li>
                         </ul>
                     </td>
+                    <td>{{careTeam.Supporter.LastName}}, {{careTeam.Supporter.FirstName}}</td>
                     <td>
                         <button class="btn btn-primary btn-xs" ng-click="updateCareTeam(careTeam)">
                             <i class="glyphicon glyphicon-wrench"></i>
