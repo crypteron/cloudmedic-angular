@@ -80,7 +80,7 @@
         });
     };
 })
-.controller('PreAddCtrl', function ($scope, $modalInstance, auth, Prescriptions, Users, localizedNotifications, Candidates,MedId, MedName, MONTHS) {
+.controller('PreAddCtrl', function ($scope, $modalInstance, auth, Prescriptions, Users, Candidates, MedId, MedName, MONTHS, localizedNotifications) {
     // Initialize scope variables
     $scope.prescriptionsData = {
         MedicationId: MedId,
@@ -91,11 +91,14 @@
         Duration: 0,
         Units: 1,
         PatientId: "",
-        PatientName:"",
+        PatientName: "",
         isSubmitting: false
     };
     $scope.Candidates = Candidates;
     $scope.Creator = new Prescriptions();
+    $scope.AITab = true;
+    $scope.JQTab = false;
+    $scope.RZTab = false;
 
     // Default date placeholders
     var today = new Date();
@@ -110,47 +113,50 @@
         return dat;
     };
 
-    // Search for patient to assign prescriptions
-    $scope.search = function () {
+    // Sort the patients into 3 tabs for simplified viewing
+    $scope.sort = function () {
         $scope.CandidatesAI = [];
         $scope.CandidatesJQ = [];
         $scope.CandidatesRZ = [];
-        for (var letter1 =65; letter1 <= 73; letter1++) {
-            for (var i = 0; i < $scope.Candidates.length;i++) {
-                if ($scope.Candidates[i].LastName.charCodeAt(0) == letter1) {
-                    $scope.CandidatesAI.push($scope.Candidates[i]);
-                }
-            }         
-        }
-        for (var letter2 = 74; letter2 <= 80; letter2++) {
-            for (var j= 0; j< $scope.Candidates.length; j++) {
-                if ($scope.Candidates[j].LastName.charCodeAt(0) == letter2) {
-                    $scope.CandidatesJQ.push($scope.Candidates[j]);
-                }
-            }
-        }
-
-        for (var letter3 = 81; letter3 <= 90; letter3++) {
-            for (var k = 0; k < $scope.Candidates.length; k++) {
-                if ($scope.Candidates[k].LastName.charCodeAt(0) == letter3) {
-                    $scope.CandidatesRZ.push($scope.Candidates[k]);
-                }
-            }
-        }
-    };
-    $scope.filter = function () {
-        $scope.Candidates = Candidates;
-        var name = $scope.prescriptionsData.PatientName.toLowerCase();
         for (var i = 0; i < $scope.Candidates.length; i++) {
-            var candidatename = ($scope.Candidates[i].FirstName + " " + $scope.Candidates[i].LastName).toLowerCase();
-            if (candidatename.indexOf(name) == -1) {
-                $scope.Candidates.splice(i, 1);
+            if ($scope.Candidates[i].LastName.charCodeAt(0) <= 73) {
+                $scope.CandidatesAI.push($scope.Candidates[i]);
+            } else if ($scope.Candidates[i].LastName.charCodeAt(0) <= 80) {
+                $scope.CandidatesJQ.push($scope.Candidates[i]);
+            } else {
+                $scope.CandidatesRZ.push($scope.Candidates[i]);
             }
         }
-        $scope.search();     
     };
-    $scope.Creator = new Prescriptions();
-    $scope.search();
+
+    // Filter the patients displayed as candidates
+    $scope.filter = function () {
+        $scope.Candidates = angular.copy(Candidates);
+        if ($scope.prescriptionsData.PatientName) {
+            var name = $scope.prescriptionsData.PatientName.toLowerCase();
+            for (var i = 0; i < $scope.Candidates.length; i++) {
+                var reversename = ($scope.Candidates[i].LastName + ", " + $scope.Candidates[i].FirstName).toLowerCase();
+                if (reversename.substring(0, name.length).localeCompare(name) !== 0) {
+                    $scope.Candidates.splice(i, 1);
+                }
+            }
+            // Redirect to proper tab based on filter
+            if ($scope.prescriptionsData.PatientName.charCodeAt(0) <= 73) {
+                $scope.AITab = true;
+                $scope.JQTab = false;
+                $scope.RZTab = false;
+            } else if ($scope.prescriptionsData.PatientName.charCodeAt(0) <= 80) {
+                $scope.JQTab = true;
+                $scope.AITab = false;
+                $scope.RZTab = false;
+            } else {
+                $scope.RZTab = true;
+                $scope.AITab = false;
+                $scope.JQTab = false;
+            }
+        }
+        $scope.sort();
+    };
 
     // Prescription creation method
     $scope.create = function () {
@@ -203,11 +209,9 @@
     // Initialize scope variables
     $scope.prescription = angular.copy(prescription);
     $scope.original = angular.copy($scope.prescription);
-
     $scope.data = {
         isSubmitting: false
     };
-
     $scope.Updater = new Prescriptions();
 
     $scope.updatePrescription = function () {

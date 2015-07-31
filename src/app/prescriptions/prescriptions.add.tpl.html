@@ -1,4 +1,4 @@
-﻿<form name="form" ng-submit="search()">
+﻿<form name="form" ng-submit="create()" ng-init="sort()">
     <div class="modal-header">
         <h3 class="modal-title">Add New Prescription</h3>
     </div>
@@ -63,27 +63,26 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-cloud"></i></span>
-                <input id="prescription-frequency" class="form-control" placeholder="Patient Full Name" type="text" ng-model="prescriptionsData.PatientName" required>
+                <input id="prescription-frequency" class="form-control" placeholder="Filter Patient (Last Name, First Name)" type="text" ng-model="prescriptionsData.PatientName" ng-change="filter()" required>
                 <span ng-click="filter()" class="input-group-addon"><i class="fa fa-search"></i></span>
                 <button type="submit" ng-click="filter()" ng-hide="true"></button>
             </div>
         </div>
-
         <tabset>
-            <tab heading="A-I" id="a-i-tab">
+            <tab heading="A-I" id="a-i-tab" active="AITab">
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <select multiple required class="form-control" ng-model="prescriptionsData.PatientId">
                             <option class="placeholder" selected disabled value="">--Select Patient--</option>
                             <option ng-repeat="candidate in CandidatesAI" value="{{candidate.UserId}}">
-                                Name: {{candidate.LastName}}, {{candidate.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Born: {{candidate.DateOfBirth | date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName: {{candidate.UserName}}
+                                {{candidate.LastName}}, {{candidate.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Born: {{candidate.DateOfBirth | date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName: {{candidate.UserName}}
                             </option>
                         </select>
                     </div>
                 </div>
             </tab>
-            <tab heading="J-Q" id="J-Q-tab">
+            <tab heading="J-Q" id="j-q-tab" active="JQTab">
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -96,7 +95,7 @@
                     </div>
                 </div>
             </tab>
-            <tab heading="R-Z" id="R-Z-tab">
+            <tab heading="R-Z" id="r-z-tab" active="RZTab">
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -116,5 +115,4 @@
                     <button class="btn btn-danger btn-lg btn-block" type="button" ng-click="create()" ng-disabled="form.$invalid || medicationsData.isSubmitting">Create</button>
                 </div>
             </div>
-</div>
 </form>
