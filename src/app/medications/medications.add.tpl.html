@@ -8,7 +8,7 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-tag"></i></span>
-                <input id="medication-genericname" class="form-control" placeholder="Generic Name" type="text" watch-change="check_GenericName()" ng-model="medicationsData.GenericName" required>
+                <input id="medication-genericname" class="form-control" placeholder="Generic Name" type="text" ng-model="medicationsData.GenericName" watch-change="check_generic_name()" required>
             </div>
         </div>
         <div class="form-group" ng-hide="GenericName_Valid">
@@ -17,7 +17,7 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><font size="4">#</font></span>
-                <input id="medication-code" class="form-control" placeholder="Code" type="text" ng-pattern="/^\d{5}$/" ng-model="medicationsData.Code" ng-maxlength="5" maxlength="5" watch-change="check_Code()" required>
+                <input id="medication-code" class="form-control" placeholder="Code" type="text" ng-pattern="/^\d{5}$/" ng-model="medicationsData.Code" ng-maxlength="5" maxlength="5" watch-change="check_code()" required>
             </div>
         </div>
         <div class="form-group" ng-hide="Code_Valid">
@@ -25,7 +25,9 @@
         </div>        
         <div class="form-group">
             <div class="modal-footer">
-                <button class="btn btn-primary btn-lg btn-block" type="submit" ng-click="create()" ng-disabled="form.$invalid || medicationsData.isSubmitting">Create</button>
+                <button class="btn btn-primary btn-lg btn-block" type="submit" ng-click="create()" ng-disabled="form.$invalid || medicationsData.isSubmitting">
+                    Create
+                </button>
             </div>
         </div>
     </div>

@@ -31,11 +31,13 @@
     });
 })
 .controller('PrescriptionsCtrl', function ($scope, $state, prescriptions, Prescriptions, localizedNotifications, $modal) {
-    // initialize scope variables
+    // Initialize scope variables
     $scope.prescriptions = prescriptions;
     $scope.orderByField = 'MedicationCode';
     $scope.reverseSort = false;
+    $scope.prescriptionsRemover = new Prescriptions();
 
+    // Split the prescriptions into active and expired
     var today = new Date();
     $scope.expiredPrescriptions = [];
     $scope.activePrescriptions = [];
@@ -47,8 +49,6 @@
             $scope.activePrescriptions.push($scope.prescriptions[i]);
         }
     }
-
-    $scope.prescriptionsRemover = new Prescriptions();
 
     $scope.removePrescription = function (prescription) {
         localizedNotifications.removeForCurrent();
@@ -81,6 +81,7 @@
     };
 })
 .controller('PreAddCtrl', function ($scope, $modalInstance, auth, Prescriptions, Users, localizedNotifications, Candidates,MedId, MedName, MONTHS) {
+    // Initialize scope variables
     $scope.prescriptionsData = {
         MedicationId: MedId,
         MedicationName: MedName,
@@ -94,19 +95,22 @@
         isSubmitting: false
     };
     $scope.Candidates = Candidates;
+    $scope.Creator = new Prescriptions();
+
     // Default date placeholders
     var today = new Date();
     $scope.SelectedMonth = today.getMonth() + 1;
     $scope.SelectedDay = today.getDate();
     $scope.SelectedYear = today.getFullYear();
 
-    // Create function to calculate End Date based on duration
+    // Add a number of days to a given date
     Date.prototype.addDays = function (days) {
         var dat = new Date(this.valueOf());
         dat.setDate(dat.getDate() + days);
         return dat;
     };
 
+    // Search for patient to assign prescriptions
     $scope.search = function () {
         $scope.CandidatesAI = [];
         $scope.CandidatesJQ = [];
@@ -147,6 +151,7 @@
     };
     $scope.Creator = new Prescriptions();
     $scope.search();
+
     // Prescription creation method
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
@@ -195,7 +200,7 @@
     ];
 })
 .controller('UpdatePrescriptionsCtrl', function ($scope, $modalInstance, Prescriptions, prescription, MONTHS, localizedNotifications) {
-    // initialize scope variables
+    // Initialize scope variables
     $scope.prescription = angular.copy(prescription);
     $scope.original = angular.copy($scope.prescription);
 

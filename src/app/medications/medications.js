@@ -29,11 +29,12 @@
     });
 }])
 .controller('MedicationsCtrl', function ($scope, $state, medications, Medications, localizedNotifications, $modal) {
-
+    // Initialize scope variables
     $scope.medications = medications;
     $scope.medicationsRemover = new Medications();
     $scope.orderByField = 'GenericName';
     $scope.reverseSort = false;
+
     $scope.removeMedication = function (medication) {
         localizedNotifications.removeForCurrent();
         $modal.open({
@@ -59,6 +60,7 @@
             $state.go("medications", null, { reload: true });
         });
     };
+
     $scope.createPrescription = function (medication) {
         $scope.medication = medication;
         localizedNotifications.removeForCurrent();
@@ -77,6 +79,7 @@
     };
 })
 .controller('MedAddCtrl', function ($scope, $state, $modalInstance, Medications, localizedNotifications) {
+    // Initialize scope variables
     $scope.medicationsData = {
         MedicationId: "",
         GenericName: "",
@@ -89,7 +92,8 @@
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
         $scope.medicationsData.isSubmitting = true;
-        // bind scope values to creator object
+
+        // Bind scope values to creator resource
         $scope.medicationsCreator.GenericName = $scope.medicationsData.GenericName;
         $scope.medicationsCreator.Code = $scope.medicationsData.Code;
 
@@ -102,9 +106,7 @@
     };
 
     $scope.Code_Valid = true;
-
-    $scope.check_Code = function () {
-
+    $scope.check_code = function () {
         if (document.getElementById("medication-code").value.match(/\D{1,5}/) != null) {
             $scope.Code_Valid = false;
             $scope.medicationsData.isSubmitting = true;
@@ -116,8 +118,7 @@
     };
 
     $scope.GenericName_Valid = true;
-
-    $scope.check_GenericName = function () {
+    $scope.check_generic_name = function () {
         if (document.getElementById("medication-genericname").value.match(/[^a-zA-Z]{1,}/) != null) {
             $scope.GenericName_Valid = false;
             $scope.medicationsData.isSubmitting = true;

@@ -84,19 +84,9 @@
             } else {
                 auth.redirectAfterLogin('provider');
             }
-            //// After login, if user hasn't completed profile, send them to profile page
-            //var profile = userProfile.get();
-            //profile.$promise.then(function () {
-            //    if (profile.UserMetaData.CompletedProfile === false) {
-            //        $state.go('profile');
-            //    } else                    
-            //    {   
-            //        // Otherwise redirect them to the Apps state or to whichever state they were attempting to load
-            //        auth.redirectAfterLogin('apps.list', {});
-            //    }
-            //});
         },
         function (err) {
+            $scope.loginData.password = "";
             $scope.loginData.isSubmitting = false; // re-enable submit button
         });
     };
