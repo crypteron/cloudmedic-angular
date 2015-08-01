@@ -1,11 +1,10 @@
 ﻿angular.module('form', [
     'ui.router',
     'ui.mask',
-    'reg',
     'cloudmedic.resources',
     'cloudmedic.dropdown.values'
 ])
-.controller('FormCtrl', function ($scope, reg, Users, Password, $state, MONTHS, localizedNotifications) {
+.controller('FormCtrl', function ($scope, Registration, Users, Password, $state, MONTHS, localizedNotifications) {
     // Initialize scope variables
     $scope.data = {
         UserName: "",
@@ -19,27 +18,45 @@
         Role: "",
         Specialty: "",
         PhoneNumber: "",
+        PatientId: "",
         isSubmitting: false
     };
+    $scope.supporter = false;
     $scope.creator = new Users();
     $scope.password = new Password();
+    $scope.registration = new Registration();
 
-    // User registration method
+    // Patient registration
     $scope.register = function () {
         $scope.data.isSubmitting = true;
-        $scope.data.DOB = $scope.SelectedYear + '-' + pad($scope.SelectedMonth, 2) + '-' + pad($scope.SelectedDay, 2);
-        $scope.data.PhoneNumber = '(' + $scope.data.PhoneNumber.substr(0, 3) + ') ' + $scope.data.PhoneNumber.substr(3, 3) + '-' + $scope.data.PhoneNumber.substr(6, 4);
-        reg.register($scope.data)
-        .then(function (response) {
-            // After registration, send them to login page
-            $state.go('login');
-        },
-        function (err) {
-            $scope.data.isSubmitting = false; // re-enable submit button
-        });
+        $scope.registration.UserName = $scope.data.UserName;
+        $scope.registration.Email = $scope.data.Email;
+        $scope.registration.Password = $scope.data.Password;
+        $scope.registration.ConfirmPassword = $scope.data.ConfirmPassword;
+        $scope.registration.FirstName = $scope.data.FirstName;
+        $scope.registration.LastName = $scope.data.LastName;
+        $scope.registration.Gender = $scope.data.Gender;
+        $scope.registration.Specialty = $scope.data.Specialty;
+        $scope.registration.DOB = $scope.SelectedYear + '-' + pad($scope.SelectedMonth, 2) + '-' + pad($scope.SelectedDay, 2);
+        $scope.registration.PhoneNumber = '(' + $scope.data.PhoneNumber.substr(0, 3) + ') ' + $scope.data.PhoneNumber.substr(3, 3) + '-' + $scope.data.PhoneNumber.substr(6, 4);
+        if ($scope.supporter) {
+            $scope.registration.PatientId = $scope.data.PatientId;
+            $scope.registration.$supporter().then(function (response) {
+                $state.go('login');
+            }, function (err) {
+                $scope.data.isSubmitting = false; // re-enable submit button
+            });
+        } else {
+            $scope.registration.$register().then(function (response) {
+                $state.go('login');
+            },
+            function (err) {
+                $scope.data.isSubmitting = false;
+            });
+        }
     };
 
-    // User creation method
+    // Provider creation
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
 

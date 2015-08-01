@@ -7,6 +7,7 @@
         'medications.resource',
         'profile.resource',
         'password.resource',
+        'registration.resource',
         'cloudmedic.config',
         'users.resource'
     ])
@@ -19,6 +20,7 @@
             ProfileProvider,
             PasswordProvider,
             CareTeamsProvider,
+            RegistrationProvider,
             APP_CONFIG,            
             UsersProvider) {
                 AppsProvider.setApiUrl(APP_CONFIG.api_url);
@@ -30,5 +32,6 @@
                 UsersProvider.setApiUrl(APP_CONFIG.api_url);
                 PrescriptionsProvider.setApiUrl(APP_CONFIG.api_url);
                 CareTeamsProvider.setApiUrl(APP_CONFIG.api_url);
+                RegistrationProvider.setApiUrl(APP_CONFIG.api_url);
         }
     );

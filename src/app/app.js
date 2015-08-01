@@ -27,7 +27,7 @@ angular.module('cloudmedic', [
   'errorHandler',  
   'userProfile'
 ])
-.config(function ($urlRouterProvider, authProvider, regProvider, APP_CONFIG, localizedMessagesProvider, CRY_MESSAGES) {
+.config(function ($urlRouterProvider, authProvider, APP_CONFIG, localizedMessagesProvider, CRY_MESSAGES) {
         // Configure the localized messages provider with the messages 
         localizedMessagesProvider.setMessages(CRY_MESSAGES);
 
@@ -45,16 +45,10 @@ angular.module('cloudmedic', [
                 'account/resendVerify$',
                 // The registration request
                 'Register$',
+                'Supporter$',
                 // The entire demo route
                 'demo/.*$'
             ]
-        });
-
-        // Configure the registration provider
-        regProvider.setOptions({
-            apiUrl: APP_CONFIG.api_url,
-            registerPath: 'Account/Register',
-            assumePublic: false
         });
 
         // Enable to 'contains' method for all browsers
@@ -81,31 +75,6 @@ angular.module('cloudmedic', [
         $scope.hideNav = false;
         $rootScope.previous = 'login';
         $rootScope.previousParams = {};
-
-        //// Prevent migrating to any state other than Profile if not yet completed profile        
-        //var removeProfileListener = $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-        //    if (auth.status.isLoggedIn && toState.name != 'profile' && toState.data.public !== true) {
-        //        // Fetch the profile singleton from the userProfile service
-        //        var profile = userProfile.get();
-
-        //        // Ensure the profile has already been fetched by using it's promise
-        //        profile.$promise.then(function () {
-        //            // see if the user has complete his/her profile
-        //            if (profile.UserMetaData.CompletedProfile === false) {            
-        //                event.preventDefault();
-        //                // show a custom error for those trying to navigate away from the Update profile page so they don't think that nothing is happening
-        //                if (fromState.name == 'profile') {
-        //                    localizedNotifications.removeAll();
-        //                    localizedNotifications.addForCurrent('profile.required.force', 'warning', { pageTitle: toState.data.pageTitle });
-        //                }
-        //                $state.go('profile');
-        //            } else {
-        //                // Remove profile listener whenever CompletedProfile has been found to be true
-        //                removeProfileListener();
-        //            }
-        //        });
-        //    }
-        //});
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             // Update page title when state changes
