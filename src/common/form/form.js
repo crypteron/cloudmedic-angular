@@ -27,8 +27,8 @@
     // User registration method
     $scope.register = function () {
         $scope.data.isSubmitting = true;
-        $scope.data.DOB = $scope.SelectedYear + '-' + pad($scope.SelectedMonth, 2) + '-' + pad($scope.SelectedDay, 2);
         $scope.data.PhoneNumber = '(' + $scope.data.PhoneNumber.substr(0, 3) + ') ' + $scope.data.PhoneNumber.substr(3, 3) + '-' + $scope.data.PhoneNumber.substr(6, 4);
+        $scope.data.DOB = document.getElementById('register-DOB').value.toString();
         reg.register($scope.data)
         .then(function (response) {
             // After registration, send them to login page
@@ -53,7 +53,7 @@
         $scope.creator.Specialty = $scope.data.Specialty;
         $scope.creator.PhoneNumber = '(' + $scope.data.PhoneNumber.substr(0, 3) + ') ' + $scope.data.PhoneNumber.substr(3, 3) + '-' + $scope.data.PhoneNumber.substr(6, 4);
         $scope.creator.Roles = [$scope.data.Role];
-        $scope.creator.DOB = $scope.SelectedYear + '-' + pad($scope.SelectedMonth, 2) + '-' + pad($scope.SelectedDay, 2);
+        $scope.creator.DOB = document.getElementById('admin-DOB').value.toString();
 
         $scope.creator.$create().then(function (response) {
             localizedNotifications.addForNext('create.success', 'success', { entityType: 'User' });
@@ -166,30 +166,20 @@
         }
     };
 
-    // Date of Birth dropdown menu value generator
-    var numberOfYears = (new Date()).getYear();
-    var years = $.map($(Array(numberOfYears)), function (val, i) {
-        return i + 1900;
-    });
-    var days = $.map($(Array(31)), function (val, i) {
-        return i + 1;
-    });
-    var isLeapYear = function () {
-        var year = $scope.SelectedYear || 0;
-        return ((year % 400 === 0 || year % 100 !== 0) && (year % 4 === 0)) ? 1 : 0;
-    };
-    var getNumberOfDaysInMonth = function () {
-        var selectedMonth = $scope.SelectedMonth || 0;
-        return 31 - ((selectedMonth === 2) ? (3 - isLeapYear()) : ((selectedMonth - 1) % 7 % 2));
+    // Date Picker    
+    $scope.open = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened = true;
     };
 
-    $scope.UpdateNumberOfDays = function () {
-        $scope.NumberOfDays = getNumberOfDaysInMonth();
+    $scope.format = 'yyyy-MM-dd';
+
+    $scope.dateOptions = {
+        showWeeks: false
     };
-    $scope.NumberOfDays = 31;
-    $scope.Years = years;
-    $scope.Days = days;
-    $scope.Months = MONTHS;
+
 })
 .directive('watchChange', function () {
     return {

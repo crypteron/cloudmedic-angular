@@ -52,15 +52,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
                         <div class="form-inline">
-                            <select required class="form-control" ng-model="SelectedMonth" ng-options="month.value as month.text for month in Months" ng-change="UpdateNumberOfDays()">
-                                <option class="placeholder" selected disabled value="">Month</option>
-                            </select>
-                            <select required class="form-control" ng-model="SelectedDay" ng-options="day as day for day in Days | limitTo:NumberOfDays">
-                                <option class="placeholder" selected disabled value="">Day</option>
-                            </select>
-                            <select required class="form-control" ng-model="SelectedYear" ng-options="years as years for years in Years | reverse" ng-change="UpdateNumberOfDays()">
-                                <option class="placeholder" selected disabled value="">Year</option>
-                            </select>
+                            <input type="text" style="width:319px" id="admin-DOB" ng-model="dt" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" placeholder="YYYY-MM-DD" show-button-bar="false" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
                         </div>
                     </div>
                 </div>

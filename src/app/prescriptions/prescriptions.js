@@ -80,8 +80,8 @@
         });
     };
 })
-.controller('PreAddCtrl', function ($scope, $modalInstance, auth, Prescriptions, Users, Candidates, MedId, MedName, MONTHS, localizedNotifications) {
-    // Initialize scope variables
+
+.controller('PreAddCtrl', function ($scope, $modalInstance, $filter, auth, Prescriptions, Users, localizedNotifications, MedId, MedName, MONTHS) {
     $scope.prescriptionsData = {
         MedicationId: MedId,
         MedicationName: MedName,
@@ -102,15 +102,13 @@
 
     // Default date placeholders
     var today = new Date();
-    $scope.SelectedMonth = today.getMonth() + 1;
-    $scope.SelectedDay = today.getDate();
-    $scope.SelectedYear = today.getFullYear();
+    $scope.dt = today.getFullYear() + '-' + (pad((today.getMonth() + 1), 2)) + '-' + today.getDate();
 
     // Add a number of days to a given date
     Date.prototype.addDays = function (days) {
-        var dat = new Date(this.valueOf());
-        dat.setDate(dat.getDate() + days);
-        return dat;
+        var date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
     };
 
     // Sort the patients into 3 tabs for simplified viewing
@@ -129,46 +127,22 @@
         }
     };
 
-    // Filter the patients displayed as candidates
-    $scope.filter = function () {
-        $scope.Candidates = angular.copy(Candidates);
-        if ($scope.prescriptionsData.PatientName) {
-            var name = $scope.prescriptionsData.PatientName.toLowerCase();
-            for (var i = 0; i < $scope.Candidates.length; i++) {
-                var reversename = ($scope.Candidates[i].LastName + ", " + $scope.Candidates[i].FirstName).toLowerCase();
-                if (reversename.substring(0, name.length).localeCompare(name) !== 0) {
-                    $scope.Candidates.splice(i, 1);
-                }
-            }
-            // Redirect to proper tab based on filter
-            if ($scope.prescriptionsData.PatientName.charCodeAt(0) <= 73) {
-                $scope.AITab = true;
-                $scope.JQTab = false;
-                $scope.RZTab = false;
-            } else if ($scope.prescriptionsData.PatientName.charCodeAt(0) <= 80) {
-                $scope.JQTab = true;
-                $scope.AITab = false;
-                $scope.RZTab = false;
-            } else {
-                $scope.RZTab = true;
-                $scope.AITab = false;
-                $scope.JQTab = false;
-            }
-        }
-        $scope.sort();
-    };
-
+    $scope.Creator = new Prescriptions();
     // Prescription creation method
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
         $scope.prescriptionsData.isSubmitting = true;
+
         $scope.Creator.MedicationId = $scope.prescriptionsData.MedicationId;
         $scope.Creator.PatientId = $scope.prescriptionsData.PatientId[0];
         $scope.Creator.Frequency = $scope.prescriptionsData.Frequency;
         $scope.Creator.Dosage = $scope.prescriptionsData.Dosage;
         $scope.Creator.Notes = $scope.prescriptionsData.Notes;
-        $scope.Creator.StartDate = new Date($scope.SelectedYear + '-' + pad($scope.SelectedMonth, 2) + '-' + pad($scope.SelectedDay, 2));
+        $scope.Creator.StartDate = new Date($scope.dt);
         $scope.Creator.EndDate = $scope.Creator.StartDate.addDays($scope.prescriptionsData.Duration * $scope.prescriptionsData.Units);
+        console.log($scope.prescriptionsData.Duration + '*' + $scope.prescriptionsData.Units);
+        console.log($scope.Creator.StartDate + ', ' + $scope.Creator.EndDate, (new Date($scope.Creator.StartDate)));
+
         $scope.Creator.$create().then(function () {
             localizedNotifications.addForNext('create.success', 'success', { entityType: 'Prescription' });
             $modalInstance.close();
@@ -177,36 +151,32 @@
         });
     };
 
-    // Date dropdown menu value generator
-    var CurrentYear = new Date().getFullYear();
-    $scope.CurrentYear = CurrentYear;
-    var years = $.map($(Array(10)), function (val, i) { return i + CurrentYear; });
-    var days = $.map($(Array(31)), function (val, i) { return i + 1; });
-    var isLeapYear = function () {
-        var year = $scope.SelectedYear || 0;
-        return ((year % 400 === 0 || year % 100 !== 0) && (year % 4 === 0)) ? 1 : 0;
-    };
-    var getNumberOfDaysInMonth = function () {
-        var selectedMonth = $scope.SelectedMonth || 0;
-        return 31 - ((selectedMonth === 2) ? (3 - isLeapYear()) : ((selectedMonth - 1) % 7 % 2));
-    };
-
-    $scope.UpdateNumberOfDays = function () {
-        $scope.NumberOfDays = getNumberOfDaysInMonth();
-    };
-    $scope.NumberOfDays = 31;
-    $scope.Years = years;
-    $scope.Days = days;
-    $scope.Months = MONTHS;
     $scope.Periods = $.map($(Array(100)), function (val, i) { return i + 1; });
     $scope.Units = [
         Days = 1,
         Weeks = 7,
         Months = 31
     ];
+
+    // Date Picker    
+    $scope.open = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened = true;
+    };
+
+    $scope.format = 'yyyy-MM-dd';
+
+    $scope.dateOptions = {
+        'showWeeks': false
+    };
+
+
 })
-.controller('UpdatePrescriptionsCtrl', function ($scope, $modalInstance, Prescriptions, prescription, MONTHS, localizedNotifications) {
-    // Initialize scope variables
+
+.controller('UpdatePrescriptionsCtrl', function ($scope, $modalInstance, $filter, Prescriptions, prescription, MONTHS, localizedNotifications) {
+    // initialize scope variables
     $scope.prescription = angular.copy(prescription);
     $scope.original = angular.copy($scope.prescription);
     $scope.data = {
@@ -218,7 +188,7 @@
         localizedNotifications.removeForCurrent();
         $scope.Updater.PrescriptionId = $scope.prescription.PrescriptionId;
         $scope.Updater.Notes = $scope.prescription.Notes;
-        $scope.Updater.EndDate = new Date($scope.SelectedYear + '-' + pad($scope.SelectedMonth, 2) + '-' + pad($scope.SelectedDay + 1, 2));
+        $scope.Updater.EndDate = document.getElementById('prescription-date').value.toString();
         $scope.Updater.$update().then(function () {
             localizedNotifications.addForNext('update.success', 'success', { entityType: 'Prescription' });
             $modalInstance.close();
@@ -228,39 +198,28 @@
     };
 
     $scope.resetPrescription = function () {
-        $scope.prescription.Notes = $scope.original.Notes;
-        $scope.SelectedMonth = origDate.getMonth() + 1;
-        $scope.SelectedDay = origDate.getDate();
-        $scope.SelectedYear = origDate.getFullYear();
+        $scope.dt = $filter('date')(Date($scope.prescription.EndDate), 'yyyy-MM-dd');
         $scope.form.$setPristine();
     };
 
-    // Date dropdown menu value generator
-    var origDate = new Date($scope.prescription.EndDate);
-    $scope.SelectedMonth = origDate.getMonth() + 1;
-    $scope.SelectedDay = origDate.getDate();
-    $scope.SelectedYear = origDate.getFullYear();
+    $scope.dt = $scope.prescription.EndDate;
+    // Date Picker    
+    $scope.open = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
 
-    var CurrentYear = new Date().getFullYear();
-    $scope.CurrentYear = CurrentYear;
-    var years = $.map($(Array(10)), function (val, i) { return i + CurrentYear; });
-    var days = $.map($(Array(31)), function (val, i) { return i + 1; });
-    var isLeapYear = function () {
-        var year = $scope.SelectedYear || 0;
-        return ((year % 400 === 0 || year % 100 !== 0) && (year % 4 === 0)) ? 1 : 0;
-    };
-    var getNumberOfDaysInMonth = function () {
-        var selectedMonth = $scope.SelectedMonth || 0;
-        return 31 - ((selectedMonth === 2) ? (3 - isLeapYear()) : ((selectedMonth - 1) % 7 % 2));
+        $scope.opened = true;
     };
 
-    $scope.UpdateNumberOfDays = function () {
-        $scope.NumberOfDays = getNumberOfDaysInMonth();
+    $scope.format = 'yyyy-MM-dd';
+
+    $scope.dateOptions = {
+        'min-date': $scope.minDate,
+        'showWeeks': false
     };
-    $scope.NumberOfDays = 31;
-    $scope.Years = years;
-    $scope.Days = days;
-    $scope.Months = MONTHS;
+
+    $scope.minDate = $scope.minDate ? null : new Date();
+
 });
 // adds leading zeroes
 function pad(num, size) {
