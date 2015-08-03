@@ -66,7 +66,7 @@
         localizedNotifications.removeForCurrent();
         $modal.open({
             templateUrl: "prescriptions/prescriptions.add.tpl.html",
-            controller: 'PreAddCtrl',
+            controller: 'AddPrescriptionsCtrl',
             resolve: {
                 Candidates: function (Users, auth) {
                     return Users.search({ ProviderId: auth.status.token.userId }).$promise;},
