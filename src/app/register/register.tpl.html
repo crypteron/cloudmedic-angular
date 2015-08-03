@@ -9,6 +9,28 @@
             <form name="form" novalidate role="form">
                 <div class="form-group">
                     <div class="input-group">
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" ng-model="supporter" name="Patient" ng-value="false" selected />
+                                Patient
+                            </label>
+                        </div>
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" ng-model="supporter" name="Supporter" ng-value="true" selected />
+                                Supporter
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-hide="!supporter">
+                    <div class="input-group">
+                        <span class="input-group-addon"><font size="4">#</font></span>
+                        <input id="register-patientId" class="form-control" placeholder="Patient Id" type="text" ng-model="data.PatientId" ng-required="supporter" autofocus>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
                         <input id="register-username" class="form-control" pattern="[A-Za-z0-9.]{3,20}" placeholder="Username" type="text" ng-model="data.UserName" watch-change="check_username_symbol();check_username_length()" required autofocus>
                     </div>

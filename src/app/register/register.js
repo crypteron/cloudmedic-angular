@@ -1,7 +1,6 @@
 ﻿angular.module('cloudmedic.register', [
     'ui.router',
     'ui.mask',
-    'reg',
     'form',
     'cloudmedic.dropdown.values'
 ]).config(function ($stateProvider) {
