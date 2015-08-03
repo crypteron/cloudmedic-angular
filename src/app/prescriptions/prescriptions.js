@@ -80,8 +80,7 @@
         });
     };
 })
-
-.controller('PreAddCtrl', function ($scope, $modalInstance, $filter, auth, Prescriptions, Users, Candidates,localizedNotifications, MedId, MedName, MONTHS) {
+.controller('PreAddCtrl', function ($scope, $modalInstance, $filter, auth, Prescriptions, Users, localizedNotifications, Candidates, MedId, MedName, MONTHS) {
     $scope.prescriptionsData = {
         MedicationId: MedId,
         MedicationName: MedName,
@@ -102,7 +101,7 @@
 
     // Default date placeholders
     var today = new Date();
-    $scope.dt = today.getFullYear() + '-' + (pad((today.getMonth() + 1), 2)) + '-' + today.getDate();
+    $scope.dt = today.getFullYear() + '-' + (pad((today.getMonth() + 1), 2)) + '-' + pad(today.getDate(),2);
 
     // Add a number of days to a given date
     Date.prototype.addDays = function (days) {
@@ -147,15 +146,15 @@
         localizedNotifications.removeForCurrent();
         $scope.prescriptionsData.isSubmitting = true;
 
+        $scope.TempEnd = new Date($scope.dt).addDays($scope.prescriptionsData.Duration * $scope.prescriptionsData.Units);     
+
         $scope.Creator.MedicationId = $scope.prescriptionsData.MedicationId;
         $scope.Creator.PatientId = $scope.prescriptionsData.PatientId[0];
         $scope.Creator.Frequency = $scope.prescriptionsData.Frequency;
         $scope.Creator.Dosage = $scope.prescriptionsData.Dosage;
         $scope.Creator.Notes = $scope.prescriptionsData.Notes;
-        $scope.Creator.StartDate = new Date($scope.dt);
-        $scope.Creator.EndDate = $scope.Creator.StartDate.addDays($scope.prescriptionsData.Duration * $scope.prescriptionsData.Units);
-        console.log($scope.prescriptionsData.Duration + '*' + $scope.prescriptionsData.Units);
-        console.log($scope.Creator.StartDate + ', ' + $scope.Creator.EndDate, (new Date($scope.Creator.StartDate)));
+        $scope.Creator.StartDate = $filter('date')($scope.dt, 'M/d/yyyy h:mm:ss a', '+000');
+        $scope.Creator.EndDate = $filter('date')(DateToUTC($scope.TempEnd), 'M/d/yyyy h:mm:ss a');
 
         $scope.Creator.$create().then(function () {
             localizedNotifications.addForNext('create.success', 'success', { entityType: 'Prescription' });
@@ -202,7 +201,7 @@
         localizedNotifications.removeForCurrent();
         $scope.Updater.PrescriptionId = $scope.prescription.PrescriptionId;
         $scope.Updater.Notes = $scope.prescription.Notes;
-        $scope.Updater.EndDate = document.getElementById('prescription-date').value.toString();
+        $scope.Updater.EndDate = $filter('date')($scope.dt, 'M/d/yyyy h:mm:ss a', '+000');
         $scope.Updater.$update().then(function () {
             localizedNotifications.addForNext('update.success', 'success', { entityType: 'Prescription' });
             $modalInstance.close();
@@ -212,7 +211,7 @@
     };
 
     $scope.resetPrescription = function () {
-        $scope.dt = $filter('date')(Date($scope.prescription.EndDate), 'yyyy-MM-dd');
+        $scope.dt = $filter('date')(Date($scope.prescription.EndDate), 'M/d/yyyy h:mm:ss a', '+000');
         $scope.form.$setPristine();
     };
 
@@ -228,15 +227,16 @@
     $scope.format = 'yyyy-MM-dd';
 
     $scope.dateOptions = {
-        'min-date': $scope.minDate,
         'showWeeks': false
     };
-
-    $scope.minDate = $scope.minDate ? null : new Date();
 
 });
 // adds leading zeroes
 function pad(num, size) {
     var s = "00" + num;
     return s.substr(s.length - size);
+}
+
+function DateToUTC(date) {
+    return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
 }

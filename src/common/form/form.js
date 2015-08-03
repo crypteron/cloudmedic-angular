@@ -4,7 +4,7 @@
     'cloudmedic.resources',
     'cloudmedic.dropdown.values'
 ])
-.controller('FormCtrl', function ($scope, Registration, Users, Password, $state, MONTHS, localizedNotifications) {
+.controller('FormCtrl', function ($scope, $filter, Registration, Users, Password, $state, MONTHS, localizedNotifications) {
     // Initialize scope variables
     $scope.data = {
         UserName: "",
@@ -37,7 +37,7 @@
         $scope.registration.LastName = $scope.data.LastName;
         $scope.registration.Gender = $scope.data.Gender;
         $scope.registration.Specialty = $scope.data.Specialty;
-        $scope.data.DOB = document.getElementById('register-DOB').value.toString();
+        $scope.registration.DOB = document.getElementById('register-DOB').value.toString();
         $scope.registration.PhoneNumber = '(' + $scope.data.PhoneNumber.substr(0, 3) + ') ' + $scope.data.PhoneNumber.substr(3, 3) + '-' + $scope.data.PhoneNumber.substr(6, 4);
         if ($scope.supporter) {
             $scope.registration.PatientId = $scope.data.PatientId;
@@ -56,7 +56,7 @@
         }
     };
 
-    // Provider creation
+    // Physician & Nurse creation
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
 
@@ -70,7 +70,7 @@
         $scope.creator.Specialty = $scope.data.Specialty;
         $scope.creator.PhoneNumber = '(' + $scope.data.PhoneNumber.substr(0, 3) + ') ' + $scope.data.PhoneNumber.substr(3, 3) + '-' + $scope.data.PhoneNumber.substr(6, 4);
         $scope.creator.Roles = [$scope.data.Role];
-        $scope.creator.DOB = document.getElementById('admin-DOB').value.toString();
+        $scope.creator.DOB = $filter('date')($scope.dt, 'M/d/yyyy h:mm:ss a', '+000');
 
         $scope.creator.$create().then(function (response) {
             localizedNotifications.addForNext('create.success', 'success', { entityType: 'User' });
@@ -217,8 +217,7 @@
         return items.slice().reverse();
     };
 });
-// Add leading zeroes for displaying a date
-function pad(num, size) {
-    var s = "00" + num;
-    return s.substr(s.length - size);
+
+function DateToUTC(date) {
+    return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
 }
