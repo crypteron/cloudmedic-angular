@@ -51,6 +51,8 @@
             $state.go('admin');
         } else if (auth.status.token.userRole.contains('Patient')) {
             $state.go('patient');
+        } else if (auth.status.token.userRole.contains('Supporter')) {
+            $state.go('supporter');
         } else {
             $state.go('provider');
         }

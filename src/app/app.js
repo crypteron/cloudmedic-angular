@@ -110,7 +110,9 @@ angular.module('cloudmedic', [
         $scope.isPatient = function () {
             return auth.status.token.userRole.contains("Patient");
         };
-
+        $scope.isSupporter = function () {
+            return auth.status.token.userRole.contains("Supporter");
+        };
         //// When the user logs in, fetch the profile whenever the user logs in
         //$scope.$on('authService:login', function () {
         //    $scope.profile = userProfile.get();

@@ -23,7 +23,7 @@
                 return Users.meds({ id: auth.status.token.userId }).$promise;
             }
         },
-        data: { pageTitle: 'patient' }
+        data: { pageTitle: 'Patient' }
     });
 })
 .controller('PatientCtrl', function ($scope, $state, prescriptions, localizedNotifications) {
