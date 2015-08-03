@@ -98,6 +98,7 @@
     $scope.AITab = true;
     $scope.JQTab = false;
     $scope.RZTab = false;
+    $scope.Creator = new Prescriptions();
 
     // Default date placeholders
     var today = new Date();
@@ -125,22 +126,36 @@
             }
         }
     };
+
+    // Filter the patients displayed as candidates
     $scope.filter = function () {
-        $scope.Candidates=angular.copy(Candidates);
-        for (var i = 0; i < $scope.Candidates.length;i++){
-            var name = $scope.Candidates[i].FirstName + " " + $scope.Candidates[i].LastName;
-            name = name.toLowerCase();
-            var patientname = "";
-            if ($scope.prescriptionsData.PatientName != null) {
-                patientname = $scope.prescriptionsData.PatientName.toLowerCase();
+        $scope.Candidates = angular.copy(Candidates);
+        if ($scope.prescriptionsData.PatientName) {
+            var name = $scope.prescriptionsData.PatientName.toLowerCase();
+            for (var i = 0; i < $scope.Candidates.length; i++) {
+                var reversename = ($scope.Candidates[i].LastName + ", " + $scope.Candidates[i].FirstName).toLowerCase();
+                if (reversename.substring(0, name.length).localeCompare(name) !== 0) {
+                    $scope.Candidates.splice(i, 1);
+                }
             }
-            if (name.indexOf(patientname) == -1) {
-                $scope.Candidates.splice(i, 1);
+            // Redirect to proper tab based on filter
+            if ($scope.prescriptionsData.PatientName.charCodeAt(0) <= 73) {
+                $scope.AITab = true;
+                $scope.JQTab = false;
+                $scope.RZTab = false;
+            } else if ($scope.prescriptionsData.PatientName.charCodeAt(0) <= 81) {
+                $scope.JQTab = true;
+                $scope.AITab = false;
+                $scope.RZTab = false;
+            } else {
+                $scope.RZTab = true;
+                $scope.AITab = false;
+                $scope.JQTab = false;
             }
         }
         $scope.sort();
     };
-    $scope.Creator = new Prescriptions();
+
     // Prescription creation method
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
