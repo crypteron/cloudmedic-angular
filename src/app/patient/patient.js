@@ -1,16 +1,16 @@
-﻿angular.module('cloudmedic.user', [
+﻿angular.module('cloudmedic.patient', [
     'ui.router',
     'chart.js',
     'cloudmedic.resources',
     'form'
 ])
 .config(function config($stateProvider) {
-    $stateProvider.state('user', {
-        url: '/user',
+    $stateProvider.state('patient', {
+        url: '/users',
         views: {
-            "main": {
-                controller: 'UserCtrl',
-                templateUrl: 'users/users.tpl.html'
+            "main": {  
+                controller: 'PatientCtrl',
+                templateUrl: 'patient/patient.tpl.html'
             }
         },
         resolve: {
@@ -23,10 +23,10 @@
                 return Users.meds({ id: auth.status.token.userId }).$promise;
             }
         },
-        data: { pageTitle: 'User' }
+        data: { pageTitle: 'patient' }
     });
 })
-.controller('UserCtrl', function ($scope, $state, prescriptions, localizedNotifications) {
+.controller('PatientCtrl', function ($scope, $state, prescriptions, localizedNotifications) {
     $scope.prescriptions = prescriptions;
     $scope.orderByField = 'MedicationName';
     $scope.reverseSort = false;

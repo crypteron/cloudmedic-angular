@@ -4,7 +4,7 @@
     'ui.bootstrap'
 ])
 .config(function config($stateProvider) {
-    $stateProvider.state("user.invite", {
+    $stateProvider.state("patient.invite", {
         url: "/invite",
         onEnter: function ($modal) {
             $modal.open({
@@ -34,8 +34,8 @@
     };
 
     $modalInstance.result.then(function () {
-        $state.go("user", $stateParams, { reload: true });
+        $state.go("patient", $stateParams, { reload: true });
     }, function () {
-        return $state.go("user", $stateParams);
+        return $state.go("patient", $stateParams);
     });
 });

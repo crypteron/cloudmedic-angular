@@ -50,7 +50,7 @@
         if (auth.status.token.userRole.contains('SysAdmin')) {
             $state.go('admin');
         } else if (auth.status.token.userRole.contains('Patient')) {
-            $state.go('user');
+            $state.go('patient');
         } else {
             $state.go('provider');
         }
@@ -80,7 +80,7 @@
                 auth.redirectAfterLogin('admin');
             }
             else if (auth.status.token.userRole.contains('Patient')) {
-                auth.redirectAfterLogin('user');
+                auth.redirectAfterLogin('patient');
             } else {
                 auth.redirectAfterLogin('provider');
             }
