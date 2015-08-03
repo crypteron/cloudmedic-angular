@@ -8,7 +8,10 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
-                <input id="register-username" class="form-control" pattern="[A-Za-z0-9.]{3,20}" placeholder="Username" type="text" ng-model="data.UserName" watch-change="check_username_symbol();check_username_length()" required autofocus>
+                <input id="register-username" class="form-control" pattern="[A-Za-z0-9.]{3,20}" placeholder="Username" type="text" 
+                       ng-model="creator.UserName" 
+                       watch-change="check_username()" 
+                       required autofocus>
             </div>
         </div>
         <div class="form-group">
@@ -22,14 +25,22 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">@</span>
-                <input id="register-email" class="form-control" placeholder="Email" type="email" ng-model="data.Email" required autofocus>
+                <input id="register-email" class="form-control" placeholder="Email" type="email" 
+                       ng-model="creator.Email" 
+                       required autofocus>
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="data.FirstName" ng-change="check_firstName()" required>
-                <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="data.LastName" ng-change="check_lastName()" required>
+                <input id="user-first" class="form-control" placeholder="First Name" type="text" 
+                       ng-model="creator.FirstName" 
+                       ng-change="check_firstName()" 
+                       required>
+                <input id="user-last" class="form-control" placeholder="Last Name" type="text" 
+                       ng-model="creator.LastName" 
+                       ng-change="check_lastName()" 
+                       required>
             </div>
         </div>
         <div class="form-group">
@@ -43,7 +54,10 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                <input id="register-phonenumber" class="form-control" placeholder="(xxx) xxx-xxxx" type="text" ng-model="data.PhoneNumber" ui-mask="(999) 999-9999" required>
+                <input id="register-phonenumber" class="form-control" placeholder="(xxx) xxx-xxxx" type="text" 
+                       ng-model="data.PhoneNumber" 
+                       ui-mask="(999) 999-9999" 
+                       required>
             </div><!-- /input-group -->
         </div>
         <div class="form-group">
@@ -52,14 +66,21 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
                         <div class="form-inline">
-                            <input type="text" style="width:319px" id="admin-DOB" ng-model="dt" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" placeholder="YYYY-MM-DD" show-button-bar="false" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                            <input type="text" style="width:319px" id="admin-DOB" ng-model="dt" ng-click="open($event)" class="form-control" 
+                                   datepicker-popup="{{format}}" 
+                                   placeholder="YYYY-MM-DD" 
+                                   show-button-bar="false" 
+                                   is-open="opened" 
+                                   datepicker-options="dateOptions" 
+                                   ng-required="true" 
+                                   close-text="Close">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-male"></i> /  <i class="fa fa-female"></i></span>
-                        <select required class="form-control" ng-model="data.Gender" aria-expanded="false">
+                        <select required class="form-control" ng-model="creator.Gender" aria-expanded="false">
                             <option class="placeholder" selected disabled value="">Gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>

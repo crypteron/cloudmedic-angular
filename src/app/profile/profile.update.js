@@ -4,7 +4,7 @@
     'cloudmedic.dropdown.values',
     'form'
 ])
-.config(['$stateProvider', function config($stateProvider) {
+.config(function config($stateProvider) {
     $stateProvider.state('profile', {
         url: '/profile',
         views: {
@@ -22,7 +22,7 @@
             }
         }
     });
-}])
+})
 .controller('ProfileCtrl', function ($scope, $state, profile, localizedNotifications) {
     $scope.data = {
         Email: "",

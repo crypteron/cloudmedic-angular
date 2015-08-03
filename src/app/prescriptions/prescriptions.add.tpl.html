@@ -8,25 +8,33 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-medkit"></i></span>
-                <input id="medication-name" class="form-control" placeholder="Medication Name" type="text" ng-model="prescriptionsData.MedicationName" disabled required>
+                <input id="medication-name" class="form-control" placeholder="Medication Name" type="text" 
+                       ng-model="Creator.MedicationName" 
+                       disabled required>
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                <input id="prescription-frequency" class="form-control" placeholder="Frequency" type="text" ng-model="prescriptionsData.Frequency" required>
+                <input id="prescription-frequency" class="form-control" placeholder="Frequency" type="text" 
+                       ng-model="Creator.Frequency" 
+                       required>
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
-                <input id="prescription-dosage" class="form-control" placeholder="Dosage" type="text" ng-model="prescriptionsData.Dosage" required>
+                <input id="prescription-dosage" class="form-control" placeholder="Dosage" type="text" 
+                       ng-model="Creator.Dosage" 
+                       required>
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                <textarea id="prescription-notes" class="form-control" placeholder="Notes" type="text" ng-model="prescriptionsData.Notes" required></textarea>
+                <textarea id="prescription-notes" class="form-control" placeholder="Notes" type="text" 
+                          ng-model="Creator.Notes" 
+                          required></textarea>
             </div>
         </div>
         <div class="form-group">
@@ -35,21 +43,30 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         <div class="form-inline">
-                            <input type="text" id="prescription-add-date" ng-model="dt" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" placeholder="YYYY-MM-DD" show-button-bar="false" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                            <input type="text" id="prescription-add-date" class="form-control" 
+                                   ng-model="dt" 
+                                   ng-click="open($event)" 
+                                   datepicker-popup="{{format}}" 
+                                   placeholder="YYYY-MM-DD" 
+                                   show-button-bar="false" 
+                                   is-open="opened" 
+                                   datepicker-options="dateOptions" 
+                                   ng-required="true" 
+                                   close-text="Close" />
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                        <select id="duration-dropdown" required class="form-control" ng-model="prescriptionsData.Duration" ng-options="period as period for period in Periods">
+                        <select id="duration-dropdown" required class="form-control" ng-model="data.Duration" ng-options="period as period for period in Periods">
                             <option class="placeholder" selected disabled value="">Duration</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
-                        <select id="duration-dropdown" required class="form-control" ng-model="prescriptionsData.Units">
+                        <select id="duration-dropdown" required class="form-control" ng-model="data.Units">
                             <option value="1">Days</option>
                             <option value="7">Weeks</option>
                             <option value="31">Months</option>
@@ -61,7 +78,10 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-cloud"></i></span>
-                <input id="prescription-frequency" class="form-control" placeholder="Filter Patient (Last Name, First Name)" type="text" ng-model="prescriptionsData.PatientName" ng-change="filter()" required>
+                <input id="prescription-frequency" class="form-control" placeholder="Filter Patient (Last Name, First Name)" type="text" 
+                       ng-model="data.PatientName" 
+                       ng-change="filter()" 
+                       required>
                 <button type="submit" ng-click="filter()" ng-hide="true"></button>
             </div>
         </div>
@@ -70,7 +90,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <select multiple required class="form-control" ng-model="prescriptionsData.PatientId">
+                        <select multiple required class="form-control" ng-model="data.PatientId">
                             <option class="placeholder" selected disabled value="">--Select Patient--</option>
                             <option ng-repeat="candidate in CandidatesAI" value="{{candidate.UserId}}">
                                 Name: {{candidate.LastName}}, {{candidate.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Born: {{candidate.DateOfBirth | date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName: {{candidate.UserName}}
@@ -83,7 +103,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <select multiple required class="form-control" ng-model="prescriptionsData.PatientId">
+                        <select multiple required class="form-control" ng-model="data.PatientId">
                             <option class="placeholder" selected disabled value="">--Select Patient--</option>
                             <option ng-repeat="candidate in CandidatesJQ" value="{{candidate.UserId}}">
                                 Name: {{candidate.LastName}}, {{candidate.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Born: {{candidate.DateOfBirth | date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName: {{candidate.UserName}}
@@ -96,7 +116,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <select multiple required class="form-control" ng-model="prescriptionsData.PatientId">
+                        <select multiple required class="form-control" ng-model="data.PatientId">
                             <option class="placeholder" selected disabled value="">--Select Patient--</option>
                             <option ng-repeat="candidate in CandidatesRZ" value="{{candidate.UserId}}">
                                 Name: {{candidate.LastName}}, {{candidate.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Born: {{candidate.DateOfBirth | date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName: {{candidate.UserName}}
@@ -107,9 +127,9 @@
             </tab>
         </tabset>
     </div>
-            <div class="form-group">
-                <div class="modal-footer">
-                    <button class="btn btn-danger btn-lg btn-block" type="button" ng-click="create()" ng-disabled="form.$invalid || medicationsData.isSubmitting">Create</button>
-                </div>
-            </div>
+    <div class="form-group">
+        <div class="modal-footer">
+            <button class="btn btn-danger btn-lg btn-block" type="button" ng-click="create()" ng-disabled="form.$invalid || data.isSubmitting">Create</button>
+        </div>
+    </div>
 </form>

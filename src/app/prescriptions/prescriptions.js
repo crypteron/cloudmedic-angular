@@ -80,13 +80,8 @@
         });
     };
 })
-.controller('PreAddCtrl', function ($scope, $modalInstance, $filter, auth, Prescriptions, Users, localizedNotifications, Candidates, MedId, MedName, MONTHS) {
-    $scope.prescriptionsData = {
-        MedicationId: MedId,
-        MedicationName: MedName,
-        Frequency: "",
-        Dosage: "",
-        Notes: "",
+.controller('AddPrescriptionsCtrl', function ($scope, $modalInstance, $filter, auth, Prescriptions, Users, localizedNotifications, Candidates, MedId, MedName, MONTHS) {
+    $scope.data = {
         Duration: 0,
         Units: 1,
         PatientId: "",
@@ -94,11 +89,28 @@
         isSubmitting: false
     };
     $scope.Candidates = angular.copy(Candidates);
-    $scope.Creator = new Prescriptions();
     $scope.AITab = true;
     $scope.JQTab = false;
     $scope.RZTab = false;
     $scope.Creator = new Prescriptions();
+    $scope.Creator.Medicationid = MedId;
+    $scope.Creator.MedicationName = MedName;
+
+    // Prescription creation
+    $scope.create = function () {
+        localizedNotifications.removeForCurrent();
+        $scope.data.isSubmitting = true;
+        $scope.Creator.PatientId = $scope.data.PatientId[0];
+        $scope.Creator.StartDate = $filter('date')($scope.dt, 'M/d/yyyy h:mm:ss a', '+000');
+        $scope.EndDateNonUtc = new Date($scope.dt).addDays($scope.data.Duration * $scope.data.Units);
+        $scope.Creator.EndDate = $filter('date')(DateToUTC($scope.EndDateNonUtc), 'M/d/yyyy h:mm:ss a');
+        $scope.Creator.$create().then(function () {
+            localizedNotifications.addForNext('create.success', 'success', { entityType: 'Prescription' });
+            $modalInstance.close();
+        }, function () {
+            $scope.data.isSubmitting = false;
+        });
+    };
 
     // Default date placeholders
     var today = new Date();
@@ -130,8 +142,8 @@
     // Filter the patients displayed as candidates
     $scope.filter = function () {
         $scope.Candidates = angular.copy(Candidates);
-        if ($scope.prescriptionsData.PatientName) {
-            var name = $scope.prescriptionsData.PatientName.toLowerCase();
+        if ($scope.data.PatientName) {
+            var name = $scope.data.PatientName.toLowerCase();
             for (var i = 0; i < $scope.Candidates.length; i++) {
                 var reversename = ($scope.Candidates[i].LastName + ", " + $scope.Candidates[i].FirstName).toLowerCase();
                 if (reversename.substring(0, name.length).localeCompare(name) !== 0) {
@@ -139,11 +151,11 @@
                 }
             }
             // Redirect to proper tab based on filter
-            if ($scope.prescriptionsData.PatientName.charCodeAt(0) <= 73) {
+            if ($scope.data.PatientName.charCodeAt(0) <= 73) {
                 $scope.AITab = true;
                 $scope.JQTab = false;
                 $scope.RZTab = false;
-            } else if ($scope.prescriptionsData.PatientName.charCodeAt(0) <= 81) {
+            } else if ($scope.data.PatientName.charCodeAt(0) <= 81) {
                 $scope.JQTab = true;
                 $scope.AITab = false;
                 $scope.RZTab = false;
@@ -156,29 +168,7 @@
         $scope.sort();
     };
 
-    // Prescription creation method
-    $scope.create = function () {
-        localizedNotifications.removeForCurrent();
-        $scope.prescriptionsData.isSubmitting = true;
-
-        $scope.TempEnd = new Date($scope.dt).addDays($scope.prescriptionsData.Duration * $scope.prescriptionsData.Units);     
-
-        $scope.Creator.MedicationId = $scope.prescriptionsData.MedicationId;
-        $scope.Creator.PatientId = $scope.prescriptionsData.PatientId[0];
-        $scope.Creator.Frequency = $scope.prescriptionsData.Frequency;
-        $scope.Creator.Dosage = $scope.prescriptionsData.Dosage;
-        $scope.Creator.Notes = $scope.prescriptionsData.Notes;
-        $scope.Creator.StartDate = $filter('date')($scope.dt, 'M/d/yyyy h:mm:ss a', '+000');
-        $scope.Creator.EndDate = $filter('date')(DateToUTC($scope.TempEnd), 'M/d/yyyy h:mm:ss a');
-
-        $scope.Creator.$create().then(function () {
-            localizedNotifications.addForNext('create.success', 'success', { entityType: 'Prescription' });
-            $modalInstance.close();
-        }, function () {
-            $scope.prescriptionsData.isSubmitting = false;
-        });
-    };
-
+    // Duration constants
     $scope.Periods = $.map($(Array(100)), function (val, i) { return i + 1; });
     $scope.Units = [
         Days = 1,
@@ -186,21 +176,17 @@
         Months = 31
     ];
 
-    // Date Picker    
+    // Date picker    
     $scope.open = function ($event) {
         $event.preventDefault();
         $event.stopPropagation();
 
         $scope.opened = true;
     };
-
     $scope.format = 'yyyy-MM-dd';
-
     $scope.dateOptions = {
         'showWeeks': false
     };
-
-
 })
 
 .controller('UpdatePrescriptionsCtrl', function ($scope, $modalInstance, $filter, Prescriptions, prescription, MONTHS, localizedNotifications) {
@@ -238,13 +224,10 @@
 
         $scope.opened = true;
     };
-
     $scope.format = 'yyyy-MM-dd';
-
     $scope.dateOptions = {
         'showWeeks': false
     };
-
 });
 // adds leading zeroes
 function pad(num, size) {

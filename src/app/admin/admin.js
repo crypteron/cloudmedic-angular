@@ -52,6 +52,8 @@
     $scope.orderByFieldCareTeam = 'Name';
     $scope.reverseSortCareTeam = false;
 
+    $scope.PhysicianTabActive = false;
+
     $scope.providers = [];
     for (var i = 0; i < $scope.users.length; i++) {
         if ($scope.isProvider($scope.users[i])) {
@@ -75,10 +77,10 @@
         });
     };
 
-    $scope.createUser = function () {
+    $scope.createProvider = function () {
         localizedNotifications.removeForCurrent();
         $modal.open({
-            templateUrl: "admin/admin.add.tpl.html",
+            templateUrl: "provider/provider.add.tpl.html",
             controller: 'FormCtrl'
         }).result.then(function () {
             $state.go("admin", null, { reload: true });
@@ -113,6 +115,4 @@
             $state.go("admin", null, { reload: true });
         });
     };
-
-    $scope.PhysicianTabActive = false;
 });

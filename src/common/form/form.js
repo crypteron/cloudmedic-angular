@@ -1,24 +1,13 @@
 ﻿angular.module('form', [
     'ui.router',
     'ui.mask',
-    'cloudmedic.resources',
-    'cloudmedic.dropdown.values'
+    'cloudmedic.resources'
 ])
-.controller('FormCtrl', function ($scope, $filter, Registration, Users, Password, $state, MONTHS, localizedNotifications) {
+.controller('FormCtrl', function ($scope, $filter, Users, Password, Registration, $state, localizedNotifications) {
     // Initialize scope variables
     $scope.data = {
-        UserName: "",
-        Email: "",
-        Password: "",
-        ConfirmPassword: "",
-        FirstName: "",
-        LastName: "",
-        Gender: "",
-        DOB: "",
         Role: "",
-        Specialty: "",
         PhoneNumber: "",
-        PatientId: "",
         isSubmitting: false
     };
     $scope.supporter = false;
@@ -26,21 +15,14 @@
     $scope.password = new Password();
     $scope.registration = new Registration();
 
-    // Patient registration
+    // Patient & Supporter registration
     $scope.register = function () {
         $scope.data.isSubmitting = true;
-        $scope.registration.UserName = $scope.data.UserName;
-        $scope.registration.Email = $scope.data.Email;
-        $scope.registration.Password = $scope.data.Password;
-        $scope.registration.ConfirmPassword = $scope.data.ConfirmPassword;
-        $scope.registration.FirstName = $scope.data.FirstName;
-        $scope.registration.LastName = $scope.data.LastName;
-        $scope.registration.Gender = $scope.data.Gender;
-        $scope.registration.Specialty = $scope.data.Specialty;
+        $scope.registration.Specialty = "";
         $scope.registration.DOB = document.getElementById('register-DOB').value.toString();
         $scope.registration.PhoneNumber = '(' + $scope.data.PhoneNumber.substr(0, 3) + ') ' + $scope.data.PhoneNumber.substr(3, 3) + '-' + $scope.data.PhoneNumber.substr(6, 4);
+        // Seperate registration by Patient or Supporter
         if ($scope.supporter) {
-            $scope.registration.PatientId = $scope.data.PatientId;
             $scope.registration.$supporter().then(function (response) {
                 $state.go('login');
             }, function (err) {
@@ -59,17 +41,10 @@
     // Physician & Nurse creation
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
-
         $scope.data.isSubmitting = true;
-        // Bind scope values to creator resource
-        $scope.creator.UserName = $scope.data.UserName;
-        $scope.creator.Email = $scope.data.Email;
-        $scope.creator.FirstName = $scope.data.FirstName;
-        $scope.creator.LastName = $scope.data.LastName;
-        $scope.creator.Gender = $scope.data.Gender;
-        $scope.creator.Specialty = $scope.data.Specialty;
         $scope.creator.PhoneNumber = '(' + $scope.data.PhoneNumber.substr(0, 3) + ') ' + $scope.data.PhoneNumber.substr(3, 3) + '-' + $scope.data.PhoneNumber.substr(6, 4);
         $scope.creator.Roles = [$scope.data.Role];
+        $scope.creator.Specialty = "";
         $scope.creator.DOB = $filter('date')($scope.dt, 'M/d/yyyy h:mm:ss a', '+000');
 
         $scope.creator.$create().then(function (response) {
@@ -94,17 +69,15 @@
     // Username validation
     $scope.Username_Valid_length = true;
     $scope.Username_Valid_symbol = true;
-
-    $scope.check_username_symbol = function () {
+    $scope.check_username = function () {
+        // Check UserName for symbols
         if (document.getElementById("register-username").value.match(/[^0-9a-zA-Z]/) != null) {
             $scope.Username_Valid_symbol = false;
         }
         else {
             $scope.Username_Valid_symbol = true;
         }
-    };
-
-    $scope.check_username_length = function () {
+        // Check UserName for length
         if (document.getElementById("register-username").value.length < 3 || document.getElementById("register-username").value.length > 20) {
             $scope.Username_Valid_length = false;
         }
@@ -153,7 +126,7 @@
         }
     };
 
-    // Password matching
+    // Check that the passwords match
     $scope.Passwords_Match = true;
     $scope.compare_passwords = function () {
         if (document.getElementById("user-password").value != (document.getElementById("user-confirmpassword").value)) {
@@ -183,20 +156,16 @@
         }
     };
 
-    // Date Picker    
+    // Date Picker 
     $scope.open = function ($event) {
         $event.preventDefault();
         $event.stopPropagation();
-
         $scope.opened = true;
     };
-
     $scope.format = 'yyyy-MM-dd';
-
     $scope.dateOptions = {
         showWeeks: false
     };
-
 })
 .directive('watchChange', function () {
     return {
