@@ -8,6 +8,7 @@
         'create.success': 'New {{entityType}} created successfully',
         'delete.success': '{{entityType}} deleted successfully',
         'delete.error': '{{entityType}} could not be deleted',
+        'invite.success': '{{entityType}} has been invited as a supporter.',
         'key.refresh.success': 'A new version of Security Partition {{SecPartId}} has been created successfully.',
         'key.refresh.instructions': 'You are about to initiate a key rollover. All new data will use the latest encryption key within this security partition while existing data will continue to use older encryption key. The process takes a couple of seconds and does not disrupt your application availability; though client-side run time caching may delay visibility for up to 10 minutes. Are you sure you want to proceed?',
         'key.refresh.confirm': 'Yes, rollover key',

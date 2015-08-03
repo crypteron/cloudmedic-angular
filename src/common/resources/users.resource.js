@@ -11,6 +11,7 @@
             'query': { method: 'GET', isArray: true },
             'meds': { method: 'GET', isArray: true, params: { path: 'Prescriptions' } },
             'prTeams': { method: 'GET', isArray: true, params: { path: 'Provider' } },
+            'supporter': { method: 'POST', isArray: false, params: { path: 'Supporter' } },
             'search': { method: 'GET', isArray: true, params: { path: 'Find' } },
             'remove': { method: 'DELETE', isArray: false },
             'create': { method: 'POST', isArray: false, params: { path: 'Add' } }

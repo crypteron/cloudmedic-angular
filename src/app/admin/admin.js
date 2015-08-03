@@ -78,7 +78,7 @@
     $scope.createUser = function () {
         localizedNotifications.removeForCurrent();
         $modal.open({
-            templateUrl: "app.add.tpl.html",
+            templateUrl: "admin/admin.add.tpl.html",
             controller: 'FormCtrl'
         }).result.then(function () {
             $state.go("admin", null, { reload: true });

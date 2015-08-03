@@ -54,7 +54,7 @@
     <Content Include="build.config.js" />
     <Content Include="Gruntfile.js" />
     <Content Include="karma\karma-unit.tpl.js" />
-    <Content Include="src\app\app.add.tpl.html" />
+    <Content Include="src\app\admin\admin.add.tpl.html" />
     <Content Include="src\app\careteams\careteams.add.tpl.html" />
     <Content Include="src\app\careteams\careteams.js" />
     <Content Include="src\app\careteams\careteams.tpl.html" />
@@ -90,6 +90,9 @@
     <Content Include="src\app\provider\history.tpl.html" />
     <Content Include="src\app\provider\provider.js" />
     <Content Include="src\app\provider\provider.tpl.html" />
+    <Content Include="src\app\supporter\supporter.invite.js" />
+    <Content Include="src\app\supporter\supporter.invite.tpl.html" />
+    <Content Include="src\app\supporter\supporter.js" />
     <Content Include="src\common\form\form.js" />
     <Content Include="src\app\users\users.js" />
     <Content Include="src\app\keys\keys.add.js" />

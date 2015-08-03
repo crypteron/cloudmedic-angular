@@ -56,7 +56,7 @@
         }
     };
 
-    // Provider creation
+    // Physician & Nurse creation
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
 
