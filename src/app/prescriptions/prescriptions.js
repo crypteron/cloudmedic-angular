@@ -214,11 +214,8 @@
     $scope.format = 'yyyy-MM-dd';
 
     $scope.dateOptions = {
-        'min-date': $scope.minDate,
         'showWeeks': false
     };
-
-    $scope.minDate = $scope.minDate ? null : new Date();
 
 });
 // adds leading zeroes
