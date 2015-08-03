@@ -80,7 +80,6 @@
         });
     };
 })
-
 .controller('PreAddCtrl', function ($scope, $modalInstance, $filter, auth, Prescriptions, Users, localizedNotifications, Candidates, MedId, MedName, MONTHS) {
     $scope.prescriptionsData = {
         MedicationId: MedId,
@@ -94,7 +93,7 @@
         PatientName: "",
         isSubmitting: false
     };
-    $scope.Candidates = Candidates;
+    $scope.Candidates = angular.copy(Candidates);
     $scope.Creator = new Prescriptions();
     $scope.AITab = true;
     $scope.JQTab = false;
@@ -126,7 +125,21 @@
             }
         }
     };
-
+    $scope.filter = function () {
+        $scope.Candidates=angular.copy(Candidates);
+        for (var i = 0; i < $scope.Candidates.length;i++){
+            var name = $scope.Candidates[i].FirstName + " " + $scope.Candidates[i].LastName;
+            name = name.toLowerCase();
+            var patientname = "";
+            if ($scope.prescriptionsData.PatientName != null) {
+                patientname = $scope.prescriptionsData.PatientName.toLowerCase();
+            }
+            if (name.indexOf(patientname) == -1) {
+                $scope.Candidates.splice(i, 1);
+            }
+        }
+        $scope.sort();
+    };
     $scope.Creator = new Prescriptions();
     // Prescription creation method
     $scope.create = function () {
