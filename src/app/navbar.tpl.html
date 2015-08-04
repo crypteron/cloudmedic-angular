@@ -21,8 +21,14 @@
                             Admin
                         </a>
                     </li>
-                    <li ng-show="authStatus.isLoggedIn && isPatient()" ng-class="{active: $state.includes('user')}">
-                        <a href ui-sref="user">
+                    <li ng-show="authStatus.isLoggedIn && isSupporter()" ng-class="{active: $state.includes('supporter')}">
+                        <a href ui-sref="supporter">
+                            <i class="fa fa-bug"></i>
+                            Supporter
+                        </a>
+                    </li>
+                    <li ng-show="authStatus.isLoggedIn && isPatient()" ng-class="{active: $state.includes('patient')}">
+                        <a href ui-sref="patient">
                             <i class="fa fa-user"></i>
                             User
                         </a>

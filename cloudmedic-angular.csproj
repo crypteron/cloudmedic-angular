@@ -93,8 +93,9 @@
     <Content Include="src\app\supporter\supporter.invite.js" />
     <Content Include="src\app\supporter\supporter.invite.tpl.html" />
     <Content Include="src\app\supporter\supporter.js" />
+    <Content Include="src\app\supporter\supporter.tpl.html" />
     <Content Include="src\common\form\form.js" />
-    <Content Include="src\app\users\users.js" />
+    <Content Include="src\app\patient\patient.js" />
     <Content Include="src\app\keys\keys.add.js" />
     <Content Include="src\app\keys\keys.add.spec.js" />
     <Content Include="src\app\keys\keys.detail.spec.js" />
@@ -119,7 +120,7 @@
     <Content Include="src\app\keys\keys.detail.tpl.html" />
     <Content Include="src\app\keys\keys.detail.js" />
     <Content Include="src\app\navbar.tpl.html" />
-    <Content Include="src\app\users\users.tpl.html" />
+    <Content Include="src\app\patient\patient.tpl.html" />
     <Content Include="src\assets\font-awesome.css" />
     <Content Include="src\assets\fonts\example.html" />
     <Content Include="src\assets\fonts\flexslider-icon.svg" />
