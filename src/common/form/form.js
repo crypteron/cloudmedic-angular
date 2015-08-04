@@ -15,30 +15,21 @@
     $scope.password = new Password();
     $scope.registration = new Registration();
 
-    // Patient & Supporter registration
+    // Patient registration
     $scope.register = function () {
         $scope.data.isSubmitting = true;
         $scope.registration.Specialty = "";
         $scope.registration.DOB = document.getElementById('register-DOB').value.toString();
         $scope.registration.PhoneNumber = '(' + $scope.data.PhoneNumber.substr(0, 3) + ') ' + $scope.data.PhoneNumber.substr(3, 3) + '-' + $scope.data.PhoneNumber.substr(6, 4);
-        // Seperate registration by Patient or Supporter
-        if ($scope.supporter) {
-            $scope.registration.$supporter().then(function (response) {
-                $state.go('login');
-            }, function (err) {
-                $scope.data.isSubmitting = false; // re-enable submit button
-            });
-        } else {
-            $scope.registration.$register().then(function (response) {
-                $state.go('login');
-            },
-            function (err) {
-                $scope.data.isSubmitting = false;
-            });
-        }
+        $scope.registration.$register().then(function (response) {
+            $state.go('login');
+        },
+        function (err) {
+            $scope.data.isSubmitting = false;
+        });
     };
 
-    // Physician & Nurse creation
+    // User creation
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
         $scope.data.isSubmitting = true;

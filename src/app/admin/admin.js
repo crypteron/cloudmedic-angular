@@ -60,7 +60,6 @@
             $scope.providers.push($scope.users[i]);
         }
     }
-
     $scope.removeUser = function (user) {
         localizedNotifications.removeForCurrent();
         $modal.open({
@@ -87,6 +86,16 @@
         });
     };
 
+    $scope.createSupporter = function () {
+        localizedNotifications.removeForCurrent();
+        $modal.open({
+            templateUrl: "supporter/supporter.add.tpl.html",
+            controller: 'FormCtrl'
+        }).result.then(function () {
+            $state.go("admin", null, { reload: true });
+        });
+    };
+
     $scope.createCareTeam = function (user) {
         localizedNotifications.removeForCurrent();
         $scope.user = user;
@@ -94,8 +103,7 @@
             templateUrl: "careteams/careteams.add.tpl.html",
             controller: 'CareTeamAddCtrl',
             resolve: {
-                user: function () { return $scope.user; },
-                providers: function () { return $scope.providers; }
+                user: function () { return $scope.user; }
             }
         }).result.then(function () {
             $state.go("admin", null, { reload: true });

@@ -9,10 +9,11 @@
     provider.$get = function ($resource) {
         var service = $resource(provider.apiUrl + 'users/:path', {}, {
             'query': { method: 'GET', isArray: true },
+            'search': { method: 'GET', isArray: true, params: { path: 'Providers' }},
             'meds': { method: 'GET', isArray: true, params: { path: 'Prescriptions' } },
             'prTeams': { method: 'GET', isArray: true, params: { path: 'Provider' } },
             'supporter': { method: 'POST', isArray: false, params: { path: 'Supporter' } },
-            'search': { method: 'GET', isArray: true, params: { path: 'Find' } },
+            'patients': { method: 'GET', isArray: true, params: { path: 'Patients' } },
             'remove': { method: 'DELETE', isArray: false },
             'create': { method: 'POST', isArray: false, params: { path: 'Add' } }
         });

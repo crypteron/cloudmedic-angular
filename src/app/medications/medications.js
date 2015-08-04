@@ -69,9 +69,14 @@
             controller: 'AddPrescriptionsCtrl',
             resolve: {
                 Candidates: function (Users, auth) {
-                    return Users.search({ ProviderId: auth.status.token.userId }).$promise;},
-                MedId: function () { return $scope.medication.MedicationId; },
-                MedName: function () { return $scope.medication.GenericName; }
+                    return Users.patients({ providerId: auth.status.token.userId }).$promise;
+                },
+                MedId: function () {
+                    return $scope.medication.MedicationId;
+                },
+                MedName: function () {
+                    return $scope.medication.GenericName;
+                }
             }
         }).result.then(function () {
             $state.go("medications", null, { reload: true });
