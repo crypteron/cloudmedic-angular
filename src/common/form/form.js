@@ -5,7 +5,7 @@
 ])
 .controller('FormCtrl', function ($scope, $filter, Users, Password, Registration, $state, localizedNotifications) {
     // Initialize scope variables
-    $scope.data = {
+    $scope.data =   {
         Role: "",
         PhoneNumber: "",
         isSubmitting: false

@@ -26,6 +26,6 @@
 })
 .controller('SupporterCtrl', function ($scope, $state, prescriptions, localizedNotifications) {
     $scope.prescriptions = prescriptions;
-    $scope.orderByField = 'MedicationName';
+    $scope.orderByField = 'Name';
     $scope.reverseSort = false;
 });

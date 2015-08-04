@@ -83,6 +83,9 @@
             }
             else if (auth.status.token.userRole.contains('Patient')) {
                 auth.redirectAfterLogin('patient');
+            }
+            else if (auth.status.token.userRole.contains('Supporter')) {
+                auth.redirectAfterLogin('supporter');
             } else {
                 auth.redirectAfterLogin('provider');
             }
