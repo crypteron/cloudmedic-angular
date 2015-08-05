@@ -4,63 +4,6 @@
     'cloudmedic.resources',
     'form'
 ])
-.config(function config($stateProvider) {
-    $stateProvider.state('careteams', {
-        url: '/careteams',
-        views: {
-            "main": {
-                controller: 'CareTeamsCtrl',
-                templateUrl: 'careteams/careteams.tpl.html'
-            }
-        },
-        resolve: {
-            security: function ($q, auth) {
-                if (!auth.status.token || (!auth.status.token.userRole.contains('SysAdmin') && !auth.status.token.userRole.contains('Physician') && !auth.status.token.userRole.contains('Nurse'))) {
-                    return $q.reject("Not Authorized");
-                }
-            },
-            careteams: function (CareTeams) {
-                if (auth.status.token.userRole.contains('SysAdmin') || auth.status.token.userRole.contains('Physician') || auth.status.token.userRole.contains('Nurse')) {
-                    return CareTeams.query().$promise;
-                }
-            }
-        },
-        data: { pageTitle: 'CareTeams' }
-    });
-})
-.controller('CareTeamsCtrl', function ($scope, $state, careteams, CareTeams, localizedNotifications, $modal) {
-
-    $scope.careteams = careteams;
-    for (var i = 0; i < $scope.careteams.length; i++) {
-        $scope.careteams[i].patientinfo = "Name: " + $scope.careteams[i].Patient.LastName + "," + $scope.careteams[i].Patient.FirstName + "\n";
-        $scope.careteams[i].patientinfo += "Gender: " + $scope.careteams[i].Patient.Gender + "\n";
-        $scope.careteams[i].patientinfo += "Date of Birth: " + $scope.careteams[i].Patient.DateOfBirth.substring(0, 10) + "\n";
-        $scope.careteams[i].patientinfo += "Email: " + $scope.careteams[i].Patient.Email;
-    }
-    for ( i = 0; i < $scope.careteams.length; i++) {
-        $scope.careteams[i].providersinfo = "";
-        for (var j = 0; j < $scope.careteams[i].Providers.length; j++) {
-            $scope.careteams[i].providersinfo+= "Name: " + $scope.careteams[i].Providers[j].LastName + "," + $scope.careteams[i].Providers[j].FirstName + "\n";
-            $scope.careteams[i].providersinfo += "Role: " + $scope.careteams[i].Providers[j].Roles[0] + "\n";
-        }
-    }
-    $scope.careteamRemover = new CareTeams();
-    $scope.removecareteam = function (careteam) {
-        localizedNotifications.removeForCurrent();
-        $modal.open({
-            templateUrl: "app.confirm.tpl.html",
-            controller: ['$scope', function ($scope) {
-                $scope.confirmText = "You will not be able to recover this medication!";
-                $scope.confirmButton = "Yes, delete medication!";
-            }]
-        }).result.then(function () {
-            $scope.careteamRemover.$remove({ id: careteam.Id }).then(function () {
-                localizedNotifications.addForNext('delete.success', 'success', { entityType: 'CareTeam' });
-                $state.go("careteams", null, { reload: true });
-            });
-        });
-    };
-})
 .controller('CareTeamAddCtrl', function ($scope, $modalInstance, user, CareTeams, Users, localizedNotifications) {
     $scope.creator = new CareTeams();
     $scope.creator.ProviderIds = [""];
@@ -78,6 +21,7 @@
         localizedNotifications.removeForCurrent();
         $scope.data.isSubmitting = true;
         $scope.creator.PatientId = user.UserId;
+        $scope.creator.ProviderIds = $scope.providerIds;
         $scope.creator.$create().then(function () {
             localizedNotifications.addForNext('create.success', 'success', { entityType: 'CareTeam' });
             $modalInstance.close();

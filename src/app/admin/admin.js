@@ -1,7 +1,6 @@
 ﻿angular.module('cloudmedic.admin', [
     'ui.router',
     'ui.mask',
-    'chart.js',
     'form',
     'cloudmedic.resources'
 ])
@@ -34,11 +33,12 @@
         data: { pageTitle: 'Admin' }
     });
 })
-.controller('AdminCtrl', function ($scope, $state, users, Users, careTeams, localizedNotifications, $modal, DROPDOWN_PLANS) {
+.controller('AdminCtrl', function ($scope, $state, $modal, users, Users, careTeams, CareTeams, localizedNotifications) {
     // Initialize scope variables
     $scope.users = users;
     $scope.careTeams = careTeams;
     $scope.userRemover = new Users();
+    $scope.careteamRemover = new CareTeams();
     $scope.isProvider = function (user) {
         return user.Roles == 'Nurse' || user.Roles == 'Physician';
     };
@@ -60,6 +60,7 @@
             $scope.providers.push($scope.users[i]);
         }
     }
+
     $scope.removeUser = function (user) {
         localizedNotifications.removeForCurrent();
         $modal.open({
@@ -71,6 +72,22 @@
         }).result.then(function () {
             $scope.userRemover.$remove({ id: user.UserId }).then(function () {
                 localizedNotifications.addForNext('delete.success', 'success', { entityType: 'User' });
+                $state.go("admin", null, { reload: true });
+            });
+        });
+    };
+
+    $scope.removeCareTeam = function (careTeam) {
+        localizedNotifications.removeForCurrent();
+        $modal.open({
+            templateUrl: "app.confirm.tpl.html",
+            controller: function ($scope) {
+                $scope.confirmText = "You will not be able to recover this medication!";
+                $scope.confirmButton = "Yes, delete medication!";
+            }
+        }).result.then(function () {
+            $scope.careteamRemover.$remove({ id: careTeam.Id }).then(function () {
+                localizedNotifications.addForNext('delete.success', 'success', { entityType: 'CareTeam' });
                 $state.go("admin", null, { reload: true });
             });
         });
