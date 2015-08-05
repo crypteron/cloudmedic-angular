@@ -25,9 +25,9 @@
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
                 <input id="provider-name-filter" class="form-control" placeholder="Search providers by name" type="text"
-                       ng-model="providerNameFilter">
+                        ng-model="providerNameFilter">
                 <span class="input-group-btn">
-                    <button class="btn" type="submit" ng-click="search()"><i class="fa fa-search"></i></button>
+                    <button class="btn" type="button" ng-click="searchProviders()"><i class="fa fa-search"></i></button>
                 </span>
             </div>
         </div>
@@ -53,6 +53,40 @@
                     <td>{{provider.Roles[0]}}</td>
                     <td>
                         <button class="btn btn-danger btn-sm" ng-click="removeProvider(provider)"><i class="fa fa-trash-o"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                <input id="supporter-name-filter" class="form-control" placeholder="Search supporters by name" type="text"
+                        ng-model="supporterNameFilter">
+                <span class="input-group-btn">
+                    <button class="btn" type="button" ng-click="searchSupporters()"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>
+        <label>Supporter Search Results</label>
+        <table id="filter-supporter-results" class="table table-striped table-hover">
+            <tbody>
+                <tr ng-repeat="supporter in supporters">
+                    <td>{{supporter.FirstName}} {{supporter.LastName}}</td>
+                    <td>{{supporter.Email}}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" ng-click="addSupporter(supporter)"><i class="fa fa-plus"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <label>Selected Supporters</label>
+        <table id="selected-supporters" class="table table-striped table-hover">
+            <tbody>
+                <tr ng-repeat="supporter in selectedSupporters">
+                    <td>{{supporter.FirstName}} {{supporter.LastName}}</td>
+                    <td>{{supporter.Email}}</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" ng-click="removeSupporter(supporter)"><i class="fa fa-trash-o"></i></button>
                     </td>
                 </tr>
             </tbody>

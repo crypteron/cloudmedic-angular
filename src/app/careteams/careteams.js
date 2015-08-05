@@ -13,6 +13,10 @@
     $scope.providers = [];
     $scope.providerIds = [];
     $scope.selectedProviders = [];
+    $scope.supporterNameFilter = "";
+    $scope.supporters = [];
+    $scope.supporterIds = [];
+    $scope.selectedSupporters = [];
     $scope.data = {
         isSubmitting: false
     };
@@ -22,6 +26,7 @@
         $scope.data.isSubmitting = true;
         $scope.creator.PatientId = user.UserId;
         $scope.creator.ProviderIds = $scope.providerIds;
+        $scope.creator.SupporterIds = $scope.supporterIds;
         $scope.creator.$create().then(function () {
             localizedNotifications.addForNext('create.success', 'success', { entityType: 'CareTeam' });
             $modalInstance.close();
@@ -30,18 +35,18 @@
         });
     };
 
-    $scope.search = function () {
+    // Provider functions
+    $scope.searchProviders = function () {
         $scope.providers = [];
         if ($scope.providerNameFilter.length > 0) {
-            $scope.providers = Users.search({ id: $scope.providerNameFilter }).$promise.then(function (result) {
+            $scope.providers = Users.providers({ id: $scope.providerNameFilter }).$promise.then(function (result) {
                 $scope.providers = result;
-                filterSearch();
+                filterProviders();
             });
         }
     };
 
-    var filterSearch = function () {
-        var toRemove = [];
+    var filterProviders = function () {
         var i = $scope.providers.length;
         while (i--) {
             var id = $scope.providers[i].UserId;
@@ -57,7 +62,7 @@
     $scope.addProvider = function (provider) {
         $scope.selectedProviders.push(angular.copy(provider));
         $scope.providerIds.push(provider.UserId);
-        filterSearch();
+        filterProviders();
     };
 
     $scope.removeProvider = function (provider) {
@@ -66,6 +71,47 @@
         for (var i = 0; i < $scope.selectedProviders.length; i++) {
             if ($scope.selectedProviders[i].UserId.localeCompare(provider.UserId) === 0) {
                 $scope.selectedProviders.splice(i, 1);
+                break;
+            }
+        }
+    };
+
+    // Supporter functions
+    $scope.searchSupporters = function () {
+        $scope.supporters = [];
+        if ($scope.supporterNameFilter.length > 0) {
+            $scope.supporters = Users.supporters({ id: $scope.supporterNameFilter }).$promise.then(function (result) {
+                $scope.supporters = result;
+                filterSupporters();
+            });
+        }
+    };
+
+    var filterSupporters = function () {
+        var i = $scope.supporters.length;
+        while (i--) {
+            var id = $scope.supporters[i].UserId;
+            for (var j = 0; j < $scope.selectedSupporters.length; j++) {
+                var selectedId = $scope.selectedSupporters[j].UserId;
+                if (id.localeCompare(selectedId) === 0) {
+                    $scope.supporters.splice(i, 1);
+                }
+            }
+        }
+    };
+
+    $scope.addSupporter = function (supporter) {
+        $scope.selectedSupporters.push(angular.copy(supporter));
+        $scope.supporterIds.push(supporter.UserId);
+        filterSupporters();
+    };
+
+    $scope.removeSupporter = function (supporter) {
+        $scope.supporters.push(angular.copy(supporter));
+        $scope.supporterIds.splice($scope.supporterIds.indexOf(supporter.UserId), 1);
+        for (var i = 0; i < $scope.selectedSupporters.length; i++) {
+            if ($scope.selectedSupporters[i].UserId.localeCompare(supporter.UserId) === 0) {
+                $scope.selectedSupporters.splice(i, 1);
                 break;
             }
         }
@@ -83,6 +129,15 @@
         $scope.providerIds.push(provider.UserId);
         $scope.selectedProviders.push(angular.copy(provider));
     }
+    $scope.supporterNameFilter = "";
+    $scope.supporters = [];
+    $scope.supporterIds = [];
+    $scope.selectedSupporters = [];
+    for (var y = 0; y < $scope.careTeam.Supporters.length; y++) {
+        var supporter = $scope.careTeam.Supporters[y];
+        $scope.supporterIds.push(supporter.UserId);
+        $scope.selectedSupporters.push(angular.copy(supporter));
+    }
     $scope.data = {
         isSubmitting: false
     };
@@ -93,6 +148,7 @@
         $scope.Updater.TeamId = $scope.careTeam.Id;
         $scope.Updater.TeamName = $scope.careTeam.Name;
         $scope.Updater.ProviderIds = $scope.providerIds;
+        $scope.Updater.SupporterIds = $scope.supporterIds;
         $scope.Updater.$update().then(function () {
             localizedNotifications.addForNext('update.success', 'success', { entityType: 'CareTeam' });
             $modalInstance.close();
@@ -101,17 +157,18 @@
         });
     };
 
-    $scope.search = function () {
+    // Provider functions
+    $scope.searchProviders = function () {
         $scope.providers = [];
         if ($scope.providerNameFilter.length > 0) {
-            $scope.providers = Users.search({ id: $scope.providerNameFilter }).$promise.then(function (result) {
+            $scope.providers = Users.providers({ id: $scope.providerNameFilter }).$promise.then(function (result) {
                 $scope.providers = result;
-                filterSearch();
+                filterProviders();
             });
         }
     };
 
-    var filterSearch = function () {
+    var filterProviders = function () {
         var i = $scope.providers.length;
         while (i--) {
             var id = $scope.providers[i].UserId;
@@ -127,7 +184,7 @@
     $scope.addProvider = function (provider) {
         $scope.selectedProviders.push(angular.copy(provider));
         $scope.providerIds.push(provider.UserId);
-        filterSearch();
+        filterProviders();
     };
 
     $scope.removeProvider = function (provider) {
@@ -136,6 +193,47 @@
         for (var i = 0; i < $scope.selectedProviders.length; i++) {
             if ($scope.selectedProviders[i].UserId.localeCompare(provider.UserId) === 0) {
                 $scope.selectedProviders.splice(i, 1);
+                break;
+            }
+        }
+    };
+
+    // Supporter functions
+    $scope.searchSupporters = function () {
+        $scope.supporters = [];
+        if ($scope.supporterNameFilter.length > 0) {
+            $scope.supporters = Users.supporters({ id: $scope.supporterNameFilter }).$promise.then(function (result) {
+                $scope.supporters = result;
+                filterSupporters();
+            });
+        }
+    };
+
+    var filterSupporters = function () {
+        var i = $scope.supporters.length;
+        while (i--) {
+            var id = $scope.supporters[i].UserId;
+            for (var j = 0; j < $scope.selectedSupporters.length; j++) {
+                var selectedId = $scope.selectedSupporters[j].UserId;
+                if (id.localeCompare(selectedId) === 0) {
+                    $scope.supporters.splice(i, 1);
+                }
+            }
+        }
+    };
+
+    $scope.addSupporter = function (supporter) {
+        $scope.selectedSupporters.push(angular.copy(supporter));
+        $scope.supporterIds.push(supporter.UserId);
+        filterSupporters();
+    };
+
+    $scope.removeSupporter = function (supporter) {
+        $scope.supporters.push(angular.copy(supporter));
+        $scope.supporterIds.splice($scope.supporterIds.indexOf(supporter.UserId), 1);
+        for (var i = 0; i < $scope.selectedSupporters.length; i++) {
+            if ($scope.selectedSupporters[i].UserId.localeCompare(supporter.UserId) === 0) {
+                $scope.selectedSupporters.splice(i, 1);
                 break;
             }
         }
