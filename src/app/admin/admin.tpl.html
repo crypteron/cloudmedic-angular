@@ -37,7 +37,11 @@
                     <td>{{user.UserName}}</td>
                     <td>{{user.Email}}</td>
                     <td></td>
-                    <td><button class="btn btn-danger btn-xs center-block" ng-click="removeUser(user)"><i class="glyphicon glyphicon-trash"></i></button></td>
+                    <td align="center">
+                        <button class="btn btn-danger btn-xs center-block" ng-click="removeUser(user)">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </button>
+                    </td>
                     <td align="center">
                         <button class="btn btn-primary btn-xs" ng-click="createCareTeam(user)">
                             <i class="glyphicon glyphicon-plus"></i>
@@ -140,7 +144,11 @@
                             <li ng-repeat="careTeamName in user.SupporterCareTeamNames">{{careTeamName}}</li>
                         </ul>
                     </td>
-                    <td><button class="btn btn-danger btn-xs center-block" ng-click="removeUser(user)"><i class="glyphicon glyphicon-trash"></i></button></td>
+                    <td align="center">
+                        <button class="btn btn-danger btn-xs" ng-click="removeUser(user)">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -166,7 +174,7 @@
                     <th>Providers</th>
                     <th>Supporters</th>
                     <th style="width:69px;">Remove</th>
-                    <th style="width:69px;">Edit</th>
+                    <th style="width:69px;">Update</th>
                 </tr>
             </thead>
             <tbody>
