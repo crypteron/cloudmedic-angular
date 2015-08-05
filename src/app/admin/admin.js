@@ -43,6 +43,7 @@
         return user.Roles == 'Nurse' || user.Roles == 'Physician';
     };
 
+
     $scope.orderByFieldPatient = 'LastName';
     $scope.reverseSortPatient = false;
 
@@ -52,7 +53,11 @@
     $scope.orderByFieldCareTeam = 'Name';
     $scope.reverseSortCareTeam = false;
 
+    $scope.orderByFieldSupporter = 'Name';
+    $scope.reverseSortSupporter = false;
+
     $scope.PhysicianTabActive = false;
+    $scope.SupporterTabActive = false;
 
     $scope.providers = [];
     for (var i = 0; i < $scope.users.length; i++) {
@@ -136,6 +141,16 @@
                 careTeam: function () { return careTeam; },
                 providers: function () { return $scope.providers; }
             }
+        }).result.then(function () {
+            $state.go("admin", null, { reload: true });
+        });
+    };
+
+    $scope.createSupporter = function () {
+        localizedNotifications.removeForCurrent();
+        $modal.open({
+            templateUrl: "supporter/supporter.add.tpl.html",
+            controller: 'FormCtrl'
         }).result.then(function () {
             $state.go("admin", null, { reload: true });
         });

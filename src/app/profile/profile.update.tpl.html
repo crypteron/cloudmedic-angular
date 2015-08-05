@@ -11,13 +11,11 @@
                         <input id="user-username" class="form-control" placeholder="Username" type="text" ng-model="profile.Username" watch-change="check_username()" required tabindex="0">
                     </div>
                 </div>
-                <div class="form-group">
-                    <div ng-hide="Username_Valid_length">
-                        <font color="red">Username must be 3-20 characters long.</font>
-                    </div>
-                    <div ng-hide="Username_Valid_symbol">
-                        <font color="red">Username must only contain letters and numbers.</font>
-                    </div>
+                <div class="form-group text-center" ng-hide="Username_Valid_length">
+                    <font color="red">Username must contain 3-20 characters.</font>
+                </div>
+                <div class="form-group text-center" ng-hide="Username_Valid_symbol">
+                    <font color="red">Username must only contain letters/numbers.</font>
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">

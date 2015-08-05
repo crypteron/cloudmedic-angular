@@ -5,7 +5,7 @@
 ])
 .controller('FormCtrl', function ($scope, $filter, Users, Password, Registration, $state, localizedNotifications) {
     // Initialize scope variables
-    $scope.data =   {
+    $scope.data = {
         Role: "",
         PhoneNumber: "",
         isSubmitting: false
@@ -29,12 +29,18 @@
         });
     };
 
-    // User creation
+    // Physician, Nurse, Supporter creation
+
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
         $scope.data.isSubmitting = true;
         $scope.creator.PhoneNumber = '(' + $scope.data.PhoneNumber.substr(0, 3) + ') ' + $scope.data.PhoneNumber.substr(3, 3) + '-' + $scope.data.PhoneNumber.substr(6, 4);
-        $scope.creator.Roles = [$scope.data.Role];
+        if ($scope.data.Role != "Physician" && $scope.data.Role != "Nurse") {
+            $scope.creator.Roles = ["Supporter"];
+        }
+        else {
+            $scope.creator.Roles = [$scope.data.Role];
+        }
         $scope.creator.Specialty = "";
         $scope.creator.DOB = $filter('date')($scope.dt, 'M/d/yyyy h:mm:ss a', '+000');
 
@@ -157,6 +163,7 @@
     $scope.dateOptions = {
         showWeeks: false
     };
+
 })
 .directive('watchChange', function () {
     return {

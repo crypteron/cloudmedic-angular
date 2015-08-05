@@ -42,7 +42,7 @@
             localizedNotifications.addForNext('update.success', 'success', { entityType: 'Profile' });
             $scope.data.isSubmitting = false;
             $scope.form.$setPristine();
-            $state.go('user');
+            $state.go("profile", null, { reload: true });
         }, function () {
             $scope.data.isSubmitting = false;
         });
