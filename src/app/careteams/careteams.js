@@ -116,6 +116,18 @@
             }
         }
     };
+
+    // Bind the enter key on the two search input fields
+    $scope.enterProviders = function (key) {
+        if (key.which === 13) {
+            $scope.searchProviders();
+        }
+    };
+    $scope.enterSupporters = function (key) {
+        if (key.which === 13) {
+            $scope.searchSupporters();
+        }
+    };
 })
 .controller('CareTeamUpdateCtrl', function ($scope, $modalInstance, careTeam, CareTeams, Users, localizedNotifications) {
     // Initialize scope variables
@@ -236,6 +248,18 @@
                 $scope.selectedSupporters.splice(i, 1);
                 break;
             }
+        }
+    };
+
+    // Bind the enter key on the two search input fields
+    $scope.enterProviders = function (key) {
+        if (key.which === 13) {
+            $scope.searchProviders();
+        }
+    };
+    $scope.enterSupporters = function (key) {
+        if (key.which === 13) {
+            $scope.searchSupporters();
         }
     };
 });

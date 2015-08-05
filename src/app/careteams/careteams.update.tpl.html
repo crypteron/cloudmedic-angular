@@ -13,16 +13,19 @@
             </div>                   
         </div>
         <label>Providers</label>
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
-                <input id="provider-name-filter" class="form-control" placeholder="Search providers by name" type="text"
-                       ng-model="providerNameFilter">
-                <span class="input-group-btn">
-                    <button class="btn" type="button" ng-click="searchProviders()"><i class="fa fa-search"></i></button>
-                </span>
+        <ng-form>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
+                    <input id="provider-name-filter" class="form-control" placeholder="Search providers by name" type="text"
+                           ng-keypress="enterProviders($event)"
+                           ng-model="providerNameFilter">
+                    <span class="input-group-btn">
+                        <button class="btn" type="button" ng-click="searchProviders()"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
             </div>
-        </div>
+        </ng-form>
         <label>Provider Search Results</label>
         <table id="filter-results" class="table table-striped table-hover">
             <tbody>
@@ -31,7 +34,10 @@
                     <td>{{provider.Email}}</td>
                     <td>{{provider.Roles[0]}}</td>
                     <td>
-                        <button class="btn btn-primary btn-sm" ng-click="addProvider(provider)"><i class="fa fa-plus"></i></button>
+                        <button class="btn btn-primary btn-sm" type="button"
+                                ng-click="addProvider(provider)">
+                            <i class="fa fa-plus"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -44,22 +50,28 @@
                     <td>{{provider.Email}}</td>
                     <td>{{provider.Roles[0]}}</td>
                     <td>
-                        <button class="btn btn-danger btn-sm" ng-click="removeProvider(provider)"><i class="fa fa-trash-o"></i></button>
+                        <button class="btn btn-danger btn-sm" type="button"
+                                ng-click="removeProvider(provider)">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
         <label>Supporters</label>
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                <input id="supporter-name-filter" class="form-control" placeholder="Search supporters by name" type="text"
-                       ng-model="supporterNameFilter">
-                <span class="input-group-btn">
-                    <button class="btn" type="button" ng-click="searchSupporters()"><i class="fa fa-search"></i></button>
-                </span>
+        <ng-form>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                    <input id="supporter-name-filter" class="form-control" placeholder="Search supporters by name" type="text"
+                           ng-keypress="enterSupporters($event)"
+                           ng-model="supporterNameFilter">
+                    <span class="input-group-btn">
+                        <button class="btn" type="button" ng-click="searchSupporters()"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
             </div>
-        </div>
+        </ng-form>
         <label>Supporter Search Results</label>
         <table id="filter-supporter-results" class="table table-striped table-hover">
             <tbody>
@@ -67,7 +79,10 @@
                     <td>{{supporter.FirstName}} {{supporter.LastName}}</td>
                     <td>{{supporter.Email}}</td>
                     <td>
-                        <button class="btn btn-primary btn-sm" ng-click="addSupporter(supporter)"><i class="fa fa-plus"></i></button>
+                        <button class="btn btn-primary btn-sm" type="button"
+                                ng-click="addSupporter(supporter)">
+                            <i class="fa fa-plus"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -79,7 +94,10 @@
                     <td>{{supporter.FirstName}} {{supporter.LastName}}</td>
                     <td>{{supporter.Email}}</td>
                     <td>
-                        <button class="btn btn-danger btn-sm" ng-click="removeSupporter(supporter)"><i class="fa fa-trash-o"></i></button>
+                        <button class="btn btn-danger btn-sm" type="button"
+                                ng-click="removeSupporter(supporter)">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>
