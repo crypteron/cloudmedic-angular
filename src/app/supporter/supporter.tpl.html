@@ -1,44 +1,42 @@
-﻿div class="col-md-10 col-md-offset-1">
+﻿<div class="col-md-10 col-md-offset-1">
 <h2>
-    Prescriptions
+    
 </h2>
 <table id="supporter-list" class="table table-striped table-hover">
     <thead>
         <tr>
             <th>
-                <a href="#" ng-click="orderByField='PatientName'; reverseSort = !reverseSort">
-                    Name <span ng-show="orderByField == 'PatientName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                <a href="#" ng-click="orderByField='Name'; reverseSort = !reverseSort">
+                    Care Team <span ng-show="orderByField == 'Name'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
                 </a>
             </th>
             <th>
-                <a href="#" ng-click="orderByField='MedicationName'; reverseSort = !reverseSort">
-                    Medication <span ng-show="orderByField == 'MedicationName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                <a href="#" ng-click="orderByField='Patient.LastName'; reverseSort = !reverseSort">
+                    Patient Name <span ng-show="orderByField == 'Patient.LastName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
                 </a>
             </th>
-            <th>
-                <a href="#" ng-click="orderByField='StartDate'; reverseSort = !reverseSort">
-                    Start Date <span ng-show="orderByField == 'StartDate'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
-                </a>
-            </th>
-            <th>
-                <a href="#" ng-click="orderByField='EndDate'; reverseSort = !reverseSort">
-                    End Date <span ng-show="orderByField == 'EndDate'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
-                </a>
-            </th>
-            <th>Frequency</th>
-            <th>Dosage</th>
-            <th>Notes</th>
+            <th>Medications</th>
+            <th>Physicians</th>
+            <th>Nurses</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="prescription in prescriptions">
-            <td>Patient Name</td> 
-            <td>{{prescription.MedicationName}}</td>
-            <td>{{prescription.StartDate | date}}</td>
-            <td>{{prescription.EndDate | date}}</td>
-            <td>{{prescription.Frequency}}</td>
-            <td>{{prescription.Dosage}}</td>
-            <td class="col-md-4">{{prescription.Notes}}</td>
+        <tr ng-repeat="sTeam in sTeams | orderBy:orderByField:reverseSort">
+            <td>{{sTeam.Name}}</td>
+            <td>{{sTeam.Patient.LastName}}, {{sTeam.Patient.FirstName}}</td>
+            <td>
+                <button ng-click="medicationHistory(sTeam.Patient)" class="btn btn-default">Click Me!</button>
+            </td>
+            <td>
+                <ul>
+                    <li ng-repeat="provider in sTeam.Providers | filter:{Roles:'Physician'}" >{{provider.LastName}}, {{provider.FirstName}} - {{provider.Roles[0]}}</li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li ng-repeat="provider in sTeam.Providers | filter:{Roles:'Nurse'}" >{{provider.LastName}}, {{provider.FirstName}} - {{provider.Roles[0]}}</li>
+                </ul>
+            </td>
         </tr>
     </tbody>
 </table>

@@ -13,10 +13,12 @@
             'supporters': { method: 'GET', isArray: true, params: { path: 'Supporters' } },
             'meds': { method: 'GET', isArray: true, params: { path: 'Prescriptions' } },
             'prTeams': { method: 'GET', isArray: true, params: { path: 'Provider' } },
+            'sTeams': {method: 'GET', isArray: true, params: {path: 'CareTeams'} },
             //'supporter': { method: 'POST', isArray: false, params: { path: 'Supporter' } },
             'patients': { method: 'GET', isArray: true, params: { path: 'Patients' } },
             'remove': { method: 'DELETE', isArray: false },
             'create': { method: 'POST', isArray: false, params: { path: 'Add' } }
+
         });
         return service;
     };
