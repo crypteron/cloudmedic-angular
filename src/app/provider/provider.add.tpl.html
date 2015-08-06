@@ -7,23 +7,6 @@
         <cry-notification-bar></cry-notification-bar>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
-                <input id="register-username" class="form-control" pattern="[A-Za-z0-9.]{3,20}" placeholder="Username" type="text" 
-                       ng-model="creator.UserName" 
-                       watch-change="check_username()" 
-                       required autofocus>
-            </div>
-        </div>
-        <div class="form-group">
-            <div ng-hide="Username_Valid_length">
-                <font color="red">Username must be 3-20 characters long.</font>
-            </div>
-            <div ng-hide="Username_Valid_symbol">
-                <font color="red">Username must only contain letters and numbers.</font>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">@</span>
                 <input id="register-email" class="form-control" placeholder="Email" type="email" 
                        ng-model="creator.Email" 
@@ -58,7 +41,7 @@
                        ng-model="data.PhoneNumber" 
                        ui-mask="(999) 999-9999" 
                        required>
-            </div><!-- /input-group -->
+            </div>
         </div>
         <div class="form-group">
             <div class="form-inline">
@@ -66,7 +49,9 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
                         <div class="form-inline">
-                            <input type="text" style="width:319px" id="admin-DOB" ng-model="dt" ng-click="open($event)" class="form-control" 
+                            <input type="text" style="width:319px" id="admin-DOB" class="form-control" 
+                                   ng-model="dt" 
+                                   ng-click="open($event)"
                                    datepicker-popup="{{format}}" 
                                    placeholder="YYYY-MM-DD" 
                                    show-button-bar="false" 
@@ -100,7 +85,11 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button style="padding-top:5px" class="btn btn-primary btn-lg btn-block" type="submit" ng-click="create()" ng-disabled="form.$invalid || data.isSubmitting" tabindex="0">Register</button>
+            <button style="padding-top:5px" class="btn btn-primary btn-lg btn-block" type="submit" 
+                    ng-click="create()" 
+                    ng-disabled="form.$invalid || data.isSubmitting">
+                Register
+            </button>
         </div>
     </div>
 </form>

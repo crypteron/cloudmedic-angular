@@ -90,8 +90,6 @@
     <Content Include="src\app\provider\provider.js" />
     <Content Include="src\app\provider\provider.tpl.html" />
     <Content Include="src\app\supporter\supporter.add.tpl.html" />
-    <Content Include="src\app\supporter\supporter.invite.js" />
-    <Content Include="src\app\supporter\supporter.invite.tpl.html" />
     <Content Include="src\app\supporter\supporter.js" />
     <Content Include="src\app\supporter\supporter.tpl.html" />
     <Content Include="src\common\form\form.js" />

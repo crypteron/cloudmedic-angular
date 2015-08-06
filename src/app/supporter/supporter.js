@@ -1,5 +1,4 @@
 ﻿angular.module('cloudmedic.supporter', [
-    'cloudmedic.supporter.invite',
     'cloudmedic.resources'
 ])
 .config(function config($stateProvider) {

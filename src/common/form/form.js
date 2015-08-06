@@ -29,8 +29,7 @@
         });
     };
 
-    // Physician, Nurse, Supporter creation
-
+    // Physician/Nurse/Supporter creation
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
         $scope.data.isSubmitting = true;

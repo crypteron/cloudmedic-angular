@@ -110,7 +110,11 @@
         <div class="profile-buttons">
             <button class="btn btn-primary btn-lg" type="button" 
                     ng-click="create()" 
-                    ng-disabled="data.isSubmitting" style="pointer-events:all" autofocus>Create Care Team</button>
+                    ng-disabled="form.$invalid || data.isSubmitting" 
+                    style="pointer-events:all" 
+                    autofocus>
+                Create Care Team
+            </button>
         </div>
     </div>
 </form>
