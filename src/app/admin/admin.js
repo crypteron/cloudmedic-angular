@@ -97,8 +97,8 @@
         $modal.open({
             templateUrl: "app.confirm.tpl.html",
             controller: function ($scope) {
-                $scope.confirmText = "You will not be able to recover this medication!";
-                $scope.confirmButton = "Yes, delete medication!";
+                $scope.confirmText = "You will not be able to recover this care team!";
+                $scope.confirmButton = "Yes, delete care team!";
             }
         }).result.then(function () {
             $scope.careteamRemover.$remove({ id: careTeam.Id }).then(function () {
