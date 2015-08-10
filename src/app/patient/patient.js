@@ -66,12 +66,28 @@
                 $scope.confirmButton = "Yes";
             }
         }).result.then(function () {
-            $scope.CareTeamUpdater.Id = careTeam.id;
-            $scope.CareTeamUpdater.$update().then(function () {
-                localizedNotifications.addForNext('update.success', 'success', { entityType: 'User' });
+            $scope.CareTeamUpdater.Id = careTeam.Id;
+            $scope.CareTeamUpdater.$activate().then(function () {
+                localizedNotifications.addForNext('update.success', 'success', { entityType: 'CareTeam' });
                 $state.go("patient", null, { reload: true });
             });
         });
     };
 
+    $scope.rejectCareTeam = function (careTeam) {
+        localizedNotifications.removeForCurrent();
+        $modal.open({
+            templateUrl: "app.confirm.tpl.html",
+            controller: function ($scope) {
+                $scope.confirmText = "Are you sure you want to remove this care team?";
+                $scope.confirmButton = "Yes";
+            }
+        }).result.then(function () {
+            $scope.CareTeamUpdater.Id = careTeam.Id;
+            $scope.CareTeamUpdater.$remove({ id: careTeam.Id }).then(function () {
+                localizedNotifications.addForNext('delete.success', 'success', { entityType: 'CareTeam' });
+                $state.go("patient", null, { reload: true });
+            });
+        });
+    };
 });
