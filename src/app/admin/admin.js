@@ -1,4 +1,4 @@
-﻿angular.module('cloudmedic.admin', [
+﻿angular.module("cloudmedic.admin", [
     'ui.router',
     'ui.mask',
     'form',
