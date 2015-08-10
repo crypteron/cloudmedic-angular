@@ -11,7 +11,7 @@ Install [Node.js](http://nodejs.org/download/) and then follow one of the follow
 #### Starting from a blank slate
 ```
 git clone git@bitbucket.org:Crypteron/crypteron-dashboard.git
-npm -g install grunt-cli karma bower
+npm -g install grunt-cli karma bower protractor
 npm install
 bower install
 grunt watch
