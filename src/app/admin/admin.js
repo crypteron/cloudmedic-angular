@@ -36,7 +36,17 @@
 .controller('AdminCtrl', function ($scope, $state, $modal, users, Users, careTeams, CareTeams, localizedNotifications) {
     // Initialize scope variables
     $scope.users = users;
-    $scope.careTeams = careTeams;
+    $scope.careTeams = angular.copy(careTeams);
+    $scope.inactiveTeams = [];
+    $scope.inactiveTeamsEmpty = true;
+    var x = $scope.careTeams.length;
+    while (x--) {
+        if (!$scope.careTeams[x].Active) {
+            $scope.inactiveTeams.push($scope.careTeams[x]);
+            $scope.careTeams.splice(x, 1);
+            $scope.inactiveTeamsEmpty = false;
+        }
+    }
     $scope.userRemover = new Users();
     $scope.careteamRemover = new CareTeams();
     $scope.isProvider = function (user) {
@@ -87,8 +97,8 @@
         $modal.open({
             templateUrl: "app.confirm.tpl.html",
             controller: function ($scope) {
-                $scope.confirmText = "You will not be able to recover this medication!";
-                $scope.confirmButton = "Yes, delete medication!";
+                $scope.confirmText = "You will not be able to recover this care team!";
+                $scope.confirmButton = "Yes, delete care team!";
             }
         }).result.then(function () {
             $scope.careteamRemover.$remove({ id: careTeam.Id }).then(function () {
