@@ -11,7 +11,9 @@
             'query': { method: 'GET', isArray: true },
             'update': { method: 'POST', isArray: false, params: { path: 'Update' } },
             'remove': { method: 'DELETE', isArray: false },
-            'create': { method: 'POST', isArray: false, params: { path: 'Add' } }
+            'create': { method: 'POST', isArray: false, params: { path: 'Add' } },
+            'activate': { method: 'POST', isArray: false, params: { path: 'Activate' } }
+
         });
         return service;
     };

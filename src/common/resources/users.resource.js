@@ -14,6 +14,7 @@
             'meds': { method: 'GET', isArray: true, params: { path: 'Prescriptions' } },
             'prTeams': { method: 'GET', isArray: true, params: { path: 'Provider' } },
             'sTeams': {method: 'GET', isArray: true, params: {path: 'CareTeams'} },
+            'paTeams': { method: 'GET', isArray: true, params: { path: 'Patient' } },
             'patients': { method: 'GET', isArray: true, params: { path: 'Patients' } },
             'remove': { method: 'DELETE', isArray: false },
             'create': { method: 'POST', isArray: false, params: { path: 'Add' } }
