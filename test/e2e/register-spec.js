@@ -1,12 +1,12 @@
 ﻿// Registration page spec
-describe('registration page', function () {
-    browser.get('#/register');
-
-    xit("should load", function () {
+xdescribe('registration page', function () {
+    it("should load", function () {
+        browser.get('#/');
+        element(by.linkText("Patient registration")).click();
         expect(browser.getTitle()).toBe('Register | CloudMedic Dashboard');
     });
 
-    xdescribe("username input", function () {
+    describe("username input", function () {
         beforeEach(function () {
             element(by.model('registration.UserName')).clear();
         });
@@ -31,7 +31,7 @@ describe('registration page', function () {
         })
     });
 
-    xdescribe("name inputs", function () {
+    describe("name inputs", function () {
         beforeEach(function () {
             element(by.model('registration.FirstName')).clear();
             element(by.model('registration.LastName')).clear();
@@ -56,7 +56,7 @@ describe('registration page', function () {
         });
     });
 
-    xdescribe("password inputs", function () {
+    describe("password inputs", function () {
         beforeEach(function () {
             element(by.model('registration.Password')).clear();
             element(by.model('registration.ConfirmPassword')).clear();
@@ -126,7 +126,7 @@ describe('registration page', function () {
         });
     })
 
-    xdescribe("phone number input", function () {
+    describe("phone number input", function () {
         beforeEach(function () {
             element(by.model('data.PhoneNumber')).clear();
         });
@@ -144,7 +144,7 @@ describe('registration page', function () {
         });
     });
 
-    xit("should prevent submission until all fields complete", function () {
+    it("should prevent submission until all fields complete", function () {
         var registerBtn = element(by.id("register-btn"));
         expect(registerBtn.isEnabled()).toBeFalsy();
 
@@ -176,7 +176,7 @@ describe('registration page', function () {
         expect(registerBtn.isEnabled()).toBeTruthy();
     });
 
-    xit("should redirect to login page on successful registration", function () {
+    it("should redirect to login page on successful registration", function () {
         element(by.id("register-btn")).click();
 
         expect(browser.getTitle()).toBe('Login | CloudMedic Dashboard');

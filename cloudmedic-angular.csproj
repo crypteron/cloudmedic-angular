@@ -181,6 +181,7 @@
     <Content Include="src\common\userProfile\userProfile.js" />
     <Content Include="src\common\userProfile\userProfile.service.js" />
     <Content Include="src\index.html" />
+    <Content Include="test\e2e\admin-spec.js" />
     <Content Include="test\e2e\register-spec.js" />
     <Content Include="test\protractor-conf.js" />
     <Content Include="vendor\angular-animate\angular-animate.js" />

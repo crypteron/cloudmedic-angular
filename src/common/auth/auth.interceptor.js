@@ -90,6 +90,6 @@
 
     return service;
 })
-.config(['$httpProvider', function ($httpProvider) {
+.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');
-}]);
+});
