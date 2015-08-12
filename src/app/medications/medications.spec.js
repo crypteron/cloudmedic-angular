@@ -1,4 +1,4 @@
-﻿describe('CareTeamAddCtrl', function () {
+﻿/*describe('CareTeamAddCtrl', function () {
     var $controller;
     var $rootScope;
     var $scope;
@@ -23,6 +23,7 @@
         $httpBackend.flush();
     });
     it('Test', function () {
-        var ctrl = $controller('MedAddCtrl', { $scope: $scope });
+        var ctrl = $controller('MedicationsCtrl', { $scope: $scope });
+        var med = {"GenericName":"Weed",'Code':"50051",}
     });
-});
+});*/

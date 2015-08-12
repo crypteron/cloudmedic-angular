@@ -5,6 +5,12 @@ var crySetupServiceMocks = function (provide) {
         go: function () { }
     });
 
+    provide.value('user', {
+        FirstName: 'John',
+        LastName: 'Doe',
+        UserId: 'some-guid'
+    });
+
     provide.value('localizedNotifications',  {
         removeForCurrent: function () { },
         addForCurrent: function () { },
@@ -68,7 +74,8 @@ beforeEach(function () {
 });
 
 describe('AppCtrl', function () {
-  describe( 'isCurrentUrl', function() {
+    describe('isCurrentUrl', function () {
+        console.log('runs fine');
     var AppCtrl, $location, $scope;
 
     beforeEach( module( 'cloudmedic' ) );
