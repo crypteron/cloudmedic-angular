@@ -2,8 +2,7 @@
     var $scope,
         $httpBackend,
         $localizedNotifications,
-        careTeamCtrl,
-        url;
+        careTeamCtrl;
     beforeEach(function () {
         module('cloudmedic.careteams');
         module('cloudmedic.resources');
@@ -14,7 +13,6 @@
 
         inject(function ($rootScope, _$httpBackend_, $controller, CareTeams, $modalInstance, localizedNotifications, user, Users) {
             $scope = $rootScope.$new();
-            url = 'https://localhost:44300/';
             $httpBackend = _$httpBackend_;
             $localizedNotifications = localizedNotifications;
             careTeamCtrl = $controller('CareTeamAddCtrl', {
@@ -30,7 +28,6 @@
 
     it('CareTeam Add Test', function () {
         $scope.create();
-        $httpBackend.expectPOST(url + 'CareTeams/Add').respond(201);
         expect($scope.creator.PatientId).toBe('123');
     });
     it('Provider Add Test', function () {
@@ -38,6 +35,11 @@
         $scope.providerIds = [];
         $scope.addProvider({ 'Name': 'aa', UserId: '123' });
         $scope.addProvider({ 'Name': 'bb', UserId: '1234' });
-        expect($scope.providerIds).toBe(['123','1234']);
+        expect($scope.providerIds).toEqual(['123','1234']);
+    });
+    it('Provider Remove Test', function () {
+        $scope.selectedProviders = [{ 'Name': 'aa', UserId: '123' }, { 'Name': 'bb', UserId: '1234' }, { 'Name': 'cc', UserId: '12345' }];
+        $scope.removeProvider({ 'Name': 'aa', UserId: '123' });
+        expect($scope.selectedProviders).toEqual([{ 'Name': 'bb', UserId: '1234' }, { 'Name': 'cc', UserId: '12345' }]);
     });
 });

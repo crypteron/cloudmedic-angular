@@ -1,29 +1,31 @@
-﻿/*describe('CareTeamAddCtrl', function () {
-    var $controller;
-    var $rootScope;
-    var $scope;
-    var $httpBackend;
+﻿describe('Medication Controller', function () {
+    var $scope,
+        $httpBackend,
+        $localizedNotifications,
+        medCtrl;
     beforeEach(function () {
-        module('cloudmedic.resources');
-        module('medications.resource');
         module('cloudmedic.medications');
-        module('key.mocks');
+        module('cloudmedic.resources');
+        module(function ($provide) {
+            crySetupServiceMocks($provide);
+        });
+
+        inject(function ($rootScope, _$httpBackend_, $controller,$state,$modal, localizedNotifications, Medications, medications) {
+            $scope = $rootScope.$new();
+            $httpBackend = _$httpBackend_;
+            $localizedNotifications = localizedNotifications;
+            careTeamCtrl = $controller('MedicationsCtrl', {
+                '$scope': $scope,
+                '$modal': $modal,
+                'Medications': Medications,
+                'medications':medications,
+                'localizedNotifications': $localizedNotifications,
+                '$state':$state
+            });
+        });
     });
-    beforeEach(inject(function ($injector) {
-        $rootScope = $injector.get('$rootScope');
-        $controller = $injector.get('$controller');
-        $httpbakend = $injector.get('$httpBackend');
-        
-        $scope = $rootScope.$new();
+    it('should pass a dummy test', inject(function () {
+        expect(true).toBeTruthy();
     }));
-    it('Medication Add Test', function () {
-        $scope.create();
-        var ctrl = $controller('MedAddCtrl', { $scope: $scope });
-        var handler = $httpBackend.expectPOST('medications/Add');
-        $httpBackend.flush();
-    });
-    it('Test', function () {
-        var ctrl = $controller('MedicationsCtrl', { $scope: $scope });
-        var med = {"GenericName":"Weed",'Code':"50051",}
-    });
-});*/
+
+});

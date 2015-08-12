@@ -10,7 +10,9 @@ var crySetupServiceMocks = function (provide) {
         LastName: 'Doe',
         UserId: '123'
     });
-    provide.value('apiurl',{base:'https://localhost:44300/'});
+    provide.value('medications', {
+        get: function () { }
+    });
     provide.value('localizedNotifications', {
         removeForCurrent: function () { },
         addForCurrent: function () { },
