@@ -8,13 +8,14 @@ var crySetupServiceMocks = function (provide) {
     provide.value('user', {
         FirstName: 'John',
         LastName: 'Doe',
-        UserId: 'some-guid'
+        UserId: '123'
     });
-
-    provide.value('localizedNotifications',  {
+    provide.value('apiurl',{base:'https://localhost:44300/'});
+    provide.value('localizedNotifications', {
         removeForCurrent: function () { },
         addForCurrent: function () { },
-        addForNext: function () { },
+        addForNext: function () {
+        },
         addSticky: function () { },
         get: function () { },
         remove: function () { },
@@ -75,7 +76,6 @@ beforeEach(function () {
 
 describe('AppCtrl', function () {
     describe('isCurrentUrl', function () {
-        console.log('runs fine');
     var AppCtrl, $location, $scope;
 
     beforeEach( module( 'cloudmedic' ) );
