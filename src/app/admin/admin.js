@@ -66,7 +66,7 @@
     $scope.orderByFieldSupporter = 'Name';
     $scope.reverseSortSupporter = false;
 
-    $scope.PhysicianTabActive = false;
+    $scope.ProviderTabActive = false;
     $scope.SupporterTabActive = false;
 
     $scope.providers = [];

@@ -6,7 +6,8 @@
 
     // location of your E2E test specs
     specs: [
-      '../test/e2e/*.js'
+        '../test/e2e/register-spec.js',
+        '../test/e2e/admin-spec.js'
     ],
 
     // configure multiple browsers to run tests
@@ -20,6 +21,9 @@
     capabilities: {
       browserName: 'chrome'
     },
+
+    // extend default timeout length for bulky get requests (admin page)
+    allScriptsTimeout: 15000,
 
     // url where your app is running, relative URLs are prepending with this URL
     baseUrl: 'http://localhost:9000/',

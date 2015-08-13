@@ -7,7 +7,7 @@
             <h2 class="text-center">Registration</h2>
             <cry-notification-bar></cry-notification-bar>
             <form name="form" novalidate role="form">
-                <div class="form-group">
+                <div id="patient-username" class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
                         <input id="register-username" class="form-control" pattern="[A-Za-z0-9.]{3,20}" placeholder="Username" type="text" 
@@ -16,7 +16,7 @@
                                required autofocus>
                     </div>
                 </div>
-                <div class="form-group">
+                <div id="patient-username-errors" class="form-group">
                     <div id="un-invalid-length" ng-hide="Username_Valid_length">
                         <font color="red">Username must be 3-20 characters long.</font>
                     </div>
@@ -24,7 +24,7 @@
                         <font color="red">Username must only contain letters and numbers.</font>
                     </div>
                 </div>
-                <div class="form-group">
+                <div id="patient-email" class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">@</span>
                         <input id="register-email" class="form-control" placeholder="Email" type="email" 
@@ -32,7 +32,7 @@
                                required autofocus>
                     </div>
                 </div>
-                <div class="form-group">
+                <div id="patient-name" class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input id="user-first" class="form-control" placeholder="First Name" type="text" 
@@ -45,7 +45,7 @@
                                required>
                     </div>
                 </div>
-                <div class="form-group">
+                <div id="patient-name-errors" class="form-group">
                     <div id="fn-invalid" ng-hide="Firstname_Valid">
                         <font color="red">First name must only contain letters.</font>
                     </div>
@@ -53,7 +53,7 @@
                         <font color="red">Last name must only contain letters.</font>
                     </div>
                 </div>
-                <div class="form-group">
+                <div id="patient-password" class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                         <input id="user-password" class="form-control" pattern="(?=(.*\d))(?=(.*[A-Z]))(?=(.*[a-z]))(?=(.*[^A-Za-z0-9])).{6,}" 
@@ -67,7 +67,7 @@
                                required>
                     </div>
                 </div>
-                <div class="form-group">
+                <div id="patient-password-errors" class="form-group">
                     <div id="pw-invalid" ng-hide="Password_Valid">
                         <font color="red">Password invalid:</font>
                         <ul style="margin-bottom:5px">
@@ -92,7 +92,7 @@
                         <font color="red">Passwords must match!</font>
                     </div>
                 </div>   
-                <div class="form-group">
+                <div id="patient-phone" class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                         <input id="register-phonenumber" class="form-control" placeholder="(xxx) xxx-xxxx" type="text" 
@@ -101,7 +101,7 @@
                                required>
                     </div>
                 </div>
-                <div class="form-group">
+                <div id="patient-birthday-gender" class="form-group">
                     <div class="form-inline">
                         <div class="form-group">
                             <div class="input-group">

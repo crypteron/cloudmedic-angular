@@ -1,13 +1,17 @@
 ﻿// Registration page spec
-xdescribe('registration page', function () {
-    it("should load", function () {
-        browser.get('#/');
+xdescribe('registration-page', function () {
+    browser.get('#/');
+
+    beforeAll(function () {
         element(by.linkText("Patient registration")).click();
+    });
+
+    it("should load", function () {
         expect(browser.getTitle()).toBe('Register | CloudMedic Dashboard');
     });
 
-    describe("username input", function () {
-        beforeEach(function () {
+    describe("username-input", function () {
+        afterEach(function () {
             element(by.model('registration.UserName')).clear();
         });
 
@@ -18,21 +22,23 @@ xdescribe('registration page', function () {
             element(by.model('registration.UserName')).sendKeys("bcdefghijklmnopqrstuvwxyz");
             expect(element(by.id('un-invalid-length')).isDisplayed()).toBeTruthy();
         });
+
         it("should display error message for invalid symbols", function () {
             element(by.model('registration.UserName')).sendKeys("Invalid!@#");
 
             expect(element(by.id('un-invalid-symbol')).isDisplayed()).toBeTruthy();
         });
+
         it("should accept valid inputs", function () {
             element(by.model('registration.UserName')).sendKeys("user1");
 
             expect(element(by.id('un-invalid-length')).isDisplayed()).toBeFalsy();
             expect(element(by.id('un-invalid-symbol')).isDisplayed()).toBeFalsy();
-        })
+        });
     });
 
-    describe("name inputs", function () {
-        beforeEach(function () {
+    describe("name-inputs", function () {
+        afterEach(function () {
             element(by.model('registration.FirstName')).clear();
             element(by.model('registration.LastName')).clear();
         });
@@ -42,11 +48,13 @@ xdescribe('registration page', function () {
 
             expect(element(by.id("fn-invalid")).isDisplayed()).toBeTruthy();
         });
+
         it("should display error message for invalid last name", function () {
             element(by.model('registration.LastName')).sendKeys("example1");
 
             expect(element(by.id("ln-invalid")).isDisplayed()).toBeTruthy();
         });
+
         it("should accept valid inputs", function () {
             element(by.model('registration.FirstName')).sendKeys("user");
             element(by.model('registration.LastName')).sendKeys("example");
@@ -56,8 +64,8 @@ xdescribe('registration page', function () {
         });
     });
 
-    describe("password inputs", function () {
-        beforeEach(function () {
+    describe("password-inputs", function () {
+        afterEach(function () {
             element(by.model('registration.Password')).clear();
             element(by.model('registration.ConfirmPassword')).clear();
         });
@@ -126,8 +134,8 @@ xdescribe('registration page', function () {
         });
     })
 
-    describe("phone number input", function () {
-        beforeEach(function () {
+    describe("phone-number-input", function () {
+        afterEach(function () {
             element(by.model('data.PhoneNumber')).clear();
         });
 

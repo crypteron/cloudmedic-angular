@@ -10,10 +10,10 @@
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
                 <input id="patient-name" class="form-control" placeholder="Patient Name" type="text" 
                        ng-model="patientName" 
-                       required>
+                       disabled required>
             </div>
         </div>
-        <div class="form-group">
+        <div id="careteam-name" class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tag"></i></span>
                 <input id="team-name" class="form-control" placeholder="Team Name" type="text" 
@@ -21,7 +21,7 @@
                        required>
             </div>
         </div>
-        <div class="form-group">
+        <div id="provider-search" class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
                 <input id="provider-name-filter" class="form-control" placeholder="Search providers by name" type="text"
@@ -64,7 +64,7 @@
                 </tr>
             </tbody>
         </table>
-        <div class="form-group">
+        <div id="supporter-search" class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-users"></i></span>
                 <input id="supporter-name-filter" class="form-control" placeholder="Search supporters by name" type="text"
