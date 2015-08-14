@@ -30,7 +30,7 @@
 })
 .controller('ProviderCtrl', function ($scope, $state, $modal, careTeams, localizedNotifications) {
     $scope.careTeams = careTeams;
-    $scope.orderByField = 'Patient.LastName';
+    $scope.orderByField = ['Patient.LastName', 'Patient.FirstName'];
     $scope.reverseSort = false;
     $scope.medicationHistory = function (patient) {
         $modal.open({
