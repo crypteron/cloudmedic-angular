@@ -11,7 +11,7 @@
         });
 
         inject(function ($rootScope, _$httpBackend_, $controller, $state, $modalInstance, $filter, auth,
-            Prescriptions, Users, localizedNotifications, Candidates, MedId, MedName, MONTHS) {
+            Prescriptions, Users, localizedNotifications, Candidates, MedId, MedName) {
             $scope = $rootScope.$new();
             $httpBackend = _$httpBackend_;
             $localizedNotifications = localizedNotifications;
@@ -20,7 +20,6 @@
                 '$modalInstance': $modalInstance,
                 'MedId': MedId,
                 'MedName': MedName,
-                'MONTHS':MONTHS,
                 'localizedNotifications': $localizedNotifications,
                 '$state': $state,
                 'Prescriptions': Prescriptions,

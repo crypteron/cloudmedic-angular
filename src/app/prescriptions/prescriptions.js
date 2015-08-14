@@ -80,11 +80,11 @@
         });
     };
 })
-.controller('AddPrescriptionsCtrl', function ($scope, $modalInstance, $filter, auth, Prescriptions, Users, localizedNotifications, Candidates, MedId, MedName, MONTHS) {
+.controller('AddPrescriptionsCtrl', function ($scope, $modalInstance, $filter, auth, Prescriptions, Users, localizedNotifications, Candidates, MedId, MedName) {
     $scope.data = {
         Duration: 0,
         Units: 1,
-        PatientId: "",
+        PatientId: [],
         PatientName: "",
         isSubmitting: false
     };
@@ -191,7 +191,7 @@
     };
 })
 
-.controller('UpdatePrescriptionsCtrl', function ($scope, $modalInstance, $filter, Prescriptions, prescription, MONTHS, localizedNotifications) {
+.controller('UpdatePrescriptionsCtrl', function ($scope, $modalInstance, $filter, Prescriptions, prescription, localizedNotifications) {
     // initialize scope variables
     $scope.prescription = angular.copy(prescription);
     $scope.original = angular.copy($scope.prescription);
