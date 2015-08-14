@@ -1,5 +1,5 @@
 ﻿// Registration page spec
-xdescribe('registration-page', function () {
+describe('registration-page', function () {
     browser.get('#/');
 
     beforeAll(function () {

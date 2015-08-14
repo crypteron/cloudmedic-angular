@@ -11,8 +11,8 @@
                 </a>
             </th>
             <th>
-                <a href="#" ng-click="orderByField='Patient.LastName'; reverseSort = !reverseSort">
-                    Patient Name <span ng-show="orderByField == 'Patient.LastName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                <a href="#" ng-click="orderByField=['Patient.LastName', 'Patient.FirstName']; reverseSort = !reverseSort">
+                    Patient Name <span ng-show="orderByField == ['Patient.LastName', 'Patient.FirstName']" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
                 </a>
             </th>
             <th>Medications</th>

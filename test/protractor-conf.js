@@ -7,7 +7,9 @@
     // location of your E2E test specs
     specs: [
         '../test/e2e/register-spec.js',
-        '../test/e2e/admin-spec.js'
+        '../test/e2e/admin-spec.js',
+        '../test/e2e/provider-spec.js',
+        '../test/e2e/patient-spec.js'
     ],
 
     // configure multiple browsers to run tests
