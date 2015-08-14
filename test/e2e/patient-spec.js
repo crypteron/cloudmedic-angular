@@ -197,6 +197,10 @@ describe("patient-page", function () {
                 expect(element.all(by.cssContainingText("tbody tr", "Fantastic Three")).count()).toBe(0);
             });
         });
+    });
 
+    it("should log out", function () {
+        element(by.linkText("Logout")).click();
+        expect(browser.getTitle()).toBe('Login | CloudMedic Dashboard');
     });
 });

@@ -159,7 +159,7 @@ describe("provider-page", function () {
     });
 
     it("should log out", function () {
-        element(by.id("close-btn")).click();
+        element(by.id("close-hist-btn")).click();
         element(by.linkText("Logout")).click();
         expect(browser.getTitle()).toBe('Login | CloudMedic Dashboard');
     });

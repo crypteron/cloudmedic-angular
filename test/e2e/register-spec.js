@@ -162,16 +162,16 @@ describe('registration-page', function () {
         element(by.model('registration.Email')).sendKeys("user@example.com");
         expect(registerBtn.isEnabled()).toBeFalsy();
 
-        element(by.model('registration.FirstName')).sendKeys("user");
+        element(by.model('registration.FirstName')).sendKeys("User");
         expect(registerBtn.isEnabled()).toBeFalsy();
 
-        element(by.model('registration.LastName')).sendKeys("example");
+        element(by.model('registration.LastName')).sendKeys("Example");
         expect(registerBtn.isEnabled()).toBeFalsy();
 
-        element(by.model('registration.Password')).sendKeys("Password1!");
+        element(by.model('registration.Password')).sendKeys("Password1?");
         expect(registerBtn.isEnabled()).toBeFalsy();
 
-        element(by.model('registration.ConfirmPassword')).sendKeys("Password1!");
+        element(by.model('registration.ConfirmPassword')).sendKeys("Password1?");
         expect(registerBtn.isEnabled()).toBeFalsy();
 
         element(by.model('data.PhoneNumber')).sendKeys(" 1234567890");

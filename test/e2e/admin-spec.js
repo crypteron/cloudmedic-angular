@@ -519,14 +519,14 @@ describe("admin-page", function () {
             var patient;
 
             it("should ask for confirmation when clicked", function () {
-                patient = element(by.cssContainingText("tbody tr", "user@example.com"))
+                patient = element(by.cssContainingText("tbody tr", "person@sample.com"))
                 patient.element(by.id("remove-patient")).click();
                 expect(element.all(by.cssContainingText(".modal-title", "Are You Sure?")).count()).toEqual(1);
             });
 
             it("should delete user when confirmed", function () {
                 element(by.buttonText("Yes, delete User!")).click();
-                expect(element.all(by.cssContainingText("tbody tr", "user@example.com")).count()).toEqual(0);
+                expect(element.all(by.cssContainingText("tbody tr", "person@sample.com")).count()).toEqual(0);
             });
         });
 

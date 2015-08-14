@@ -8,13 +8,17 @@
                         <label for="profile-fn" class="control-label pull-right">Username:</label>
                     </div>
                     <div class="col-md-9">
-                        <input id="user-username" class="form-control" placeholder="Username" type="text" ng-model="profile.Username" watch-change="check_username()" required tabindex="0">
+                        <input id="user-username" class="form-control" pattern="[A-Za-z0-9.]{3,20}" placeholder="Username" type="text" 
+                               ng-model="profile.Username" 
+                               watch-change="check_username()" 
+                               required tabindex="0">
                     </div>
                 </div>
-                <div class="form-group text-center" ng-hide="Username_Valid_length">
+                <div id="un-invalid-length" class="form-group text-center" 
+                     ng-hide="Username_Valid_length">
                     <font color="red">Username must contain 3-20 characters.</font>
                 </div>
-                <div class="form-group text-center" ng-hide="Username_Valid_symbol">
+                <div id="un-invalid-symbol" class="form-group text-center" ng-hide="Username_Valid_symbol">
                     <font color="red">Username must only contain letters/numbers.</font>
                 </div>
                 <div class="form-group">
@@ -22,10 +26,13 @@
                         <label for="profile-fn" class="control-label pull-right">FirstName:</label>
                     </div>
                     <div class="col-md-9">
-                        <input id="user-first" class="form-control" placeholder="First Name" type="text" ng-model="profile.FirstName" watch-change="check_firstName()" required tabindex="0">
+                        <input id="user-first" class="form-control" pattern="[A-Za-z]{1,}" placeholder="First Name" type="text" 
+                               ng-model="profile.FirstName" 
+                               watch-change="check_firstName()" 
+                               required tabindex="0">
                     </div>
                 </div>
-                <div class="form-group text-center" ng-hide="Firstname_Valid">
+                <div id="fn-invalid" class="form-group text-center" ng-hide="Firstname_Valid">
                     <font color="red">First name must only contain letters.</font>
                 </div>
                 <div class="form-group">
@@ -33,10 +40,13 @@
                             <label for="profile-ln" class="control-label pull-right">LastName:</label>
                     </div>
                     <div class="col-md-9">
-                        <input id="user-last" class="form-control" placeholder="Last Name" type="text" ng-model="profile.LastName" watch-change="check_lastName()" required tabindex="0">
+                        <input id="user-last" class="form-control" pattern="[A-Za-z]{1,}" placeholder="Last Name" type="text" 
+                               ng-model="profile.LastName" 
+                               watch-change="check_lastName()" 
+                               required tabindex="0">
                     </div>
                 </div>
-                <div class="form-group text-center" ng-hide="Lastname_Valid">
+                <div id="ln-invalid" class="form-group text-center" ng-hide="Lastname_Valid">
                     <font color="red">Last name must only contain letters.</font>
                 </div>
                 <div class="form-group">
@@ -44,7 +54,10 @@
                         <label for="profile-ln" class="control-label pull-right">Email:</label>
                     </div>
                     <div class="col-md-9">
-                        <input id="register-email" class="form-control" type="text" ng-model="profile.Email" placeholder="Email" ng-disabled="data.isSubmitting"
+                        <input id="register-email" class="form-control" type="text" 
+                               ng-model="profile.Email" 
+                               placeholder="Email" 
+                               ng-disabled="data.isSubmitting"
                                required autofocus />
                     </div>
                 </div>
@@ -53,12 +66,13 @@
                         <label for="profile-password" class="control-label pull-right">Password: </label>
                     </div>
                     <div class="col-md-3">
-                        <a ui-sref="profile.changePassword" class="btn btn-default" ng-disabled="data.isSubmitting">Change Password...</a>
+                        <a ui-sref="profile.changePassword" class="btn btn-default" 
+                           ng-disabled="data.isSubmitting">Change Password...</a>
                     </div>
                 </div>
                 <div class="profile-buttons">            
-                    <button class="btn btn-primary btn-lg" id="update-profile-btn" type="submit" ng-disabled="data.isSubmitting">Update Profile</button>
-                    <a class="text-danger reset-link" type="button" ng-click="resetProfile()" ng-disabled="data.isSubmitting">
+                    <button class="btn btn-primary btn-lg" id="update-profile-btn" type="submit" ng-disabled="data.isSubmitting || form.$invalid">Update Profile</button>
+                    <a id="reset-update-form" class="text-danger reset-link" type="button" ng-click="resetProfile()" ng-disabled="data.isSubmitting">
                         <i class="fa fa-undo"></i> Reset
                     </a>
                 </div>
