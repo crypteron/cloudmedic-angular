@@ -141,13 +141,14 @@
 
     // Filter the patients displayed as candidates
     $scope.filter = function () {
+        $scope.tempCandidates=[];
         $scope.Candidates = angular.copy(Candidates);
         if ($scope.data.PatientName) {
             var name = $scope.data.PatientName.toLowerCase();
             for (var i = 0; i < $scope.Candidates.length; i++) {
                 var reversename = ($scope.Candidates[i].LastName + ", " + $scope.Candidates[i].FirstName).toLowerCase();
-                if (reversename.substring(0, name.length).localeCompare(name) !== 0) {
-                    $scope.Candidates.splice(i, 1);
+                if (reversename.substring(0, name.length).localeCompare(name) === 0) {
+                    $scope.tempCandidates.push($scope.Candidates[i]);
                 }
             }
             // Redirect to proper tab based on filter
@@ -165,6 +166,7 @@
                 $scope.JQTab = false;
             }
         }
+        $scope.Candidates = angular.copy($scope.tempCandidates);
         $scope.sort();
     };
 

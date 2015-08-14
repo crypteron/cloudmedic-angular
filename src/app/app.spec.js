@@ -4,7 +4,38 @@ var crySetupServiceMocks = function (provide) {
     provide.value('$state', {
         go: function () { }
     });
-
+    
+    provide.value('MedId', 12345);
+    provide.value('MedName', 'Whatever');
+    provide.value('MONTHS', 'whatever');
+    provide.value('Candidates', [
+        {
+            FirstName: 'Nick',
+            LastName: 'Sid'
+        },
+        {
+            FirstName: 'Armanda',
+            LastName: 'Alice'
+        },
+        {
+            FirstName: 'Arm',
+            LastName: 'Ali'
+        },
+        {
+            FirstName: 'Zed',
+            LastName: 'Zure'
+        },
+        {
+            FirstName: 'Zara',
+            LastName: 'Zuma'
+        }
+    ]);
+    provide.value('auth', {
+        status:null
+    });
+    provide.value('filter', function () {
+        return function () { };
+     });
     provide.value('user', {
         FirstName: 'John',
         LastName: 'Doe',
