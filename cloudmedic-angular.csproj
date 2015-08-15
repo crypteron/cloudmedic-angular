@@ -184,6 +184,7 @@
     <Content Include="test\e2e\admin-spec.js" />
     <Content Include="test\e2e\medication-spec.js" />
     <Content Include="test\e2e\patient-spec.js" />
+    <Content Include="test\e2e\prescription-spec.js" />
     <Content Include="test\e2e\profile-spec.js" />
     <Content Include="test\e2e\provider-spec.js" />
     <Content Include="test\e2e\register-spec.js" />

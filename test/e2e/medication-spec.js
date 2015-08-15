@@ -1,6 +1,6 @@
 ﻿// Medication page spec
 describe("medication-page", function () {
-    browser.get('#/');
+    //browser.get('#/');
 
     beforeAll(function () {
         // Login as an provider
@@ -158,6 +158,16 @@ describe("medication-page", function () {
                 });
             });
 
+            describe("start-date", function () {
+                it("should default to the current date", function () {
+                    var today = new Date();
+                    var dateString = (today.getFullYear()) + "-" + ('0' + (today.getMonth() + 1)).slice(-2) + "-" + ('0' + today.getDate()).slice(-2);
+                    element(by.id("prescription-add-date")).getAttribute('value').then(function (data) {
+                        expect(data).toEqual(dateString);
+                    });
+                });
+            });
+
             describe("patient-filter-results", function () {
                 it("should change tabs", function () {
                     element(by.id("patient-name-filter")).sendKeys("z");
@@ -176,10 +186,14 @@ describe("medication-page", function () {
                 element(by.id("prescription-frequency")).sendKeys("Twice a day");
                 expect(prescribeBtn.isEnabled()).toBeFalsy();
 
-                element(by.id("prescription-dosage")).sendKeys("Two tablets");
+                element(by.id("prescription-dosage")).sendKeys("Example Prescription");
                 expect(prescribeBtn.isEnabled()).toBeFalsy();
 
                 element(by.id("prescription-notes")).sendKeys("Report any symptoms");
+                expect(prescribeBtn.isEnabled()).toBeFalsy();
+
+                element(by.id("prescription-add-date")).clear();
+                element(by.id("prescription-add-date")).sendKeys("1990-01-01");
                 expect(prescribeBtn.isEnabled()).toBeFalsy();
 
                 element(by.cssContainingText("option", "100")).click();
