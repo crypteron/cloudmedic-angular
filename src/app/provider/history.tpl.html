@@ -7,18 +7,27 @@
             <tr>
                 <th>
                     <a href="#" ng-click="orderByField='MedicationName'; reverseSort = !reverseSort">
-                        Medication <span ng-show="orderByField == 'MedicationName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                        Medication
                     </a>
+                    <span class="fa"
+                          ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"
+                          ng-show="orderByField == 'MedicationName'"></span>
                 </th>
                 <th>
                     <a href="#" ng-click="orderByField='StartDate'; reverseSort = !reverseSort">
-                        Start Date <span ng-show="orderByField == 'StartDate'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                        Start Date
                     </a>
+                    <span class="fa"
+                          ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"
+                          ng-show="orderByField == 'StartDate'"></span>
                 </th>
                 <th>
                     <a href="#" ng-click="orderByField='EndDate'; reverseSort = !reverseSort">
-                        End Date <span ng-show="orderByField == 'EndDate'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                        End Date
                     </a>
+                    <span class="fa"
+                          ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"
+                          ng-show="orderByField == 'EndDate'"></span>
                 </th>
                 <th>Frequency</th>
                 <th>Dosage</th>
@@ -26,7 +35,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="prescription in prescriptions">
+            <tr ng-repeat="prescription in prescriptions | orderBy:orderByField:reverseSort">
                 <td>{{prescription.MedicationName}}</td>
                 <td>{{prescription.StartDate | date}}</td>
                 <td>{{prescription.EndDate | date}}</td>
@@ -38,4 +47,7 @@
             </tr>
         </tbody>
     </table>
+</div>
+<div class="modal-footer">
+    <button id="close-hist-btn" class="btn btn-default btn-large" ng-click="$dismiss()">Close</button>
 </div>

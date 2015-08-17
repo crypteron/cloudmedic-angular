@@ -21,7 +21,7 @@
                            ng-keypress="enterProviders($event)"
                            ng-model="providerNameFilter">
                     <span class="input-group-btn">
-                        <button class="btn" type="button" ng-click="searchProviders()"><i class="fa fa-search"></i></button>
+                        <button id="search-providers" class="btn" type="button" ng-click="searchProviders()"><i class="fa fa-search"></i></button>
                     </span>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                     <td>{{provider.Email}}</td>
                     <td>{{provider.Roles[0]}}</td>
                     <td>
-                        <button class="btn btn-primary btn-sm" type="button"
+                        <button id="select-provider" class="btn btn-primary btn-sm" type="button"
                                 ng-click="addProvider(provider)">
                             <i class="fa fa-plus"></i>
                         </button>
@@ -50,7 +50,7 @@
                     <td>{{provider.Email}}</td>
                     <td>{{provider.Roles[0]}}</td>
                     <td>
-                        <button class="btn btn-danger btn-sm" type="button"
+                        <button id="deselect-provider" class="btn btn-danger btn-sm" type="button"
                                 ng-click="removeProvider(provider)">
                             <i class="fa fa-trash-o"></i>
                         </button>
@@ -67,7 +67,7 @@
                            ng-keypress="enterSupporters($event)"
                            ng-model="supporterNameFilter">
                     <span class="input-group-btn">
-                        <button class="btn" type="button" ng-click="searchSupporters()"><i class="fa fa-search"></i></button>
+                        <button id="search-supporters" class="btn" type="button" ng-click="searchSupporters()"><i class="fa fa-search"></i></button>
                     </span>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                     <td>{{supporter.FirstName}} {{supporter.LastName}}</td>
                     <td>{{supporter.Email}}</td>
                     <td>
-                        <button class="btn btn-primary btn-sm" type="button"
+                        <button id="select-supporter" class="btn btn-primary btn-sm" type="button"
                                 ng-click="addSupporter(supporter)">
                             <i class="fa fa-plus"></i>
                         </button>
@@ -94,7 +94,7 @@
                     <td>{{supporter.FirstName}} {{supporter.LastName}}</td>
                     <td>{{supporter.Email}}</td>
                     <td>
-                        <button class="btn btn-danger btn-sm" type="button"
+                        <button id="deselect-supporter" class="btn btn-danger btn-sm" type="button"
                                 ng-click="removeSupporter(supporter)">
                             <i class="fa fa-trash-o"></i>
                         </button>

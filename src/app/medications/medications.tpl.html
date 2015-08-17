@@ -5,18 +5,27 @@
             <tr>
                 <th>
                     <a href="#" ng-click="orderByField='GenericName'; reverseSort = !reverseSort">
-                        Generic Name <span ng-show="orderByField == 'GenericName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                        Generic Name
                     </a>
+                    <span class="fa"
+                          ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"
+                          ng-show="orderByField == 'GenericName'"></span>
                 </th>
                 <th>
                     <a href="#" ng-click="orderByField='MedicationId'; reverseSort = !reverseSort">
-                        Medication ID <span ng-show="orderByField == 'MedicationId'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
-                    </a>                
+                        Medication ID
+                    </a>        
+                    <span class="fa"
+                          ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"
+                          ng-show="orderByField == 'MedicationId'"></span>        
                 </th>
                 <th>
                     <a href="#" ng-click="orderByField='Code'; reverseSort = !reverseSort">
-                        Code <span ng-show="orderByField == 'Code'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                        Code
                     </a>
+                    <span class="fa"
+                          ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"
+                          ng-show="orderByField == 'Code'"></span>
                 </th>
                 <th style="width:69px;">Remove</th>
                 <th style="width:69px;">Prescribe</th>
@@ -28,12 +37,12 @@
                 <td>{{medication.MedicationId | uppercase}}</td>
                 <td>{{medication.Code}}</td>
                 <td>
-                    <button class="btn btn-danger btn-xs center-block" ng-click="removeMedication(medication)">
+                    <button id="remove-medication" class="btn btn-danger btn-xs center-block" ng-click="removeMedication(medication)">
                         <i class="glyphicon glyphicon-trash"></i>
                     </button>
                 </td>
                 <td align="center">
-                    <button class="btn btn-primary btn-xs" ng-click="createPrescription(medication)">
+                    <button id="prescribe-medication" class="btn btn-primary btn-xs" ng-click="createPrescription(medication)">
                         <i class="glyphicon glyphicon-pencil"></i>
                     </button>
                 </td>

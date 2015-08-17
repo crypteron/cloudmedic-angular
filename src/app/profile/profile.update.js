@@ -53,6 +53,8 @@
         $scope.profile.LastName = $scope.original.LastName;
         $scope.profile.FirstName = $scope.original.FirstName;
         $scope.form.$setPristine();
+        $scope.Username_Valid_length = true;
+        $scope.Username_Valid_symbol = true;
         $scope.Firstname_Valid = true;
         $scope.Lastname_Valid = true;
     };

@@ -54,19 +54,19 @@
     };
 
 
-    $scope.orderByFieldPatient = 'LastName';
+    $scope.orderByFieldPatient = ['LastName', 'FirstName'];
     $scope.reverseSortPatient = false;
 
-    $scope.orderByFieldProvider = 'LastName';
+    $scope.orderByFieldProvider = ['LastName', 'FirstName'];
     $scope.reverseSortProvider = false;
 
     $scope.orderByFieldCareTeam = 'Name';
     $scope.reverseSortCareTeam = false;
 
-    $scope.orderByFieldSupporter = 'Name';
+    $scope.orderByFieldSupporter = ['LastName', 'FirstName'];
     $scope.reverseSortSupporter = false;
 
-    $scope.PhysicianTabActive = false;
+    $scope.ProviderTabActive = false;
     $scope.SupporterTabActive = false;
 
     $scope.providers = [];

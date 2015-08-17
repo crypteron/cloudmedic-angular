@@ -7,9 +7,11 @@
             <tr>
                 <th>
                     <a href="#" ng-click="orderByField='MedicationName'; reverseSort = !reverseSort">
-                        Medication <span ng-show="orderByField == 'MedicationName'" class="fa"
-                                        ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                        Medication
                     </a>
+                    <span class="fa"
+                          ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"
+                          ng-show="orderByField == 'MedicationName'"></span>
                 </th>
                 <th>Frequency</th>
                 <th>Dosage</th>
@@ -25,4 +27,7 @@
             </tr>
         </tbody>
     </table>
+</div>
+<div class="modal-footer">
+    <button id="close-meds-btn" class="btn btn-danger btn-large center-block" ng-click="$dismiss()">Close</button>
 </div>

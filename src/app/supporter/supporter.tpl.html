@@ -7,13 +7,19 @@
         <tr>
             <th>
                 <a href="#" ng-click="orderByField='Name'; reverseSort = !reverseSort">
-                    Care Team <span ng-show="orderByField == 'Name'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                    Care Team
                 </a>
+                <span class="fa"
+                      ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"
+                      ng-show="orderByField == 'Name'"></span>
             </th>
             <th>
-                <a href="#" ng-click="orderByField='Patient.LastName'; reverseSort = !reverseSort">
-                    Patient Name <span ng-show="orderByField == 'Patient.LastName'" class="fa" ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"></span>
+                <a href="#" ng-click="orderByField=['Patient.LastName', 'Patient.FirstName']; reverseSort = !reverseSort">
+                    Patient Name
                 </a>
+                <span class="fa"
+                      ng-class="reverseSort ? 'fa-caret-up' : 'fa-caret-down'"
+                      ng-show="orderByField == ['Patient.LastName', 'Patient.FirstName']"></span>
             </th>
             <th>Medications</th>
             <th>Physicians</th>
@@ -25,7 +31,7 @@
             <td>{{sTeam.Name}}</td>
             <td>{{sTeam.Patient.LastName}}, {{sTeam.Patient.FirstName}}</td>
             <td>
-                <button ng-click="medicationHistory(sTeam.Patient)" class="btn btn-default">Click Me!</button>
+                <button id="medication-info" ng-click="medicationHistory(sTeam.Patient)" class="btn btn-default">Click Me!</button>
             </td>
             <td>
                 <ul>

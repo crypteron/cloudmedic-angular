@@ -12,10 +12,12 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-conventional-changelog');
   grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-coffeelint');
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-protractor-runner');
   grunt.loadNpmTasks('grunt-ng-annotate');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-ng-constant');
@@ -428,6 +430,60 @@ module.exports = function ( grunt ) {
     },
 
     /**
+    * The protractor configuration
+    */
+    protractor: {
+        options: {
+            // Location of your protractor config file
+            configFile: "test/protractor-conf.js",
+ 
+            // Do you want the output to use fun colors?
+            noColor: false,
+ 
+            // Set to true if you would like to use the Protractor command line debugging tool
+            // debug: true,
+ 
+            // Additional arguments that are passed to the webdriver command
+            args: { }
+        },
+        e2e: {
+            options: {
+                // Stops Grunt process if a test fails
+                keepAlive: false
+            }
+        }
+    },
+
+    /**
+     * This task starts a Selenium WebDriver, blocks until it's ready to accept 
+     * connections, and then leaves it running in the background until the Grunt
+     * process finished. 
+     */
+    //protractor_webdriver: {
+    //    your_target: {
+    //        options: {
+    //            command: 'webdriver-manager start'
+    //        }
+    //    }
+    //},
+
+    /**
+    * Create an http server to run app for e2e testing
+    */
+    connect: {
+        options: {
+            port: 9000,
+            hostname: 'localhost'
+        },
+        test: {
+            options: {
+                // set the location of the application files
+                base: ['build']
+            }
+        }
+    },
+
+    /**
      * And for rapid development, we have a watch set up that checks to see if
      * any of the files listed below change, and then to execute the listed 
      * tasks when they do. This just saves us from having to type "grunt" into
@@ -566,6 +622,11 @@ module.exports = function ( grunt ) {
   grunt.renameTask( 'watch', 'delta' );
   grunt.registerTask('watch', ['build', 'karma:unit', 'delta']);
 
+    /**
+    * Connect to the server and run protractor
+    */
+  grunt.registerTask('e2e-test', ['connect:test', 'protractor:e2e']);
+
   /**
    * The default task is to build and compile.  If an environment argument is specified, it will also deploy
    */
@@ -583,7 +644,7 @@ module.exports = function ( grunt ) {
     'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 'less:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'ngconstant:development', 'index:build', 'karmaconfig',
-    'karma:continuous' 
+    'karma:continuous'
   ]);
 
   grunt.registerTask('unittest', [

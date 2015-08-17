@@ -5,7 +5,7 @@
 
     <div class="modal-body">
         <cry-notification-bar></cry-notification-bar>
-        <div class="form-group">
+        <div id="supporter-email" class="form-group">
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">@</span>
                 <input id="register-email" class="form-control" placeholder="Email" type="email"
@@ -13,7 +13,7 @@
                        required autofocus>
             </div>
         </div>
-        <div class="form-group">
+        <div id="supporter-name" class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                 <input id="user-first" class="form-control" placeholder="First Name" type="text"
@@ -26,15 +26,15 @@
                        required>
             </div>
         </div>
-        <div class="form-group">
-            <div ng-hide="Firstname_Valid">
+        <div id="supporter-name-errors" class="form-group">
+            <div id="fn-invalid" ng-hide="Firstname_Valid">
                 <font color="red">First name must only contain letters.</font>
             </div>
-            <div ng-hide="Lastname_Valid">
+            <div id="ln-invalid" ng-hide="Lastname_Valid">
                 <font color="red">Last name must only contain letters.</font>
             </div>
         </div>
-        <div class="form-group">
+        <div id="supporter-phone" class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                 <input id="register-phonenumber" class="form-control" placeholder="(xxx) xxx-xxxx" type="text"
@@ -43,7 +43,7 @@
                        required>
             </div>
         </div>
-        <div class="form-group">
+        <div id="supporter-birthday-gender" class="form-group">
             <div class="form-inline">
                 <div class="form-group">
                     <div class="input-group">
@@ -75,7 +75,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button style="padding-top:5px" class="btn btn-primary btn-lg btn-block" type="submit" 
+            <button id="register-btn" style="padding-top:5px" class="btn btn-primary btn-lg btn-block" type="submit" 
                     ng-click="create()" 
                     ng-disabled="form.$invalid || data.isSubmitting">
                 Register

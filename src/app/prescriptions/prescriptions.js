@@ -214,7 +214,8 @@
     };
 
     $scope.resetPrescription = function () {
-        $scope.dt = $filter('date')(Date($scope.prescription.EndDate), 'M/d/yyyy h:mm:ss a', '+000');
+        $scope.dt = $scope.prescription.EndDate;
+        $scope.prescription.Notes = $scope.original.Notes;
         $scope.form.$setPristine();
     };
 
