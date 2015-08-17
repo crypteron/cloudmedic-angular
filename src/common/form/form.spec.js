@@ -31,7 +31,6 @@
 
     it('should pass a dummy test', inject(function () {
         expect(true).toBeTruthy();
-        console.log("Passing dummy test.");
     }));
 
     it('should set roles and phone number for provider/supporter', function () {
@@ -44,8 +43,6 @@
         expect($scope.creator.PhoneNumber).toEqual("(123) 456-7890");
         expect($scope.creator.DOB).toEqual("01/01/1970");
         expect($scope.creator.Roles).toEqual(["Supporter"]);
-        console.log("Completed provider test.");
-
     });
 
     it('should set DOB and phone number for patient registration', function () {
@@ -57,8 +54,5 @@
 
         expect($scope.registration.DOB).toEqual("04/05/2006");
         expect($scope.registration.PhoneNumber).toEqual("(619) 123-4567");
-
-        console.log("Completed patient registration test.");
-
     });
 });
