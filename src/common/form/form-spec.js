@@ -36,7 +36,6 @@
 
     it('should pass a dummy test', inject(function () {
         expect(true).toBeTruthy();
-        console.log("Passing dummy test.");
     }));
 
     it('should set roles and phone number', function () {

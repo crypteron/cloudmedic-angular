@@ -41,6 +41,8 @@ var crySetupServiceMocks = function (provide) {
         LastName : 'User',
         FirstName :'Example'
     });
+    provide.value('careTeams', []);
+    provide.value('prescriptions', []);
     provide.value('user', {
         FirstName: 'John',
         LastName: 'Doe',
