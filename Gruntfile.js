@@ -586,6 +586,9 @@ module.exports = function ( grunt ) {
     'karma:continuous' 
   ]);
 
+  grunt.registerTask('unittest', [
+      'karmaconfig', 'karma:continuous'
+  ]);
   /**
    * The `compile` task gets your app ready for deployment by concatenating and
    * minifying your code.
