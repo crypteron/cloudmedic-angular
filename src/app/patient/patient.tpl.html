@@ -1,6 +1,6 @@
 ﻿<div class="col-md-10 col-md-offset-1">
-    <tabset>
-        <tab heading="Team Invites" id="invites-tab">
+    <tabset id="tabs">
+        <tab heading="Team Invites" id="invites-tab" active="ActiveTab[0]">
             <table id="pending-team-list" class="table table-striped table-hover" ng-show="hasPending">
                 <thead>
                     <tr>
@@ -45,7 +45,7 @@
                 </tbody>
             </table>
         </tab>
-        <tab heading="Prescriptions" id="prescription-tab">
+        <tab heading="Prescriptions" id="prescription-tab" active="ActiveTab[1]">
             <table id="prescription-list" class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -90,7 +90,7 @@
                 </tbody>
             </table>
         </tab>
-        <tab heading="CareTeams" id="careteam-tab">
+        <tab heading="CareTeams" id="careteam-tab" active="ActiveTab[2]">
             <table id="careteams-list" class="table table-striped table-hover">
                 <thead>
                     <tr >

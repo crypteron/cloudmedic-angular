@@ -41,12 +41,15 @@
     $scope.reverseSortCareTeam = false;
     $scope.hasPending = false;
     $scope.CareTeamUpdater = new CareTeams();
+    $scope.ActiveTab = [false,true,false];
 
     for(var i = 0; i < careTeams.length; i++)
     {
         if(!careTeams[i].Active)
         {
             $scope.hasPending = true;
+            $scope.ActiveTab[0] = true;
+            $scope.ActiveTab[1] = false;
         }
       
     }
