@@ -19,7 +19,7 @@
     $scope.register = function () {
         $scope.data.isSubmitting = true;
         $scope.registration.Specialty = "";
-        $scope.registration.DOB = document.getElementById('register-DOB').value.toString();
+        $scope.registration.DOB = $filter('date')($scope.dt, 'M/d/yyyy h:mm:ss a', '+000');
         $scope.registration.PhoneNumber = '(' + $scope.data.PhoneNumber.substr(0, 3) + ') ' + $scope.data.PhoneNumber.substr(3, 3) + '-' + $scope.data.PhoneNumber.substr(6, 4);
         $scope.registration.$register().then(function (response) {
             $state.go('login');
@@ -176,11 +176,6 @@
                 });
             });
         }
-    };
-})
-.filter('reverse', function () {
-    return function (items) {
-        return items.slice().reverse();
     };
 });
 

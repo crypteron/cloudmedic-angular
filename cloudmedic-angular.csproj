@@ -98,7 +98,7 @@
     <Content Include="src\app\supporter\supporter.add.tpl.html" />
     <Content Include="src\app\supporter\supporter.js" />
     <Content Include="src\app\supporter\supporter.tpl.html" />
-    <Content Include="src\common\form\form-spec.js" />
+    <Content Include="src\common\form\form.spec.js" />
     <Content Include="src\common\form\form.js" />
     <Content Include="src\app\patient\patient.js" />
     <Content Include="src\app\keys\keys.add.js" />
