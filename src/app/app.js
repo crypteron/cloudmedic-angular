@@ -26,9 +26,9 @@ angular.module('cloudmedic', [
   'errorHandler',  
   'userProfile'
 ])
-.config(function ($urlRouterProvider, authProvider, APP_CONFIG, localizedMessagesProvider, CRY_MESSAGES) {
+.config(function ($urlRouterProvider, authProvider, APP_CONFIG, localizedMessagesProvider, CM_MESSAGES) {
         // Configure the localized messages provider with the messages 
-        localizedMessagesProvider.setMessages(CRY_MESSAGES);
+        localizedMessagesProvider.setMessages(CM_MESSAGES);
 
         // Configure the authentication provider
         authProvider.setOptions({

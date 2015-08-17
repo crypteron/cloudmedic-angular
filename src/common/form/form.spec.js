@@ -9,7 +9,7 @@
         module('cloudmedic.admin');
         module('cloudmedic.resources');
         module(function ($provide) {
-            crySetupServiceMocks($provide);
+            cmSetupServiceMocks($provide);
         });
 
         inject(function ($rootScope, _$compile_, _$httpBackend_, $controller, $filter, $state, localizedNotifications, Prescriptions, Users, Password, Registration) {

@@ -8,7 +8,7 @@
         module('cloudmedic.resources');
 
         module(function ($provide) {
-            crySetupServiceMocks($provide);
+            cmSetupServiceMocks($provide);
         });
 
         inject(function ($rootScope, _$httpBackend_, $controller, $state, profile, localizedNotifications) {

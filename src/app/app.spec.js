@@ -1,6 +1,6 @@
 // Helper method used by many tests to replace non essential services with stubs
 // TODO: Add Jasmine Spies if needed
-var crySetupServiceMocks = function (provide) {
+var cmSetupServiceMocks = function (provide) {
     provide.value('$state', {
         go: function () { }
     });

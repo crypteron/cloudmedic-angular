@@ -1,4 +1,4 @@
-﻿angular.module('cryFilters', [])
+﻿angular.module('cmFilters', [])
     .filter('checkmark', ['$sce', function ($sce) {
         return function (input, withX) {
             var x = withX ? $sce.trustAsHtml('<i class="fa fa-close"></i>') : '';

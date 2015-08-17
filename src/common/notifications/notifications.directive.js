@@ -1,5 +1,5 @@
 ﻿angular.module('notifications.directive', ['notifications.service'])
-.directive('cryNotificationBar', ['notifications', function (notifications) {
+.directive('cmNotificationBar', ['notifications', function (notifications) {
     var directive = {
         templateUrl: 'notifications/notifications.bar.tpl.html',
         restrict: 'E',

@@ -108,7 +108,7 @@
 
         // Fetch the auth status from local storage
         var _fetchStatus = function () {
-            var status = localStorageService.get('cryAuthStatus');
+            var status = localStorageService.get('cmAuthStatus');
             if (status) {
                 _status.isLoggedIn = status.isLoggedIn;
                 _status.token = status.token;
@@ -145,7 +145,7 @@
             _status.ssoProvider = null;
             _status.isLoggedIn = false;
 
-            localStorageService.remove('cryAuthStatus');
+            localStorageService.remove('cmAuthStatus');
             if (withNotification){
                 localizedNotifications.addForNext('logout.success', 'info', null, null);
             }
@@ -191,7 +191,7 @@
 
         // Update local storage with auth status
         var _updateStorage = function () {
-            localStorageService.set('cryAuthStatus', _status);
+            localStorageService.set('cmAuthStatus', _status);
         };
 
         // Service API
