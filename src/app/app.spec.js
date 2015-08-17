@@ -5,9 +5,8 @@ var crySetupServiceMocks = function (provide) {
         go: function () { }
     });
     
-    provide.value('MedId', 12345);
-    provide.value('MedName', 'Whatever');
-    provide.value('MONTHS', 'whatever');
+    provide.value('MedId', '12345');
+    provide.value('MedName', 'TestMed');
     provide.value('Candidates', [
         {
             FirstName: 'Nick',
