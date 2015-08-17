@@ -647,7 +647,7 @@ module.exports = function ( grunt ) {
     'karma:continuous'
   ]);
 
-  grunt.registerTask('unittest', [
+  grunt.registerTask('unit-test', [
       'karmaconfig', 'karma:continuous'
   ]);
   /**

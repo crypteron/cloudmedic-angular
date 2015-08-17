@@ -46,6 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+    <Folder Include="src\common\constants\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
@@ -54,7 +55,6 @@
     <Content Include="build.config.js" />
     <Content Include="Gruntfile.js" />
     <Content Include="karma\karma-unit.tpl.js" />
-    <Content Include="src\app\careteams\careteam.new.spec.js" />
     <Content Include="src\app\careteams\careteams.spec.js" />
     <Content Include="src\app\medications\medications.spec.js" />
     <Content Include="src\app\patient\patient.spec.js" />
@@ -135,7 +135,6 @@
     <Content Include="src\common\auth\auth.ssoProviders.js" />
     <Content Include="src\common\auth\auth.messages.js" />
     <Content Include="src\common\auth\auth.service.js" />
-    <Content Include="src\common\constants\dropdown-values.constants.js" />
     <Content Include="src\common\errorHandler\errorHandler.js" />
     <Content Include="src\common\errorHandler\errorHandler.messages.js" />
     <Content Include="src\common\errorHandler\errorHandler.service.js" />
