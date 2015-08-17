@@ -3,8 +3,7 @@
     'ui.bootstrap',
     'ui.bootstrap.position',
     'chart.js',
-    'cloudmedic.resources',
-    'cloudmedic.dropdown.values'
+    'cloudmedic.resources'
 ])
 .config(function config($stateProvider) {
     $stateProvider.state('prescriptions', {

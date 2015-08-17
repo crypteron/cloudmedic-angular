@@ -1,8 +1,7 @@
 ﻿angular.module('cloudmedic.register', [
     'ui.router',
     'ui.mask',
-    'form',
-    'cloudmedic.dropdown.values'
+    'form'
 ]).config(function ($stateProvider) {
     $stateProvider.state('register', {
         url: '/register',

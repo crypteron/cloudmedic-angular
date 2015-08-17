@@ -42,12 +42,6 @@
                     <li ng-hide="authStatus.isLoggedIn" ui-sref-active="active" >
                         <a ui-sref="login">Login</a>
                     </li>                    
-                    <li ng-show="authStatus.isLoggedIn" ui-sref-active="active">
-                        <a ui-sref="profile">
-                            <i class="glyphicon glyphicon-wrench"></i>
-                            Profile
-                        </a>
-                    </li>
                     <li ng-show="authStatus.isLoggedIn && isMedicationViewer()" ui-sref-active="active">
                         <a ui-sref="medications">
                             <i class="fa fa-medkit"></i>
@@ -58,6 +52,12 @@
                         <a ui-sref="prescriptions">
                             <i class="fa fa-plus-square"></i>
                             Prescriptions
+                        </a>
+                    </li>
+                    <li ng-show="authStatus.isLoggedIn" ui-sref-active="active">
+                        <a ui-sref="profile">
+                            <i class="glyphicon glyphicon-wrench"></i>
+                            Profile
                         </a>
                     </li>
                     <li ng-show="authStatus.isLoggedIn">

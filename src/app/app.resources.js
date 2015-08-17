@@ -1,7 +1,4 @@
 ﻿angular.module('cloudmedic.resources', [
-        'apps.resource',
-        'keys.resource',
-        'acl.resource',
         'prescriptions.resource',
         'careteams.resource',
         'medications.resource',
@@ -12,9 +9,7 @@
         'users.resource'
     ])
     .config(
-        function(AppsProvider,
-            KeysProvider,
-            AclProvider,
+        function(
             MedicationsProvider,
             PrescriptionsProvider,
             ProfileProvider,
@@ -23,9 +18,6 @@
             RegistrationProvider,
             APP_CONFIG,            
             UsersProvider) {
-                AppsProvider.setApiUrl(APP_CONFIG.api_url);
-                KeysProvider.setApiUrl(APP_CONFIG.api_url);
-                AclProvider.setApiUrl(APP_CONFIG.api_url);
                 MedicationsProvider.setApiUrl(APP_CONFIG.api_url);
                 ProfileProvider.setApiUrl(APP_CONFIG.api_url);
                 PasswordProvider.setApiUrl(APP_CONFIG.api_url);                

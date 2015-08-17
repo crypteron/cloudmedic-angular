@@ -1,9 +1,6 @@
 angular.module('cloudmedic', [  
   'templates-app',
   'templates-common',
-  'cloudmedic.apps',  
-  'cloudmedic.keys',
-  'cloudmedic.acl',
   'cloudmedic.profile',  
   'cloudmedic.login',
   'cloudmedic.register',
@@ -18,6 +15,7 @@ angular.module('cloudmedic', [
   'cloudmedic.medications',
   'cloudmedic.prescriptions',
   'cloudmedic.provider',
+  'xeditable',
   'ui.router',
   'ui.mask',
   'auth',

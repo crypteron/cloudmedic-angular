@@ -1,7 +1,6 @@
 ﻿angular.module('cloudmedic.profile.update', [
     'ui.router',
     'cloudmedic.resources',
-    'cloudmedic.dropdown.values',
     'form'
 ])
 .config(function config($stateProvider) {
