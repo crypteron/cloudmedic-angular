@@ -89,7 +89,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <select multiple required class="form-control" ng-model="data.PatientId">
+                        <select id="ai-list" multiple required class="form-control" ng-model="data.PatientId">
                             <option class="placeholder" selected disabled value="">--Select Patient--</option>
                             <option ng-repeat="candidate in CandidatesAI" value="{{candidate.UserId}}">
                                 Name: {{candidate.LastName}}, {{candidate.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Born: {{candidate.DateOfBirth | date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName: {{candidate.UserName}}
@@ -102,7 +102,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <select multiple required class="form-control" ng-model="data.PatientId">
+                        <select id="jq-list" multiple required class="form-control" ng-model="data.PatientId">
                             <option class="placeholder" selected disabled value="">--Select Patient--</option>
                             <option ng-repeat="candidate in CandidatesJQ" value="{{candidate.UserId}}">
                                 Name: {{candidate.LastName}}, {{candidate.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Born: {{candidate.DateOfBirth | date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName: {{candidate.UserName}}
@@ -115,7 +115,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <select multiple required class="form-control" ng-model="data.PatientId">
+                        <select id="rz-list" multiple required class="form-control" ng-model="data.PatientId">
                             <option class="placeholder" selected disabled value="">--Select Patient--</option>
                             <option ng-repeat="candidate in CandidatesRZ" value="{{candidate.UserId}}">
                                 Name: {{candidate.LastName}}, {{candidate.FirstName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Born: {{candidate.DateOfBirth | date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName: {{candidate.UserName}}

@@ -2,14 +2,11 @@
 describe("supporter-page", function () {
     //browser.get('#/');
 
-    beforeAll(function () {
+    it("should load", function () {
         // Login as an provider
         element(by.model("loginData.username")).sendKeys("supporter1");
         element(by.model("loginData.password")).sendKeys("Password1.");
         element(by.buttonText("Login to your account")).click();
-    });
-
-    it("should load", function () {
         expect(browser.getTitle()).toBe('Supporter | CloudMedic Dashboard');
     });
 
@@ -33,18 +30,18 @@ describe("supporter-page", function () {
         it("should be sortable by patient name", function () {
             element(by.id("supporter-list")).element(by.linkText("Patient Name")).click();
             var r1 = element(by.id("supporter-list")).all(by.repeater("sTeam in sTeams")).get(0);
-            var string1 = r1.all(by.tagName('td')).get(4).getText();
+            var string1 = r1.all(by.tagName('td')).get(1).getText();
             var r2 = element(by.id("supporter-list")).all(by.repeater("sTeam in sTeams")).get(1);
-            var string2 = r2.all(by.tagName('td')).get(4).getText();
+            var string2 = r2.all(by.tagName('td')).get(1).getText();
             protractor.promise.all([string1, string2]).then(function (data) {
                 expect((data[0].toLowerCase())).toBeGreaterThan(data[1].toLowerCase());
             });
 
             element(by.id("supporter-list")).element(by.linkText("Patient Name")).click();
             var r3 = element(by.id("supporter-list")).all(by.repeater("sTeam in sTeams")).get(0);
-            var string3 = r3.all(by.tagName('td')).get(4).getText();
+            var string3 = r3.all(by.tagName('td')).get(1).getText();
             var r4 = element(by.id("supporter-list")).all(by.repeater("sTeam in sTeams")).get(1);
-            var string4 = r4.all(by.tagName('td')).get(4).getText();
+            var string4 = r4.all(by.tagName('td')).get(1).getText();
             protractor.promise.all([string3, string4]).then(function (data) {
                 expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
             });
@@ -76,10 +73,14 @@ describe("supporter-page", function () {
                 });
             });
         });
+
+        it("should close on exit button", function () {
+            element(by.id("close-meds-btn")).click();
+            expect(element(by.id("supporter-list")).isDisplayed()).toBeTruthy();
+        });
     });
 
     it("should log out", function () {
-        element(by.id("close-meds-btn")).click();
         element(by.linkText("Logout")).click();
         expect(browser.getTitle()).toBe('Login | CloudMedic Dashboard');
     });

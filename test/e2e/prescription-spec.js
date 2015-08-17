@@ -33,19 +33,12 @@ describe("prescription-page", function () {
         }
     }
 
-    beforeAll(function () {
-        //// Login as an provider
-        //element(by.model("loginData.username")).sendKeys("doctor1");
-        //element(by.model("loginData.password")).sendKeys("Password1?");
-        //element(by.buttonText("Login to your account")).click();
-        // generate test prescriptions
+    it("should load", function () {
+        // Generate test prescriptions before loading
         createPrescriptions();
         element(by.linkText("Prescriptions")).click();
-    });
-
-    it("should load", function () {
         expect(browser.getTitle()).toBe('Prescriptions | CloudMedic Dashboard');
-    });
+    }, 100000);
 
     describe("active-tab", function () {
         it("should be sortable by med description", function () {
@@ -95,7 +88,7 @@ describe("prescription-page", function () {
             var r2 = element(by.id("active-prescription-list")).all(by.repeater("prescription in activePrescriptions")).get(1);
             var string2 = r2.all(by.tagName('td')).get(2).getText();
             protractor.promise.all([string1, string2]).then(function (data) {
-                expect(Date.parse(data[0])).toBeGreaterThan(Date.parse(data[1]));
+                expect(Date.parse(data[0]) >= Date.parse(data[1])).toBeTruthy();
             });
 
             element(by.id("active-prescription-list")).element(by.linkText("Start Date")).click();
@@ -104,7 +97,7 @@ describe("prescription-page", function () {
             var r4 = element(by.id("active-prescription-list")).all(by.repeater("prescription in activePrescriptions")).get(1);
             var string4 = r4.all(by.tagName('td')).get(2).getText();
             protractor.promise.all([string3, string4]).then(function (data) {
-                expect(Date.parse(data[0])).toBeLessThan(Date.parse(data[1]));
+                expect(Date.parse(data[0]) <= Date.parse(data[1])).toBeTruthy();
             });
         });
 
@@ -115,7 +108,7 @@ describe("prescription-page", function () {
             var r2 = element(by.id("active-prescription-list")).all(by.repeater("prescription in activePrescriptions")).get(1);
             var string2 = r2.all(by.tagName('td')).get(3).getText();
             protractor.promise.all([string1, string2]).then(function (data) {
-                expect(Date.parse(data[0])).toBeGreaterThan(Date.parse(data[1]));
+                expect(Date.parse(data[0]) >= Date.parse(data[1])).toBeTruthy();
             });
 
             element(by.id("active-prescription-list")).element(by.linkText("End Date")).click();
@@ -124,7 +117,7 @@ describe("prescription-page", function () {
             var r4 = element(by.id("active-prescription-list")).all(by.repeater("prescription in activePrescriptions")).get(1);
             var string4 = r4.all(by.tagName('td')).get(3).getText();
             protractor.promise.all([string3, string4]).then(function (data) {
-                expect(Date.parse(data[0])).toBeLessThan(Date.parse(data[1]));
+                expect(Date.parse(data[0]) <= Date.parse(data[1])).toBeTruthy();
             });
         });
 
@@ -134,9 +127,6 @@ describe("prescription-page", function () {
             it("should open on selecting update button", function () {
                 element(by.id("active-prescription-list")).element(by.cssContainingText("tbody tr", "Test Prescription")).element(by.id("update-prescription")).click();
                 expect(element.all(by.cssContainingText(".modal-title", "Update Prescription")).count()).toEqual(1);
-            });
-
-            describe("end-date-input", function () {
             });
 
             describe("reset-button", function () {
@@ -243,7 +233,7 @@ describe("prescription-page", function () {
             var r2 = element(by.id("expired-prescription-list")).all(by.repeater("prescription in expiredPrescriptions")).get(1);
             var string2 = r2.all(by.tagName('td')).get(2).getText();
             protractor.promise.all([string1, string2]).then(function (data) {
-                expect(Date.parse(data[0])).toBeGreaterThan(Date.parse(data[1]));
+                expect(Date.parse(data[0]) >= Date.parse(data[1])).toBeTruthy();
             });
 
             element(by.id("expired-prescription-list")).element(by.linkText("Start Date")).click();
@@ -252,7 +242,7 @@ describe("prescription-page", function () {
             var r4 = element(by.id("expired-prescription-list")).all(by.repeater("prescription in expiredPrescriptions")).get(1);
             var string4 = r4.all(by.tagName('td')).get(2).getText();
             protractor.promise.all([string3, string4]).then(function (data) {
-                expect(Date.parse(data[0])).toBeLessThan(Date.parse(data[1]));
+                expect(Date.parse(data[0]) <= Date.parse(data[1])).toBeTruthy();
             });
         });
 
@@ -263,7 +253,7 @@ describe("prescription-page", function () {
             var r2 = element(by.id("expired-prescription-list")).all(by.repeater("prescription in expiredPrescriptions")).get(1);
             var string2 = r2.all(by.tagName('td')).get(3).getText();
             protractor.promise.all([string1, string2]).then(function (data) {
-                expect(Date.parse(data[0])).toBeGreaterThan(Date.parse(data[1]));
+                expect(Date.parse(data[0]) >= Date.parse(data[1])).toBeTruthy();
             });
 
             element(by.id("expired-prescription-list")).element(by.linkText("End Date")).click();
@@ -272,7 +262,7 @@ describe("prescription-page", function () {
             var r4 = element(by.id("expired-prescription-list")).all(by.repeater("prescription in expiredPrescriptions")).get(1);
             var string4 = r4.all(by.tagName('td')).get(3).getText();
             protractor.promise.all([string3, string4]).then(function (data) {
-                expect(Date.parse(data[0])).toBeLessThan(Date.parse(data[1]));
+                expect(Date.parse(data[0]) <= Date.parse(data[1])).toBeTruthy();
             });
         });
 

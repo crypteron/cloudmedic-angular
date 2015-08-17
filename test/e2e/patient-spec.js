@@ -125,7 +125,7 @@ describe("patient-page", function () {
             var r2 = element(by.id("prescription-list")).all(by.repeater("prescription in prescriptions")).get(1);
             var string2 = r2.all(by.tagName('td')).get(1).getText();
             protractor.promise.all([string1, string2]).then(function (data) {
-                expect(Date.parse(data[0])).toBeGreaterThan(Date.parse(data[1]));
+                expect(Date.parse(data[0]) >= Date.parse(data[1])).toBeTruthy();
             });
 
             element(by.id("prescription-list")).element(by.linkText("Start Date")).click();
@@ -134,7 +134,7 @@ describe("patient-page", function () {
             var r4 = element(by.id("prescription-list")).all(by.repeater("prescription in prescriptions")).get(1);
             var string4 = r4.all(by.tagName('td')).get(1).getText();
             protractor.promise.all([string3, string4]).then(function (data) {
-                expect(Date.parse(data[0])).toBeLessThan(Date.parse(data[1]));
+                expect(Date.parse(data[0]) <= Date.parse(data[1])).toBeTruthy();
             });
         });
 
@@ -145,7 +145,7 @@ describe("patient-page", function () {
             var r2 = element(by.id("prescription-list")).all(by.repeater("prescription in prescriptions")).get(1);
             var string2 = r2.all(by.tagName('td')).get(2).getText();
             protractor.promise.all([string1, string2]).then(function (data) {
-                expect(Date.parse(data[0])).toBeGreaterThan(Date.parse(data[1]));
+                expect(Date.parse(data[0]) >= Date.parse(data[1])).toBeTruthy();
             });
 
             element(by.id("prescription-list")).element(by.linkText("End Date")).click();
@@ -154,7 +154,7 @@ describe("patient-page", function () {
             var r4 = element(by.id("prescription-list")).all(by.repeater("prescription in prescriptions")).get(1);
             var string4 = r4.all(by.tagName('td')).get(2).getText();
             protractor.promise.all([string3, string4]).then(function (data) {
-                expect(Date.parse(data[0])).toBeLessThan(Date.parse(data[1]));
+                expect(Date.parse(data[0]) <= Date.parse(data[1])).toBeTruthy();
             });
         });
     });

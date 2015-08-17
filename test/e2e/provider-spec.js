@@ -50,25 +50,27 @@ describe("provider-page", function () {
             });
         });
 
-        //it("should be sortable by gender", function () {
-        //    element(by.id("careteams-list")).element(by.linkText("Email")).click();
-        //    var r1 = element(by.id("careteams-list")).all(by.repeater("patient in users")).get(0);
-        //    var string1 = r1.all(by.tagName('td')).get(2).getText();
-        //    var r2 = element(by.id("careteams-list")).all(by.repeater("patient in users")).get(1);
-        //    var string2 = r2.all(by.tagName('td')).get(2).getText();
-        //    protractor.promise.all([string1, string2]).then(function (data) {
-        //        expect((data[0].toLowerCase())).toBeGreaterThan(data[1].toLowerCase());
-        //    });
+        it("should be sortable by gender", function () {
+            if (element.all(by.cssContainingText("tbody tr", "male")).count() > 0 && element.all(by.cssContainingText("tbody tr", "female")).count() > 0) {
+                element(by.id("careteams-list")).element(by.linkText("Gender")).click();
+                var r1 = element(by.id("careteams-list")).all(by.repeater("careTeam in careTeams")).get(0);
+                var string1 = r1.all(by.tagName('td')).get(2).getText();
+                var r2 = element(by.id("careteams-list")).all(by.repeater("careTeam in careTeams")).get(1);
+                var string2 = r2.all(by.tagName('td')).get(2).getText();
+                protractor.promise.all([string1, string2]).then(function (data) {
+                    expect(data[0].toLowerCase() >= data[1].toLowerCase()).toBeTruthy();
+                });
 
-        //    element(by.id("careteams-list")).element(by.linkText("Email")).click();
-        //    var r3 = element(by.id("careteams-list")).all(by.repeater("patient in users")).get(0);
-        //    var string3 = r3.all(by.tagName('td')).get(2).getText();
-        //    var r4 = element(by.id("careteams-list")).all(by.repeater("patient in users")).get(1);
-        //    var string4 = r4.all(by.tagName('td')).get(2).getText();
-        //    protractor.promise.all([string3, string4]).then(function (data) {
-        //        expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
-        //    });
-        //});
+                element(by.id("careteams-list")).element(by.linkText("Gender")).click();
+                var r3 = element(by.id("careteams-list")).all(by.repeater("careTeam in careTeams")).get(0);
+                var string3 = r3.all(by.tagName('td')).get(2).getText();
+                var r4 = element(by.id("careteams-list")).all(by.repeater("careTeam in careTeams")).get(1);
+                var string4 = r4.all(by.tagName('td')).get(2).getText();
+                protractor.promise.all([string3, string4]).then(function (data) {
+                    expect(data[0].toLowerCase() <= data[1].toLowerCase()).toBeTruthy();
+                });
+            }
+        });
 
         it("should be sortable by careteam name", function () {
             element(by.id("careteams-list")).element(by.linkText("CareTeam Name")).click();
@@ -123,7 +125,7 @@ describe("provider-page", function () {
                 var r2 = element(by.id("prescription-list")).all(by.repeater("prescription in prescriptions")).get(1);
                 var string2 = r2.all(by.tagName('td')).get(1).getText();
                 protractor.promise.all([string1, string2]).then(function (data) {
-                    expect(Date.parse(data[0])).toBeGreaterThan(Date.parse(data[1]));
+                    expect(Date.parse(data[0]) >= Date.parse(data[1])).toBeTruthy();
                 });
 
                 element(by.id("prescription-list")).element(by.linkText("Start Date")).click();
@@ -132,7 +134,7 @@ describe("provider-page", function () {
                 var r4 = element(by.id("prescription-list")).all(by.repeater("prescription in prescriptions")).get(1);
                 var string4 = r4.all(by.tagName('td')).get(1).getText();
                 protractor.promise.all([string3, string4]).then(function (data) {
-                    expect(Date.parse(data[0])).toBeLessThan(Date.parse(data[1]));
+                    expect(Date.parse(data[0]) <= Date.parse(data[1])).toBeTruthy();
                 });
             });
 
@@ -143,7 +145,7 @@ describe("provider-page", function () {
                 var r2 = element(by.id("prescription-list")).all(by.repeater("prescription in prescriptions")).get(1);
                 var string2 = r2.all(by.tagName('td')).get(2).getText();
                 protractor.promise.all([string1, string2]).then(function (data) {
-                    expect(Date.parse(data[0])).toBeGreaterThan(Date.parse(data[1]));
+                    expect(Date.parse(data[0]) >= Date.parse(data[1])).toBeTruthy();
                 });
 
                 element(by.id("prescription-list")).element(by.linkText("End Date")).click();
@@ -152,14 +154,18 @@ describe("provider-page", function () {
                 var r4 = element(by.id("prescription-list")).all(by.repeater("prescription in prescriptions")).get(1);
                 var string4 = r4.all(by.tagName('td')).get(2).getText();
                 protractor.promise.all([string3, string4]).then(function (data) {
-                    expect(Date.parse(data[0])).toBeLessThan(Date.parse(data[1]));
+                    expect(Date.parse(data[0]) <= Date.parse(data[1])).toBeTruthy();
                 });
+            });
+
+            it("should close on exit button", function () {
+                element(by.id("close-hist-btn")).click();
+                expect(element(by.id("careteams-list")).isDisplayed()).toBeTruthy();
             });
         });
     });
 
     it("should log out", function () {
-        element(by.id("close-hist-btn")).click();
         element(by.linkText("Logout")).click();
         expect(browser.getTitle()).toBe('Login | CloudMedic Dashboard');
     });

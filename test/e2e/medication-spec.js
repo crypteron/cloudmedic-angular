@@ -2,15 +2,12 @@
 describe("medication-page", function () {
     //browser.get('#/');
 
-    beforeAll(function () {
+    it("should load", function () {
         // Login as an provider
         element(by.model("loginData.username")).sendKeys("doctor1");
         element(by.model("loginData.password")).sendKeys("Password1?");
         element(by.buttonText("Login to your account")).click();
         element(by.linkText("Medications")).click();
-    });
-
-    it("should load", function () {
         expect(browser.getTitle()).toBe('Medications | CloudMedic Dashboard');
     });
 
@@ -170,12 +167,13 @@ describe("medication-page", function () {
 
             describe("patient-filter-results", function () {
                 it("should change tabs", function () {
+                    element(by.id("patient-name-filter")).clear();
                     element(by.id("patient-name-filter")).sendKeys("z");
-                    expect(element(by.cssContainingText("option", "Patient, Example")).isDisplayed()).toBeFalsy();
+                    expect(element(by.id("rz-list")).isDisplayed()).toBeTruthy();
 
                     element(by.id("patient-name-filter")).clear();
                     element(by.id("patient-name-filter")).sendKeys("Patient");
-                    expect(element(by.cssContainingText("option", "Patient, Example")).isDisplayed()).toBeTruthy();
+                    expect(element(by.id("jq-list")).isDisplayed()).toBeTruthy();
                 });
             });
 
@@ -199,6 +197,8 @@ describe("medication-page", function () {
                 element(by.cssContainingText("option", "100")).click();
                 expect(prescribeBtn.isEnabled()).toBeFalsy();
 
+                element(by.id("patient-name-filter")).clear();
+                element(by.id("patient-name-filter")).sendKeys("Patient");
                 element(by.cssContainingText("option", "Patient, Example")).click();
                 expect(prescribeBtn.isEnabled()).toBeTruthy();
             });
