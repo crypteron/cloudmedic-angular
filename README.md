@@ -13,9 +13,19 @@ Install [Node.js](http://nodejs.org/download/) and then follow one of the follow
 git clone git@bitbucket.org:Crypteron/crypteron-dashboard.git
 npm -g install grunt-cli karma bower protractor
 npm install
+webdriver-manager update
 bower install
 grunt watch
 ```
+
+#### Run end to end test
+
+`webdriver-manager start` (Starts selenium server for protractor)
+
+`grunt e2e-test`
+
+*grunt-protractor-webdriver is a task that can be used to start a selenium web server, but it may not display all 
+meaningful stack traces from protractor
 
 #### Build and watch for changes
 

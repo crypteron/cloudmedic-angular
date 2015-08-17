@@ -451,13 +451,21 @@ module.exports = function ( grunt ) {
                 // Stops Grunt process if a test fails
                 keepAlive: false
             }
-        },
-        continuous: {
-            options: {
-                keepAlive: true
-            }
         }
     },
+
+    /**
+     * This task starts a Selenium WebDriver, blocks until it's ready to accept 
+     * connections, and then leaves it running in the background until the Grunt
+     * process finished. 
+     */
+    //protractor_webdriver: {
+    //    your_target: {
+    //        options: {
+    //            command: 'webdriver-manager start'
+    //        }
+    //    }
+    //},
 
     /**
     * Create an http server to run app for e2e testing
@@ -599,11 +607,6 @@ module.exports = function ( grunt ) {
           livereload: false
         }
       }
-
-      //protractor: {
-      //    files: ['src/app/**/*.js', 'test/e2e/*.js'],
-      //    tasks: ['protractor:continuous']
-      //}
     }
   };
 
@@ -641,7 +644,7 @@ module.exports = function ( grunt ) {
     'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 'less:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'ngconstant:development', 'index:build', 'karmaconfig',
-    'karma:continuous', 'e2e-test'
+    'karma:continuous'
   ]);
 
   /**
