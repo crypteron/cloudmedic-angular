@@ -58,6 +58,7 @@
     <Content Include="src\app\careteams\careteams.spec.js" />
     <Content Include="src\app\medications\medications.spec.js" />
     <Content Include="src\app\prescriptions\prescriptions.spec.js" />
+    <Content Include="src\app\profile\profile.update.spec.js" />
     <Content Include="src\app\provider\provider.add.tpl.html" />
     <Content Include="src\app\careteams\careteams.add.tpl.html" />
     <Content Include="src\app\careteams\careteams.js" />

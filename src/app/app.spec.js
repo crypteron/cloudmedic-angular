@@ -34,7 +34,13 @@ var crySetupServiceMocks = function (provide) {
     });
     provide.value('filter', function () {
         return function () { };
-     });
+    });
+    provide.value('profile', {
+        Username:'Doc',
+        Email :'Example@cloudmedic.com',
+        LastName : 'User',
+        FirstName :'Example'
+    });
     provide.value('user', {
         FirstName: 'John',
         LastName: 'Doe',
