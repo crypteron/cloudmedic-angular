@@ -3,10 +3,7 @@
         $httpBackend,
         $localizedNotifications,
         FormCtrl,
-        $modalInstance,
-        $http,
-        $compile,
-        auth;
+        $modalInstance;
 
     beforeEach(function () {
         module('cloudmedic.admin');
@@ -15,11 +12,9 @@
             crySetupServiceMocks($provide);
         });
 
-        inject(function ($rootScope, _$compile_, _$httpBackend_, _$http_, $controller, $filter, $state, localizedNotifications, Prescriptions, Users, Password, Registration) {
+        inject(function ($rootScope, _$compile_, _$httpBackend_, $controller, $filter, $state, localizedNotifications, Prescriptions, Users, Password, Registration) {
             $scope = $rootScope.$new();
             $httpBackend = _$httpBackend_;
-            $http = _$http_;
-            $compile = _$compile_;
             $localizedNotifications = localizedNotifications;
 
             FormCtrl = $controller('FormCtrl', {
@@ -38,7 +33,7 @@
         expect(true).toBeTruthy();
     }));
 
-    it('should set roles and phone number', function () {
+    it('should set roles and phone number for provider/supporter', function () {
         $scope.data.PhoneNumber = "1234567890";
         $scope.dt = "01/01/1970";
         $scope.data.Role = "Supporter";
@@ -48,7 +43,16 @@
         expect($scope.creator.PhoneNumber).toEqual("(123) 456-7890");
         expect($scope.creator.DOB).toEqual("01/01/1970");
         expect($scope.creator.Roles).toEqual(["Supporter"]);
-
     });
 
+    it('should set DOB and phone number for patient registration', function () {
+
+        $scope.dt = "04/05/2006";
+        $scope.data.PhoneNumber = "6191234567";
+
+        $scope.register();
+
+        expect($scope.registration.DOB).toEqual("04/05/2006");
+        expect($scope.registration.PhoneNumber).toEqual("(619) 123-4567");
+    });
 });
