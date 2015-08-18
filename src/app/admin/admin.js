@@ -19,11 +19,6 @@
                     return $q.reject("Not Authorized");
                 }
             },
-            users: function (Users, $q, auth) {
-                if (auth.status.token.userRole.contains('SysAdmin')) {
-                    return Users.query().$promise;
-                }
-            },
             careTeams: function (CareTeams, $q, auth) {
                 if (auth.status.token.userRole.contains('SysAdmin')) {
                     return CareTeams.query().$promise;
@@ -33,9 +28,8 @@
         data: { pageTitle: 'Admin' }
     });
 })
-.controller('AdminCtrl', function ($scope, $state, $modal, users, Users, careTeams, CareTeams, localizedNotifications) {
+.controller('AdminCtrl', function ($scope, $state, $modal, $q, Users, careTeams, CareTeams, localizedNotifications) {
     // Initialize scope variables
-    $scope.users = users;
     $scope.careTeams = angular.copy(careTeams);
     $scope.inactiveTeams = [];
     $scope.inactiveTeamsEmpty = true;
@@ -47,18 +41,33 @@
             $scope.inactiveTeamsEmpty = false;
         }
     }
-    $scope.userRemover = new Users();
+    $scope.users = new Users();
     $scope.careteamRemover = new CareTeams();
     $scope.isProvider = function (user) {
         return user.Roles == 'Nurse' || user.Roles == 'Physician';
     };
+    $scope.patients = [];
+    $scope.patientsPage = 1;
+    $scope.physicians = [];
+    $scope.physiciansPage = 1;
+    $scope.nurses = [];
+    $scope.nursesPage = 1;
+    $scope.supporters = [];
+    $scope.supportersPage = 1;
+    $scope.hasNext = false;
+    $scope.hasPrev = false;
+    $scope.numPages = 1;
+    $scope.isLoading = false;
 
-
+    // Default values for table display
     $scope.orderByFieldPatient = ['LastName', 'FirstName'];
     $scope.reverseSortPatient = false;
 
-    $scope.orderByFieldProvider = ['LastName', 'FirstName'];
-    $scope.reverseSortProvider = false;
+    $scope.orderByFieldPhysician = ['LastName', 'FirstName'];
+    $scope.reverseSortPhysician = false;
+
+    $scope.orderByFieldNurse = ['LastName', 'FirstName'];
+    $scope.reverseSortNurse = false;
 
     $scope.orderByFieldCareTeam = 'Name';
     $scope.reverseSortCareTeam = false;
@@ -69,13 +78,64 @@
     $scope.ProviderTabActive = false;
     $scope.SupporterTabActive = false;
 
-    $scope.providers = [];
-    for (var i = 0; i < $scope.users.length; i++) {
-        if ($scope.isProvider($scope.users[i])) {
-            $scope.providers.push($scope.users[i]);
-        }
-    }
+    // Load Users for the tabs
+    $scope.getPatients = function (page) {
+        $scope.isLoading = true;
+        $scope.ProviderTabActive = false;
+        $scope.SupporterTabActive = false;
+        $scope.users.$query({ page: page, role: "Patient" }).then(function (result) {
+            $scope.patients = result.Users;
+            $scope.hasNext = result.HasNext;
+            $scope.hasPrev = result.HasPrev;
+            $scope.numPages = result.NumPages;
+            $scope.patientsPage = page;
+            $scope.isLoading = false;
+        });
+    };
 
+    $scope.getPhysicians = function (page) {
+        $scope.isLoading = true;
+        $scope.ProviderTabActive = true;
+        $scope.SupporterTabActive = false;
+        $scope.users.$query({ page: page, role: "Physician" }).then(function (result) {
+            $scope.physicians = result.Users;
+            $scope.hasNext = result.HasNext;
+            $scope.hasPrev = result.HasPrev;
+            $scope.numPages = result.NumPages;
+            $scope.physiciansPage = page;
+            $scope.isLoading = false;
+        });
+    };
+
+    $scope.getNurses = function (page) {
+        $scope.isLoading = true;
+        $scope.ProviderTabActive = true;
+        $scope.SupporterTabActive = false;
+        $scope.users.$query({ page: page, role: "Nurse" }).then(function (result) {
+            $scope.nurses = result.Users;
+            $scope.hasNext = result.HasNext;
+            $scope.hasPrev = result.HasPrev;
+            $scope.numPages = result.NumPages;
+            $scope.nursesPage = page;
+            $scope.isLoading = false;
+        });
+    };
+
+    $scope.getSupporters = function (page) {
+        $scope.isLoading = true;
+        $scope.ProviderTabActive = false;
+        $scope.SupporterTabActive = true;
+        $scope.users.$query({ page: page, role: "Supporter" }).then(function (result) {
+            $scope.supporters = result.Users;
+            $scope.hasNext = result.HasNext;
+            $scope.hasPrev = result.HasPrev;
+            $scope.numPages = result.NumPages;
+            $scope.supportersPage = page;
+            $scope.isLoading = false;
+        });
+    };
+
+    // Remove entities from database
     $scope.removeUser = function (user) {
         localizedNotifications.removeForCurrent();
         $modal.open({
@@ -108,6 +168,7 @@
         });
     };
 
+    // Create new instances/entities
     $scope.createProvider = function () {
         localizedNotifications.removeForCurrent();
         $modal.open({
@@ -142,6 +203,17 @@
         });
     };
 
+    $scope.createSupporter = function () {
+        localizedNotifications.removeForCurrent();
+        $modal.open({
+            templateUrl: "supporter/supporter.add.tpl.html",
+            controller: 'FormCtrl'
+        }).result.then(function () {
+            $state.go("admin", null, { reload: true });
+        });
+    };
+
+    // Update entities
     $scope.updateCareTeam = function (careTeam) {
         localizedNotifications.removeForCurrent();
         $modal.open({
@@ -151,16 +223,6 @@
                 careTeam: function () { return careTeam; },
                 providers: function () { return $scope.providers; }
             }
-        }).result.then(function () {
-            $state.go("admin", null, { reload: true });
-        });
-    };
-
-    $scope.createSupporter = function () {
-        localizedNotifications.removeForCurrent();
-        $modal.open({
-            templateUrl: "supporter/supporter.add.tpl.html",
-            controller: 'FormCtrl'
         }).result.then(function () {
             $state.go("admin", null, { reload: true });
         });
