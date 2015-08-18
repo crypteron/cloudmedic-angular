@@ -27,8 +27,12 @@
     });
 
     it('CareTeam Add Test', function () {
+        $scope.creator.Name = "team unit test";
+
         $scope.create();
         expect($scope.creator.PatientId).toBe('123');
+        expect($scope.creator.Name).toEqual("Team Unit Test");
+
     });
     it('Provider Add Test', function () {
         $scope.selectedProviders = [];

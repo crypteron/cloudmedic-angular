@@ -27,10 +27,10 @@
         expect(true).toBeTruthy();
     }));
     it('Medication Create Test', inject(function () {
-        $scope.medicationsData.GenericName = "TestMed";
+        $scope.medicationsData.GenericName = "tEStMED";
         $scope.medicationsData.Code = 57077;
         $scope.create();
-        expect($scope.medicationsCreator.GenericName).toEqual("TestMed");
+        expect($scope.medicationsCreator.GenericName).toEqual("Testmed");
         expect($scope.medicationsCreator.Code).toEqual(57077);
     }));
 });

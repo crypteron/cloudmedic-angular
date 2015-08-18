@@ -37,6 +37,8 @@
     $scope.updateProfile = function () {
         localizedNotifications.removeForCurrent();
         $scope.data.isSubmitting = true;
+        $scope.profile.FirstName = capitalize($scope.profile.FirstName);
+        $scope.profile.LastName = capitalize($scope.profile.LastName);
         $scope.profile.$post().then(function () {
             localizedNotifications.addForNext('update.success', 'success', { entityType: 'Profile' });
             $scope.data.isSubmitting = false;
@@ -99,3 +101,10 @@
         }
     };
 });
+
+function capitalize(input) {
+    if (input != null) {
+        input = input.toLowerCase();
+    }
+    return input.substring(0, 1).toUpperCase() + input.substring(1);
+}

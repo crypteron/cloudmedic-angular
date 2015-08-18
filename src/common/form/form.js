@@ -18,6 +18,8 @@
     // Patient registration
     $scope.register = function () {
         $scope.data.isSubmitting = true;
+        $scope.registration.FirstName = capitalize($scope.registration.FirstName);
+        $scope.registration.LastName = capitalize($scope.registration.LastName);
         $scope.registration.Specialty = "";
         $scope.registration.DOB = $filter('date')($scope.dt, 'M/d/yyyy h:mm:ss a', '+000');
         $scope.registration.PhoneNumber = '(' + $scope.data.PhoneNumber.substr(0, 3) + ') ' + $scope.data.PhoneNumber.substr(3, 3) + '-' + $scope.data.PhoneNumber.substr(6, 4);
@@ -33,6 +35,8 @@
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
         $scope.data.isSubmitting = true;
+        $scope.creator.FirstName = capitalize($scope.creator.FirstName);
+        $scope.creator.LastName = capitalize($scope.creator.LastName);
         $scope.creator.PhoneNumber = '(' + $scope.data.PhoneNumber.substr(0, 3) + ') ' + $scope.data.PhoneNumber.substr(3, 3) + '-' + $scope.data.PhoneNumber.substr(6, 4);
         if ($scope.data.Role != "Physician" && $scope.data.Role != "Nurse") {
             $scope.creator.Roles = ["Supporter"];
@@ -178,6 +182,14 @@
         }
     };
 });
+
+function capitalize(input) {
+    if (input != null)
+    {
+        input = input.toLowerCase();
+    }
+    return input.substring(0, 1).toUpperCase() + input.substring(1);
+}
 
 function DateToUTC(date) {
     return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());

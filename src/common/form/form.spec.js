@@ -37,22 +37,30 @@
         $scope.data.PhoneNumber = "1234567890";
         $scope.dt = "01/01/1970";
         $scope.data.Role = "Supporter";
+        $scope.creator.FirstName = "tEsT";
+        $scope.creator.LastName = "cAmElCASE";
             
         $scope.create();
 
         expect($scope.creator.PhoneNumber).toEqual("(123) 456-7890");
         expect($scope.creator.DOB).toEqual("01/01/1970");
         expect($scope.creator.Roles).toEqual(["Supporter"]);
+        expect($scope.creator.FirstName).toEqual("Test");
+        expect($scope.creator.LastName).toEqual("Camelcase");
     });
 
     it('should set DOB and phone number for patient registration', function () {
 
         $scope.dt = "04/05/2006";
+        $scope.registration.FirstName = "heLLo";
+        $scope.registration.LastName = "wOrLD";
         $scope.data.PhoneNumber = "6191234567";
 
         $scope.register();
 
         expect($scope.registration.DOB).toEqual("04/05/2006");
         expect($scope.registration.PhoneNumber).toEqual("(619) 123-4567");
+        expect($scope.registration.FirstName).toEqual("Hello");
+        expect($scope.registration.LastName).toEqual("World");
     });
 });

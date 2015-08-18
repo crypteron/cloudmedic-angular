@@ -9,11 +9,11 @@
     $scope.creator = new CareTeams();
     $scope.creator.ProviderIds = [""];
     $scope.patientName = user.FirstName + " " + user.LastName;
-    $scope.providerNameFilter = "";
+    $scope.providerEmailFilter = "";
     $scope.providers = [];
     $scope.providerIds = [];
     $scope.selectedProviders = [];
-    $scope.supporterNameFilter = "";
+    $scope.supporterEmailFilter = "";
     $scope.supporters = [];
     $scope.supporterIds = [];
     $scope.selectedSupporters = [];
@@ -25,6 +25,8 @@
         localizedNotifications.removeForCurrent();
         $scope.data.isSubmitting = true;
         $scope.creator.PatientId = user.UserId;
+
+        $scope.creator.Name = capitalizeTeamName($scope.creator.Name);
         $scope.creator.ProviderIds = $scope.providerIds;
         $scope.creator.SupporterIds = $scope.supporterIds;
         $scope.creator.$create().then(function () {
@@ -38,12 +40,27 @@
     // Provider functions
     $scope.searchProviders = function () {
         $scope.providers = [];
-        if ($scope.providerNameFilter.length > 0) {
-            $scope.providers = Users.providers({ id: $scope.providerNameFilter }).$promise.then(function (result) {
+        if ($scope.providerEmailFilter.length > 0) {
+            $scope.providers = Users.providers({ email: $scope.providerEmailFilter}).$promise.then(function (result) {
                 $scope.providers = result;
                 filterProviders();
             });
         }
+    };
+
+    //Capitalizes every word separated by a space
+    var capitalizeTeamName = function (teamname) {
+
+        var string_array = teamname.split(' ');
+        var name_holder = "";
+        angular.forEach(string_array, function (word) {
+            name_holder = name_holder + capitalize(word) + ' ';
+        });
+
+        name_holder = name_holder.substr(0, name_holder.length - 1);
+
+        return name_holder;
+
     };
 
     var filterProviders = function () {
@@ -79,8 +96,8 @@
     // Supporter functions
     $scope.searchSupporters = function () {
         $scope.supporters = [];
-        if ($scope.supporterNameFilter.length > 0) {
-            $scope.supporters = Users.supporters({ id: $scope.supporterNameFilter }).$promise.then(function (result) {
+        if ($scope.supporterEmailFilter.length > 0) {
+            $scope.supporters = Users.supporters({ email: $scope.supporterEmailFilter }).$promise.then(function (result) {
                 $scope.supporters = result;
                 filterSupporters();
             });
@@ -132,7 +149,7 @@
 .controller('CareTeamUpdateCtrl', function ($scope, $modalInstance, careTeam, CareTeams, Users, localizedNotifications) {
     // Initialize scope variables
     $scope.careTeam = angular.copy(careTeam);
-    $scope.providerNameFilter = "";
+    $scope.providerEmailFilter = "";
     $scope.providers = [];
     $scope.providerIds = [];
     $scope.selectedProviders = [];
@@ -141,7 +158,7 @@
         $scope.providerIds.push(provider.UserId);
         $scope.selectedProviders.push(angular.copy(provider));
     }
-    $scope.supporterNameFilter = "";
+    $scope.supporterEmailFilter = "";
     $scope.supporters = [];
     $scope.supporterIds = [];
     $scope.selectedSupporters = [];
@@ -172,8 +189,8 @@
     // Provider functions
     $scope.searchProviders = function () {
         $scope.providers = [];
-        if ($scope.providerNameFilter.length > 0) {
-            $scope.providers = Users.providers({ id: $scope.providerNameFilter }).$promise.then(function (result) {
+        if ($scope.providerEmailFilter.length > 0) {
+            $scope.providers = Users.providers({ email: $scope.providerEmailFilter }).$promise.then(function (result) {
                 $scope.providers = result;
                 filterProviders();
             });
@@ -213,8 +230,8 @@
     // Supporter functions
     $scope.searchSupporters = function () {
         $scope.supporters = [];
-        if ($scope.supporterNameFilter.length > 0) {
-            $scope.supporters = Users.supporters({ id: $scope.supporterNameFilter }).$promise.then(function (result) {
+        if ($scope.supporterEmailFilter.length > 0) {
+            $scope.supporters = Users.supporters({ email: $scope.supporterEmailFilter }).$promise.then(function (result) {
                 $scope.supporters = result;
                 filterSupporters();
             });

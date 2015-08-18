@@ -99,7 +99,7 @@
         $scope.medicationsData.isSubmitting = true;
 
         // Bind scope values to creator resource
-        $scope.medicationsCreator.GenericName = $scope.medicationsData.GenericName;
+        $scope.medicationsCreator.GenericName = capitalize($scope.medicationsData.GenericName);
         $scope.medicationsCreator.Code = $scope.medicationsData.Code;
 
         $scope.medicationsCreator.$create().then(function () {
@@ -134,3 +134,10 @@
         }
     };
 });
+
+function capitalize(input) {
+    if (input != null) {
+        input = input.toLowerCase();
+    }
+    return input.substring(0, 1).toUpperCase() + input.substring(1);
+}
