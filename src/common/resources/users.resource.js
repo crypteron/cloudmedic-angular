@@ -18,7 +18,6 @@
             'patients': { method: 'GET', isArray: true, params: { path: 'Patients' } },
             'remove': { method: 'DELETE', isArray: false },
             'create': { method: 'POST', isArray: false, params: { path: 'Add' } }
-
         });
         return service;
     };

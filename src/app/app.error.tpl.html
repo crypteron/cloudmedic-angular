@@ -1,0 +1,11 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">{{errorType || "Error Received!"}}</h3>
+</div>
+
+<div class="modal-body">
+    <p style="margin-bottom:0px">{{confirmText || "An error occurred in communicating with the server."}}</p>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger btn-large" ng-click="$dismiss()">{{cancelButton || "Cancel"}}</button>
+    <button class="btn btn-primary" ng-click="$close()">{{confirmButton || "Resolve"}}</button>
+</div>

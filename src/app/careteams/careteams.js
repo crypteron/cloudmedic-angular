@@ -4,7 +4,7 @@
     'cloudmedic.resources',
     'form'
 ])
-.controller('CareTeamAddCtrl', function ($scope, $modalInstance, CareTeams, user, Users, localizedNotifications) {
+.controller('CareTeamAddCtrl', function ($scope, $modal, $modalInstance, CareTeams, user, Users, localizedNotifications) {
     // Initialize scope variables
     $scope.creator = new CareTeams();
     $scope.creator.ProviderIds = [""];
@@ -32,12 +32,31 @@
             $scope.data.isSubmitting = false;
         });
     };
+    $scope.error = "";
 
     // Provider functions
     $scope.searchProviders = function () {
         if ($scope.providerEmail.length > 0) {
             var providerResults = Users.providers({ email: $scope.providerEmail }).$promise.then(function (result) {
                 $scope.addProvider(angular.fromJson(result));
+            }, function (error) {
+                if (error.status == "404") {
+                    localizedNotifications.removeForCurrent();
+                    $modal.open({
+                        templateUrl: "app.error.tpl.html",
+                        controller: function ($scope) {
+                            $scope.errorType = "Not Found!";
+                            $scope.confirmText = "Provider with specified email not found. Create a new provider and try again, or try a different address.";
+                            $scope.confirmButton = "Create New Provider";
+                        }
+                    }).result.then(function () {
+                        localizedNotifications.removeForCurrent();
+                        $modal.open({
+                            templateUrl: "provider/provider.add.tpl.html",
+                            controller: 'FormCtrl'
+                        });
+                    });
+                }
             });
             $scope.providerEmail = "";
         }
@@ -65,6 +84,24 @@
         if ($scope.supporterEmail.length > 0) {
             var supporterResults = Users.supporters({ email: $scope.supporterEmail }).$promise.then(function (result) {
                 $scope.addSupporter(angular.fromJson(result));
+            }, function (error) {
+                if (error.status == "404") {
+                    localizedNotifications.removeForCurrent();
+                    $modal.open({
+                        templateUrl: "app.error.tpl.html",
+                        controller: function ($scope) {
+                            $scope.errorType = "Not Found!";
+                            $scope.confirmText = "Supporter with specified email not found. Create a new provider and try again, or try a different address.";
+                            $scope.confirmButton = "Create New Supporter";
+                        }
+                    }).result.then(function () {
+                        localizedNotifications.removeForCurrent();
+                        $modal.open({
+                            templateUrl: "supporter/supporter.add.tpl.html",
+                            controller: 'FormCtrl'
+                        });
+                    });
+                }
             });
             $scope.supporterEmail = "";
         }
@@ -111,7 +148,7 @@
         return false;
     };
 })
-.controller('CareTeamUpdateCtrl', function ($scope, $modalInstance, careTeam, CareTeams, Users, localizedNotifications) {
+.controller('CareTeamUpdateCtrl', function ($scope, $modal, $modalInstance, careTeam, CareTeams, Users, localizedNotifications) {
     // Initialize scope variables
     $scope.careTeam = angular.copy(careTeam);
 
@@ -158,6 +195,24 @@
         if ($scope.providerEmail.length > 0) {
             var providerResults = Users.providers({ email: $scope.providerEmail }).$promise.then(function (result) {
                 $scope.addProvider(angular.fromJson(result));
+            }, function (error) {
+                if (error.status == "404") {
+                    localizedNotifications.removeForCurrent();
+                    $modal.open({
+                        templateUrl: "app.error.tpl.html",
+                        controller: function ($scope) {
+                            $scope.errorType = "Not Found!";
+                            $scope.confirmText = "Provider with specified email not found. Create a new provider and try again, or try a different address.";
+                            $scope.confirmButton = "Create New Provider";
+                        }
+                    }).result.then(function () {
+                        localizedNotifications.removeForCurrent();
+                        $modal.open({
+                            templateUrl: "provider/provider.add.tpl.html",
+                            controller: 'FormCtrl'
+                        });
+                    });
+                }
             });
             $scope.providerEmail = "";
         }
@@ -185,6 +240,24 @@
         if ($scope.supporterEmail.length > 0) {
             var supporterResults = Users.supporters({ email: $scope.supporterEmail }).$promise.then(function (result) {
                 $scope.addSupporter(angular.fromJson(result));
+            }, function (error) {
+                if (error.status == "404") {
+                    localizedNotifications.removeForCurrent();
+                    $modal.open({
+                        templateUrl: "app.error.tpl.html",
+                        controller: function ($scope) {
+                            $scope.errorType = "Not Found!";
+                            $scope.confirmText = "Supporter with specified email not found. Create a new supporter and try again, or try a different address.";
+                            $scope.confirmButton = "Create New Supporter";
+                        }
+                    }).result.then(function () {
+                        localizedNotifications.removeForCurrent();
+                        $modal.open({
+                            templateUrl: "supporter/supporter.add.tpl.html",
+                            controller: 'FormCtrl'
+                        });
+                    });
+                }
             });
             $scope.supporterEmail = "";
         }
