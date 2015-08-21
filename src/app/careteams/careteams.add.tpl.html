@@ -24,30 +24,14 @@
         <div id="provider-search" class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
-                <input id="provider-name-filter" class="form-control" placeholder="Search providers by name" type="text"
+                <input id="provider-name-filter" class="form-control" placeholder="Add providers by email" type="text"
                        ng-keypress="enterProviders($event)" 
-                       ng-model="providerNameFilter">
+                       ng-model="providerEmail">
                 <span class="input-group-btn">
                     <button id="search-providers" class="btn" type="button" ng-click="searchProviders()"><i class="fa fa-search"></i></button>
                 </span>
             </div>
         </div>
-        <label>Filtered Provider Search</label>
-        <table id="filter-results" class="table table-striped table-hover">
-            <tbody>
-                <tr ng-repeat="provider in providers">
-                    <td>{{provider.FirstName}} {{provider.LastName}}</td>
-                    <td>{{provider.Email}}</td>
-                    <td>{{provider.Roles[0]}}</td>
-                    <td>
-                        <button id="select-provider" class="btn btn-primary btn-sm" type="button"
-                                ng-click="addProvider(provider)">
-                            <i class="fa fa-plus"></i>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
         <label>Selected Providers</label>
         <table id="selected-providers" class="table table-striped table-hover">
             <tbody>
@@ -67,29 +51,14 @@
         <div id="supporter-search" class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                <input id="supporter-name-filter" class="form-control" placeholder="Search supporters by name" type="text"
+                <input id="supporter-name-filter" class="form-control" placeholder="Add supporters by email" type="text"
                         ng-keypress="enterSupporters($event)"
-                        ng-model="supporterNameFilter">
+                        ng-model="supporterEmail">
                 <span class="input-group-btn">
                     <button id="search-supporters" class="btn" type="button" ng-click="searchSupporters()"><i class="fa fa-search"></i></button>
                 </span>
             </div>
         </div>
-        <label>Supporter Search Results</label>
-        <table id="filter-supporter-results" class="table table-striped table-hover">
-            <tbody>
-                <tr ng-repeat="supporter in supporters">
-                    <td>{{supporter.FirstName}} {{supporter.LastName}}</td>
-                    <td>{{supporter.Email}}</td>
-                    <td>
-                        <button id="select-supporter" class="btn btn-primary btn-sm" type="button"
-                                ng-click="addSupporter(supporter)"> 
-                            <i class="fa fa-plus"></i>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
         <label>Selected Supporters</label>
         <table id="selected-supporters" class="table table-striped table-hover">
             <tbody>

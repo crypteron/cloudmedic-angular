@@ -9,12 +9,10 @@
     $scope.creator = new CareTeams();
     $scope.creator.ProviderIds = [""];
     $scope.patientName = user.FirstName + " " + user.LastName;
-    $scope.providerNameFilter = "";
-    $scope.providers = [];
+    $scope.providerEmail = "";
     $scope.providerIds = [];
     $scope.selectedProviders = [];
     $scope.supporterNameFilter = "";
-    $scope.supporters = [];
     $scope.supporterIds = [];
     $scope.selectedSupporters = [];
     $scope.data = {
@@ -37,36 +35,22 @@
 
     // Provider functions
     $scope.searchProviders = function () {
-        $scope.providers = [];
-        if ($scope.providerNameFilter.length > 0) {
-            $scope.providers = Users.providers({ id: $scope.providerNameFilter }).$promise.then(function (result) {
-                $scope.providers = result;
-                filterProviders();
+        if ($scope.providerEmail.length > 0) {
+            var providerResults = Users.providers({ email: $scope.providerEmail }).$promise.then(function (result) {
+                $scope.addProvider(angular.fromJson(result));
             });
-        }
-    };
-
-    var filterProviders = function () {
-        var i = $scope.providers.length;
-        while (i--) {
-            var id = $scope.providers[i].UserId;
-            for (var j = 0; j < $scope.selectedProviders.length; j++) {
-                var selectedId = $scope.selectedProviders[j].UserId;
-                if (id.localeCompare(selectedId) === 0) {
-                    $scope.providers.splice(i, 1);
-                }
-            }
+            $scope.providerEmail = "";
         }
     };
 
     $scope.addProvider = function (provider) {
-        $scope.selectedProviders.push(angular.copy(provider));
-        $scope.providerIds.push(provider.UserId);
-        filterProviders();
+        if (!alreadySelected(provider.UserId, $scope.selectedProviders)) {
+            $scope.selectedProviders.push(angular.copy(provider));
+            $scope.providerIds.push(provider.UserId);
+        }
     };
 
     $scope.removeProvider = function (provider) {
-        $scope.providers.push(angular.copy(provider));
         $scope.providerIds.splice($scope.providerIds.indexOf(provider.UserId), 1);
         for (var i = 0; i < $scope.selectedProviders.length; i++) {
             if ($scope.selectedProviders[i].UserId.localeCompare(provider.UserId) === 0) {
@@ -78,36 +62,22 @@
 
     // Supporter functions
     $scope.searchSupporters = function () {
-        $scope.supporters = [];
-        if ($scope.supporterNameFilter.length > 0) {
-            $scope.supporters = Users.supporters({ id: $scope.supporterNameFilter }).$promise.then(function (result) {
-                $scope.supporters = result;
-                filterSupporters();
+        if ($scope.supporterEmail.length > 0) {
+            var supporterResults = Users.supporters({ email: $scope.supporterEmail }).$promise.then(function (result) {
+                $scope.addSupporter(angular.fromJson(result));
             });
-        }
-    };
-
-    var filterSupporters = function () {
-        var i = $scope.supporters.length;
-        while (i--) {
-            var id = $scope.supporters[i].UserId;
-            for (var j = 0; j < $scope.selectedSupporters.length; j++) {
-                var selectedId = $scope.selectedSupporters[j].UserId;
-                if (id.localeCompare(selectedId) === 0) {
-                    $scope.supporters.splice(i, 1);
-                }
-            }
+            $scope.supporterEmail = "";
         }
     };
 
     $scope.addSupporter = function (supporter) {
-        $scope.selectedSupporters.push(angular.copy(supporter));
-        $scope.supporterIds.push(supporter.UserId);
-        filterSupporters();
+        if (!alreadySelected(supporter.UserId, $scope.selectedSupporters)) {
+            $scope.selectedSupporters.push(angular.copy(supporter));
+            $scope.supporterIds.push(supporter.UserId);
+        }
     };
 
     $scope.removeSupporter = function (supporter) {
-        $scope.supporters.push(angular.copy(supporter));
         $scope.supporterIds.splice($scope.supporterIds.indexOf(supporter.UserId), 1);
         for (var i = 0; i < $scope.selectedSupporters.length; i++) {
             if ($scope.selectedSupporters[i].UserId.localeCompare(supporter.UserId) === 0) {
@@ -128,23 +98,37 @@
             $scope.searchSupporters();
         }
     };
+
+    // check if user already exists
+    var alreadySelected = function (id, selected) {
+        var i = selected.length;
+        while (i--) {
+            var selectedId = selected[i].UserId;
+            if (id.localeCompare(selectedId) === 0) {
+                return true;
+            }
+        }
+        return false;
+    };
 })
 .controller('CareTeamUpdateCtrl', function ($scope, $modalInstance, careTeam, CareTeams, Users, localizedNotifications) {
     // Initialize scope variables
     $scope.careTeam = angular.copy(careTeam);
-    $scope.providerNameFilter = "";
-    $scope.providers = [];
+
+    $scope.providerEmail = "";
     $scope.providerIds = [];
     $scope.selectedProviders = [];
+    // Add current providers to selected
     for (var x = 0; x < $scope.careTeam.Providers.length; x++) {
         var provider = $scope.careTeam.Providers[x];
         $scope.providerIds.push(provider.UserId);
         $scope.selectedProviders.push(angular.copy(provider));
     }
-    $scope.supporterNameFilter = "";
-    $scope.supporters = [];
+
+    $scope.supporterEmail = "";
     $scope.supporterIds = [];
     $scope.selectedSupporters = [];
+    // Add current supporters to selected
     for (var y = 0; y < $scope.careTeam.Supporters.length; y++) {
         var supporter = $scope.careTeam.Supporters[y];
         $scope.supporterIds.push(supporter.UserId);
@@ -171,36 +155,22 @@
 
     // Provider functions
     $scope.searchProviders = function () {
-        $scope.providers = [];
-        if ($scope.providerNameFilter.length > 0) {
-            $scope.providers = Users.providers({ id: $scope.providerNameFilter }).$promise.then(function (result) {
-                $scope.providers = result;
-                filterProviders();
+        if ($scope.providerEmail.length > 0) {
+            var providerResults = Users.providers({ email: $scope.providerEmail }).$promise.then(function (result) {
+                $scope.addProvider(angular.fromJson(result));
             });
-        }
-    };
-
-    var filterProviders = function () {
-        var i = $scope.providers.length;
-        while (i--) {
-            var id = $scope.providers[i].UserId;
-            for (var j = 0; j < $scope.selectedProviders.length; j++) {
-                var selectedId = $scope.selectedProviders[j].UserId;
-                if (id.localeCompare(selectedId) === 0) {
-                    $scope.providers.splice(i, 1);
-                }
-            }
+            $scope.providerEmail = "";
         }
     };
 
     $scope.addProvider = function (provider) {
-        $scope.selectedProviders.push(angular.copy(provider));
-        $scope.providerIds.push(provider.UserId);
-        filterProviders();
+        if (!alreadySelected(provider.UserId, $scope.selectedProviders)) {
+            $scope.selectedProviders.push(angular.copy(provider));
+            $scope.providerIds.push(provider.UserId);
+        }
     };
 
     $scope.removeProvider = function (provider) {
-        $scope.providers.push(angular.copy(provider));
         $scope.providerIds.splice($scope.providerIds.indexOf(provider.UserId), 1);
         for (var i = 0; i < $scope.selectedProviders.length; i++) {
             if ($scope.selectedProviders[i].UserId.localeCompare(provider.UserId) === 0) {
@@ -212,36 +182,22 @@
 
     // Supporter functions
     $scope.searchSupporters = function () {
-        $scope.supporters = [];
-        if ($scope.supporterNameFilter.length > 0) {
-            $scope.supporters = Users.supporters({ id: $scope.supporterNameFilter }).$promise.then(function (result) {
-                $scope.supporters = result;
-                filterSupporters();
+        if ($scope.supporterEmail.length > 0) {
+            var supporterResults = Users.supporters({ email: $scope.supporterEmail }).$promise.then(function (result) {
+                $scope.addSupporter(angular.fromJson(result));
             });
-        }
-    };
-
-    var filterSupporters = function () {
-        var i = $scope.supporters.length;
-        while (i--) {
-            var id = $scope.supporters[i].UserId;
-            for (var j = 0; j < $scope.selectedSupporters.length; j++) {
-                var selectedId = $scope.selectedSupporters[j].UserId;
-                if (id.localeCompare(selectedId) === 0) {
-                    $scope.supporters.splice(i, 1);
-                }
-            }
+            $scope.supporterEmail = "";
         }
     };
 
     $scope.addSupporter = function (supporter) {
-        $scope.selectedSupporters.push(angular.copy(supporter));
-        $scope.supporterIds.push(supporter.UserId);
-        filterSupporters();
+        if (!alreadySelected(supporter.UserId, $scope.selectedSupporters)) {
+            $scope.selectedSupporters.push(angular.copy(supporter));
+            $scope.supporterIds.push(supporter.UserId);
+        }
     };
 
     $scope.removeSupporter = function (supporter) {
-        $scope.supporters.push(angular.copy(supporter));
         $scope.supporterIds.splice($scope.supporterIds.indexOf(supporter.UserId), 1);
         for (var i = 0; i < $scope.selectedSupporters.length; i++) {
             if ($scope.selectedSupporters[i].UserId.localeCompare(supporter.UserId) === 0) {
@@ -261,5 +217,17 @@
         if (key.which === 13) {
             $scope.searchSupporters();
         }
+    };
+
+    // check if user already exists
+    var alreadySelected = function (id, selected) {
+        var i = selected.length;
+        while (i--) {
+            var selectedId = selected[i].UserId;
+            if (id.localeCompare(selectedId) === 0) {
+                return true;
+            }
+        }
+        return false;
     };
 });

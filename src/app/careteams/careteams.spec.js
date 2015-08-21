@@ -30,7 +30,7 @@
         $scope.create();
         expect($scope.creator.PatientId).toBe('123');
     });
-    it('Provider Add Test', function () {
+    xit('Provider Add Test', function () {
         $scope.selectedProviders = [];
         $scope.providerIds = [];
         $scope.addProvider({ 'Name': 'aa', UserId: '123' });
