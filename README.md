@@ -10,7 +10,7 @@ Install [Node.js](http://nodejs.org/download/) and then follow one of the follow
 
 #### Starting from a blank slate
 ```
-git clone git@bitbucket.org:Crypteron/crypteron-dashboard.git
+git clone git@bitbucket.org:Crypteron/cloudmedic-angular.git
 npm -g install grunt-cli karma bower protractor
 npm install
 webdriver-manager update
@@ -24,8 +24,11 @@ grunt watch
 
 `grunt e2e-test`
 
-*grunt-protractor-webdriver is a task that can be used to start a selenium web server, but it may not display all 
-meaningful stack traces from protractor
+* One can add the `grunt-protractor-webdriver` task to the gruntfile.js at (example) 
+`grunt.registerTask('e2e-test', ['grunt-protractor-webdriver', 'connect:test', 'protractor:e2e']);`
+and also at ___________ but it may not display all meaningful stack traces from protractor
+
+Additonal details at __________
 
 #### Build and watch for changes
 

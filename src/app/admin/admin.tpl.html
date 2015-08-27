@@ -110,10 +110,10 @@
             </tbody>
         </table>
         <div class="row text-center">
-            <button class="btn btn-lg" ng-click="getPhysicians(physiciansPage - 1)" ng-hide="!hasPrev" ng-disabled="isLoading">
+            <button id="prev-phys-pg" class="btn btn-lg" ng-click="getPhysicians(physiciansPage - 1)" ng-hide="!hasPrev" ng-disabled="isLoading">
                 <<
             </button>
-            <button class="btn btn-lg" ng-click="getPhysicians(physiciansPage + 1)" ng-hide="!hasNext" ng-disabled="isLoading">
+            <button id="next-phys-pg" class="btn btn-lg" ng-click="getPhysicians(physiciansPage + 1)" ng-hide="!hasNext" ng-disabled="isLoading">
                 >>
             </button>
             <div>{{physiciansPage}} of {{numPages}}</div>

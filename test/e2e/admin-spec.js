@@ -1,5 +1,7 @@
 ﻿// Admin page spec
 describe("admin-page", function () {
+    browser.get("#/");
+
     var generateTests;
     var removeTests;
 
@@ -14,7 +16,7 @@ describe("admin-page", function () {
             for (var i = 0; i < 2; i++) {
                 var randNo = Math.floor((Math.random() * 10000) + 1);
 
-                element(by.id("provider-tab")).click();
+                element(by.id("physician-tab")).click();
                 element(by.buttonText("Add Physician/Nurse")).click();
                 element(by.model('creator.Email')).sendKeys(testNames[i] + "Miller@example.com");
                 element(by.model('creator.FirstName')).sendKeys(testNames[i]);
@@ -42,12 +44,12 @@ describe("admin-page", function () {
         }
 
         removeTests = function () {
-            element(by.id("provider-tab")).click();
-            element(by.id("provider-list")).all(by.cssContainingText("tbody tr", "MikeMiller@example.com")).get(0).element(by.id("remove-provider")).click();
+            element(by.id("physician-tab")).click();
+            element(by.id("physician-list")).all(by.cssContainingText("tbody tr", "MikeMiller@example.com")).get(0).element(by.id("remove-provider")).click();
             element(by.buttonText("Yes, delete User!")).click();
 
-            element(by.id("provider-tab")).click();
-            element(by.id("provider-list")).all(by.cssContainingText("tbody tr", "JohnMiller@example.com")).get(0).element(by.id("remove-provider")).click();
+            element(by.id("physician-tab")).click();
+            element(by.id("physician-list")).all(by.cssContainingText("tbody tr", "JohnMiller@example.com")).get(0).element(by.id("remove-provider")).click();
             element(by.buttonText("Yes, delete User!")).click();
 
             element(by.id("supporter-tab")).click();
@@ -64,49 +66,49 @@ describe("admin-page", function () {
         expect(browser.getTitle()).toBe('Admin | CloudMedic Dashboard');
     });
 
-    describe("providers-tab", function () {
+    describe("physicians-tab", function () {
         var providerEmail;
 
         it("should be hidden initially", function () {
-            expect(element(by.id("provider-list")).isDisplayed()).toBeFalsy();
+            expect(element(by.id("physician-list")).isDisplayed()).toBeFalsy();
         })
 
         it("should load when selected", function () {
-            element(by.id("provider-tab")).click();
-            expect(element(by.id("provider-list")).isDisplayed()).toBeTruthy();
+            element(by.id("physician-tab")).click();
+            expect(element(by.id("physician-list")).isDisplayed()).toBeTruthy();
         });
 
-        describe("providers-table", function () {
+        describe("physicians-table", function () {
             it("should be sortable by name", function () {
-                element(by.id("provider-list")).element(by.linkText("Full Name")).click();
-                var string1 = element(by.id("provider-list")).all(by.repeater("provider in users")).get(0).getText();
-                var string2 = element(by.id("provider-list")).all(by.repeater("provider in users")).get(1).getText();
+                element(by.id("physician-list")).element(by.linkText("Full Name")).click();
+                var string1 = element(by.id("physician-list")).all(by.repeater("physician in physicians")).get(0).getText();
+                var string2 = element(by.id("physician-list")).all(by.repeater("physician in physicians")).get(1).getText();
                 protractor.promise.all([string1, string2]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeGreaterThan(data[1].toLowerCase());
                 });
 
-                element(by.id("provider-list")).element(by.linkText("Full Name")).click();
-                var string3 = element(by.id("provider-list")).all(by.repeater("provider in users")).get(0).getText();
-                var string4 = element(by.id("provider-list")).all(by.repeater("provider in users")).get(1).getText();
+                element(by.id("physician-list")).element(by.linkText("Full Name")).click();
+                var string3 = element(by.id("physician-list")).all(by.repeater("physician in physicians")).get(0).getText();
+                var string4 = element(by.id("physician-list")).all(by.repeater("physician in physicians")).get(1).getText();
                 protractor.promise.all([string3, string4]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
                 });
             });
 
             it("should be sortable by username", function () {
-                element(by.id("provider-list")).element(by.linkText("UserName")).click();
-                var r1 = element(by.id("provider-list")).all(by.repeater("provider in users")).get(0);
+                element(by.id("physician-list")).element(by.linkText("UserName")).click();
+                var r1 = element(by.id("physician-list")).all(by.repeater("physician in physicians")).get(0);
                 var string1 = r1.all(by.tagName('td')).get(1).getText();
-                var r2 = element(by.id("provider-list")).all(by.repeater("provider in users")).get(1);
+                var r2 = element(by.id("physician-list")).all(by.repeater("physician in physicians")).get(1);
                 var string2 = r2.all(by.tagName('td')).get(1).getText();
                 protractor.promise.all([string1, string2]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeGreaterThan(data[1].toLowerCase());
                 });
 
-                element(by.id("provider-list")).element(by.linkText("UserName")).click();
-                var r3 = element(by.id("provider-list")).all(by.repeater("provider in users")).get(0);
+                element(by.id("physician-list")).element(by.linkText("UserName")).click();
+                var r3 = element(by.id("physician-list")).all(by.repeater("physician in physicians")).get(0);
                 var string3 = r3.all(by.tagName('td')).get(1).getText();
-                var r4 = element(by.id("provider-list")).all(by.repeater("provider in users")).get(1);
+                var r4 = element(by.id("physician-list")).all(by.repeater("physician in physicians")).get(1);
                 var string4 = r4.all(by.tagName('td')).get(1).getText();
                 protractor.promise.all([string3, string4]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
@@ -114,36 +116,22 @@ describe("admin-page", function () {
             });
 
             it("should be sortable by email", function () {
-                element(by.id("provider-list")).element(by.linkText("Email")).click();
-                var r1 = element(by.id("provider-list")).all(by.repeater("provider in users")).get(0);
+                element(by.id("physician-list")).element(by.linkText("Email")).click();
+                var r1 = element(by.id("physician-list")).all(by.repeater("physician in physicians")).get(0);
                 var string1 = r1.all(by.tagName('td')).get(2).getText();
-                var r2 = element(by.id("provider-list")).all(by.repeater("provider in users")).get(1);
+                var r2 = element(by.id("physician-list")).all(by.repeater("physician in physicians")).get(1);
                 var string2 = r2.all(by.tagName('td')).get(2).getText();
                 protractor.promise.all([string1, string2]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeGreaterThan(data[1].toLowerCase());
                 });
 
-                element(by.id("provider-list")).element(by.linkText("Email")).click();
-                var r3 = element(by.id("provider-list")).all(by.repeater("provider in users")).get(0);
+                element(by.id("physician-list")).element(by.linkText("Email")).click();
+                var r3 = element(by.id("physician-list")).all(by.repeater("physician in physicians")).get(0);
                 var string3 = r3.all(by.tagName('td')).get(2).getText();
-                var r4 = element(by.id("provider-list")).all(by.repeater("provider in users")).get(1);
+                var r4 = element(by.id("physician-list")).all(by.repeater("physician in physicians")).get(1);
                 var string4 = r4.all(by.tagName('td')).get(2).getText();
                 protractor.promise.all([string3, string4]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
-                });
-            });
-
-            it("should be sortable by role", function () {
-                element(by.id("provider-list")).element(by.linkText("Role")).click();
-                var r1 = element(by.id("provider-list")).all(by.repeater("provider in users")).get(0);
-                var string1 = r1.all(by.tagName('td')).get(3).getText().then(function (data) {
-                    expect(data).toEqual("Physician");
-                });
-
-                element(by.id("provider-list")).element(by.linkText("Role")).click();
-                var r2 = element(by.id("provider-list")).all(by.repeater("provider in users")).get(0);
-                var string2 = r2.all(by.tagName('td')).get(3).getText().then(function (data) {
-                    expect(data).toEqual("Nurse");
                 });
             });
         });
@@ -154,8 +142,8 @@ describe("admin-page", function () {
                 expect(element(by.buttonText("Add Physician/Nurse")).isDisplayed()).toBeFalsy();
             });
 
-            it("should be active for provider tab", function () {
-                element(by.id("provider-tab")).click();
+            it("should be active for physician tab", function () {
+                element(by.id("physician-tab")).click();
                 expect(element(by.buttonText("Add Physician/Nurse")).isDisplayed()).toBeTruthy();
             });
         });
@@ -241,11 +229,30 @@ describe("admin-page", function () {
             it("should close the modal upon successful creation", function () {
                 element(by.id("register-btn")).click();
                 expect(element.all(by.css(".modal-header")).count()).toEqual(0);
+                element(by.id("physician-tab")).click();
             });
 
             it("should successfully create a provider", function () {
-                element(by.id("provider-tab")).click();
-                expect(element.all(by.cssContainingText("tbody tr", providerEmail)).count()).toEqual(1);
+                var nextPage = element(by.id("next-phys-pg"));
+                var count = 0;
+
+                // Iterate through the pages and search for create physician
+                var findProvider = function () {
+                    var numberFound = element.all(by.cssContainingText("tbody tr", providerEmail)).count().then(function (result) {
+                        count += result;
+                        var hasNext = nextPage.isDisplayed().then(function (result) {
+                            if (result && count === 0) {
+                                nextPage.click().then(function () {
+                                    findProvider();
+                                });
+                            } else {
+                                expect(count).toBeGreaterThan(0);
+                            }
+                        });
+                    });
+                }
+
+                findProvider();
             });
         });
 
@@ -254,15 +261,38 @@ describe("admin-page", function () {
 
             it("should ask for confirmation when clicked", function () {
                 provider = element(by.cssContainingText("tbody tr", providerEmail));
-                provider.element(by.id("remove-provider")).click();
+                provider.element(by.id("remove-physician")).click();
 
                 expect(element.all(by.cssContainingText(".modal-title", "Are You Sure?")).count()).toEqual(1);
             });
 
-            it("should delete provider when confirmed", function () {
+            it("should close view on successful deletion", function () {
                 element(by.buttonText("Yes, delete User!")).click();
-                element(by.id("provider-tab")).click();
-                expect(element.all(by.cssContainingText("tbody tr", providerEmail)).count()).toEqual(0);
+                expect(element.all(by.cssContainingText(".modal-title", "Are You Sure?")).count()).toEqual(0);
+            });
+
+            it("should delete provider when confirmed", function () {
+                element(by.id("physician-tab")).click();
+                var nextPage = element(by.id("next-phys-pg"));
+                var count = 0;
+
+                // Iterate through the pages and search for create physician
+                var findProvider = function () {
+                    var numberFound = element.all(by.cssContainingText("tbody tr", providerEmail)).count().then(function (result) {
+                        count += result;
+                        var hasNext = nextPage.isDisplayed().then(function (result) {
+                            if (result && count === 0) {
+                                nextPage.click().then(function () {
+                                    findProvider();
+                                });
+                            } else {
+                                expect(count).toBe(0);
+                            }
+                        });
+                    });
+                }
+
+                findProvider();
             });
         });
     });
@@ -451,7 +481,7 @@ describe("admin-page", function () {
         });
     });
 
-    describe("patients-tab", function () {
+    xdescribe("patients-tab", function () {
         it("should be the default loaded tab", function () {
             browser.get('#/admin');
             expect(element(by.id("patient-list")).isDisplayed()).toBeTruthy();
@@ -720,7 +750,7 @@ describe("admin-page", function () {
         });
     });
 
-    describe("careteams-tab", function () {
+    xdescribe("careteams-tab", function () {
         var testCount;
 
         it("should be hidden initially", function () {
@@ -941,7 +971,7 @@ describe("admin-page", function () {
         });
     });
 
-    it("should log out", function () {
+    xit("should log out", function () {
         // remove test users before logging out
         removeTests();
 

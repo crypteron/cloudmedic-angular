@@ -31,14 +31,13 @@ describe("patient-page", function () {
     beforeAll(function () {
         // Create example careteam invites 
         createInvites();
+    }, 100000);
 
+    it("should load", function () {
         // Login as an provider
         element(by.model("loginData.username")).sendKeys("patient1");
         element(by.model("loginData.password")).sendKeys("Password1!");
         element(by.buttonText("Login to your account")).click();
-    }, 100000);
-
-    it("should load", function () {
         expect(browser.getTitle()).toBe('Patient | CloudMedic Dashboard');
     });
 

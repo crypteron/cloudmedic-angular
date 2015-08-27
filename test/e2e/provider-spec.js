@@ -2,14 +2,11 @@
 describe("provider-page", function () {
     //browser.get('#/');
 
-    beforeAll(function () {
+    it("should load", function () {
         // Login as an provider
         element(by.model("loginData.username")).sendKeys("doctor1");
         element(by.model("loginData.password")).sendKeys("Password1?");
         element(by.buttonText("Login to your account")).click();
-    });
-
-    it("should load", function () {
         expect(browser.getTitle()).toBe('Provider | CloudMedic Dashboard');
     });
 

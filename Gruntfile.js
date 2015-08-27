@@ -455,19 +455,6 @@ module.exports = function ( grunt ) {
     },
 
     /**
-     * This task starts a Selenium WebDriver, blocks until it's ready to accept 
-     * connections, and then leaves it running in the background until the Grunt
-     * process finished. 
-     */
-    //protractor_webdriver: {
-    //    your_target: {
-    //        options: {
-    //            command: 'webdriver-manager start'
-    //        }
-    //    }
-    //},
-
-    /**
     * Create an http server to run app for e2e testing
     */
     connect: {
