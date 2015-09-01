@@ -312,33 +312,33 @@ describe("admin-page", function () {
         describe("supporters-table", function () {
             it("should be sortable by name", function () {
                 element(by.id("supporter-list")).element(by.linkText("Full Name")).click();
-                var string1 = element(by.id("supporter-list")).all(by.repeater("supporter in users")).get(0).getText();
-                var string2 = element(by.id("supporter-list")).all(by.repeater("supporter in users")).get(1).getText();
+                var string1 = element(by.id("supporter-list")).all(by.repeater("supporter in supporters")).get(0).getText();
+                var string2 = element(by.id("supporter-list")).all(by.repeater("supporter in supporters")).get(1).getText();
                 protractor.promise.all([string1, string2]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeGreaterThan(data[1].toLowerCase());
                 });
 
                 element(by.id("supporter-list")).element(by.linkText("Full Name")).click();
-                var string3 = element(by.id("supporter-list")).all(by.repeater("supporter in users")).get(0).getText();
-                var string4 = element(by.id("supporter-list")).all(by.repeater("supporter in users")).get(1).getText();
+                var string3 = element(by.id("supporter-list")).all(by.repeater("supporter in supporters")).get(0).getText();
+                var string4 = element(by.id("supporter-list")).all(by.repeater("supporter in supporters")).get(1).getText();
                 protractor.promise.all([string3, string4]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
                 });
             });
             it("should be sortable by username", function () {
                 element(by.id("supporter-list")).element(by.linkText("UserName")).click();
-                var r1 = element(by.id("supporter-list")).all(by.repeater("supporter in users")).get(0);
+                var r1 = element(by.id("supporter-list")).all(by.repeater("supporter in supporters")).get(0);
                 var string1 = r1.all(by.tagName('td')).get(1).getText();
-                var r2 = element(by.id("supporter-list")).all(by.repeater("supporter in users")).get(1);
+                var r2 = element(by.id("supporter-list")).all(by.repeater("supporter in supporters")).get(1);
                 var string2 = r2.all(by.tagName('td')).get(1).getText();
                 protractor.promise.all([string1, string2]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeGreaterThan(data[1].toLowerCase());
                 });
 
                 element(by.id("supporter-list")).element(by.linkText("UserName")).click();
-                var r3 = element(by.id("supporter-list")).all(by.repeater("supporter in users")).get(0);
+                var r3 = element(by.id("supporter-list")).all(by.repeater("supporter in supporters")).get(0);
                 var string3 = r3.all(by.tagName('td')).get(1).getText();
-                var r4 = element(by.id("supporter-list")).all(by.repeater("supporter in users")).get(1);
+                var r4 = element(by.id("supporter-list")).all(by.repeater("supporter in supporters")).get(1);
                 var string4 = r4.all(by.tagName('td')).get(1).getText();
                 protractor.promise.all([string3, string4]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
@@ -346,18 +346,18 @@ describe("admin-page", function () {
             });
             it("should be sortable by email", function () {
                 element(by.id("supporter-list")).element(by.linkText("Email")).click();
-                var r1 = element(by.id("supporter-list")).all(by.repeater("supporter in users")).get(0);
+                var r1 = element(by.id("supporter-list")).all(by.repeater("supporter in supporters")).get(0);
                 var string1 = r1.all(by.tagName('td')).get(2).getText();
-                var r2 = element(by.id("supporter-list")).all(by.repeater("supporter in users")).get(1);
+                var r2 = element(by.id("supporter-list")).all(by.repeater("supporter in supporters")).get(1);
                 var string2 = r2.all(by.tagName('td')).get(2).getText();
                 protractor.promise.all([string1, string2]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeGreaterThan(data[1].toLowerCase());
                 });
 
                 element(by.id("supporter-list")).element(by.linkText("Email")).click();
-                var r3 = element(by.id("supporter-list")).all(by.repeater("supporter in users")).get(0);
+                var r3 = element(by.id("supporter-list")).all(by.repeater("supporter in supporters")).get(0);
                 var string3 = r3.all(by.tagName('td')).get(2).getText();
-                var r4 = element(by.id("supporter-list")).all(by.repeater("supporter in users")).get(1);
+                var r4 = element(by.id("supporter-list")).all(by.repeater("supporter in supporters")).get(1);
                 var string4 = r4.all(by.tagName('td')).get(2).getText();
                 protractor.promise.all([string3, string4]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
@@ -459,7 +459,26 @@ describe("admin-page", function () {
 
             it("should successfully create a supporter", function () {
                 element(by.id("supporter-tab")).click();
-                expect(element.all(by.cssContainingText("tbody tr", supporterEmail)).count()).toEqual(1);
+                var nextPage = element(by.id("next-supp-pg"));
+                var count = 0;
+
+                // Iterate through the pages and search for created supporter
+                var findSupporter = function () {
+                    var numberFound = element.all(by.cssContainingText("tbody tr", supporterEmail)).count().then(function (result) {
+                        count += result;
+                        var hasNext = nextPage.isDisplayed().then(function (result) {
+                            if (result && count === 0) {
+                                nextPage.click().then(function () {
+                                    findSupporter();
+                                });
+                            } else {
+                                expect(count).toBeGreaterThan(0);
+                            }
+                        });
+                    });
+                }
+
+                findSupporter();
             });
         });
 
@@ -473,10 +492,33 @@ describe("admin-page", function () {
                 expect(element.all(by.cssContainingText(".modal-title", "Are You Sure?")).count()).toEqual(1);
             });
 
-            it("should delete supporter when confirmed", function () {
+            it("should close view on successful deletion", function () {
                 element(by.buttonText("Yes, delete User!")).click();
+                expect(element.all(by.cssContainingText(".modal-title", "Are You Sure?")).count()).toEqual(0);
+            });
+
+            it("should delete supporter when confirmed", function () {
                 element(by.id("supporter-tab")).click();
-                expect(element.all(by.cssContainingText("tbody tr", supporterEmail)).count()).toEqual(0);
+                var nextPage = element(by.id("next-supp-pg"));
+                var count = 0;
+
+                // Iterate through the pages and search for create physician
+                var findSupporter = function () {
+                    var numberFound = element.all(by.cssContainingText("tbody tr", supporterEmail)).count().then(function (result) {
+                        count += result;
+                        var hasNext = nextPage.isDisplayed().then(function (result) {
+                            if (result && count === 0) {
+                                nextPage.click().then(function () {
+                                    findSupporter();
+                                });
+                            } else {
+                                expect(count).toBe(0);
+                            }
+                        });
+                    });
+                }
+
+                findSupporter();
             });
         });
     });

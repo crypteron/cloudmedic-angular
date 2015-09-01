@@ -224,10 +224,10 @@
             </tbody>
         </table>
         <div class="row text-center">
-            <button class="btn btn-lg" ng-click="getSupporters(supportersPage - 1)" ng-hide="!hasPrev" ng-disabled="isLoading">
+            <button id="prev-supp-pg" class="btn btn-lg" ng-click="getSupporters(supportersPage - 1)" ng-hide="!hasPrev" ng-disabled="isLoading">
                 <<
             </button>
-            <button class="btn btn-lg" ng-click="getSupporters(supportersPage + 1)" ng-hide="!hasNext" ng-disabled="isLoading">
+            <button id="next-supp-pg" class="btn btn-lg" ng-click="getSupporters(supportersPage + 1)" ng-hide="!hasNext" ng-disabled="isLoading">
                 >>
             </button>
             <div>{{supportersPage}} of {{numPages}}</div>
