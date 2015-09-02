@@ -6,7 +6,7 @@
 
     // location of your E2E test specs
     specs: [
-        //'../test/e2e/register-spec.js',
+        '../test/e2e/register-spec.js',
         //'../test/e2e/profile-spec.js',
         '../test/e2e/admin-spec.js'
         //'../test/e2e/provider-spec.js',

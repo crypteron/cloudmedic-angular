@@ -1,6 +1,6 @@
 ﻿// Admin page spec
 describe("admin-page", function () {
-    browser.get("#/");
+    //browser.get("#/");
 
     var generateTests;
     var removeTests;
@@ -44,21 +44,59 @@ describe("admin-page", function () {
         }
 
         removeTests = function () {
-            element(by.id("physician-tab")).click();
-            element(by.id("physician-list")).all(by.cssContainingText("tbody tr", "MikeMiller@example.com")).get(0).element(by.id("remove-provider")).click();
-            element(by.buttonText("Yes, delete User!")).click();
+            var nextPhysPage = element(by.id("next-phys-pg"));
+            var nextSuppPage = element(by.id("next-supp-pg"));
+            var count = 0;
 
-            element(by.id("physician-tab")).click();
-            element(by.id("physician-list")).all(by.cssContainingText("tbody tr", "JohnMiller@example.com")).get(0).element(by.id("remove-provider")).click();
-            element(by.buttonText("Yes, delete User!")).click();
+            // Iterate through the pages and search for example provider to delete
+            var findExampleProvider = function (email) {
+                return element.all(by.cssContainingText("tbody tr", email)).count().then(function (result) {
+                    count += result;
+                    var hasNext = nextPhysPage.isDisplayed().then(function (result) {
+                        if (result && count === 0) {
+                            nextPhysPage.click().then(function () {
+                                findExampleProvider(email);
+                            });
+                        } else {
+                            console.log(count);
+                            element(by.cssContainingText("tbody tr", email)).element(by.id("remove-physician")).click();
+                            element(by.buttonText("Yes, delete User!")).click();
+                            count = 0;
+                        }
+                    });
+                });
+            }
 
-            element(by.id("supporter-tab")).click();
-            element(by.id("supporter-list")).all(by.cssContainingText("tbody tr", "MikeJohnson@example.com")).get(0).element(by.id("remove-supporter")).click();
-            element(by.buttonText("Yes, delete User!")).click();
+            var findExampleSupporter = function (email) {
+                return element.all(by.cssContainingText("tbody tr", email)).count().then(function (result) {
+                    count += result;
+                    var hasNext = nextSuppPage.isDisplayed().then(function (result) {
+                        if (result && count === 0) {
+                            nextSuppPage.click().then(function () {
+                                findExampleSupporter(email);
+                            });
+                        } else {
+                            console.log(count);
+                            element(by.cssContainingText("tbody tr", email)).element(by.id("remove-supporter")).click();
+                            element(by.buttonText("Yes, delete User!")).click();
+                            count = 0;
+                        }
+                    });
+                });
+            }
 
-            element(by.id("supporter-tab")).click();
-            element(by.id("supporter-list")).all(by.cssContainingText("tbody tr", "JohnJohnson@example.com")).get(0).element(by.id("remove-supporter")).click();
-            element(by.buttonText("Yes, delete User!")).click();
+            element(by.id("physician-tab")).click().then(function () {
+                findExampleProvider("MikeMiller@example.com");
+            });
+            element(by.id("physician-tab")).click().then(function () {
+                findExampleProvider("JohnMiller@example.com");
+            });
+            element(by.id("supporter-tab")).click().then(function () {
+                findExampleSupporter("MikeJohnson@example.com");
+            });
+            element(by.id("supporter-tab")).click().then(function () {
+                findExampleSupporter("JohnJohnson@example.com");
+            });
         }
     });
 
@@ -67,7 +105,7 @@ describe("admin-page", function () {
     });
 
     describe("physicians-tab", function () {
-        var providerEmail;
+        var physicianEmail;
 
         it("should be hidden initially", function () {
             expect(element(by.id("physician-list")).isDisplayed()).toBeFalsy();
@@ -134,6 +172,38 @@ describe("admin-page", function () {
                     expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
                 });
             });
+
+            describe("next-page-btn", function () {
+                var nextBtn = element(by.id("next-phys-pg"));
+
+                it("should be displayed on first page", function () {
+                    expect(nextBtn.isDisplayed()).toBeTruthy();
+                });
+
+                it("should lead to a new page", function () {
+                    var r1 = element(by.id("physician-list")).all(by.repeater("physician in physicians")).get(0);
+                    var email = r1.all(by.tagName('td')).get(2).getText().then(function (data) {
+                        nextBtn.click();
+                        expect(element.all(by.cssContainingText("tbody tr", data)).count()).toBe(0);
+                    });
+                });
+            });
+
+            describe("prev-page-btn", function () {
+                var prevBtn = element(by.id("prev-phys-pg"));
+
+                it("should lead to a new page", function () {
+                    var r1 = element(by.id("physician-list")).all(by.repeater("physician in physicians")).get(0);
+                    var email = r1.all(by.tagName('td')).get(2).getText().then(function (data) {
+                        prevBtn.click();
+                        expect(element.all(by.cssContainingText("tbody tr", data)).count()).toBe(0);
+                    });
+                });
+
+                it("should be hidden on first page", function () {
+                    expect(prevBtn.isDisplayed()).toBeFalsy();
+                });
+            });
         });
 
         describe("add-button", function () {
@@ -150,7 +220,7 @@ describe("admin-page", function () {
 
         describe("add-provider-form", function () {
             var randNo = Math.floor((Math.random() * 10000) + 1);
-            providerEmail = "physician" + randNo.toString() + "@example.com";
+            physicianEmail = "physician" + randNo.toString() + "@example.com";
 
             it("should open on clicking add button", function () {
                 element(by.buttonText("Add Physician/Nurse")).click();
@@ -204,7 +274,7 @@ describe("admin-page", function () {
                 var registerBtn = element(by.id("register-btn"));
                 expect(registerBtn.isEnabled()).toBeFalsy();
 
-                element(by.model('creator.Email')).sendKeys(providerEmail);
+                element(by.model('creator.Email')).sendKeys(physicianEmail);
                 expect(registerBtn.isEnabled()).toBeFalsy();
 
                 element(by.model('creator.FirstName')).sendKeys("Example");
@@ -238,7 +308,7 @@ describe("admin-page", function () {
 
                 // Iterate through the pages and search for create physician
                 var findProvider = function () {
-                    var numberFound = element.all(by.cssContainingText("tbody tr", providerEmail)).count().then(function (result) {
+                    var numberFound = element.all(by.cssContainingText("tbody tr", physicianEmail)).count().then(function (result) {
                         count += result;
                         var hasNext = nextPage.isDisplayed().then(function (result) {
                             if (result && count === 0) {
@@ -260,7 +330,7 @@ describe("admin-page", function () {
             var provider;
 
             it("should ask for confirmation when clicked", function () {
-                provider = element(by.cssContainingText("tbody tr", providerEmail));
+                provider = element(by.cssContainingText("tbody tr", physicianEmail));
                 provider.element(by.id("remove-physician")).click();
 
                 expect(element.all(by.cssContainingText(".modal-title", "Are You Sure?")).count()).toEqual(1);
@@ -271,14 +341,14 @@ describe("admin-page", function () {
                 expect(element.all(by.cssContainingText(".modal-title", "Are You Sure?")).count()).toEqual(0);
             });
 
-            it("should delete provider when confirmed", function () {
+            it("should delete physician when confirmed", function () {
                 element(by.id("physician-tab")).click();
                 var nextPage = element(by.id("next-phys-pg"));
                 var count = 0;
 
-                // Iterate through the pages and search for create physician
+                // Iterate through the pages and search for deleted physician
                 var findProvider = function () {
-                    var numberFound = element.all(by.cssContainingText("tbody tr", providerEmail)).count().then(function (result) {
+                    var numberFound = element.all(by.cssContainingText("tbody tr", physicianEmail)).count().then(function (result) {
                         count += result;
                         var hasNext = nextPage.isDisplayed().then(function (result) {
                             if (result && count === 0) {
@@ -296,6 +366,269 @@ describe("admin-page", function () {
             });
         });
     });
+
+    describe("nurses-tab", function () {
+        var nurseEmail;
+
+        it("should be hidden initially", function () {
+            expect(element(by.id("nurse-list")).isDisplayed()).toBeFalsy();
+        })
+
+        it("should load when selected", function () {
+            element(by.id("nurse-tab")).click();
+            expect(element(by.id("nurse-list")).isDisplayed()).toBeTruthy();
+        });
+
+        describe("nurses-table", function () {
+            it("should be sortable by name", function () {
+                element(by.id("nurse-list")).element(by.linkText("Full Name")).click();
+                var string1 = element(by.id("nurse-list")).all(by.repeater("nurse in nurses")).get(0).getText();
+                var string2 = element(by.id("nurse-list")).all(by.repeater("nurse in nurses")).get(1).getText();
+                protractor.promise.all([string1, string2]).then(function (data) {
+                    expect((data[0].toLowerCase())).toBeGreaterThan(data[1].toLowerCase());
+                });
+
+                element(by.id("nurse-list")).element(by.linkText("Full Name")).click();
+                var string3 = element(by.id("nurse-list")).all(by.repeater("nurse in nurses")).get(0).getText();
+                var string4 = element(by.id("nurse-list")).all(by.repeater("nurse in nurses")).get(1).getText();
+                protractor.promise.all([string3, string4]).then(function (data) {
+                    expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
+                });
+            });
+
+            it("should be sortable by username", function () {
+                element(by.id("nurse-list")).element(by.linkText("UserName")).click();
+                var r1 = element(by.id("nurse-list")).all(by.repeater("nurse in nurses")).get(0);
+                var string1 = r1.all(by.tagName('td')).get(1).getText();
+                var r2 = element(by.id("nurse-list")).all(by.repeater("nurse in nurses")).get(1);
+                var string2 = r2.all(by.tagName('td')).get(1).getText();
+                protractor.promise.all([string1, string2]).then(function (data) {
+                    expect((data[0].toLowerCase())).toBeGreaterThan(data[1].toLowerCase());
+                });
+
+                element(by.id("nurse-list")).element(by.linkText("UserName")).click();
+                var r3 = element(by.id("nurse-list")).all(by.repeater("nurse in nurses")).get(0);
+                var string3 = r3.all(by.tagName('td')).get(1).getText();
+                var r4 = element(by.id("nurse-list")).all(by.repeater("nurse in nurses")).get(1);
+                var string4 = r4.all(by.tagName('td')).get(1).getText();
+                protractor.promise.all([string3, string4]).then(function (data) {
+                    expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
+                });
+            });
+
+            it("should be sortable by email", function () {
+                element(by.id("nurse-list")).element(by.linkText("Email")).click();
+                var r1 = element(by.id("nurse-list")).all(by.repeater("nurse in nurses")).get(0);
+                var string1 = r1.all(by.tagName('td')).get(2).getText();
+                var r2 = element(by.id("nurse-list")).all(by.repeater("nurse in nurses")).get(1);
+                var string2 = r2.all(by.tagName('td')).get(2).getText();
+                protractor.promise.all([string1, string2]).then(function (data) {
+                    expect((data[0].toLowerCase())).toBeGreaterThan(data[1].toLowerCase());
+                });
+
+                element(by.id("nurse-list")).element(by.linkText("Email")).click();
+                var r3 = element(by.id("nurse-list")).all(by.repeater("nurse in nurses")).get(0);
+                var string3 = r3.all(by.tagName('td')).get(2).getText();
+                var r4 = element(by.id("nurse-list")).all(by.repeater("nurse in nurses")).get(1);
+                var string4 = r4.all(by.tagName('td')).get(2).getText();
+                protractor.promise.all([string3, string4]).then(function (data) {
+                    expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
+                });
+            });
+
+            describe("next-page-btn", function () {
+                var nextBtn = element(by.id("next-nurse-pg"));
+
+                it("should be displayed on first page", function () {
+                    expect(nextBtn.isDisplayed()).toBeTruthy();
+                });
+
+                it("should lead to a new page", function () {
+                    var r1 = element(by.id("nurse-list")).all(by.repeater("nurse in nurses")).get(0);
+                    var email = r1.all(by.tagName('td')).get(2).getText().then(function (data) {
+                        nextBtn.click();
+                        expect(element.all(by.cssContainingText("tbody tr", data)).count()).toBe(0);
+                    });
+                });
+            });
+
+            describe("prev-page-btn", function () {
+                var prevBtn = element(by.id("prev-nurse-pg"));
+
+                it("should lead to a new page", function () {
+                    var r1 = element(by.id("nurse-list")).all(by.repeater("nurse in nurses")).get(0);
+                    var email = r1.all(by.tagName('td')).get(2).getText().then(function (data) {
+                        prevBtn.click();
+                        expect(element.all(by.cssContainingText("tbody tr", data)).count()).toBe(0);
+                    });
+                });
+
+                it("should be hidden on first page", function () {
+                    expect(prevBtn.isDisplayed()).toBeFalsy();
+                });
+            });
+        });
+
+        describe("add-button", function () {
+            it("should be hidden for other tabs", function () {
+                element(by.id("patient-tab")).click();
+                expect(element(by.buttonText("Add Physician/Nurse")).isDisplayed()).toBeFalsy();
+            });
+
+            it("should be active for physician tab", function () {
+                element(by.id("nurse-tab")).click();
+                expect(element(by.buttonText("Add Physician/Nurse")).isDisplayed()).toBeTruthy();
+            });
+        });
+
+        describe("add-provider-form", function () {
+            var randNo = Math.floor((Math.random() * 10000) + 1);
+            nurseEmail = "nurse" + randNo.toString() + "@example.com";
+
+            it("should open on clicking add button", function () {
+                element(by.buttonText("Add Physician/Nurse")).click();
+                expect(element.all(by.cssContainingText(".modal-title", "Register New Physician/Nurse")).count()).toEqual(1);
+            });
+
+            describe("name-inputs", function () {
+                afterEach(function () {
+                    element(by.model('creator.FirstName')).clear();
+                    element(by.model('creator.LastName')).clear();
+                });
+
+                it("should display error message for invalid first name", function () {
+                    element(by.model('creator.FirstName')).sendKeys("user1");
+
+                    expect(element(by.id("fn-invalid")).isDisplayed()).toBeTruthy();
+                });
+                it("should display error message for invalid last name", function () {
+                    element(by.model('creator.LastName')).sendKeys("example1");
+
+                    expect(element(by.id("ln-invalid")).isDisplayed()).toBeTruthy();
+                });
+                it("should accept valid inputs", function () {
+                    element(by.model('creator.FirstName')).sendKeys("user");
+                    element(by.model('creator.LastName')).sendKeys("example");
+
+                    expect(element(by.id("fn-invalid")).isDisplayed()).toBeFalsy();
+                    expect(element(by.id("ln-invalid")).isDisplayed()).toBeFalsy();
+                });
+            });
+
+            describe("phone-number-input", function () {
+                afterEach(function () {
+                    element(by.model('data.PhoneNumber')).clear();
+                });
+
+                it("should only allow numbers", function () {
+                    element(by.model('data.PhoneNumber')).sendKeys("abc");
+
+                    expect(element(by.model('data.PhoneNumber')).getAttribute('value')).toEqual("(xxx) xxx-xxxx");
+                });
+
+                it("should cap length of input", function () {
+                    element(by.model('data.PhoneNumber')).sendKeys(" 1234567890123");
+
+                    expect(element(by.model('data.PhoneNumber')).getAttribute('value')).toEqual("(123) 456-7890");
+                });
+            });
+
+            it("should prevent submission until all fields complete", function () {
+                var registerBtn = element(by.id("register-btn"));
+                expect(registerBtn.isEnabled()).toBeFalsy();
+
+                element(by.model('creator.Email')).sendKeys(nurseEmail);
+                expect(registerBtn.isEnabled()).toBeFalsy();
+
+                element(by.model('creator.FirstName')).sendKeys("Example");
+                expect(registerBtn.isEnabled()).toBeFalsy();
+
+                element(by.model('creator.LastName')).sendKeys("Nurse");
+                expect(registerBtn.isEnabled()).toBeFalsy();
+
+                element(by.model('data.PhoneNumber')).sendKeys(" 1234567890");
+                expect(registerBtn.isEnabled()).toBeFalsy();
+
+                element(by.model('dt')).sendKeys("1934-11-01");
+                expect(registerBtn.isEnabled()).toBeFalsy();
+
+                element(by.cssContainingText('option', 'Male')).click();
+                expect(registerBtn.isEnabled()).toBeFalsy();
+
+                element(by.cssContainingText('option', 'Nurse')).click();
+                expect(registerBtn.isEnabled()).toBeTruthy();
+            });
+
+            it("should close the modal upon successful creation", function () {
+                element(by.id("register-btn")).click();
+                expect(element.all(by.css(".modal-header")).count()).toEqual(0);
+                element(by.id("nurse-tab")).click();
+            });
+
+            it("should successfully create a nurse", function () {
+                var nextPage = element(by.id("next-nurse-pg"));
+                var count = 0;
+
+                // Iterate through the pages and search for create physician
+                var findNurse = function () {
+                    var numberFound = element.all(by.cssContainingText("tbody tr", nurseEmail)).count().then(function (result) {
+                        count += result;
+                        var hasNext = nextPage.isDisplayed().then(function (result) {
+                            if (result && count === 0) {
+                                nextPage.click().then(function () {
+                                    findNurse();
+                                });
+                            } else {
+                                expect(count).toBeGreaterThan(0);
+                            }
+                        });
+                    });
+                }
+
+                findNurse();
+            });
+        });
+
+        describe("remove-button", function () {
+            var provider;
+
+            it("should ask for confirmation when clicked", function () {
+                provider = element(by.cssContainingText("tbody tr", nurseEmail));
+                provider.element(by.id("remove-nurse")).click();
+
+                expect(element.all(by.cssContainingText(".modal-title", "Are You Sure?")).count()).toEqual(1);
+            });
+
+            it("should close view on successful deletion", function () {
+                element(by.buttonText("Yes, delete User!")).click();
+                expect(element.all(by.cssContainingText(".modal-title", "Are You Sure?")).count()).toEqual(0);
+            });
+
+            it("should delete provider when confirmed", function () {
+                element(by.id("nurse-tab")).click();
+                var nextPage = element(by.id("next-nurse-pg"));
+                var count = 0;
+
+                // Iterate through the pages and search for deleted nurse
+                var findNurse = function () {
+                    var numberFound = element.all(by.cssContainingText("tbody tr", nurseEmail)).count().then(function (result) {
+                        count += result;
+                        var hasNext = nextPage.isDisplayed().then(function (result) {
+                            if (result && count === 0) {
+                                nextPage.click().then(function () {
+                                    findNurse();
+                                });
+                            } else {
+                                expect(count).toBe(0);
+                            }
+                        });
+                    });
+                }
+
+                findNurse();
+            });
+        });
+    })
 
     describe("supporters-tab", function () {
         var supporterEmail;
@@ -325,6 +658,7 @@ describe("admin-page", function () {
                     expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
                 });
             });
+
             it("should be sortable by username", function () {
                 element(by.id("supporter-list")).element(by.linkText("UserName")).click();
                 var r1 = element(by.id("supporter-list")).all(by.repeater("supporter in supporters")).get(0);
@@ -344,6 +678,7 @@ describe("admin-page", function () {
                     expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
                 });
             });
+
             it("should be sortable by email", function () {
                 element(by.id("supporter-list")).element(by.linkText("Email")).click();
                 var r1 = element(by.id("supporter-list")).all(by.repeater("supporter in supporters")).get(0);
@@ -361,6 +696,38 @@ describe("admin-page", function () {
                 var string4 = r4.all(by.tagName('td')).get(2).getText();
                 protractor.promise.all([string3, string4]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
+                });
+            });
+
+            describe("next-page-btn", function () {
+                var nextBtn = element(by.id("next-supp-pg"));
+
+                it("should be displayed on first page", function () {
+                    expect(nextBtn.isDisplayed()).toBeTruthy();
+                });
+
+                it("should lead to a new page", function () {
+                    var r1 = element(by.id("supporter-list")).all(by.repeater("supporter in supporters")).get(0);
+                    var email = r1.all(by.tagName('td')).get(2).getText().then(function (data) {
+                        nextBtn.click();
+                        expect(element.all(by.cssContainingText("tbody tr", data)).count()).toBe(0);
+                    });
+                });
+            });
+
+            describe("prev-page-btn", function () {
+                var prevBtn = element(by.id("prev-supp-pg"));
+
+                it("should lead to a new page", function () {
+                    var r1 = element(by.id("supporter-list")).all(by.repeater("supporter in supporters")).get(0);
+                    var email = r1.all(by.tagName('td')).get(2).getText().then(function (data) {
+                        prevBtn.click();
+                        expect(element.all(by.cssContainingText("tbody tr", data)).count()).toBe(0);
+                    });
+                });
+
+                it("should be hidden on first page", function () {
+                    expect(prevBtn.isDisplayed()).toBeFalsy();
                 });
             });
         });
@@ -502,7 +869,7 @@ describe("admin-page", function () {
                 var nextPage = element(by.id("next-supp-pg"));
                 var count = 0;
 
-                // Iterate through the pages and search for create physician
+                // Iterate through the pages and search for deleted supporter
                 var findSupporter = function () {
                     var numberFound = element.all(by.cssContainingText("tbody tr", supporterEmail)).count().then(function (result) {
                         count += result;
@@ -523,7 +890,7 @@ describe("admin-page", function () {
         });
     });
 
-    xdescribe("patients-tab", function () {
+    describe("patients-tab", function () {
         it("should be the default loaded tab", function () {
             browser.get('#/admin');
             expect(element(by.id("patient-list")).isDisplayed()).toBeTruthy();
@@ -532,15 +899,15 @@ describe("admin-page", function () {
         describe("patients-table", function () {
             it("should be sortable by name", function () {
                 element(by.id("patient-list")).element(by.linkText("Full Name")).click();
-                var string1 = element(by.id("patient-list")).all(by.repeater("patient in users")).get(0).getText();
-                var string2 = element(by.id("patient-list")).all(by.repeater("patient in users")).get(1).getText();
+                var string1 = element(by.id("patient-list")).all(by.repeater("patient in patients")).get(0).getText();
+                var string2 = element(by.id("patient-list")).all(by.repeater("patient in patients")).get(1).getText();
                 protractor.promise.all([string1, string2]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeGreaterThan(data[1].toLowerCase());
                 });
 
                 element(by.id("patient-list")).element(by.linkText("Full Name")).click();
-                var string3 = element(by.id("patient-list")).all(by.repeater("patient in users")).get(0).getText();
-                var string4 = element(by.id("patient-list")).all(by.repeater("patient in users")).get(1).getText();
+                var string3 = element(by.id("patient-list")).all(by.repeater("patient in patients")).get(0).getText();
+                var string4 = element(by.id("patient-list")).all(by.repeater("patient in patients")).get(1).getText();
                 protractor.promise.all([string3, string4]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
                 });
@@ -548,18 +915,18 @@ describe("admin-page", function () {
 
             it("should be sortable by username", function () {
                 element(by.id("patient-list")).element(by.linkText("UserName")).click();
-                var r1 = element(by.id("patient-list")).all(by.repeater("patient in users")).get(0);
+                var r1 = element(by.id("patient-list")).all(by.repeater("patient in patients")).get(0);
                 var string1 = r1.all(by.tagName('td')).get(1).getText();
-                var r2 = element(by.id("patient-list")).all(by.repeater("patient in users")).get(1);
+                var r2 = element(by.id("patient-list")).all(by.repeater("patient in patients")).get(1);
                 var string2 = r2.all(by.tagName('td')).get(1).getText();
                 protractor.promise.all([string1, string2]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeGreaterThan(data[1].toLowerCase());
                 });
 
                 element(by.id("patient-list")).element(by.linkText("UserName")).click();
-                var r3 = element(by.id("patient-list")).all(by.repeater("patient in users")).get(0);
+                var r3 = element(by.id("patient-list")).all(by.repeater("patient in patients")).get(0);
                 var string3 = r3.all(by.tagName('td')).get(1).getText();
-                var r4 = element(by.id("patient-list")).all(by.repeater("patient in users")).get(1);
+                var r4 = element(by.id("patient-list")).all(by.repeater("patient in patients")).get(1);
                 var string4 = r4.all(by.tagName('td')).get(1).getText();
                 protractor.promise.all([string3, string4]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
@@ -568,21 +935,53 @@ describe("admin-page", function () {
 
             it("should be sortable by email", function () {
                 element(by.id("patient-list")).element(by.linkText("Email")).click();
-                var r1 = element(by.id("patient-list")).all(by.repeater("patient in users")).get(0);
+                var r1 = element(by.id("patient-list")).all(by.repeater("patient in patients")).get(0);
                 var string1 = r1.all(by.tagName('td')).get(2).getText();
-                var r2 = element(by.id("patient-list")).all(by.repeater("patient in users")).get(1);
+                var r2 = element(by.id("patient-list")).all(by.repeater("patient in patients")).get(1);
                 var string2 = r2.all(by.tagName('td')).get(2).getText();
                 protractor.promise.all([string1, string2]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeGreaterThan(data[1].toLowerCase());
                 });
 
                 element(by.id("patient-list")).element(by.linkText("Email")).click();
-                var r3 = element(by.id("patient-list")).all(by.repeater("patient in users")).get(0);
+                var r3 = element(by.id("patient-list")).all(by.repeater("patient in patients")).get(0);
                 var string3 = r3.all(by.tagName('td')).get(2).getText();
-                var r4 = element(by.id("patient-list")).all(by.repeater("patient in users")).get(1);
+                var r4 = element(by.id("patient-list")).all(by.repeater("patient in patients")).get(1);
                 var string4 = r4.all(by.tagName('td')).get(2).getText();
                 protractor.promise.all([string3, string4]).then(function (data) {
                     expect((data[0].toLowerCase())).toBeLessThan(data[1].toLowerCase());
+                });
+            });
+
+            describe("next-page-btn", function () {
+                var nextBtn = element(by.id("next-ptnt-pg"));
+
+                it("should be displayed on first page", function () {
+                    expect(nextBtn.isDisplayed()).toBeTruthy();
+                });
+
+                it("should lead to a new page", function () {
+                    var r1 = element(by.id("patient-list")).all(by.repeater("patient in patients")).get(0);
+                    var email = r1.all(by.tagName('td')).get(2).getText().then(function (data) {
+                        nextBtn.click();
+                        expect(element.all(by.cssContainingText("tbody tr", data)).count()).toBe(0);
+                    });
+                });
+            });
+
+            describe("prev-page-btn", function () {
+                var prevBtn = element(by.id("prev-ptnt-pg"));
+
+                it("should lead to a new page", function () {
+                    var r1 = element(by.id("patient-list")).all(by.repeater("patient in patients")).get(0);
+                    var email = r1.all(by.tagName('td')).get(2).getText().then(function (data) {
+                        prevBtn.click();
+                        expect(element.all(by.cssContainingText("tbody tr", data)).count()).toBe(0);
+                    });
+                });
+
+                it("should be hidden on first page", function () {
+                    expect(prevBtn.isDisplayed()).toBeFalsy();
                 });
             });
         });
@@ -591,19 +990,57 @@ describe("admin-page", function () {
             var patient;
 
             it("should ask for confirmation when clicked", function () {
-                patient = element(by.cssContainingText("tbody tr", "person@sample.com"))
-                patient.element(by.id("remove-patient")).click();
-                expect(element.all(by.cssContainingText(".modal-title", "Are You Sure?")).count()).toEqual(1);
+                var nextPage = element(by.id("next-ptnt-pg"));
+                var count = 0;
+
+                // Iterate through the pages and search for created patient
+                var findPatient = function () {
+                    var numberFound = element.all(by.cssContainingText("tbody tr", "person@sample.com")).count().then(function (result) {
+                        count += result;
+                        var hasNext = nextPage.isDisplayed().then(function (result) {
+                            if (result && count === 0) {
+                                nextPage.click().then(function () {
+                                    findPatient();
+                                });
+                            } else {
+                                patient = element(by.cssContainingText("tbody tr", "person@sample.com"));
+                                patient.element(by.id("remove-patient")).click();
+                                expect(element.all(by.cssContainingText(".modal-title", "Are You Sure?")).count()).toEqual(1);
+                            }
+                        });
+                    });
+                }
+
+                findPatient();
             });
 
             it("should delete user when confirmed", function () {
                 element(by.buttonText("Yes, delete User!")).click();
-                expect(element.all(by.cssContainingText("tbody tr", "person@sample.com")).count()).toEqual(0);
+                element(by.id("patient-tab")).click();
+                var nextPage = element(by.id("next-ptnt-pg"));
+                var count = 0;
+
+                // Iterate through the pages and search for deleted patient
+                var findPatient = function () {
+                    var numberFound = element.all(by.cssContainingText("tbody tr", "person@sample.com")).count().then(function (result) {
+                        count += result;
+                        var hasNext = nextPage.isDisplayed().then(function (result) {
+                            if (result && count === 0) {
+                                nextPage.click().then(function () {
+                                    findPatient();
+                                });
+                            } else {
+                                expect(count).toBe(0);
+                            }
+                        });
+                    });
+                }
+
+                findPatient();
             });
         });
 
         describe("create-careteam-form", function () {
-
             it("should open on clicking add button", function () {
                 // generate test characters before opening modal
                 generateTests();
@@ -621,147 +1058,70 @@ describe("admin-page", function () {
 
             describe("provider-search-input", function () {
                 afterEach(function () {
-                    element(by.model("providerNameFilter")).clear();
+                    element(by.model("providerEmail")).clear();
                 });
 
                 it("should allow searching providers", function () {
-                    element(by.model("providerNameFilter")).sendKeys("Example Doctor");
+                    element(by.model("providerEmail")).sendKeys("MikeMiller@example.com");
                     element(by.id("search-providers")).click();
 
-                    element.all(by.repeater("provider in providers")).count().then(function (count) {
-                        expect(count).toBeGreaterThan(0);
+                    element.all(by.repeater("provider in selectedProviders")).count().then(function (count) {
+                        expect(count).toEqual(1);
                     });
                 });
 
                 it("should capture the enter keypress", function () {
-                    element(by.model("providerNameFilter")).sendKeys("Example Doctor");
-                    element(by.model("providerNameFilter")).sendKeys(protractor.Key.ENTER);
+                    element(by.model("providerEmail")).sendKeys("JohnMiller@example.com");
+                    element(by.model("providerEmail")).sendKeys(protractor.Key.ENTER);
 
-                    element.all(by.repeater("provider in providers")).count().then(function (count) {
-                        expect(count).toEqual(1);
+                    element.all(by.repeater("provider in selectedProviders")).count().then(function (count) {
+                        expect(count).toEqual(2);
                     });
-                });
-            });
-
-            describe("provider-search-results", function () {
-                beforeEach(function () {
-                    // Search for users generated by this test
-                    element(by.model("providerNameFilter")).sendKeys("Miller");
-                    element(by.id("search-providers")).click();
-                });
-
-                afterEach(function () {
-                    element(by.model("providerNameFilter")).clear();
-                });
-
-                var provCount;
-
-                describe("select/add-button", function () {
-                    it("should send provider to the selected table", function () {
-                        // count variable used later to verify omission of selected providers
-                        provCount = element.all(by.repeater("provider in providers")).count();
-
-                        var provider = element(by.repeater("provider in providers").row(0)).getText();
-                        provider.element(by.id("select-provider")).click();
-                        var selected = element(by.repeater("provider in selectedProviders").row(0)).getText();
-                        protractor.promise.all([provider, selected]).then(function (data) {
-                            expect(data[0]).toEqual(data[1]);
-                        });
-                    });
-                });
-
-                it("should omit selected providers", function () {
-                    expect(element.all(by.repeater("provider in providers")).count()).toBeLessThan(provCount);
                 });
             });
 
             describe("selected-providers-field", function () {
                 describe("deselect/remove-button", function () {
-                    it("should move provider back to search results field", function () {
-                        var selected = element(by.repeater("provider in selectedProviders").row(0)).getText();
-                        element(by.model("providerNameFilter")).clear();
-                        // this will clear the search result list
-                        element(by.id("search-providers")).click();
-
+                    it("should remove provider from select field", function () {
+                        var oldCount = element.all(by.repeater("provider in selectedProviders")).count();
                         element.all(by.id("deselect-provider")).get(0).click();
-                        var provider = element(by.repeater("provider in providers").row(0)).getText();
-                        protractor.promise.all([selected, provider]).then(function (data) {
-                            expect(data[0]).toEqual(data[1]);
-                        });
+                        var newCount = element.all(by.repeater("provider in selectedProviders")).count();
+                        expect(oldCount).toBeGreaterThan(newCount);
                     });
                 });
             });
 
             describe("supporter-search-input", function () {
                 afterEach(function () {
-                    element(by.model("supporterNameFilter")).clear();
+                    element(by.model("supporterEmail")).clear();
                 });
 
                 it("should allow searching supporters", function () {
-                    element(by.model("supporterNameFilter")).sendKeys("Example Supporter");
+                    element(by.model("supporterEmail")).sendKeys("MikeJohnson@example.com");
                     element(by.id("search-supporters")).click();
 
-                    element.all(by.repeater("supporter in supporters")).count().then(function (count) {
-                        expect(count).toBeGreaterThan(0);
+                    element.all(by.repeater("supporter in selectedSupporters")).count().then(function (count) {
+                        expect(count).toEqual(1);
                     });
                 });
 
                 it("should capture the enter keypress", function () {
-                    element(by.model("supporterNameFilter")).sendKeys("Example Supporter");
-                    element(by.model("supporterNameFilter")).sendKeys(protractor.Key.ENTER);
+                    element(by.model("supporterEmail")).sendKeys("JohnJohnson@example.com");
+                    element(by.model("supporterEmail")).sendKeys(protractor.Key.ENTER);
 
-                    element.all(by.repeater("supporter in supporters")).count().then(function (count) {
-                        expect(count).toBeGreaterThan(0);
+                    element.all(by.repeater("supporter in selectedSupporters")).count().then(function (count) {
+                        expect(count).toEqual(2);
                     });
-                });
-            });
-
-            describe("supporter-search-results", function () {
-                beforeEach(function () {
-                    // Search with a string likely to turn up a few results
-                    element(by.model("supporterNameFilter")).sendKeys("Miller");
-
-                    element(by.id("search-supporters")).click();
-                });
-
-                afterEach(function () {
-                    element(by.model("supporterNameFilter")).clear();
-                });
-
-                var suppCount;
-
-                describe("select/add-button", function () {
-                    it("should send supporter to the selected table", function () {
-                        // count variable used later to verify omission of selected supporters
-                        suppCount = element.all(by.repeater("supporter in supporters")).count();
-
-                        var supporter = element(by.repeater("supporter in supporters").row(0)).getText();
-                        supporter.element(by.id("select-supporter")).click();
-                        var selected = element(by.repeater("supporter in selectedSupporters").row(0)).getText();
-                        protractor.promise.all([supporter, selected]).then(function (data) {
-                            expect(data[0]).toEqual(data[1]);
-                        });
-                    });
-                });
-
-                it("should omit selected supporters", function () {
-                    expect(element.all(by.repeater("supporter in supporters")).count()).toBeLessThan(suppCount);
                 });
             });
 
             describe("selected-supporters-field", function () {
                 describe("deselect/remove-button", function () {
-                    it("should move supporter back to search results field", function () {
-                        var selected = element(by.repeater("supporter in selectedSupporters").row(0)).getText();
-                        element(by.model("supporterNameFilter")).clear();
-                        // this will clear the search result list
-                        element(by.id("search-supporters")).click();
-
+                    it("should remove supporter from select field", function () {
+                        var oldCount = element.all(by.repeater("supporter in selectedSupporters")).count();
                         element.all(by.id("deselect-supporter")).get(0).click();
-                        var supporter = element(by.repeater("supporter in supporters").row(0)).getText();
-                        protractor.promise.all([selected, supporter]).then(function (data) {
-                            expect(data[0]).toEqual(data[1]);
-                        });
+                        var newCount = element.all(by.repeater("supporter in selectedSupporters")).count();
+                        expect(oldCount).toBeGreaterThan(newCount);
                     });
                 });
             });
@@ -775,24 +1135,29 @@ describe("admin-page", function () {
             });
 
             it("should close the modal upon successful creation", function () {
-                element(by.model("providerNameFilter")).clear();
-                element(by.model("providerNameFilter")).sendKeys("Miller");
+                element(by.model("providerEmail")).clear();
+                element(by.model("providerEmail")).sendKeys("MikeMiller@example.com");
                 element(by.id("search-providers")).click();
-                element(by.repeater("provider in providers").row(0)).element(by.id("select-provider")).click();
-                
 
-                element(by.model("supporterNameFilter")).clear();
-                element(by.model("supporterNameFilter")).sendKeys("Miller");
+                element(by.model("providerEmail")).clear();
+                element(by.model("providerEmail")).sendKeys("JohnMiller@example.com");
+                element(by.id("search-providers")).click();
+
+                element(by.model("supporterEmail")).clear();
+                element(by.model("supporterEmail")).sendKeys("MikeJohnson@example.com");
                 element(by.id("search-supporters")).click();
-                var supporter = element(by.repeater("supporter in supporters").row(0)).element(by.id("select-supporter")).click();
+
+                element(by.model("supporterEmail")).clear();
+                element(by.model("supporterEmail")).sendKeys("JohnJohnson@example.com");
+                element(by.id("search-supporters")).click();
 
                 element(by.id("create-btn")).click();
                 expect(element.all(by.css(".modal-header")).count()).toEqual(0);
-            });
+            }, 100000);
         });
     });
 
-    xdescribe("careteams-tab", function () {
+    describe("careteams-tab", function () {
         var testCount;
 
         it("should be hidden initially", function () {
@@ -855,144 +1220,74 @@ describe("admin-page", function () {
 
             describe("provider-search-input", function () {
                 afterEach(function () {
-                    element(by.model("providerNameFilter")).clear();
+                    element(by.model("providerEmail")).clear();
                 });
 
                 it("should allow searching providers", function () {
-                    element(by.model("providerNameFilter")).sendKeys("Example Doctor");
+                    element(by.model("providerEmail")).sendKeys("doctor@example.com");
                     element(by.id("search-providers")).click();
 
-                    element.all(by.repeater("provider in providers")).count().then(function (count) {
-                        expect(count).toBeGreaterThan(0);
+                    element.all(by.repeater("provider in selectedProviders")).count().then(function (count) {
+                        expect(count).toEqual(3);
                     });
-                });
-
-                it("should capture the enter keypress", function () {
-                    element(by.model("providerNameFilter")).sendKeys("Example Doctor");
-                    element(by.model("providerNameFilter")).sendKeys(protractor.Key.ENTER);
-
-                    element.all(by.repeater("provider in providers")).count().then(function (count) {
-                        expect(count).toBeGreaterThan(0);
-                    });
-                });
-            });
-
-            describe("provider-search-results", function () {
-                beforeEach(function () {
-                    // Search with a string likely to turn up a few results
-                    element(by.model("providerNameFilter")).sendKeys("Example Doctor");
-                    element(by.id("search-providers")).click();
-                });
-
-                afterEach(function () {
-                    element(by.model("providerNameFilter")).clear();
-                });
-
-                describe("select/add-button", function () {
-                    it("should send provider to the selected table", function () {
-                        var provider = element(by.repeater("provider in providers").row(0)).element(by.id("select-provider")).click(); 
-                        expect(element(by.id("selected-providers")).all(by.cssContainingText("tbody tr", "Example Doctor")).count()).toBeGreaterThan(0);
-                    });
-                });
-
-                it("should omit selected providers", function () {
-                    expect(element(by.id("filter-results")).all(by.cssContainingText("tbody tr", "Example Doctor")).count()).toBe(0);
                 });
             });
 
             describe("selected-providers-field", function () {
                 describe("deselect/remove-button", function () {
-                    it("should move provider back to search results field", function () {
-                        var selected = element(by.repeater("provider in selectedProviders").row(0)).getText();
-                        element(by.model("providerNameFilter")).clear();
-                        // this will clear the search result list
-                        element(by.id("search-providers")).click();
-
-                        element.all(by.id("deselect-provider")).get(0).click();
-                        var provider = element(by.repeater("provider in providers").row(0)).getText();
-                        protractor.promise.all([selected, provider]).then(function (data) {
-                            expect(data[0]).toEqual(data[1]);
-                        });
+                    it("should remove provider from select field", function () {
+                        var oldCount = element.all(by.repeater("provider in selectedProviders")).count();
+                        element(by.cssContainingText("tbody tr", "doctor@example.com")).element(by.id("deselect-provider")).click();
+                        var newCount = element.all(by.repeater("provider in selectedProviders")).count();
+                        expect(oldCount).toBeGreaterThan(newCount);
                     });
                 });
             });
 
             describe("supporter-search-input", function () {
                 afterEach(function () {
-                    element(by.model("supporterNameFilter")).clear();
+                    element(by.model("supporterEmail")).clear();
                 });
 
                 it("should allow searching supporters", function () {
-                    element(by.model("supporterNameFilter")).sendKeys("Example Supporter");
+                    element(by.model("supporterEmail")).sendKeys("supporter@example.com");
                     element(by.id("search-supporters")).click();
 
-                    element.all(by.repeater("supporter in supporters")).count().then(function (count) {
-                        expect(count).toBeGreaterThan(0);
+                    element.all(by.repeater("supporter in selectedSupporters")).count().then(function (count) {
+                        expect(count).toEqual(3);
                     });
-                });
-
-                it("should capture the enter keypress", function () {
-                    element(by.model("supporterNameFilter")).sendKeys("Example Supporter");
-                    element(by.model("supporterNameFilter")).sendKeys(protractor.Key.ENTER);
-
-                    element.all(by.repeater("supporter in supporters")).count().then(function (count) {
-                        expect(count).toBeGreaterThan(0);
-                    });
-                });
-            });
-
-            describe("supporter-search-results", function () {
-                beforeEach(function () {
-                    // Search with a string likely to turn up a few results
-                    element(by.model("supporterNameFilter")).sendKeys("Example Supporter");
-                    element(by.id("search-supporters")).click();
-                });
-
-                afterEach(function () {
-                    element(by.model("supporterNameFilter")).clear();
-                });
-
-                describe("select/add-button", function () {
-                    it("should send supporter to the selected table", function () {
-                        element(by.repeater("supporter in supporters").row(0)).element(by.id("select-supporter")).click();
-                        expect(element(by.id("selected-supporters")).all(by.cssContainingText("tbody tr", "Example Supporter")).count()).toBeGreaterThan(0);
-                    });
-                });
-
-                it("should omit selected supporters", function () {
-                    expect(element(by.id("filter-supporter-results")).all(by.cssContainingText("tbody tr", "Example Supporter")).count()).toBe(0);
                 });
             });
 
             describe("selected-supporters-field", function () {
                 describe("deselect/remove-button", function () {
-                    it("should move supporter back to search results field", function () {
-                        var selected = element(by.repeater("supporter in selectedSupporters").row(0)).getText();
-                        element(by.model("supporterNameFilter")).clear();
-                        // this will clear the search result list
-                        element(by.id("search-supporters")).click();
-
-                        element.all(by.id("deselect-supporter")).get(0).click();
-                        var supporter = element(by.repeater("supporter in supporters").row(0)).getText();
-                        protractor.promise.all([selected, supporter]).then(function (data) {
-                            expect(data[0]).toEqual(data[1]);
-                        });
+                    it("should remove supporter from select field", function () {
+                        var oldCount = element.all(by.repeater("supporter in selectedSupporters")).count();
+                        element(by.cssContainingText("tbody tr", "supporter@example.com")).element(by.id("deselect-supporter")).click();
+                        var newCount = element.all(by.repeater("supporter in selectedSupporters")).count();
+                        expect(oldCount).toBeGreaterThan(newCount);
                     });
                 });
             });
 
             it("should close the modal upon successful update", function () {
+                element(by.model("providerEmail")).clear();
+                element(by.model("providerEmail")).sendKeys("doctor@example.com");
+                element(by.id("search-providers")).click();
+                element(by.model("supporterEmail")).clear();
+                element(by.model("supporterEmail")).sendKeys("supporter@example.com");
+                element(by.id("search-supporters")).click();
                 element(by.model("careTeam.Name")).clear();
-                element(by.model("careTeam.Name")).sendKeys("Fantastic Four");
+                element(by.model("careTeam.Name")).sendKeys("Watchmen");
                 element(by.buttonText("Update CareTeam")).click();
                 expect(element.all(by.css(".modal-header")).count()).toEqual(0);
             });
 
             it("should successfully modify care team", function () {
                 element(by.id("careteam-tab")).click();
-                expect(element(by.id("inactive-careteams-list")).all(by.cssContainingText("tbody tr", "Fantastic Four")).count()).toBe(1);
+                expect(element(by.id("inactive-careteams-list")).all(by.cssContainingText("tbody tr", "Watchmen")).count()).toBe(1);
                 // testCount variable used later to verify CareTeam deletion
-                testCount = testCount = element.all(by.cssContainingText("tbody tr", "Fantastic Four")).count();
+                testCount = testCount = element.all(by.cssContainingText("tbody tr", "Watchmen")).count();
             });
         });
 
@@ -1000,7 +1295,7 @@ describe("admin-page", function () {
             var careTeam;
 
             it("should ask for confirmation when clicked", function () {
-                careTeam = element(by.id("inactive-careteams-list")).element(by.cssContainingText("tbody tr", "Fantastic Four"));
+                careTeam = element(by.id("inactive-careteams-list")).element(by.cssContainingText("tbody tr", "Watchmen"));
                 careTeam.element(by.id("remove-inactive-careteam")).click();
                 expect(element.all(by.cssContainingText(".modal-title", "Are You Sure?")).count()).toEqual(1);
             });
@@ -1008,12 +1303,12 @@ describe("admin-page", function () {
             it("should delete careteam when confirmed", function () {
                 element(by.buttonText("Yes, delete care team!")).click();
                 element(by.id("careteam-tab")).click();
-                expect(element.all(by.cssContainingText("tbody tr", "Fantastic Four")).count()).toBeLessThan(testCount);
+                expect(element.all(by.cssContainingText("tbody tr", "Watchmen")).count()).toBeLessThan(testCount);
             });
         });
     });
 
-    xit("should log out", function () {
+    it("should log out", function () {
         // remove test users before logging out
         removeTests();
 

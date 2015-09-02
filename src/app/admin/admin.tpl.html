@@ -54,10 +54,10 @@
             </tbody>
         </table>
         <div class="row text-center">
-            <button class="btn btn-lg" ng-click="getPatients(patientsPage - 1)" ng-hide="!hasPrev">
+            <button id="prev-ptnt-pg" class="btn btn-lg" ng-click="getPatients(patientsPage - 1)" ng-hide="!hasPrev">
                 <<
             </button>
-            <button class="btn btn-lg" ng-click="getPatients(patientsPage + 1)" ng-hide="!hasNext">
+            <button id="next-ptnt-pg" class="btn btn-lg" ng-click="getPatients(patientsPage + 1)" ng-hide="!hasNext">
                 >>
             </button>
             <div>{{patientsPage}} of {{numPages}}</div>
@@ -166,10 +166,10 @@
             </tbody>
         </table>
         <div class="row text-center">
-            <button class="btn btn-lg" ng-click="getNurses(nursesPage - 1)" ng-hide="!hasPrev" ng-disabled="isLoading">
+            <button id="prev-nurse-pg" class="btn btn-lg" ng-click="getNurses(nursesPage - 1)" ng-hide="!hasPrev" ng-disabled="isLoading">
                 <<
             </button>
-            <button class="btn btn-lg" ng-click="getNurses(nursesPage + 1)" ng-hide="!hasNext" ng-disabled="isLoading">
+            <button id="next-nurse-pg" class="btn btn-lg" ng-click="getNurses(nursesPage + 1)" ng-hide="!hasNext" ng-disabled="isLoading">
                 >>
             </button>
             <div>{{nursesPage}} of {{numPages}}</div>

@@ -159,7 +159,7 @@ describe('registration-page', function () {
         element(by.model('registration.UserName')).sendKeys("user1");
         expect(registerBtn.isEnabled()).toBeFalsy();
 
-        element(by.model('registration.Email')).sendKeys("user@example.com");
+        element(by.model('registration.Email')).sendKeys("person@sample.com");
         expect(registerBtn.isEnabled()).toBeFalsy();
 
         element(by.model('registration.FirstName')).sendKeys("User");
