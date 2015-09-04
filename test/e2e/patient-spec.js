@@ -8,22 +8,43 @@ describe("patient-page", function () {
         element(by.buttonText("Login to your account")).click();
 
         var teamNames = ["Fantastic Three", "X Men"];
+        var count = 0;
+        var nextPage = element(by.id("next-ptnt-pg"));
 
-        for (var i = 0; i < 2; i++) {
-            element(by.cssContainingText("tbody tr", "patient@example.com")).element(by.id("create-careteam")).click();
+        // Iterate through the pages and search for created patient
+        var findPatient = function (name) {
+            var numberFound = element.all(by.cssContainingText("tbody tr", "patient@example.com")).count().then(function (result) {
+                count += result;
+                var hasNext = nextPage.isDisplayed().then(function (result) {
+                    if (result && count === 0) {
+                        nextPage.click().then(function () {
+                            findPatient(name);
+                        });
+                    } else {
+                        element(by.cssContainingText("tbody tr", "patient@example.com")).element(by.id("create-careteam")).click();
+                        element(by.model("providerEmail")).sendKeys("doctor@example.com");
+                        element(by.id("search-providers")).click();
 
-            element(by.model("providerNameFilter")).sendKeys("Example Doctor");
-            element(by.id("search-providers")).click();
-            element(by.repeater("provider in providers")).element(by.id("select-provider")).click();
+                        element(by.model("supporterEmail")).sendKeys("supporter@example.com");
+                        element(by.id("search-supporters")).click();
 
-            element(by.model("supporterNameFilter")).sendKeys("Example Supporter");
-            element(by.id("search-supporters")).click();
-            element(by.repeater("supporter in supporters")).element(by.id("select-supporter")).click();
+                        element(by.id("team-name")).sendKeys(name);
 
-            element(by.id("team-name")).sendKeys(teamNames[i]);
-
-            element(by.id("create-btn")).click();
+                        element(by.id("create-btn")).click();
+                        count = 0;
+                    }
+                });
+            });
         }
+
+        findPatient("Fantastic Three");
+        findPatient("X Men");
+
+        //for (var i = 0; i < 2; i++) {
+        //    var nextPage = element(by.id("next-ptnt-pg"));
+        //    var count = 0;
+        //    findPatient();
+        //}
 
         element(by.linkText("Logout")).click();
     };

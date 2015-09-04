@@ -28,7 +28,7 @@ describe("profile-page", function () {
         });
 
         var email = element(by.model("profile.Email")).getAttribute('value').then(function (data) {
-            expect(data).toEqual("user@example.com");
+            expect(data).toEqual("person@sample.com");
         });
     });
 
@@ -103,7 +103,7 @@ describe("profile-page", function () {
             });
 
             var email = element(by.model("profile.Email")).getAttribute('value').then(function (data) {
-                expect(data).toEqual("user@example.com");
+                expect(data).toEqual("person@sample.com");
             });
         });
 

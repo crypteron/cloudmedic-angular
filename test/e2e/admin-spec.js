@@ -58,7 +58,6 @@ describe("admin-page", function () {
                                 findExampleProvider(email);
                             });
                         } else {
-                            console.log(count);
                             element(by.cssContainingText("tbody tr", email)).element(by.id("remove-physician")).click();
                             element(by.buttonText("Yes, delete User!")).click();
                             count = 0;
@@ -76,7 +75,6 @@ describe("admin-page", function () {
                                 findExampleSupporter(email);
                             });
                         } else {
-                            console.log(count);
                             element(by.cssContainingText("tbody tr", email)).element(by.id("remove-supporter")).click();
                             element(by.buttonText("Yes, delete User!")).click();
                             count = 0;
