@@ -24,25 +24,22 @@ Install [Node.js](http://nodejs.org/download/) and then follow one of the follow
 #### Starting from a blank slate
 ```
 git clone git@bitbucket.org:Crypteron/crypteron-dashboard.git
-npm -g install grunt-cli karma bower
-npm install
+sudo npm -g install grunt-cli karma bower
+sudo npm install
 bower install
 grunt watch
 ```
 
 #### Build and watch for changes
 
+Update `deploy.config.js` for your environment.
+NOTE: only the `build` operation works. The `compile` step is triggering annotatino errors to be fixed.
+
 `grunt watch` (FYI, this also does a `grunt build` behind the scenes)
 
+To deploy to a different environment (determined in deploy.config.js) use `grunt build:production` or replace `production` with environment
+
 **If you add a new file to the build, you need to quit and restart grunt to pick it up.**
-
-#### Prepare for production, including minification etc
-
-`grunt compile` 
-
-#### Update links for the relevant environment
-
-`grunt deploy staging` or `grunt deploy production`  
 
 #### A new 3rd party bower component is added
 `bower install`
