@@ -1,10 +1,10 @@
 ﻿angular.module('auth.interceptor', ['localizedNotifications', 'auth.service', 'ui.router'])
-.factory('authInterceptor', function ($q, $injector, localizedNotifications) {
+.factory('authInterceptor', ['$q', '$injector', 'localizedNotifications', function ($q, $injector, localizedNotifications) {
     // We must use $injector to get auth service to prevent circular dependancy
     var auth = {};
     var $state = {};
 
-    // helper functions for starts with and ends with 
+    // helper functions for starts with and ends with
     var _startsWith = function (str, prefix) {
         return str.toLowerCase().slice(0, prefix.length) == prefix;
     };
@@ -25,9 +25,9 @@
 
     // Callback for handling requests.  If attempting to call any API method besides login, either enforce login
     // or inject the token into the request.
-    var _request = function (config) {        
+    var _request = function (config) {
         config.headers = config.headers || {};
-        auth = $injector.get('auth');        
+        auth = $injector.get('auth');
         if (_startsWith(config.url, auth.apiUrl) && !_isEndpointExcluded(config.url)) {
             if (auth.status.isLoggedIn) {
                 config.headers.Authorization = 'Bearer ' + auth.status.token.access_token;
@@ -69,7 +69,7 @@
                     localizedNotifications.addForNext('login.expired', 'warning', null, null);
 
                 } else {
-                    localizedNotifications.addForNext('login.expired.sso', 'warning', { ssoProvider: auth.ssoProviders[auth.status.ssoProvider].label });                    
+                    localizedNotifications.addForNext('login.expired.sso', 'warning', { ssoProvider: auth.ssoProviders[auth.status.ssoProvider].label });
                 }
                 auth.logout(false);
                 $state.go(auth.loginState, null, { reload: true });
@@ -78,7 +78,7 @@
                 //localizedNotifications.add('login.required', 'warning', { pageTitle: $state.current.data.pageTitle }, null);
                 $state.go(auth.loginState, null, { reload: true });
             }
-        } 
+        }
         return $q.reject(rejection);
     };
 
@@ -89,7 +89,7 @@
     };
 
     return service;
-})
+}])
 .config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');
 }]);
