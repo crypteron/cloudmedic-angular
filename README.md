@@ -23,7 +23,7 @@ Install [Node.js](http://nodejs.org/download/) and then follow one of the follow
 
 #### Starting from a blank slate
 ```
-git clone git@bitbucket.org:Crypteron/crypteron-dashboard.git
+git clone https://github.com/crypteron/cloudmedic-angular.git
 sudo npm -g install grunt-cli karma bower
 sudo npm install
 bower install
@@ -44,6 +44,6 @@ Optionally, run `grunt watch` to build in development and watch for changes
 `bower install`
 
 ### Running the Angular app 
-Finally, open `file:///path/to/crypteron-dashboard/build/index.html` in your browser.
+Finally, open `file:///path/to/cloudmedic-angular/build/index.html` in your browser.
 
 
