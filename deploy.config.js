@@ -18,22 +18,6 @@ module.exports = {
                 APP_CONFIG: {
                     environment: 'development',
                     api_url: 'https://api.cloudmedic.io/',
-                    base_uri: 'https://demo.cloudmedic.io/',
-                    externalAssets: true
-                }
-            },
-            data: {
-                server: 'apache'
-            }
-        },
-        staging: {
-            options: {
-                dest: '<%= build_dir %>/<%= app_config %>'
-            },
-            constants: {
-                APP_CONFIG: {
-                    environment: 'staging',
-                    api_url: 'https://api.cloudmedic.io/',
                     base_uri: '',
                     externalAssets: true
                 }
@@ -55,7 +39,7 @@ module.exports = {
                 }
             },
             data: {
-                server: 'iis'
+                server: 'apache'
             }
         }
     }

@@ -31,17 +31,16 @@ grunt watch
 ```
 
 #### Build and watch for changes
+Update `deploy.config.js` and set URLs for your development and production environment.
+Run `grunt build` or `grunt build:production` (defaults to `development`) to build for your environment
 
-Update `deploy.config.js` for your environment.
-NOTE: only the `build` operation works. The `compile` step is triggering annotatino errors to be fixed.
+NOTE: The `grunt compile` step is triggering annotation errors to be fixed.
 
-`grunt watch` (FYI, this also does a `grunt build` behind the scenes)
-
-To deploy to a different environment (determined in deploy.config.js) use `grunt build:production` or replace `production` with environment
+Optionally, run `grunt watch` to build in development and watch for changes
 
 **If you add a new file to the build, you need to quit and restart grunt to pick it up.**
 
-#### A new 3rd party bower component is added
+#### After adding a new bower component to bower.json, be sure to run
 `bower install`
 
 ### Running the Angular app 
