@@ -8,7 +8,7 @@
 
     provider.$get = function ($resource) {
         var service = $resource(provider.apiUrl + 'users/:path', {}, {
-            'query': { method: 'GET', isArray: true },
+            'query': { method: 'GET', isArray: false },
             'providers': { method: 'GET', isArray: true, params: { path: 'Providers' } },
             'supporters': { method: 'GET', isArray: true, params: { path: 'Supporters' } },
             'meds': { method: 'GET', isArray: true, params: { path: 'Prescriptions' } },

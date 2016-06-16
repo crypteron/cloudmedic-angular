@@ -19,7 +19,7 @@
                     return $q.reject("Not Authorized");
                 }
             },
-            users: function (Users, $q, auth) {
+            usersResp: function (Users, $q, auth) {
                 if (auth.status.token.userRole.contains('SysAdmin')) {
                     return Users.query().$promise;
                 }
@@ -33,9 +33,9 @@
         data: { pageTitle: 'Admin' }
     });
 })
-.controller('AdminCtrl', function ($scope, $state, $modal, users, Users, careTeams, CareTeams, localizedNotifications) {
+.controller('AdminCtrl', function ($scope, $state, $modal, usersResp, Users, careTeams, CareTeams, localizedNotifications) {
     // Initialize scope variables
-    $scope.users = users;
+    $scope.users = usersResp.Users;
     $scope.careTeams = angular.copy(careTeams);
     $scope.inactiveTeams = [];
     $scope.inactiveTeamsEmpty = true;
