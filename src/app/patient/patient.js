@@ -34,7 +34,7 @@
 .controller('PatientCtrl', function ($scope, $state, $filter, $modal, prescriptions, careTeams, CareTeams, localizedNotifications) {
     $scope.prescriptions = prescriptions;
     $scope.orderByField = 'MedicationName';
-    $scope.reverseSort = false;
+    $scope.reverseSort = false;  
     $scope.hasPending = false;
     $scope.CareTeamUpdater = new CareTeams();
 
