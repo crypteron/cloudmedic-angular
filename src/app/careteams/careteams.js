@@ -4,17 +4,15 @@
     'cloudmedic.resources',
     'form'
 ])
-.controller('CareTeamAddCtrl', function ($scope, $modalInstance, CareTeams, user, Users, localizedNotifications) {
+.controller('CareTeamAddCtrl', function ($scope, $modal, $modalInstance, CareTeams, user, Users, localizedNotifications) {
     // Initialize scope variables
     $scope.creator = new CareTeams();
     $scope.creator.ProviderIds = [""];
     $scope.patientName = user.FirstName + " " + user.LastName;
-    $scope.providerEmailFilter = "";
-    $scope.providers = [];
+    $scope.providerEmail = "";
     $scope.providerIds = [];
     $scope.selectedProviders = [];
-    $scope.supporterEmailFilter = "";
-    $scope.supporters = [];
+    // $scope.supporterEmailFilter = ""; //TODO: This isn't used anywhere, so commented it. Look into this if supporterEmail search is broken
     $scope.supporterIds = [];
     $scope.selectedSupporters = [];
     $scope.data = {
@@ -25,8 +23,6 @@
         localizedNotifications.removeForCurrent();
         $scope.data.isSubmitting = true;
         $scope.creator.PatientId = user.UserId;
-
-        $scope.creator.Name = capitalizeTeamName($scope.creator.Name);
         $scope.creator.ProviderIds = $scope.providerIds;
         $scope.creator.SupporterIds = $scope.supporterIds;
         $scope.creator.$create().then(function () {
@@ -36,54 +32,44 @@
             $scope.data.isSubmitting = false;
         });
     };
+    $scope.error = "";
 
     // Provider functions
     $scope.searchProviders = function () {
-        $scope.providers = [];
-        if ($scope.providerEmailFilter.length > 0) {
-            $scope.providers = Users.providers({ email: $scope.providerEmailFilter}).$promise.then(function (result) {
-                $scope.providers = result;
-                filterProviders();
+        if ($scope.providerEmail.length > 0) {
+            var providerResults = Users.providers({ email: $scope.providerEmail }).$promise.then(function (result) {
+                $scope.addProvider(angular.fromJson(result));
+            }, function (error) {
+                if (error.status == "404") {
+                    localizedNotifications.removeForCurrent();
+                    $modal.open({
+                        templateUrl: "app.error.tpl.html",
+                        controller: function ($scope) {
+                            $scope.errorType = "Not Found!";
+                            $scope.confirmText = "Provider with specified email not found. Create a new provider and try again, or try a different address.";
+                            $scope.confirmButton = "Create New Provider";
+                        }
+                    }).result.then(function () {
+                        localizedNotifications.removeForCurrent();
+                        $modal.open({
+                            templateUrl: "provider/provider.add.tpl.html",
+                            controller: 'FormCtrl'
+                        });
             });
         }
-    };
-
-    //Capitalizes every word separated by a space
-    var capitalizeTeamName = function (teamname) {
-
-        var string_array = teamname.split(' ');
-        var name_holder = "";
-        angular.forEach(string_array, function (word) {
-            name_holder = name_holder + capitalize(word) + ' ';
-        });
-
-        name_holder = name_holder.substr(0, name_holder.length - 1);
-
-        return name_holder;
-
-    };
-
-    var filterProviders = function () {
-        var i = $scope.providers.length;
-        while (i--) {
-            var id = $scope.providers[i].UserId;
-            for (var j = 0; j < $scope.selectedProviders.length; j++) {
-                var selectedId = $scope.selectedProviders[j].UserId;
-                if (id.localeCompare(selectedId) === 0) {
-                    $scope.providers.splice(i, 1);
-                }
-            }
+            });
+            $scope.providerEmail = "";
         }
     };
 
     $scope.addProvider = function (provider) {
+        if (!alreadySelected(provider.UserId, $scope.selectedProviders)) {
         $scope.selectedProviders.push(angular.copy(provider));
         $scope.providerIds.push(provider.UserId);
-        filterProviders();
+        }
     };
 
     $scope.removeProvider = function (provider) {
-        $scope.providers.push(angular.copy(provider));
         $scope.providerIds.splice($scope.providerIds.indexOf(provider.UserId), 1);
         for (var i = 0; i < $scope.selectedProviders.length; i++) {
             if ($scope.selectedProviders[i].UserId.localeCompare(provider.UserId) === 0) {
@@ -95,36 +81,40 @@
 
     // Supporter functions
     $scope.searchSupporters = function () {
-        $scope.supporters = [];
-        if ($scope.supporterEmailFilter.length > 0) {
-            $scope.supporters = Users.supporters({ email: $scope.supporterEmailFilter }).$promise.then(function (result) {
-                $scope.supporters = result;
-                filterSupporters();
+        if ($scope.supporterEmail.length > 0) {
+            var supporterResults = Users.supporters({ email: $scope.supporterEmail }).$promise.then(function (result) {
+                $scope.addSupporter(angular.fromJson(result));
+            }, function (error) {
+                if (error.status == "404") {
+                    localizedNotifications.removeForCurrent();
+                    $modal.open({
+                        templateUrl: "app.error.tpl.html",
+                        controller: function ($scope) {
+                            $scope.errorType = "Not Found!";
+                            $scope.confirmText = "Supporter with specified email not found. Create a new provider and try again, or try a different address.";
+                            $scope.confirmButton = "Create New Supporter";
+                        }
+                    }).result.then(function () {
+                        localizedNotifications.removeForCurrent();
+                        $modal.open({
+                            templateUrl: "supporter/supporter.add.tpl.html",
+                            controller: 'FormCtrl'
+                        });
             });
         }
-    };
-
-    var filterSupporters = function () {
-        var i = $scope.supporters.length;
-        while (i--) {
-            var id = $scope.supporters[i].UserId;
-            for (var j = 0; j < $scope.selectedSupporters.length; j++) {
-                var selectedId = $scope.selectedSupporters[j].UserId;
-                if (id.localeCompare(selectedId) === 0) {
-                    $scope.supporters.splice(i, 1);
-                }
-            }
+            });
+            $scope.supporterEmail = "";
         }
     };
 
     $scope.addSupporter = function (supporter) {
+        if (!alreadySelected(supporter.UserId, $scope.selectedSupporters)) {
         $scope.selectedSupporters.push(angular.copy(supporter));
         $scope.supporterIds.push(supporter.UserId);
-        filterSupporters();
+        }
     };
 
     $scope.removeSupporter = function (supporter) {
-        $scope.supporters.push(angular.copy(supporter));
         $scope.supporterIds.splice($scope.supporterIds.indexOf(supporter.UserId), 1);
         for (var i = 0; i < $scope.selectedSupporters.length; i++) {
             if ($scope.selectedSupporters[i].UserId.localeCompare(supporter.UserId) === 0) {
@@ -145,23 +135,37 @@
             $scope.searchSupporters();
         }
     };
+
+    // check if user already exists
+    var alreadySelected = function (id, selected) {
+        var i = selected.length;
+        while (i--) {
+            var selectedId = selected[i].UserId;
+            if (id.localeCompare(selectedId) === 0) {
+                return true;
+            }
+        }
+        return false;
+    };
 })
-.controller('CareTeamUpdateCtrl', function ($scope, $modalInstance, careTeam, CareTeams, Users, localizedNotifications) {
+.controller('CareTeamUpdateCtrl', function ($scope, $modal, $modalInstance, careTeam, CareTeams, Users, localizedNotifications) {
     // Initialize scope variables
     $scope.careTeam = angular.copy(careTeam);
-    $scope.providerEmailFilter = "";
-    $scope.providers = [];
+
+    $scope.providerEmail = "";
     $scope.providerIds = [];
     $scope.selectedProviders = [];
+    // Add current providers to selected
     for (var x = 0; x < $scope.careTeam.Providers.length; x++) {
         var provider = $scope.careTeam.Providers[x];
         $scope.providerIds.push(provider.UserId);
         $scope.selectedProviders.push(angular.copy(provider));
     }
-    $scope.supporterEmailFilter = "";
-    $scope.supporters = [];
+
+    $scope.supporterEmail = "";
     $scope.supporterIds = [];
     $scope.selectedSupporters = [];
+    // Add current supporters to selected
     for (var y = 0; y < $scope.careTeam.Supporters.length; y++) {
         var supporter = $scope.careTeam.Supporters[y];
         $scope.supporterIds.push(supporter.UserId);
@@ -188,36 +192,40 @@
 
     // Provider functions
     $scope.searchProviders = function () {
-        $scope.providers = [];
-        if ($scope.providerEmailFilter.length > 0) {
-            $scope.providers = Users.providers({ email: $scope.providerEmailFilter }).$promise.then(function (result) {
-                $scope.providers = result;
-                filterProviders();
+        if ($scope.providerEmail.length > 0) {
+            var providerResults = Users.providers({ email: $scope.providerEmail }).$promise.then(function (result) {
+                $scope.addProvider(angular.fromJson(result));
+            }, function (error) {
+                if (error.status == "404") {
+                    localizedNotifications.removeForCurrent();
+                    $modal.open({
+                        templateUrl: "app.error.tpl.html",
+                        controller: function ($scope) {
+                            $scope.errorType = "Not Found!";
+                            $scope.confirmText = "Provider with specified email not found. Create a new provider and try again, or try a different address.";
+                            $scope.confirmButton = "Create New Provider";
+                        }
+                    }).result.then(function () {
+                        localizedNotifications.removeForCurrent();
+                        $modal.open({
+                            templateUrl: "provider/provider.add.tpl.html",
+                            controller: 'FormCtrl'
+                        });
             });
         }
-    };
-
-    var filterProviders = function () {
-        var i = $scope.providers.length;
-        while (i--) {
-            var id = $scope.providers[i].UserId;
-            for (var j = 0; j < $scope.selectedProviders.length; j++) {
-                var selectedId = $scope.selectedProviders[j].UserId;
-                if (id.localeCompare(selectedId) === 0) {
-                    $scope.providers.splice(i, 1);
-                }
-            }
+            });
+            $scope.providerEmail = "";
         }
     };
 
     $scope.addProvider = function (provider) {
+        if (!alreadySelected(provider.UserId, $scope.selectedProviders)) {
         $scope.selectedProviders.push(angular.copy(provider));
         $scope.providerIds.push(provider.UserId);
-        filterProviders();
+        }
     };
 
     $scope.removeProvider = function (provider) {
-        $scope.providers.push(angular.copy(provider));
         $scope.providerIds.splice($scope.providerIds.indexOf(provider.UserId), 1);
         for (var i = 0; i < $scope.selectedProviders.length; i++) {
             if ($scope.selectedProviders[i].UserId.localeCompare(provider.UserId) === 0) {
@@ -229,36 +237,40 @@
 
     // Supporter functions
     $scope.searchSupporters = function () {
-        $scope.supporters = [];
-        if ($scope.supporterEmailFilter.length > 0) {
-            $scope.supporters = Users.supporters({ email: $scope.supporterEmailFilter }).$promise.then(function (result) {
-                $scope.supporters = result;
-                filterSupporters();
+        if ($scope.supporterEmail.length > 0) {
+            var supporterResults = Users.supporters({ email: $scope.supporterEmail }).$promise.then(function (result) {
+                $scope.addSupporter(angular.fromJson(result));
+            }, function (error) {
+                if (error.status == "404") {
+                    localizedNotifications.removeForCurrent();
+                    $modal.open({
+                        templateUrl: "app.error.tpl.html",
+                        controller: function ($scope) {
+                            $scope.errorType = "Not Found!";
+                            $scope.confirmText = "Supporter with specified email not found. Create a new supporter and try again, or try a different address.";
+                            $scope.confirmButton = "Create New Supporter";
+                        }
+                    }).result.then(function () {
+                        localizedNotifications.removeForCurrent();
+                        $modal.open({
+                            templateUrl: "supporter/supporter.add.tpl.html",
+                            controller: 'FormCtrl'
+                        });
             });
         }
-    };
-
-    var filterSupporters = function () {
-        var i = $scope.supporters.length;
-        while (i--) {
-            var id = $scope.supporters[i].UserId;
-            for (var j = 0; j < $scope.selectedSupporters.length; j++) {
-                var selectedId = $scope.selectedSupporters[j].UserId;
-                if (id.localeCompare(selectedId) === 0) {
-                    $scope.supporters.splice(i, 1);
-                }
-            }
+            });
+            $scope.supporterEmail = "";
         }
     };
 
     $scope.addSupporter = function (supporter) {
+        if (!alreadySelected(supporter.UserId, $scope.selectedSupporters)) {
         $scope.selectedSupporters.push(angular.copy(supporter));
         $scope.supporterIds.push(supporter.UserId);
-        filterSupporters();
+        }
     };
 
     $scope.removeSupporter = function (supporter) {
-        $scope.supporters.push(angular.copy(supporter));
         $scope.supporterIds.splice($scope.supporterIds.indexOf(supporter.UserId), 1);
         for (var i = 0; i < $scope.selectedSupporters.length; i++) {
             if ($scope.selectedSupporters[i].UserId.localeCompare(supporter.UserId) === 0) {
@@ -278,5 +290,17 @@
         if (key.which === 13) {
             $scope.searchSupporters();
         }
+    };
+
+    // check if user already exists
+    var alreadySelected = function (id, selected) {
+        var i = selected.length;
+        while (i--) {
+            var selectedId = selected[i].UserId;
+            if (id.localeCompare(selectedId) === 0) {
+                return true;
+            }
+        }
+        return false;
     };
 });

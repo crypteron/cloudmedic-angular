@@ -55,6 +55,7 @@
     <Content Include="build.config.js" />
     <Content Include="Gruntfile.js" />
     <Content Include="karma\karma-unit.tpl.js" />
+    <Content Include="src\app\app.error.tpl.html" />
     <Content Include="src\app\careteams\careteams.spec.js" />
     <Content Include="src\app\medications\medications.spec.js" />
     <Content Include="src\app\patient\patient.spec.js" />
