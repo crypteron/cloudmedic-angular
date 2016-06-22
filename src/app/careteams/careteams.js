@@ -24,6 +24,7 @@
         $scope.data.isSubmitting = true;
         $scope.creator.PatientId = user.UserId;
         $scope.creator.ProviderIds = $scope.providerIds;
+        //$scope.creator.Name = capitalizeTeamName($scope.creator.Name); //doesnt do anything
         $scope.creator.SupporterIds = $scope.supporterIds;
         $scope.creator.$create().then(function () {
             localizedNotifications.addForNext('create.success', 'success', { entityType: 'CareTeam' });
