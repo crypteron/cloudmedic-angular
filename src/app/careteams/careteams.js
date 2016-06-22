@@ -8,6 +8,7 @@
     // Initialize scope variables
     $scope.creator = new CareTeams();
     $scope.creator.ProviderIds = [""];
+    $scope.creator.Name = "";
     $scope.patientName = user.FirstName + " " + user.LastName;
     $scope.providerEmail = "";
     $scope.providerIds = [];
@@ -19,12 +20,33 @@
         isSubmitting: false
     };
 
+    $scope.capitalizeTeamName = function() {//TODO: make this function "private"
+        var nextWord = true;
+        var capitalized = "";
+        var word = $scope.creator.Name;
+        for (var i = 0; i < $scope.creator.Name.length; i++) {
+            if (word[i] == " ") {
+                nextWord = true;
+                capitalized += word[i];
+            } else {
+                if (nextWord) {
+                    nextWord = false;
+                    capitalized += word[i].toUpperCase();
+                } else {
+                    capitalized += word[i];
+                }
+            }
+        }
+        return capitalized;
+    };
+
+
     $scope.create = function () {
         localizedNotifications.removeForCurrent();
         $scope.data.isSubmitting = true;
+        $scope.creator.Name = $scope.capitalizeTeamName();
         $scope.creator.PatientId = user.UserId;
         $scope.creator.ProviderIds = $scope.providerIds;
-        //$scope.creator.Name = capitalizeTeamName($scope.creator.Name); //doesnt do anything
         $scope.creator.SupporterIds = $scope.supporterIds;
         $scope.creator.$create().then(function () {
             localizedNotifications.addForNext('create.success', 'success', { entityType: 'CareTeam' });
@@ -33,6 +55,7 @@
             $scope.data.isSubmitting = false;
         });
     };
+
     $scope.error = "";
 
     // Provider functions
