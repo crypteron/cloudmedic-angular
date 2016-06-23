@@ -59,3 +59,5 @@ _ReSharper*/
 #NuGet
 packages/
 *.dbmdl
+
+.idea/
