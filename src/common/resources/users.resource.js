@@ -9,15 +9,15 @@
     provider.$get = function ($resource) {
         var service = $resource(provider.apiUrl + 'users/:path', {}, {
             'query': { method: 'GET', isArray: false },
-            'providers': { method: 'GET', isArray: false, params: { path: 'Providers' } },
-            'supporters': { method: 'GET', isArray: false, params: { path: 'Supporters' } },
-            'meds': { method: 'GET', isArray: true, params: { path: 'Prescriptions' } },
-            'prTeams': { method: 'GET', isArray: true, params: { path: 'Provider' } },
-            'sTeams': {method: 'GET', isArray: true, params: {path: 'CareTeams'} },
-            'paTeams': { method: 'GET', isArray: true, params: { path: 'Patient' } },
-            'patients': { method: 'GET', isArray: true, params: { path: 'Patients' } },
+            'providers': { method: 'GET', isArray: false, params: { path: 'providers' } },
+            'supporters': { method: 'GET', isArray: false, params: { path: 'supporters' } },
+            'meds': { method: 'GET', isArray: true, params: { path: 'prescriptions' } },
+            'prTeams': { method: 'GET', isArray: true, params: { path: 'provider' } },
+            'sTeams': {method: 'GET', isArray: true, params: {path: 'careteams'} },
+            'paTeams': { method: 'GET', isArray: true, params: { path: 'patient' } },
+            'patients': { method: 'GET', isArray: true, params: { path: 'patients' } },
             'remove': { method: 'DELETE', isArray: false },
-            'create': { method: 'POST', isArray: false, params: { path: 'Add' } }
+            'create': { method: 'POST', isArray: false, params: { path: 'add' } }
         });
         return service;
     };

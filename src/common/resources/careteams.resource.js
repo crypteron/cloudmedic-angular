@@ -7,12 +7,12 @@
     };
 
     provider.$get = function ($resource) {
-        var service = $resource(provider.apiUrl + 'CareTeams/:path', {}, {
+        var service = $resource(provider.apiUrl + 'careteams/:path', {}, {
             'query': { method: 'GET', isArray: true },
-            'update': { method: 'POST', isArray: false, params: { path: 'Update' } },
+            'update': { method: 'POST', isArray: false, params: { path: 'update' } },
             'remove': { method: 'DELETE', isArray: false },
-            'create': { method: 'POST', isArray: false, params: { path: 'Add' } },
-            'activate': { method: 'POST', isArray: false, params: { path: 'Activate' } }
+            'create': { method: 'POST', isArray: false, params: { path: 'add' } },
+            'activate': { method: 'POST', isArray: false, params: { path: 'activate' } }
 
         });
         return service;

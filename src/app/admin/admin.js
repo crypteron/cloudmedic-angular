@@ -147,7 +147,7 @@
         }).result.then(function () {
             $scope.users.$remove({ id: user.UserId }).then(function () {
                 localizedNotifications.addForNext('delete.success', 'success', { entityType: 'User' });
-                $state.go("admin", null, { reload: true });
+                $state.go("admin", null, { reload: true }); 
             });
         });
     };

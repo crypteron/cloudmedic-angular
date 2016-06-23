@@ -31,7 +31,16 @@ module.exports = {
     ctpl: [ 'src/common/**/*.tpl.html' ],
 
     html: [ 'src/index.html' ],
-    less: 'src/less/main.less'
+    less: 'src/less/main.less',
+      external_css: [{
+          name: 'fontAwesome',
+          url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
+          local: 'assets/font-awesome.css'
+      }, {
+          name: 'openSans',
+          url: 'https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800,300italic,400italic,600italic,700italic,800italic',
+          local: 'assets/opensans.css'
+      }]
   },
 
   /**
