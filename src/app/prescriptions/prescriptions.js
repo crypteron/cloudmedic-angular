@@ -142,7 +142,8 @@
     $scope.filter = function () {
         $scope.tempCandidates=[];
         $scope.Candidates = angular.copy(Candidates);
-        if ($scope.data.PatientName) {
+
+        if ($scope.data.PatientName.length !== 0) {
             var name = $scope.data.PatientName.toLowerCase();
             for (var i = 0; i < $scope.Candidates.length; i++) {
                 var reversename = ($scope.Candidates[i].LastName + ", " + $scope.Candidates[i].FirstName).toLowerCase();
@@ -164,8 +165,8 @@
                 $scope.AITab = false;
                 $scope.JQTab = false;
             }
-        }
-        $scope.Candidates = angular.copy($scope.tempCandidates);
+            $scope.Candidates = angular.copy($scope.tempCandidates);
+        } 
         $scope.sort();
     };
 

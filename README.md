@@ -25,10 +25,12 @@ Install [Node.js](http://nodejs.org/download/) and then follow one of the follow
 ```
 git clone https://github.com/crypteron/cloudmedic-angular.git
 sudo npm -g install grunt-cli karma bower
-sudo npm install
+npm install
 bower install
 grunt watch
 ```
+
+If you need to reinstall npm modules remove everything in `.\node_modules`
 
 #### Run end to end test
 
