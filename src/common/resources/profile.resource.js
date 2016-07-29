@@ -1,12 +1,12 @@
 ﻿angular.module('profile.resource', ['ngResource'])
 .provider('Profile', function () {
-    var provider = this;
-    provider.apiUrl = '';
-    provider.setApiUrl = function (apiUrl) {
-        provider.apiUrl = apiUrl;
+    var self = this;
+    self.apiUrl = '';
+    self.setApiUrl = function (apiUrl) {
+        self.apiUrl = apiUrl;
     };
 
-    provider.$get = ['$resource','$rootScope', function ($resource, $rootScope) {
+    self.$get = ['$resource','$rootScope', function ($resource, $rootScope) {
 
         var _putInterceptor = {
             response: function (response) {                
@@ -17,7 +17,7 @@
         $rootScope.$on('authServic:logout', function () {
         });
         
-        var Profile = $resource(provider.apiUrl + 'account/profile', {}, {
+        var Profile = $resource(self.apiUrl + 'account/profile', {}, {
             get: { method: 'GET', isArray: false},
             post: { method: 'POST', isArray: false, interceptor: _putInterceptor }
         });

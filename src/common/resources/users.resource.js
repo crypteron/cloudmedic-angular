@@ -1,13 +1,13 @@
 ﻿angular.module('users.resource', ['ngResource'])
 .provider('Users', function () {
-    var provider = this;
-    provider.apiUrl = '';
-    provider.setApiUrl = function (apiUrl) {
-        provider.apiUrl = apiUrl;
+    var self = this;
+    self.apiUrl = '';
+    self.setApiUrl = function (apiUrl) {
+        self.apiUrl = apiUrl;
     };
 
-    provider.$get = function ($resource) {
-        var service = $resource(provider.apiUrl + 'users/:path', {}, {
+    self.$get = function ($resource) {
+        var service = $resource(self.apiUrl + 'users/:path', {}, {
             'query': { method: 'GET', isArray: false },
             'providers': { method: 'GET', isArray: false, params: { path: 'providers' } },
             'supporters': { method: 'GET', isArray: false, params: { path: 'supporters' } },

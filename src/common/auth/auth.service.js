@@ -1,59 +1,59 @@
 ﻿angular.module('auth.service', ['localizedNotifications','ui.router','LocalStorageModule'])
 .provider('auth', function(){
-    var provider = this;
-    provider.apiUrl = '';
-    provider.tokenPath = '';
-    provider.loginState = 'login';
-    provider.assumePublic = true;
-    provider.ssoProviders = {};
-    provider.excludeEndpoints = [];
+    var self = this;
+    self.apiUrl = '';
+    self.tokenPath = '';
+    self.loginState = 'login';
+    self.assumePublic = true;
+    self.ssoProviders = {};
+    self.excludeEndpoints = [];
 
     // Provider configuration
     // Set the URL of the Login API
-    provider.setApiUrl = function (apiUrl) {
-        provider.apiUrl = apiUrl;        
+    self.setApiUrl = function (apiUrl) {
+        self.apiUrl = apiUrl;        
     };
 
     // Set the state to be used for logins
-    provider.setLoginState = function (loginState) {
-        provider.loginState = loginState;
+    self.setLoginState = function (loginState) {
+        self.loginState = loginState;
     };
 
     // Set whether or not states are assumed to be public or not
-    provider.setAssumePublic = function (assumePublic) {
-        provider.assumePublic = assumePublic;
+    self.setAssumePublic = function (assumePublic) {
+        self.assumePublic = assumePublic;
     };
 
     // Set the path to receive the login token at the API url
-    provider.setTokenPath = function (tokenPath) {
+    self.setTokenPath = function (tokenPath) {
         // remove the old token path from exclude endpoints
-        provider.RemoveExcludeEndpoint(tokenPath);
+        self.RemoveExcludeEndpoint(tokenPath);
 
         // set the new token path and add it to the exclude endpoints
-        provider.excludeEndpoints.push(tokenPath);
-        provider.tokenPath = tokenPath;
+        self.excludeEndpoints.push(tokenPath);
+        self.tokenPath = tokenPath;
     };
 
     // Set any additional SSO providers
-    provider.setSsoProviders = function (ssoProviders) {
-        provider.ssoProviders = ssoProviders;
+    self.setSsoProviders = function (ssoProviders) {
+        self.ssoProviders = ssoProviders;
     };
 
     // Add an endpoint to those to exclude
-    provider.AddExcludeEndpoint = function (excludeEndpoint) {
-        provider.excludeEndpoints.push(excludeEndpoint);
+    self.AddExcludeEndpoint = function (excludeEndpoint) {
+        self.excludeEndpoints.push(excludeEndpoint);
     };
 
     // Remove an endpoint from those to exclude
-    provider.RemoveExcludeEndpoint = function (endpoint) {
-        var i = provider.excludeEndpoints.indexOf(endpoint);
+    self.RemoveExcludeEndpoint = function (endpoint) {
+        var i = self.excludeEndpoints.indexOf(endpoint);
         if (i > -1) {
-            provider.excludeEndpoints.splice(i, 1);
+            self.excludeEndpoints.splice(i, 1);
         }
     };
 
     // Set all the provider options at once using JSON
-    provider.setOptions = function (options) {        
+    self.setOptions = function (options) {        
         options = angular.extend({
             apiUrl: '',
             tokenPath: '',
@@ -63,18 +63,18 @@
             excludeEndpoints: []
         }, options);
                 
-        provider.setApiUrl(options.apiUrl);
-        provider.setTokenPath(options.tokenPath);
-        provider.setLoginState(options.loginState);
-        provider.setAssumePublic(options.assumePublic);
-        provider.setSsoProviders(options.ssoProviders);
+        self.setApiUrl(options.apiUrl);
+        self.setTokenPath(options.tokenPath);
+        self.setLoginState(options.loginState);
+        self.setAssumePublic(options.assumePublic);
+        self.setSsoProviders(options.ssoProviders);
         angular.forEach(options.excludeEndpoints, function (endpoint) {
-            provider.AddExcludeEndpoint(endpoint);
+            self.AddExcludeEndpoint(endpoint);
         });
     };
 
     // Factory 
-    provider.$get = function ($http, $q, $rootScope, localizedNotifications, $state, localStorageService, AUTH_SSO_PROVIDERS) {
+    self.$get = function ($http, $q, $rootScope, localizedNotifications, $state, localStorageService, AUTH_SSO_PROVIDERS) {
         // Properties
         var _status = {
             token: null,
@@ -84,7 +84,7 @@
             isLoggedIn: false       
         };
 
-        var _ssoProviders = angular.extend(AUTH_SSO_PROVIDERS, provider.ssoProviders);
+        var _ssoProviders = angular.extend(AUTH_SSO_PROVIDERS, self.ssoProviders);
 
         // Stores the state name and params of an unaccessable state to optionally redirect to after login
         var _redirectState = false;
@@ -97,11 +97,11 @@
 
             // Redirect users to login if trying to access authenticated state without being logged in
             $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-                if (((provider.assumePublic && toState.data.auth === true) || (!provider.assumePublic && toState.data.public !== true) && _status.isLoggedIn === false)) {
+                if (((self.assumePublic && toState.data.auth === true) || (!self.assumePublic && toState.data.public !== true) && _status.isLoggedIn === false)) {
                     event.preventDefault();
                     localizedNotifications.addForNext('login.required', 'warning', { pageTitle: toState.data.pageTitle }, null);
                     _setRedirectState(toState.name, toParams);
-                    $state.go(provider.loginState, {}, { reload: true });
+                    $state.go(self.loginState, {}, { reload: true });
                 }
             });
         };
@@ -156,7 +156,7 @@
         var _login = function (loginData) {
             var data = "grant_type=password&username=" + loginData.username + "&password=" + loginData.password;
             var deferred = $q.defer();
-            $http.post(provider.apiUrl + provider.tokenPath, data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
+            $http.post(self.apiUrl + self.tokenPath, data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
                 .success(function (response) {
                     _status.token = response;
                     _status.userRoles = angular.fromJson(response.userRole);
@@ -201,14 +201,14 @@
             login: _login,
             logout: _logout,
             loginWithSso: _loginWithSso,
-            apiUrl: provider.apiUrl,
-            tokenPath: provider.tokenPath,            
-            loginState: provider.loginState,
+            apiUrl: self.apiUrl,
+            tokenPath: self.tokenPath,            
+            loginState: self.loginState,
             setRedirectState: _setRedirectState,
             redirectAfterLogin: _redirectAfterLogin,
             init: _init,
             ssoProviders: _ssoProviders,
-            excludeEndpoints: provider.excludeEndpoints
+            excludeEndpoints: self.excludeEndpoints
         };
         return service;
     };

@@ -237,7 +237,7 @@ module.exports = function ( grunt ) {
      * to code without the array syntax.
      */
     ngAnnotate: {
-      compile: {
+      build: {
         files: [
           {
             src: [ '<%= app_files.js %>' ],

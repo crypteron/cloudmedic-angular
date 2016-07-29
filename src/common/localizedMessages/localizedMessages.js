@@ -2,18 +2,18 @@
 angular.module('localizedMessages', [])
 .provider('localizedMessages', function () {
     // Provider Properties
-    var provider = this;
-    provider.messages = {};
+    var self = this;
+    self.messages = {};
 
     // Provider Configuration
     // To configure this service, provide it an object containing the localized messages
-    provider.setMessages = function (messages) {
-        provider.messages = messages;
+    self.setMessages = function (messages) {
+        self.messages = messages;
     };
 
     // Factory
-    provider.$get = ['$interpolate', function ($interpolate) {
-        var _messages = provider.messages;
+    self.$get = ['$interpolate', function ($interpolate) {
+        var _messages = self.messages;
 
         // Methods
         // Get method for doing the look up and interpolation

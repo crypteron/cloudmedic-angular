@@ -1,13 +1,13 @@
 ﻿angular.module('password.resource', ['ngResource'])
 .provider('Password', function () {
-    var provider = this;
-    provider.apiUrl = '';
-    provider.setApiUrl = function (apiUrl) {
-        provider.apiUrl = apiUrl;
+    var self = this;
+    self.apiUrl = '';
+    self.setApiUrl = function (apiUrl) {
+        self.apiUrl = apiUrl;
     };
 
-    provider.$get = ['$resource', function ($resource) {
-        var Password = $resource(provider.apiUrl + 'account/ChangePassword', {}, {
+    self.$get = ['$resource', function ($resource) {
+        var Password = $resource(self.apiUrl + 'account/ChangePassword', {}, {
             update: { method: 'POST', isArray: false }
         });
         return Password;
