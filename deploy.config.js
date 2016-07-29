@@ -33,8 +33,8 @@ module.exports = {
             constants: {
                 APP_CONFIG: {
                     environment: 'production',
-                    api_url: 'https://demo.cloudmedic.io/api/',
-                    base_uri: 'https://demo.cloudmedic.io/app/',
+                    api_url: 'https://kuraudomedikku.azurewebsites.net/api/',
+                    base_uri: 'https://kuraudomedikku.azurewebsites.net/app/',
                     externalAssets: true
                 }
             },
