@@ -48,8 +48,6 @@ Additonal details at __________
 Update `deploy.config.js` and set URLs for your development and production environment.
 Run `grunt build` or `grunt build:production` (defaults to `development`) to build for your environment
 
-NOTE: The `grunt compile` step is triggering annotation errors to be fixed.
-
 Optionally, run `grunt watch` to build in development and watch for changes
 
 **If you add a new file to the build, you need to quit and restart grunt to pick it up.**
